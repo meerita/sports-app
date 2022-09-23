@@ -10,14 +10,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import LoadingScreen from '../screens/LoadingScreen';
 
-import AuthNavigator from '../navigators/AuthNavigator';
+import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 import MainBottomNavigation from './MainBottomNavigation';
+import { useSelector } from 'react-redux';
 
 export default function AppNavigator() {
   const [initializing, setInitializing] = useState(true);
-  const [authenticated, setAuthenticated] = useState(true);
-  const bottomNav = true;
+
+  const isAuth = useSelector(state => state.auth);
 
   // we load the app
   if (!initializing) {
@@ -26,12 +27,12 @@ export default function AppNavigator() {
 
   // in case we need to auth
   // we load the app
-  if (!authenticated) {
+  if (!isAuth.isAuthenticated) {
     return <AuthNavigator />;
   }
 
   // we load the app
-  if (!bottomNav) {
+  if (isAuth.isAuthenticated) {
     return <MainBottomNavigation />;
   }
 

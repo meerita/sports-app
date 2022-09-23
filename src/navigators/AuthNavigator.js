@@ -15,6 +15,8 @@ import RegisterScreen, {
   screenOptions as RegisterScreenOptions,
 } from '../screens/auth/RegisterScreen';
 
+import { useSelector } from 'react-redux';
+
 export default function AuthNavigator() {
   const Stack = createNativeStackNavigator();
 

@@ -27,3 +27,12 @@ export default function MeNavigator() {
     </Tabs.Navigator>
   );
 }
+
+// NAVIGATION OPTIONS
+export const screenOptions = navData => {
+  return {
+    headerTitle: 'Login',
+    // headerBackTitle: null,
+    presentation: Platform.OS === 'android' ? 'card' : 'modal',
+  };
+};

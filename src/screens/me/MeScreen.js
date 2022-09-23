@@ -1,5 +1,5 @@
 /** @format */
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -10,7 +10,13 @@ export default function MeScreen(props) {
 
   return (
     <View>
-      <Text>{me.username}</Text>
+      <View style={{ width: '100%', height: Dimensions.get('window').width }}>
+        <Image
+          source={{ uri: me.avatar }}
+          style={{ width: '100%', height: '100%' }}
+        />
+      </View>
+      <Text>{me.description}</Text>
       <Text>{me.age}</Text>
       <Text>{me.email}</Text>
       <Button

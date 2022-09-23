@@ -24,13 +24,18 @@ import MeScreen, {
   screenOptions as MeScreenOptions,
 } from '../screens/me/MeScreen';
 
-import MeNavigator from '../navigators/MeNavigator';
+import MeNavigator from './MeNavigator';
 
 export default function MainBottomNavigation() {
   const me = useSelector(state => state.me.myData);
+
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Groups' component={MyGroupsScreen} />
+      <Tab.Screen
+        name='Groups'
+        component={MyGroupsScreen}
+        options={MyGroupsScreenOptions}
+      />
       <Tab.Screen
         name='Explore'
         component={ExploreScreen}
@@ -41,7 +46,11 @@ export default function MainBottomNavigation() {
         component={ActivityScreen}
         options={ActivityScreenOptions}
       />
-      <Tab.Screen name={me.username} component={MeNavigator} />
+      <Tab.Screen
+        name={me.username}
+        component={MeNavigator}
+        options={{ title: me.username || 'User' }}
+      />
     </Tab.Navigator>
   );
 }
