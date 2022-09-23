@@ -1,20 +1,17 @@
 /** @format */
-import { meActions } from '../slices/me';
+
+import { generalActions } from '../slices/general';
 
 const API_URL = 'http://192.168.1.48:8000';
 
-// ********************************************************
-// Function to fetch the any logged user
-// ********************************************************
-
-export const fetchMyUser = userId => {
+export const fetchGlobalVariables = () => {
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user
     // ********************************************************
-    const fetchUserData = async () => {
+    const fetchVariables = async () => {
       // we call the API
-      const response = await fetch(`${API_URL}/v1/users/${userId}`);
+      const response = await fetch(`${API_URL}/v1/general`);
       // we check if there's an error
       if (!response.ok) {
         throw new Error('could not fetch any data');
@@ -28,9 +25,16 @@ export const fetchMyUser = userId => {
     // Once we have the data, we will dispatch it
     try {
       // we will
-      const userData = await fetchUserData();
-      dispatch(meActions.addMyUser({ user: userData.user }));
-      dispatch(meActions.addMyGroups({ groups: userData.user.groups }));
+      const globalVariables = await fetchVariables();
+      dispatch(
+        generalActions.updateVariables({
+          currentUpdatedTerms: globalVariables.currentUpdatedTerms,
+          version: globalVariables.version,
+          login: globalVariables.login,
+          register: globalVariables.register,
+          maintenance: globalVariables.maintenance,
+        })
+      );
     } catch (error) {
       console.log(error);
     }

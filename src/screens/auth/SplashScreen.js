@@ -17,9 +17,11 @@ export default function SplashScreen(props) {
 
   const userId = '62385d8caee17d13a1762b39';
 
-  console.log(Appearance.getColorScheme());
-
   console.log(general);
+
+  // useEffect(() => {
+  //   dispatch(fetchGlobalVariables());
+  // }, []);
 
   useEffect(() => {
     dispatch(fetchMyUser(userId));
@@ -33,12 +35,15 @@ export default function SplashScreen(props) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This is an app</Text>
       <View style={{ padding: 16 }}>
-        <Button
-          title='Register'
-          onPress={() => props.navigation.navigate('RegisterScreen')}
-        />
-        <Text> </Text>
-        <Button title='Login' onPress={() => loginHandler()} />
+        {general.register && (
+          <Button
+            title='Register'
+            onPress={() => props.navigation.navigate('RegisterScreen')}
+          />
+        )}
+        {general.login && (
+          <Button title='Login' onPress={() => loginHandler()} />
+        )}
       </View>
     </View>
   );
