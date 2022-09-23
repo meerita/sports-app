@@ -33,16 +33,19 @@ export default function SplashScreen(props) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>This is an app</Text>
       <View style={{ padding: 16 }}>
-        {general.register && (
+        {general.register ? (
           <Button
             title='Register'
             onPress={() => props.navigation.navigate('RegisterScreen')}
           />
+        ) : (
+          <Text>No hay registro disponible.</Text>
         )}
-        {general.login && (
+        {general.login ? (
           <Button title='Login' onPress={() => loginHandler()} />
+        ) : (
+          <Text>No hay login</Text>
         )}
       </View>
     </View>

@@ -9,7 +9,7 @@ export const generalSlice = createSlice({
     version: null,
     login: false,
     register: false,
-    maintenance: false,
+    maintenance: true,
   },
   reducers: {
     updateVariables: (state, action) => {

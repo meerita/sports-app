@@ -14,8 +14,10 @@ import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 import MainBottomNavigation from './MainBottomNavigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGlobalVariables } from '../store/actions/general';
 import MaintenanceScreen from '../screens/auth/MaintenanceScreen';
+
+// STORE
+import { fetchGlobalVariables } from '../store/actions/general';
 
 export default function AppNavigator() {
   const [initializing, setInitializing] = useState(true);
