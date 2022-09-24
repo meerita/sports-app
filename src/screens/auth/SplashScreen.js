@@ -1,31 +1,16 @@
 /** @format */
 
-import { View, Text, Button, Appearance, useColorScheme } from 'react-native';
-import React, { useEffect } from 'react';
-import { authenticate } from '../../store/slices/auth';
+import { View, Text, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMyUser } from '../../store/actions/me';
+import React from 'react';
+
+// STORE
 import { authActions } from '../../store/slices/auth';
 
 export default function SplashScreen(props) {
-  const isAuth = useSelector(state => state.auth);
-  const me = useSelector(state => state.me.myData);
-  const myGroups = useSelector(state => state.me.myGroups);
   const general = useSelector(state => state.general);
 
   const dispatch = useDispatch();
-
-  const userId = '62385d8caee17d13a1762b39';
-
-  console.log(general);
-
-  // useEffect(() => {
-  //   dispatch(fetchGlobalVariables());
-  // }, []);
-
-  useEffect(() => {
-    dispatch(fetchMyUser(userId));
-  }, []);
 
   const loginHandler = () => {
     dispatch(authActions.authenticate());

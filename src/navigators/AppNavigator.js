@@ -18,6 +18,7 @@ import MaintenanceScreen from '../screens/auth/MaintenanceScreen';
 
 // STORE
 import { fetchGlobalVariables } from '../store/actions/general';
+import { fetchMyUser } from '../store/actions/me';
 
 export default function AppNavigator() {
   const [initializing, setInitializing] = useState(true);
@@ -27,6 +28,12 @@ export default function AppNavigator() {
   const isAuth = useSelector(state => state.auth);
 
   const maintenance = useSelector(state => state.general.maintenance);
+
+  const userId = '62385d8caee17d13a1762b39';
+
+  useEffect(() => {
+    dispatch(fetchMyUser(userId));
+  }, []);
 
   // we will ask for globalvariables in this point
   useEffect(() => {

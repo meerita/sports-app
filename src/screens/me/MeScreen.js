@@ -18,11 +18,10 @@ export default function MeScreen(props) {
       </View>
       <Text>{me.description}</Text>
       <Text>{me.age}</Text>
-      <Text>{me.email}</Text>
-      <Button
-        title='hola'
-        onPress={() => props.navigation.navigate('Settings')}
-      />
+      <Text>{'Usuario #' + me.userNumber}</Text>
+      <Text>{me.verified ? 'It is admin' : 'Is not admin'}</Text>
+      <Text>{me.isAdmin ? 'It is admin' : 'Is not admin'}</Text>
+      <Text>{me.isSuscriber ? 'Is subscriber' : 'Is not subscriber'}</Text>
     </View>
   );
 }
