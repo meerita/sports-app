@@ -1,0 +1,146 @@
+{
+  "errors": {
+    "somethingWentWrong": "Algo ha ido mal",
+    "invalidEmail": "La dirección de correo electrónico tiene un formato incorrecto",
+    "emailNotFound": "No existe registro de usuario correspondiente a este identificador. Es posible que el usuario haya sido eliminado"
+  },
+  "auth": {
+    "register": "Register",
+    "login": "Login",
+    "email": "Email",
+    "emailConfirm": "Confirm Email",
+    "password": "Password",
+    "message": "I am a new user!",
+    "onlyValidEmail": "Only valid emails",
+    "recoverPassword": {
+      "recover": "Password recovery",
+      "recoverPasswordInfo": "Enter your email and we will send you instructions to reset your password.",
+      "emailSentTo": "We have sent you an email with instructions on how to recover your password."
+    },
+    "privacyPolicy": "Política de Privacidad",
+    "termsAndConditions": "Términos y condiciones"
+  },
+  "welcome": {
+    "find": "Find groups or partners",
+    "organize": "Organize events",
+    "measure": "Measure your performance"
+  },
+  "common": {
+    "groups": "Groups",
+    "explore": "Explore",
+    "record": "Record",
+    "activity": "Activity",
+    "vehicle": "Vehicle",
+    "me": "Me",
+    "worldrank": "World Rank"
+  },
+  "events": {
+    "participants": "Participants",
+    "route": "Route type",
+    "difficulty": "Difficulty",
+    "distance": "Distance",
+    "slope": "Slope",
+    "duration": "Duration",
+    "notes": "Notes",
+    "whoGoes": "Who goes",
+    "open": "Open to",
+    "visibility": {
+      "private": "Only me",
+      "group": "Only my group",
+      "everyone": "Everyone"
+    },
+    "incoming": "Next routes",
+    "past": "Completed routes"
+  },
+  "categories": {
+    "bicycles": "Bicycle",
+    "bicyclesDesc": "Groups for traiditional bicycle fans"
+  },
+  "groups": {
+    "manyMembers": "{{count}} miembros",
+    "example": "Example"
+  },
+  "record": {
+    "example": "Example"
+  },
+  "settings": {
+    "account": "Your Account",
+    "accountDesc": "Manage your email, password & more",
+    "profile": "Profile",
+    "profileDesc": "Manage your profile, setup, gear…",
+    "subscription": "Subscription",
+    "subscriptionDesc": "Manage your PRO subscription",
+    "privacy": "Privacy",
+    "privacyDesc": "Manage your privacy",
+    "preferences": "Preferences",
+    "preferencesDesc": "Units, language, etc.",
+    "notifications": "Notifications",
+    "notificationsDesc": "Manage app's notifications",
+    "feedback": "Feedback",
+    "feedbackDesc": "Send us suggestions, bugs, etc…",
+    "logout": "Logout",
+    "logoutDesc": "Close your session",
+    "changepassword": "Password",
+    "changepasswordDesc": "Change your credentials",
+    "resetpassword": "Reset",
+    "resetpasswordDesc": "Resets your credentials",
+    "email": "Email",
+    "emailDesc": "Replace your account email",
+    "delete": "Delete",
+    "deleteDesc": "Fully delete your account",
+    "information": "Information",
+    "informationDesc": "Change your public information",
+    "avatar": "Avatar",
+    "avatarDesc": "Change your profile picture",
+    "vehicleDesc": "Setup your main vehicle",
+    "electronics": "Electronics",
+    "electronicsDesc": "Phones, cameras & more…",
+    "gear": "Equipamiento",
+    "gearDesc": "Helmets, gloves, jackets…",
+    "units": "Units",
+    "language": "Language",
+    "theme": "Theme",
+    "darkmode": "Dark Mode",
+    "lightmode": "Light Mode"
+  },
+  "account": {
+    "account": "Your account",
+    "accountDesc": "Change your email, password…",
+    "password": {
+      "newPassword": "New Password",
+      "passwordPlaceholder": "Minimum 6 characters",
+      "repeatPassword": "Repeat New Password",
+      "repeatActionPlaceholder": "Must match",
+      "success": "You have replaced your old password with a new one. Log in again"
+    }
+  },
+  "profile": {
+    "info": "Info",
+    "memberSince": "Member since",
+    "memberNumber": "Member number",
+    "memberOf": "Member of",
+    "location": "Location",
+    "membersNumber": "{{count}} member",
+    "highlights": "Highlights",
+    "mainSetup": "Main Setup"
+  },
+  "products": {
+    "vehicle": "Vehicle",
+    "electronics": "Electronics",
+    "otherVehicles": "Other vehicles",
+    "gear": "Gear",
+    "brakes": "Brakes",
+    "stem": "Stem",
+    "handlebar": "Handlebar",
+    "grips": "Grips",
+    "phone": "Phone",
+    "camera": "Camera",
+    "gps": "GPS",
+    "e-scooter": "e-Scooter",
+    "euc": "EUC",
+    "bicycle": "Bicycle",
+    "bike": "Bike",
+    "helmet": "Helmet",
+    "gloves": "Gloves"
+  }
+}

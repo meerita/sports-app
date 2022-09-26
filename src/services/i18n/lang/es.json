@@ -1,0 +1,393 @@
+{
+  "errors": {
+    "nameIsInUse": "El nombre está en uso",
+    "permissionDenied": "Permiso denegado",
+    "wrongToken": "El token de usuario no es válido",
+    "somethingWentWrong": "Algo ha ido mal",
+    "fieldRequired": "Este campo es requerido",
+    "mustMatch": "Los emails deben coincidir",
+    "userNameCantBe": "El nombre de usuario no puede tener espacios, ni símbolos. Debe ser entre 3 y 20 caracteres",
+    "userNameLength": "El nombre de usuario debe ser entre 3 y 20 caracteres.",
+    "invalidEmail": "La dirección de correo electrónico tiene un formato incorrecto",
+    "emailNotFound": "No existe registro de usuario correspondiente a este identificador. Es posible que el usuario haya sido eliminado",
+    "emailExists": "La dirección de correo electrónico ya está en uso por otra cuenta",
+    "registrationNotAllowed": "El registro está deshabilitado de momento.",
+    "tooManyAttempts": "Hemos bloqueado todas las solicitudes de este dispositivo debido a actividad inusual. Vuelva a intentarlo más tarde.",
+    "invalidPassword": "La contraseña no es válida o el usuario no existe.",
+    "userDisabled": "La cuenta de usuario ha sido deshabilitada por un administrador.",
+    "weakPassword": "La contraseña debe tener al menos 6 caracteres",
+    "descriptionLength": "Las descripciones no pueden superar los 500 caracteres.",
+    "invalidPasswordChoice": "Las contraseñas no pueden contener espacios",
+    "credentialsTooOld": "Las credenciales del usuario ya no son válidas. El usuario debe iniciar sesión de nuevo.",
+    "moreThanMin": "Debe ser mayor o igual que el mínimo"
+  },
+  "loaders": {
+    "changing": "Cambiando…",
+    "loading": "Cargando…",
+    "sending": "Enviando…",
+    "saving": "Guardando…",
+    "registering": "Registrando…",
+    "authenticating": "Autenticando…",
+    "recovering": "Recuperando…"
+  },
+  "auth": {
+    "register": "Registrarse",
+    "login": "Acceder",
+    "email": "Email",
+    "emailConfirm": "Confirmar Email",
+    "password": "Contraseña",
+    "message": "¡Soy un nuevo usuario!",
+    "onlyValidEmail": "Sólo emails válidos",
+    "recoverPassword": {
+      "recover": "Recuperar contraseña",
+      "recoverPasswordInfo": "Escribe tu email y te enviaremos instrucciones para restablecer la contraseña.",
+      "emailSentTo": "Te hemos enviado un email con las instrucciones para que recuperes tu contraseña"
+    },
+    "privacyPolicy": "Política de Privacidad",
+    "termsAndConditions": "Términos y condiciones"
+  },
+  "welcome": {
+    "find": "Encuentra grupos o amigos",
+    "organize": "Organiza eventos",
+    "measure": "Mide tu rendimiento",
+    "version": "© Minide {{year}}. Versión {{version}}"
+  },
+  "common": {
+    "close": "Cerrar",
+    "back": "Volver",
+    "accept": "Aceptar",
+    "admin": "Administrador",
+    "report": "Reportar un problema",
+    "groups": "Grupos",
+    "share": "Compartir",
+    "explore": "Explorar",
+    "record": "Grabar",
+    "activity": "Actividad",
+    "me": "Yo",
+    "vehicle": "Vehículo",
+    "worldrank": "Ránking Mundial",
+    "tryAgain": "Inténtalo de nuevo",
+    "sendAnother": "Enviar otra",
+    "general": "Generales",
+    "infoUpdated": "Hemos actualizado tu información",
+    "weight": {
+      "weight": "Peso",
+      "kg": "{{weight}}Kg",
+      "lb": "{{weight}}lb",
+      "weightInfo": "Selecciona tu peso aproximado. Esta información se usa en perfiles donde el peso es un factor clave.",
+      "metric": {
+        "title": "Métrico",
+        "description": "Toneladas, kilos, gramos"
+      },
+      "imperial": {
+        "title": "Imperial",
+        "description": "Toneladas, libras, onzas"
+      }
+    },
+    "height": {
+      "height": "Altura",
+      "m": "{{height}}m",
+      "ft-us": "{{ft}}\" {{in}}'",
+      "imperial": {
+        "title": "Imperial",
+        "description": "Millas, pies y pulgadas"
+      },
+      "metric": {
+        "title": "Métrico",
+        "description": "Kilómetros, metros y centímetros"
+      }
+    }
+  },
+  "events": {
+    "location": "Localización",
+    "about": "Sobre el evento",
+    "type": {
+      "event": "Tipo de evento",
+      "match": "Tipo de partido",
+      "game": "Tipo de juego",
+      "route": "Tipo de ruta",
+      "fight": "Tipo de lucha"
+    },
+    "difficulty": "Dificultad",
+    "distance": "Distancia",
+    "fees": "Costo por persona",
+    "wordsFrom": "Palabras de {{user}}",
+    "duration": "Duración",
+    "whoGoes": "Quienes van",
+    "open": "Abierto para…",
+    "visibility": {
+      "private": "Sólo para mí",
+      "group": "Sólo al grupo",
+      "everyone": "Todo el mundo"
+    },
+    "incomingEvents": "Próximos eventos",
+    "pastEvents": "Eventos pasados"
+  },
+  "categories": {
+    "bicycles": "Bicycle",
+    "bicyclesDesc": "Groups for traiditional bicycle fans"
+  },
+  "groups": {
+    "example": "Example",
+    "options": "Opciones del grupo",
+    "joinGroup": "Ingresa a {{group}}",
+    "groupSettings": "Ajustes del grupo",
+    "pendingInvitations": "Invitaciones",
+    "leave": "Dejar grupo",
+    "petitions_one": "{{count}} petición",
+    "petitions_other": "{{count}} peticiones",
+    "settings": {
+      "events": "Eventos",
+      "eventsDesc": "Controla la creación de eventos",
+      "information": "Información",
+      "informationDesc": "Cambia descripción, nombre, etc.",
+      "members": "Miembros",
+      "membersDesc": "Agregar, quitar miembros del grupo",
+      "privacy": {
+        "privacy": "Privacidad",
+        "privacyDesc": "Ajustes de privacidad del grupo",
+        "membership": "Membrecía",
+        "noRegister": "Sin registro",
+        "noRegisterDesc": "Sólo los administradores pueden registrar nuevos miembros al grupo",
+        "freeJoin": "Libre ingreso",
+        "freeJoinDesc": "Permita que cualquier visitante pueda unirse a su grupo. Sin embargo, los nuevos usuarios tendrán un rango bajo",
+        "membersOnly": "Sólo miembros",
+        "membersOnlyDesc": "Solo los miembros pueden participar en el grupo. Toda la información aún visible para los visitantes.",
+        "diversity": "Diversidad",
+        "diversityDesc": "Sólo aquellos que coincidan con el sexo elegido podrán ingresar en el grupo",
+        "visibilityOptions": "Opciones de visibilidad",
+        "private": "Privado",
+        "privateDesc": "Requiere ser un miembro aprovado para ver eventos, usuarios y estadísticas",
+        "visibility": "Visibilidad",
+        "visibilityDesc": "Por defecto este grupo puede ser encontrado en la sección de Explorar, resultados de búsqueda y perfiles de usuario"
+      },
+      "gender": {
+        "mixed": "Mixtos",
+        "male": "Sólo hombres",
+        "female": "Sólo mujeres"
+      }
+    }
+  },
+  "record": {
+    "example": "Example"
+  },
+  "settings": {
+    "settings": "Ajustes",
+    "admin": {
+      "adminPanel": "Panel de administradores",
+      "adminPanelDesc": "Sólo los putos amos vemos esto",
+      "users": {
+        "users": "Usuarios",
+        "usersCaption": "{{count}} usuarios"
+      },
+      "sports": {
+        "sports": "Deportes",
+        "sportsCaption": "{{count}} deportes",
+        "sportsGroups": "{{count}} grupos",
+        "noSports": "No encontramos deportes. Quizás debas agregar uno!",
+        "editSport": "Editar deporte",
+        "createSport": {
+          "createSport": "Crear un deporte",
+          "name": "Nombre",
+          "noSpaces": "Sin espacios",
+          "moreThanMin": "Más que el mínimo",
+          "iconUrl": "URL del icono",
+          "participants": "Participantes",
+          "min": "Mínimo",
+          "max": "Máximo",
+          "visible": "Visible",
+          "popular": "Popular"
+        }
+      }
+    },
+    "account": {
+      "account": "Tu cuenta",
+      "accountDesc": "Administra tu email, password…",
+      "password": {
+        "newPassword": "Nueva contraseña",
+        "passwordPlaceholder": "6 caracteres o más",
+        "repeatPassword": "Repetir nueva contraseña",
+        "repeatActionPlaceholder": "Deben coincidir",
+        "success": "Has reemplazado tu antigua contraseña por una nueva. Inicia sesión de nuevo"
+      }
+    },
+    "profile": {
+      "profile": "Perfil de usuario",
+      "profileDesc": "Administra tu perfil, equipamiento…",
+      "basicInformation": {
+        "basicInformation": "Información básica",
+        "basicInformationDesc": "Avatar, localización, contactos, etc…",
+        "userName": "Nombre de usuario",
+        "userNameDesc": "Cambia tu nombre de usuario",
+        "changeTag": "Cambiar etiqueta",
+        "tag": "Etiqueta",
+        "tagDesc": "Cambia la etiqueta debajo de tu nombre",
+        "tagInfo": "Pon una etiqueta debajo de tu nombre. La gente pone el modelo de bicicleta que tiene, su peso, o su equipo de fútbol favorito.",
+        "changeUserName": "Cambiar nombre de usuario",
+        "userNameInfo": "Puedes cambiar el nombre de usuario, siempre y cuando éste no contenga espacios, ni caracteres raros",
+        "description": "Descripción",
+        "descriptionDesc": "Cambia la descripción de tu perfil público",
+        "descriptionInfo": "Cuando otros usuarios visitan tu perfil podrán leer esto que escribas aquí.",
+        "descriptionRequirement": "Mínimo 3 caracteres, hasta un máximo de 500",
+        "changeDescription": "Cambiar descripción",
+        "gender": "Sexo",
+        "genderDesc": "Indica cuál es tu sexo",
+        "genderInfo": "Minide permite, de forma opcional, la creación de eventos, grupos donde sólo puedan estar miembros de un sexo o del otro. Por defecto los grupos permiten ambos sexos, pero los dueños de los grupos pueden exigir que pertenezcas a uno u otro.",
+        "male": "Hombre",
+        "female": "Mujer",
+        "other": "Otro…",
+        "localization": "Localización",
+        "countryProvince": "{{province}}, {{country}}",
+        "visibility": {
+          "visibility": "Visibilidad",
+          "true": "Visible",
+          "false": "Invisible"
+        },
+        "weightHeight": "Altura y peso",
+        "weightHeightDesc": "Describe tu peso actual y la altura",
+        "weightHeightInfo": "Esta información sólo estará disponible cuando crees un perfil de algún deporte donde el peso o la altura son claves para participar."
+      }
+    },
+    "profileManager": {
+      "profileManager": "Administrador de perfiles",
+      "profileManagerDesc": "perfiles personalizados por deporte"
+    },
+    "groupMembership": {
+      "groupMembership": "Participación en grupos",
+      "groupMembershipDesc": "Administra tu participación"
+    },
+    "subscription": {
+      "subscription": "Miembro PRO",
+      "subscribeNow": "Subscríbete ahora",
+      "subscriptionDesc": "Administra tu subscripción PRO",
+      "getMore": "Obtiene muchas características avanzadas con PRO",
+      "proBadge": "Insignia y colores PRO",
+      "multiple": "Múltiple perfiles por cuenta",
+      "incognito": "Modo incógnito total",
+      "stats": "Almacenamiento ilimitado de estadísticas y eventos",
+      "discounts": "Descuentos en compras",
+      "prize": "Participación en el sorteo anual",
+      "startTrial": "Empieza la prueba gratuita"
+    },
+    "privacy": {
+      "privacy": "Privacidad",
+      "privacyDesc": "Controla tu privacidad",
+      "proOptions": {
+        "proOptions": "Opciones PRO",
+        "invisible": "Invisible",
+        "invisibleDesc": "Nadie podrá ver tu información de perfil",
+        "hideActivity": "Ocultar actividad",
+        "hideActivityDesc": "Otros participantes no podrán ver tu actividad"
+      },
+      "generalOptions": {
+        "general": "Opciones generales",
+        "hideSearch": "Ocultar en búsquedas",
+        "hideSearchDesc": "Tu perfil no saldrá en resultados de búsqueda",
+        "groupless": "Grupos ocultos",
+        "grouplessDesc": "Los usuarios no podrán ver en qué grupo participas"
+      },
+      "cookies": {
+        "cookies": "Cookies",
+        "cookiesDesc": "Somos abiertos y transparentes con nuestros usuarios: queremos que tengas la seguridad y tranquilidad de pertenecer a nuestra comunidad. Si estás interesado en saber más sobre el uso de cookies, puedes leer más en el apartado de Cookies básicas.",
+        "basicCookies": "Cookies básicas",
+        "basicCookiesDesc": "Cookies necesarias para que esta app funcione",
+        "analyticsCookies": "Cookies de analítica",
+        "analyticsCookiesDesc": "Cookies para nuestra plataforma analítica",
+        "marketingCookies": "Cookies de marketing",
+        "marketingCookiesDesc": "Para mejorar la publicidad dentro de la app"
+      }
+    },
+    "preferences": {
+      "preferences": "Preferencias",
+      "preferencesDesc": "Unidades, idioma, etc.",
+      "unitSystem": "Pesaje",
+      "metricSystem": "Dimensiones",
+      "language": "Idiomas",
+      "theme": "Tema",
+      "themDesc": "Por defecto nuestra app viene con el Modo Claro activado, pero puedes usar nuestro increíble Modo Oscur",
+      "themeDark": "Modo oscuro",
+      "themeLight": "Modo claro"
+    },
+    "notifications": {
+      "notifications": "Notificaciones",
+      "notificationsDesc": "Administra las notificaciones de la app",
+      "newEvents": "Nuevos eventos",
+      "invitesYou": "Alguien te invita a un evento",
+      "newMember": "Nuevo miembro se une",
+      "joinRequests": "Peticiones de ingreso",
+      "newRecord": "Nuevo récord alcanzado",
+      "announcements": "Anuncios",
+      "appUpdates": "Actualizaciones de la app"
+    },
+    "feedback": {
+      "feedback": "Sugerencias",
+      "feedbackDesc": "Envíanos sugerencias, bugs, etc…",
+      "form": {
+        "placeholder": "Escríbenos cualquier sugerencia, pregunta o problema. Intentaremos responderte lo antes posible.",
+        "sendFeedback": "Enviar sugerencia"
+      },
+      "received": "Hemos recibido tu sugerencia. Te responderemos a la brevedad a tu cuenta de correo electrónico"
+    },
+    "logout": "Salir",
+    "logoutDesc": "Cierra tu sesión",
+    "changepassword": "Cambiar contraseña",
+    "changepasswordDesc": "Renueva tu actual contraseña por otra",
+    "resetpassword": "Reiniciar contraseña",
+    "resetpasswordDesc": "Reinicia tu contraseña por una nueva",
+    "email": "Email",
+    "emailDesc": "Cambiar tu email",
+    "delete": "Borrar",
+    "deleteDesc": "Elimina completamente tu cuenta",
+    "information": "Datos Personales",
+    "informationDesc": "Cambia tus datos personales",
+    "avatar": "Avatar",
+    "avatarDesc": "Cambia tu foto de perfil",
+    "vehicleDesc": "Configura tu vehículo",
+    "electronics": "Electrónica",
+    "electronicsDesc": "Teléfonos, cámaras y más…",
+    "gear": "Equipamiento",
+    "gearDesc": "Cascos, guantes, chaquetas…",
+    "units": "Unidades",
+    "language": "Idioma",
+    "theme": "Tema",
+    "darkmode": "Modo Oscuro",
+    "lightmode": "Modo Claro"
+  },
+  "profile": {
+    "invisible": "La información de {{user}} está oculta",
+    "info": "Información",
+    "tag": "Etiqueta",
+    "memberSince": "Miembro desde…",
+    "memberOf": "Miembro de…",
+    "memberNumber": "Miembro número…",
+    "location": "Localización",
+    "membersNumber": "{{count}} miembros",
+    "mainSetup": "Equipo principal"
+  },
+  "explore": {
+    "popularSports": "Deportes populares",
+    "countGroups": "{{count}} grupos",
+    "eventsGroupsUsers": "Eventos, grupos y usuarios por deporte"
+  },
+  "sports": {
+    "soccer": "Fútbol",
+    "cars": "Automobilismo",
+    "tennis": "Tenis",
+    "eScooters": "Patinetes eléctricos",
+    "hiking": "Senderismo",
+    "gymnastics": "Gimnasia",
+    "euc": "Monociclos",
+    "fitness": "Fitness",
+    "eBikes": "Bicicletas eléctricas",
+    "basketball": "Baloncesto",
+    "mountain": "Montañismo",
+    "padel": "Pádel",
+    "martialArts": "Artes marciales",
+    "kiteSurf": "Kitesurf",
+    "bikes": "Motocicletas",
+    "bicycle": "Ciclismo",
+    "trekking": "Trekking",
+    "inlineSkate": "Patinaje en línea",
+    "volley": "Vóleibol"
+  }
+}
