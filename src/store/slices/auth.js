@@ -8,6 +8,11 @@ export const authSlice = createSlice({
     token: '',
     isAuthenticated: false,
     acceptedTerms: 0,
+    cookies: {
+      analytics: false,
+      marketing: false,
+      others: false,
+    },
   },
   reducers: {
     authenticate: state => {
@@ -15,6 +20,9 @@ export const authSlice = createSlice({
     },
     logout: state => {
       state.isAuthenticated = false;
+    },
+    updateCookies: (state, action) => {
+      state.cookies = action.payload;
     },
   },
 });

@@ -2,19 +2,18 @@
 
 import { View, Text, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // PANTALLAS
-
 import LoadingScreen from '../screens/LoadingScreen';
+import MaintenanceScreen from '../screens/auth/MaintenanceScreen';
 
+// NAVIGATORS
 import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
 import MainBottomNavigation from './MainBottomNavigation';
-import { useDispatch, useSelector } from 'react-redux';
-import MaintenanceScreen from '../screens/auth/MaintenanceScreen';
 
 // STORE
 import { fetchGlobalVariables } from '../store/actions/general';

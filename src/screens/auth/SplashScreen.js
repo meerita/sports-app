@@ -22,7 +22,7 @@ export default function SplashScreen(props) {
         {general.register ? (
           <Button
             title='Register'
-            onPress={() => props.navigation.navigate('RegisterScreen')}
+            onPress={() => props.navigation.navigate('AcceptTermsScreen')}
           />
         ) : (
           <Text>No hay registro disponible.</Text>

@@ -1,8 +1,9 @@
 /** @format */
 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // screens
 import SplashScreen, {
@@ -14,8 +15,12 @@ import LoginScreen, {
 import RegisterScreen, {
   screenOptions as RegisterScreenOptions,
 } from '../screens/auth/RegisterScreen';
-
-import { useSelector } from 'react-redux';
+import AcceptTermsScreen, {
+  screenOptions as AcceptTermsScreenOptions,
+} from '../screens/auth/AcceptTermsScreen';
+import AcceptCookiesScreen, {
+  screenOptions as AcceptCookiesScreenOptions,
+} from '../screens/auth/AcceptCookiesScreen';
 
 export default function AuthNavigator() {
   const Stack = createNativeStackNavigator();
@@ -36,6 +41,16 @@ export default function AuthNavigator() {
         name='LoginScreen'
         component={LoginScreen}
         options={LoginScreenOptions}
+      />
+      <Stack.Screen
+        name='AcceptTermsScreen'
+        component={AcceptTermsScreen}
+        options={AcceptTermsScreenOptions}
+      />
+      <Stack.Screen
+        name='AcceptCookies'
+        component={AcceptCookiesScreen}
+        options={AcceptCookiesScreenOptions}
       />
     </Stack.Navigator>
   );
