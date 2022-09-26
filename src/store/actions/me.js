@@ -1,7 +1,7 @@
 /** @format */
 import { meActions } from '../slices/me';
 
-const API_URL = process.env.API_URL;
+const API_URL = 'http://192.168.1.48:8000';
 
 // ********************************************************
 // Function to fetch the any logged user
@@ -9,7 +9,6 @@ const API_URL = process.env.API_URL;
 
 export const fetchMyUser = userId => {
   return async dispatch => {
-    console.log('el user id' + userId);
     // ********************************************************
     // Function to fetch the loged in user
     // ********************************************************

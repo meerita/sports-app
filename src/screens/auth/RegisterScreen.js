@@ -2,6 +2,7 @@
 
 import { View, Text, Button, Platform } from 'react-native';
 import React from 'react';
+import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 
 export default function RegisterScreen(props) {
   return (
@@ -10,7 +11,8 @@ export default function RegisterScreen(props) {
       <View>
         <Text>Email</Text>
         <Text>Repeat Email</Text>
-        <Text>Password</Text>
+        <Text>Passworda</Text>
+        <ButtonFilled>Hola</ButtonFilled>
         <Button title='Register' />
       </View>
     </View>
