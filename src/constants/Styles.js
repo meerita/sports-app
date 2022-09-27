@@ -26,6 +26,7 @@ export default StyleSheet.create({
   // Forms
   formPadded: {
     paddingHorizontal: 8,
+    paddingVertical: 16,
   },
   formInput: {
     // paddingTop: 8,

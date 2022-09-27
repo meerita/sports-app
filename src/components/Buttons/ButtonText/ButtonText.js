@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TextButton from '../../../type/TextButton';
-import Colors from '../../../../constants/Colors';
+import TextButton from '../../type/TextButton';
+import Colors from '../../../constants/Colors';
 import BaseButton from '../BaseButton/BaseButton';
 import { useSelector } from 'react-redux';
 
-const ButtonText = props => {
+export default function ButtonText(props) {
   // darkMode ?
   const darkMode = useSelector(state => state.theme.darkMode);
 
@@ -31,7 +31,7 @@ const ButtonText = props => {
       {props.children}
     </BaseButton>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text: {
@@ -58,5 +58,3 @@ const styles = StyleSheet.create({
     color: Colors.light.OnPrimaryVariantUnfocused,
   },
 });
-
-export default ButtonText;
