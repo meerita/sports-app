@@ -1,11 +1,11 @@
 /** @format */
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
 import React from 'react';
 
-// screens
+// ************************************************
+// SCREENS
+// ************************************************
 import SplashScreen, {
   screenOptions as SplashScreenOptions,
 } from '../screens/auth/SplashScreen';
@@ -21,12 +21,31 @@ import AcceptTermsScreen, {
 import AcceptCookiesScreen, {
   screenOptions as AcceptCookiesScreenOptions,
 } from '../screens/auth/AcceptCookiesScreen';
+import Colors from '../constants/Colors';
 
 export default function AuthNavigator() {
+  // Definition of the stack
   const Stack = createNativeStackNavigator();
 
+  // Options of the stack
+  const defaultAuthNavigationOptions = {
+    headerStyle: {
+      backgroundColor: Colors.light.surface,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
+    },
+    headerTintColor: Colors.light.OnSurfaceActive,
+    headerTitleStyle: {
+      fontFamily: 'Barlow-Medium',
+      letterSpacing: -0.4,
+      fontSize: 20,
+      lineHeight: 22,
+    },
+  };
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={defaultAuthNavigationOptions}>
       <Stack.Screen
         name='SplashScreen'
         component={SplashScreen}

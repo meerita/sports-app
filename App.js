@@ -6,6 +6,7 @@ import { I18nManager as RNI18nManager } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
+import { ToastProvider } from 'react-native-toast-notifications';
 
 // STORE
 import store from './src/store/index';
@@ -52,9 +53,14 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
+        <ToastProvider
+          textStyle={{ fontFamily: 'Barlow-SemiBold', fontSize: 16 }}
+          offsetBottom={20}
+        >
+          <NavigationContainer>
+            <AppNavigator />
+          </NavigationContainer>
+        </ToastProvider>
       </Provider>
     );
   }

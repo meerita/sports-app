@@ -5,6 +5,7 @@ import { t } from '../../services/i18n';
 import { useForm, Controller } from 'react-hook-form';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useToast } from 'react-native-toast-notifications';
 
 // CONSTANTS
 import Colors from '../../constants/Colors';
@@ -17,7 +18,8 @@ import ButtonText from '../../components/Buttons/ButtonText/ButtonText';
 import BodyTwo from '../../components/type/BodyTwo';
 
 export default function RegisterScreen(props) {
-  const hola = 0;
+  // toast notifications
+  const toast = useToast();
 
   // loading state for the forms
   const [loading, setLoading] = useState(false);
@@ -41,6 +43,7 @@ export default function RegisterScreen(props) {
     try {
       setLoading(true);
       // await dispatch(form data);
+      toast.show(data.email, { type: 'danger', duration: 4000 });
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -148,7 +151,7 @@ export default function RegisterScreen(props) {
       />
 
       <ButtonFilled
-        loading={loading ? true : false}
+        // loading={loading ? true : false}
         onPress={handleSubmit(onSubmit)}
         style={{ marginHorizontal: 8, marginBottom: 32 }}
       >
@@ -162,7 +165,7 @@ export default function RegisterScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: 'Register an account',
-    // headerBackTitle: null,
+    headerBackTitle: 'Close',
     presentation: Platform.OS === 'android' ? 'card' : 'modal',
   };
 };

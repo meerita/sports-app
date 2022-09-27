@@ -7,15 +7,61 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import MainBottomNavigation from './MainBottomNavigation';
 
+// ************************************************
+// SCREENS
+// ************************************************
+
 import SettingsScreen, {
   screenOptions as SettingScreenOption,
 } from '../screens/settings/SettingsScreen';
+import { useSelector } from 'react-redux';
+
+// CONSTANTS
+import Colors from '../constants/Colors';
 
 export default function MainNavigator(props) {
+  // darkMode
+  const darkMode = useSelector(state => state.theme.darkMode);
+
+  // ************************************************
+  // DEFINITION OF THE STACK
+  // ************************************************
   const Stack = createNativeStackNavigator();
 
+  // ************************************************
+  // OPTIONS OF THE STACK NAVIGATION
+  // ************************************************
+
+  const defaultStackNavOptions = {
+    headerStyle: {
+      backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
+    },
+    headerTintColor: darkMode
+      ? Colors.dark.OnSurfaceActive
+      : Colors.light.OnSurfaceActive,
+    headerTitleStyle: {
+      fontFamily: 'Barlow-Medium',
+      letterSpacing: -0.3,
+      fontSize: 20,
+      color: darkMode
+        ? Colors.dark.OnSurfaceActive
+        : Colors.light.OnSurfaceActive,
+    },
+    headerBackTitleStyle: {
+      fontFamily: 'Barlow-Medium',
+      fontSize: 17,
+      letterSpacing: -0.3,
+      color: darkMode
+        ? Colors.dark.OnSurfaceActive
+        : Colors.light.OnSurfaceActive,
+    },
+  };
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={defaultStackNavOptions}>
       <Stack.Screen
         name='BottomNavigation'
         component={MainBottomNavigation}
