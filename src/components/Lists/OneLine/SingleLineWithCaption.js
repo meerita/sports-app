@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 
 // CONSTANTS
-import Colors from '../../../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import Caption from '../../../type/Caption';
+import SubtitleOne from '../../type/SubtitleOne';
+import Caption from '../../type/Caption';
 
 const SingleLineWithCaption = props => {
   // we define a variable to use TouchableOpacity or NaviteWithFeedback
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     minHeight: 48,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
