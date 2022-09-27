@@ -61,7 +61,11 @@ export default function MainBottomNavigation() {
     tabBarStyle: {
       backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
       borderTopWidth: 0,
-      shadowOpacity: 0.1,
+      shadowOpacity: 0.05,
+    },
+    tabBarLabelStyle: {
+      paddingTop: 0,
+      paddingBottom: 4,
     },
   };
 
@@ -81,6 +85,7 @@ export default function MainBottomNavigation() {
         name='Groups'
         component={MyGroupsScreen}
         options={{
+          tabBarLabel: t('groups'),
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../assets/images/icons/groups.png')}
@@ -106,7 +111,7 @@ export default function MainBottomNavigation() {
         name='Activity'
         component={ActivityScreen}
         options={{
-          tabBarLabel: t('Activity'),
+          tabBarLabel: t('activity'),
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../assets/images/icons/Notifications.png')}
