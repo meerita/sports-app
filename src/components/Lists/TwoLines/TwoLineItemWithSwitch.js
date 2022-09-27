@@ -12,12 +12,12 @@ import {
 } from 'react-native';
 
 // CONSTANTS
-import Colors from '../../../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import BodyTwo from '../../../type/BodyTwo';
-import Styles from '../../../../constants/Styles';
+import SubtitleOne from '../../type/SubtitleOne';
+import BodyTwo from '../../type/BodyTwo';
+import Styles from '../../../constants/Styles';
 import ListItem from '../ListItem/ListItem';
 
 export default function TwoLineItemWithSwitch(props) {

@@ -6,12 +6,12 @@ import { View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 // CONSTANTS
-import Colors from '../../../../constants/Colors';
-import Styles from '../../../../constants/Styles';
-import Caption from '../../../type/Caption';
+import Colors from '../../../constants/Colors';
+import Styles from '../../../constants/Styles';
+import Caption from '../../type/Caption';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
+import SubtitleOne from '../../type/SubtitleOne';
 
 // COMPONENTS
 import ListItem from '../ListItem/ListItem';
@@ -38,8 +38,8 @@ const SingleLineWithRadio = ({ options = [], onChangeSelect, selected }) => {
               }}
               source={
                 selected === index
-                  ? require('../../../../assets/images/icons/radio_button_on.png')
-                  : require('../../../../assets/images/icons/radio_button_off.png')
+                  ? require('../../../assets/images/icons/radio_button_on.png')
+                  : require('../../../assets/images/icons/radio_button_off.png')
               }
             />
             <SubtitleOne
