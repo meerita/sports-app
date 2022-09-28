@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import MainBottomNavigation from './MainBottomNavigation';
 
@@ -14,7 +15,10 @@ import MainBottomNavigation from './MainBottomNavigation';
 import SettingsScreen, {
   screenOptions as SettingScreenOption,
 } from '../screens/settings/SettingsScreen';
-import { useSelector } from 'react-redux';
+
+import GroupDetailNavigator, {
+  screenOptions as GroupDetailNavigatorOptions,
+} from '../navigators/GroupDetailNavigator';
 
 // CONSTANTS
 import Colors from '../constants/Colors';
@@ -71,6 +75,11 @@ export default function MainNavigator(props) {
         name='Settings'
         component={SettingsScreen}
         options={SettingScreenOption}
+      />
+      <Stack.Screen
+        name='GroupDetailScreen'
+        component={GroupDetailNavigator}
+        options={GroupDetailNavigatorOptions}
       />
     </Stack.Navigator>
   );

@@ -54,11 +54,6 @@ export default function AppNavigator() {
     return <AuthNavigator />;
   }
 
-  // we load the app
-  if (isAuth.isAuthenticated) {
-    return <MainBottomNavigation />;
-  }
-
   // the app itself
   return <MainNavigator />;
 }

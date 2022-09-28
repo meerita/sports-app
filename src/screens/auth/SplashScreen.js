@@ -84,5 +84,6 @@ export default function SplashScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: App.name,
+    headerShadowVisible: false,
   };
 };

@@ -10,9 +10,12 @@ import {
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/slices/auth';
+import { t } from '../../services/i18n';
 
 // COMPONENTS
 import Card from '../../components/Card/';
+import SubtitleOne from '../../components/type/SubtitleOne';
+import Caption from '../../components/type/Caption';
 
 export default function MyGroupsScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -32,8 +35,8 @@ export default function MyGroupsScreen(props) {
       {myGroups.map(group => (
         <Card
           key={group._id}
-          onPress={() => logoutHandler()}
-          style={{ marginBottom: 8 }}
+          onPress={() => props.navigation.navigate('GroupDetailScreen')}
+          style={{ marginBottom: 16 }}
         >
           <View
             style={{
@@ -52,8 +55,14 @@ export default function MyGroupsScreen(props) {
             />
           </View>
           <View style={{ paddingHorizontal: 8, paddingVertical: 8 }}>
-            <Text>{group.title}</Text>
-            <Text>{group.members.length + 'members'}</Text>
+            <SubtitleOne>{group.title}</SubtitleOne>
+            <Caption>
+              {group.members.length > 1
+                ? t('groups:manyMembers_other', { count: group.members.length })
+                : t('groups:manyMembers_one', {
+                    count: group.members.length,
+                  })}
+            </Caption>
           </View>
         </Card>
       ))}

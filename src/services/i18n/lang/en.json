@@ -57,7 +57,8 @@
     "bicyclesDesc": "Groups for traiditional bicycle fans"
   },
   "groups": {
-    "manyMembers": "{{count}} miembros",
+    "manyMembers_one": "{{count}} miembro",
+    "manyMembers_other": "{{count}} miembros",
     "example": "Example"
   },
   "record": {
