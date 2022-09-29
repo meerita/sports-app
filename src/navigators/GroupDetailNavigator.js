@@ -43,7 +43,9 @@ export default function GroupDetailNavigator(props) {
 
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
+  const title = navData.route.params.title;
   return {
-    headerTitle: 'Group name',
+    headerTitle: title,
+    headerShadowVisible: false,
   };
 };

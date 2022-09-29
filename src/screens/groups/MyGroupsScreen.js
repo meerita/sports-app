@@ -35,7 +35,12 @@ export default function MyGroupsScreen(props) {
       {myGroups.map(group => (
         <Card
           key={group._id}
-          onPress={() => props.navigation.navigate('GroupDetailScreen')}
+          onPress={() =>
+            props.navigation.navigate('GroupDetailScreen', {
+              title: group.title,
+              id: group._id,
+            })
+          }
           style={{ marginBottom: 16 }}
         >
           <View

@@ -85,7 +85,22 @@ export default function MainBottomNavigation() {
         name='Groups'
         component={MyGroupsScreen}
         options={{
+          headerTitle: t('groups'),
           tabBarLabel: t('groups'),
+          headerRight: color => {
+            return (
+              <IconButton
+                source={require('../assets/images/icons/group_add.png')}
+                onPress={() => props.navigation.navigate('SettingsScreen')}
+                style={{
+                  marginRight: 16,
+                  tintColor: darkMode
+                    ? Colors.dark.OnSurfaceActive
+                    : Colors.light.OnSurfaceActive,
+                }}
+              />
+            );
+          },
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../assets/images/icons/groups.png')}
