@@ -5,13 +5,13 @@ import { View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 // CONSTANTS
-import Styles from '../../../../constants/Styles';
+import Styles from '../../../constants/Styles';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import Caption from '../../../type/Caption';
+import SubtitleOne from '../../type/SubtitleOne';
+import Caption from '../../type/Caption';
 import ListItem from '../ListItem/ListItem';
-import Colors from '../../../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
 export default function SingleLineWithIcon(props) {
   // darkMode ?

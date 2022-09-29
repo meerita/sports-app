@@ -139,7 +139,7 @@ export default function MainBottomNavigation() {
         name={me.username}
         component={MeNavigator}
         options={{
-          title: me.username || t('common:me'),
+          title: me.username,
           headerShadowVisible: false,
           tabBarIcon: ({ color }) =>
             me === null ? (

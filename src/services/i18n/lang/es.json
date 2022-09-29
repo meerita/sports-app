@@ -366,7 +366,8 @@
   },
   "explore": {
     "popularSports": "Deportes populares",
-    "countGroups": "{{count}} grupos",
+    "countGroups_one": "{{count}} grupo",
+    "countGroups_other": "{{count}} grupos",
     "eventsGroupsUsers": "Eventos, grupos y usuarios por deporte"
   },
   "sports": {

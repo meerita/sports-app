@@ -5,13 +5,13 @@ import React from 'react';
 import { Image, View } from 'react-native';
 
 // CONSTANTS
-import Styles from '../../../../constants/Styles';
-import Colors from '../../../../constants/Colors';
+import Styles from '../../../constants/Styles';
+import Colors from '../../../constants/Colors';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import Caption from '../../../type/Caption';
-import BodyTwo from '../../../type/BodyTwo';
+import SubtitleOne from '../../type/SubtitleOne';
+import Caption from '../../type/Caption';
+import BodyTwo from '../../type/BodyTwo';
 
 // COMPONENTS
 import ListItem from '../ListItem/ListItem';
@@ -31,7 +31,7 @@ export default function TwoLineWithIcon(props) {
               ? Colors.dark.OnSurfaceUnfocused
               : Colors.light.OnSurfaceUnfocused,
           }}
-          source={props.icon}
+          source={{ uri: props.icon }}
         />
         <View style={Styles.listDoubleContent}>
           <SubtitleOne>{props.title}</SubtitleOne>

@@ -30,9 +30,11 @@ export default function AppNavigator() {
 
   const userId = '62385d8caee17d13a1762b39';
 
+  const me = useSelector(state => state.me.userData);
+
   useEffect(() => {
     dispatch(fetchMyUser(userId));
-  }, []);
+  }, [me]);
 
   // we will ask for globalvariables in this point
   useEffect(() => {
