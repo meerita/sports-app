@@ -72,7 +72,7 @@ export default function MainNavigator(props) {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='Settings'
+        name='SettingsScreen'
         component={SettingsScreen}
         options={SettingScreenOption}
       />

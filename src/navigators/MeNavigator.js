@@ -1,6 +1,5 @@
 /** @format */
 
-import { View, Text } from 'react-native';
 import React from 'react';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -15,7 +14,7 @@ import MeEventsScreen, {
 
 const Tabs = createMaterialTopTabNavigator();
 
-export default function MeNavigator() {
+export default function MeNavigator(props) {
   return (
     <Tabs.Navigator>
       <Tabs.Screen name='Me' component={MeScreen} options={MeScreenOptions} />

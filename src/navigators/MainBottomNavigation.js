@@ -32,7 +32,7 @@ import MeScreen, {
 import MeNavigator from './MeNavigator';
 import Colors from '../constants/Colors';
 
-export default function MainBottomNavigation() {
+export default function MainBottomNavigation(props) {
   const me = useSelector(state => state.me.myData);
 
   // DARK MODE
