@@ -49,8 +49,41 @@ import SettingsFeedbackScreen, {
   screenOptions as SettingsFeedbackScreenOption,
 } from '../screens/settings/SettingsFeedbackScreen';
 
+// ************************************************
+// SETTINGS SCREENS / ACCOUNT
+// ************************************************
+
+import ChangePasswordScreen, {
+  screenOptions as ChangePasswordScreenOption,
+} from '../screens/settings/account/ChangePasswordScreen';
+
+import ChangeEmailScreen, {
+  screenOptions as ChangeEmailScreenOption,
+} from '../screens/settings/account/ChangeEmailScreen';
+
+import DeleteAccountScreen, {
+  screenOptions as DeleteAccountScreenOption,
+} from '../screens/settings/account/DeleteAccountScreen';
+
+// ************************************************
+// SETTINGS SCREENS / PREFERENCES
+// ************************************************
+
+import PreferencesDimensionsScreen, {
+  screenOptions as PreferencesDimensionsScreenOption,
+} from '../screens/settings/preferences/PreferencesDimensionsScreen';
+
+import PreferencesWeightScreen, {
+  screenOptions as PreferencesWeightScreenOption,
+} from '../screens/settings/preferences/PreferencesWeightScreen';
+
+import PreferencesThemeScreen, {
+  screenOptions as PreferencesThemeScreenOption,
+} from '../screens/settings/preferences/PreferencesThemeScreen';
+
 // CONSTANTS
 import Colors from '../constants/Colors';
+import { Platform } from 'react-native';
 
 export default function MainNavigator(props) {
   // darkMode
@@ -77,8 +110,8 @@ export default function MainNavigator(props) {
       : Colors.light.OnSurfaceActive,
     headerTitleStyle: {
       fontFamily: 'Barlow-Medium',
-      letterSpacing: -0.3,
-      fontSize: 20,
+      letterSpacing: -0.4,
+      fontSize: Platform.OS === 'android' ? 18 : 20,
       color: darkMode
         ? Colors.dark.OnSurfaceActive
         : Colors.light.OnSurfaceActive,
@@ -170,6 +203,36 @@ export default function MainNavigator(props) {
         name='SettingsScreen'
         component={SettingsScreen}
         options={SettingScreenOption}
+      />
+      <Stack.Screen
+        name='PreferencesDimensionsScreen'
+        component={PreferencesDimensionsScreen}
+        options={PreferencesDimensionsScreenOption}
+      />
+      <Stack.Screen
+        name='PreferencesWeightScreen'
+        component={PreferencesWeightScreen}
+        options={PreferencesWeightScreenOption}
+      />
+      <Stack.Screen
+        name='PreferencesThemeScreen'
+        component={PreferencesThemeScreen}
+        options={PreferencesThemeScreenOption}
+      />
+      <Stack.Screen
+        name='ChangePasswordScreen'
+        component={ChangePasswordScreen}
+        options={ChangePasswordScreenOption}
+      />
+      <Stack.Screen
+        name='ChangeEmailScreen'
+        component={ChangeEmailScreen}
+        options={ChangeEmailScreenOption}
+      />
+      <Stack.Screen
+        name='DeleteAccountScreen'
+        component={DeleteAccountScreen}
+        options={DeleteAccountScreenOption}
       />
       <Stack.Screen
         name='GroupDetailScreen'
