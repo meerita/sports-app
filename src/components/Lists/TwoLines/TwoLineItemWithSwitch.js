@@ -2,22 +2,15 @@
 
 // BASE
 import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  View,
-  Switch,
-} from 'react-native';
+import { View, Switch } from 'react-native';
 
 // CONSTANTS
 import Colors from '../../../constants/Colors';
+import Styles from '../../../constants/Styles';
 
 // TYPE
 import SubtitleOne from '../../type/SubtitleOne';
 import BodyTwo from '../../type/BodyTwo';
-import Styles from '../../../constants/Styles';
 import ListItem from '../ListItem/ListItem';
 
 export default function TwoLineItemWithSwitch(props) {

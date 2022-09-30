@@ -1,9 +1,8 @@
 /** @format */
 
-import { View, Text } from 'react-native';
+import { t } from '../services/i18n';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
 import MainBottomNavigation from './MainBottomNavigation';
@@ -12,13 +11,43 @@ import MainBottomNavigation from './MainBottomNavigation';
 // SCREENS
 // ************************************************
 
+import GroupDetailNavigator, {
+  screenOptions as GroupDetailNavigatorOptions,
+} from '../navigators/GroupDetailNavigator';
+
+// ************************************************
+// SETTINGS CREENS
+// ************************************************
+
 import SettingsScreen, {
   screenOptions as SettingScreenOption,
 } from '../screens/settings/SettingsScreen';
 
-import GroupDetailNavigator, {
-  screenOptions as GroupDetailNavigatorOptions,
-} from '../navigators/GroupDetailNavigator';
+import SettingsAccountScreen, {
+  screenOptions as SettingsAccountScreenOption,
+} from '../screens/settings/SettingsAccountScreen';
+
+import SettingsProfileScreen, {
+  screenOptions as SettingsProfileScreenOption,
+} from '../screens/settings/SettingsProfileScreen';
+
+import SettingsPreferencesScreen, {
+  screenOptions as SettingsPreferencesScreenOption,
+} from '../screens/settings/SettingsPreferencesScreen';
+
+import SettingsPrivacyScreen, {
+  screenOptions as SettingsPrivacyScreenOption,
+} from '../screens/settings/SettingsPrivacyScreen';
+
+import SettingsSubscriptionScreen from '../screens/settings/SettingsSubscriptionScreen';
+
+import SettingsNotificationsScreen, {
+  screenOptions as SettingsNotificationsScreenOption,
+} from '../screens/settings/SettingsNotificationsScreen';
+
+import SettingsFeedbackScreen, {
+  screenOptions as SettingsFeedbackScreenOption,
+} from '../screens/settings/SettingsFeedbackScreen';
 
 // CONSTANTS
 import Colors from '../constants/Colors';
@@ -71,6 +100,72 @@ export default function MainNavigator(props) {
         component={MainBottomNavigation}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name='SettingsAccountScreen'
+        component={SettingsAccountScreen}
+        options={SettingsAccountScreenOption}
+      />
+      <Stack.Screen
+        name='SettingsProfileScreen'
+        component={SettingsProfileScreen}
+        options={SettingsProfileScreenOption}
+      />
+      <Stack.Screen
+        name='SettingsPreferencesScreen'
+        component={SettingsPreferencesScreen}
+        options={SettingsPreferencesScreenOption}
+      />
+      <Stack.Screen
+        name='SettingsPrivacyScreen'
+        component={SettingsPrivacyScreen}
+        options={SettingsPrivacyScreenOption}
+      />
+      <Stack.Screen
+        name='SettingsSubscriptionScreen'
+        component={SettingsSubscriptionScreen}
+        options={{
+          headerTitle: t('settings:subscription.subscription'),
+          presentation: 'modal',
+          headerStyle: {
+            backgroundColor: darkMode
+              ? Colors.dark.primary
+              : Colors.light.primary,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: darkMode
+            ? Colors.dark.OnPrimaryActive
+            : Colors.light.OnPrimaryActive,
+          headerTitleStyle: {
+            fontFamily: 'Barlow-Medium',
+            letterSpacing: -0.3,
+            fontSize: 20,
+            color: darkMode
+              ? Colors.dark.OnPrimaryActive
+              : Colors.light.OnPrimaryActive,
+          },
+          headerBackTitleStyle: {
+            fontFamily: 'Barlow-Medium',
+            fontSize: 17,
+            letterSpacing: -0.3,
+            color: darkMode
+              ? Colors.dark.OnPrimaryActive
+              : Colors.light.OnPrimaryActive,
+          },
+        }}
+      />
+      <Stack.Screen
+        name='SettingsNotificationsScreen'
+        component={SettingsNotificationsScreen}
+        options={SettingsNotificationsScreenOption}
+      />
+      <Stack.Screen
+        name='SettingsFeedbackScreen'
+        component={SettingsFeedbackScreen}
+        options={SettingsFeedbackScreenOption}
+      />
+
       <Stack.Screen
         name='SettingsScreen'
         component={SettingsScreen}

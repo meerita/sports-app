@@ -31,7 +31,7 @@ export default function TwoLineWithIcon(props) {
               ? Colors.dark.OnSurfaceUnfocused
               : Colors.light.OnSurfaceUnfocused,
           }}
-          source={{ uri: props.icon }}
+          source={props.icon}
         />
         <View style={Styles.listDoubleContent}>
           <SubtitleOne>{props.title}</SubtitleOne>

@@ -4,21 +4,19 @@
 import React from 'react';
 import {
   Platform,
-  StyleSheet,
   TouchableOpacity,
   TouchableNativeFeedback,
   View,
-  Switch,
   Image,
 } from 'react-native';
 
 // CONSTANTS
-import Colors from '../../../../constants/Colors';
+import Colors from '../../../constants/Colors';
+import Styles from '../../../constants/Styles';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import BodyTwo from '../../../type/BodyTwo';
-import Styles from '../../../../constants/Styles';
+import SubtitleOne from '../../type/SubtitleOne';
+import BodyTwo from '../../type/BodyTwo';
 
 export default function TwoLineItemWithIconAction(props) {
   // we define a variable to use TouchableOpacity or NaviteWithFeedback
