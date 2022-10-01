@@ -66,6 +66,42 @@ import DeleteAccountScreen, {
 } from '../screens/settings/account/DeleteAccountScreen';
 
 // ************************************************
+// SETTINGS SCREENS / PROFILE
+// ************************************************
+
+import BasicInformationScreen, {
+  screenOptions as BasicInformationScreenOption,
+} from '../screens/settings/profile/BasicInformationScreen';
+
+import BasicInformationUsernameScreen, {
+  screenOptions as BasicInformationUsernameScreenOption,
+} from '../screens/settings/profile/info/BasicInformationUsernameScreen';
+
+import BasicInformationTagScreen, {
+  screenOptions as BasicInformationTagScreenOption,
+} from '../screens/settings/profile/info/BasicInformationTagScreen';
+
+import BasicInformationDescriptionScreen, {
+  screenOptions as BasicInformationDescriptionScreenOption,
+} from '../screens/settings/profile/info/BasicInformationDescriptionScreen';
+
+import BasicInformationGenderScreen, {
+  screenOptions as BasicInformationGenderScreenOption,
+} from '../screens/settings/profile/info/BasicInformationGenderScreen';
+
+import BasicInformationWeightHeightScreen, {
+  screenOptions as BasicInformationWeightHeightScreenOption,
+} from '../screens/settings/profile/info/BasicInformationWeightHeightScreen';
+
+import BasicInformationWeightSelectorScreen, {
+  screenOptions as BasicInformationWeightSelectorScreenOption,
+} from '../screens/settings/profile/info/weightHeight/BasicInformationWeightSelectorScreen';
+
+import BasicInformationHeightSelectorScreen, {
+  screenOptions as BasicInformationHeightSelectorScreenOption,
+} from '../screens/settings/profile/info/weightHeight/BasicInformationHeightSelectorScreen';
+
+// ************************************************
 // SETTINGS SCREENS / PREFERENCES
 // ************************************************
 
@@ -233,6 +269,46 @@ export default function MainNavigator(props) {
         name='DeleteAccountScreen'
         component={DeleteAccountScreen}
         options={DeleteAccountScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationScreen'
+        component={BasicInformationScreen}
+        options={BasicInformationScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationUsernameScreen'
+        component={BasicInformationUsernameScreen}
+        options={BasicInformationUsernameScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationTagScreen'
+        component={BasicInformationTagScreen}
+        options={BasicInformationTagScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationDescriptionScreen'
+        component={BasicInformationDescriptionScreen}
+        options={BasicInformationDescriptionScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationGenderScreen'
+        component={BasicInformationGenderScreen}
+        options={BasicInformationGenderScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationWeightHeightScreen'
+        component={BasicInformationWeightHeightScreen}
+        options={BasicInformationWeightHeightScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationWeightSelectorScreen'
+        component={BasicInformationWeightSelectorScreen}
+        options={BasicInformationWeightSelectorScreenOption}
+      />
+      <Stack.Screen
+        name='BasicInformationHeightSelectorScreen'
+        component={BasicInformationHeightSelectorScreen}
+        options={BasicInformationHeightSelectorScreenOption}
       />
       <Stack.Screen
         name='GroupDetailScreen'

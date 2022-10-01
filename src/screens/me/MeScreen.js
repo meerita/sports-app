@@ -1,14 +1,7 @@
 /** @format */
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import { View, Image, Dimensions, ScrollView } from 'react-native';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
 import convert from 'convert-units';
 import moment from 'moment';
@@ -18,17 +11,14 @@ import BodyOne from '../../components/type/BodyOne';
 import SingleLineWithCaption from '../../components/Lists/OneLine/SingleLineWithCaption';
 import Spacer from '../../components/Spacer/Spacer';
 
-// STORE
-import { authActions } from '../../store/slices/auth';
-
 export default function MeScreen(props) {
   const me = useSelector(state => state.me.myData);
 
-  const dispatch = useDispatch();
+  const preferences = useSelector(
+    state => state.me.myData.settings.preferences
+  );
 
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
-  };
+  const characteristics = useSelector(state => state.me.myData.characteristics);
 
   return (
     <ScrollView>
@@ -54,7 +44,7 @@ export default function MeScreen(props) {
       <SingleLineWithCaption
         title={t('settings:profile.basicInformation.gender')}
         caption={t(
-          `settings:profile.basicInformation.${me.characteristics.gender}`
+          `settings:profile.basicInformation.${characteristics.gender}`
         )}
         onPress={() =>
           props.navigation.navigate('BasicInformationGenderScreen')
@@ -63,19 +53,45 @@ export default function MeScreen(props) {
       <SingleLineWithCaption
         title={t('common:weight.weight')}
         caption={
-          me.settings.preferences.weights === 'imperial'
+          preferences.weights === 'imperial'
             ? t('common:weight.lb', {
-                weight: convert(me.characteristics.weight)
+                weight: convert(characteristics.weight)
                   .from('kg')
                   .to('lb')
                   .toFixed(0),
               })
             : t('common:weight.kg', {
-                weight: me.characteristics.weight.toFixed(0),
+                weight: characteristics.weight.toFixed(0),
               })
         }
         onPress={() =>
           props.navigation.navigate('BasicInformationWeightSelectorScreen')
+        }
+      />
+      <SingleLineWithCaption
+        title={t('common:height.height')}
+        caption={
+          preferences.dimensions === 'imperial'
+            ? t('common:height.ft-us', {
+                ft: convert(characteristics.height)
+                  .from('cm')
+                  .to('ft-us')
+                  .toFixed(0),
+                in: convert(characteristics.height)
+                  .from('cm')
+                  .to('ft-us')
+                  .toFixed(1)
+                  .slice(2),
+              })
+            : t('common:height.m', {
+                height: convert(characteristics.height)
+                  .from('cm')
+                  .to('m')
+                  .toFixed(2),
+              })
+        }
+        onPress={() =>
+          props.navigation.navigate('BasicInformationHeightSelectorScreen')
         }
       />
       <SingleLineWithCaption
@@ -99,7 +115,6 @@ export default function MeScreen(props) {
         caption={me.isSuscriber ? 'Yes' : 'No'}
       />
       {me.isAdmin && <SingleLineWithCaption title='Admin' caption='Yes' />}
-      <Button title='logout' onPress={() => logoutHandler()} />
       <Spacer height='16' />
     </ScrollView>
   );
