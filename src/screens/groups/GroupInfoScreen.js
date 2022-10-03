@@ -17,11 +17,6 @@ export default function GroupInfoScreen(props) {
   // currentGroup
   const group = useSelector(state => state.group.groupDetail);
 
-  console.log('===============================');
-  console.log('GROUP WE WANT TO VISIT');
-  console.log('===============================');
-  console.log(group);
-
   // how many members this community has?
   const memberCount =
     group.members.length + group.admins.length + group.noobs.length;

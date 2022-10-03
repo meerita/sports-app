@@ -16,13 +16,22 @@ import { t } from '../../services/i18n';
 import Card from '../../components/Card/';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import Caption from '../../components/type/Caption';
+import { useEffect } from 'react';
+
+import { fetchCurrentGroup } from '../../store/actions/group';
 
 export default function MyGroupsScreen(props) {
   const me = useSelector(state => state.me.myData);
   const myGroups = useSelector(state => state.me.myGroups);
   const isAuth = useSelector(state => state.auth);
+  const firstGroup = myGroups[0]._id;
+  console.log(firstGroup);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentGroup(firstGroup));
+  }, [dispatch]);
 
   const logoutHandler = () => {
     dispatch(authActions.logout());
@@ -74,10 +83,3 @@ export default function MyGroupsScreen(props) {
     </ScrollView>
   );
 }
-
-// NAVIGATION OPTIONS
-export const screenOptions = navData => {
-  return {
-    headerTitle: 'My groups',
-  };
-};

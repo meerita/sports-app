@@ -15,15 +15,6 @@ export default function GroupMembersScreen(props) {
   // currentGroup
   const group = useSelector(state => state.group.groupDetail);
 
-  console.log('===============================');
-  console.log('ADMINS');
-  console.log('===============================');
-  console.log(group.admins);
-  console.log(group.members);
-  console.log('===============================');
-  console.log('ADMINS');
-  console.log('===============================');
-
   // how many members this community has?
   const memberCount =
     group.members.length + group.admins.length + group.noobs.length;

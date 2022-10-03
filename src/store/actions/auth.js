@@ -28,16 +28,8 @@ export const createUser = userId => {
       // ********************************************************
       if (!response.ok) {
         const errorResData = await response.json;
-        console.log('// ************************************************');
-        console.log('ERROR RES DATA ERROR RES DATA ');
-        console.log('// ************************************************');
-        console.log(errorResData);
         // we extract the type of error from the error response
         const errorId = errorResData.code;
-        console.log('// ************************************************');
-        console.log('ERRORCODE');
-        console.log('// ************************************************');
-        console.log(errorId);
         // basic error message
         let errorMessage = 'Algo ha ido mal en el registro';
 

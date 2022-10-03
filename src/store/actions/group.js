@@ -23,11 +23,6 @@ export const fetchCurrentGroup = id => {
       // if OK then we get the response
       const data = await response.json();
 
-      console.log('===============================');
-      console.log('DATA FROM FIRST REQUEST TO API');
-      console.log('===============================');
-      console.log(data);
-
       // we return data
       return data;
     };
@@ -36,10 +31,6 @@ export const fetchCurrentGroup = id => {
     try {
       // we will
       const groupData = await fetchGroup();
-      console.log('===============================');
-      console.log('DATA WE SEND TO STORE');
-      console.log('===============================');
-      console.log(groupData);
       await dispatch(
         groupActions.fetchGroup({
           group: groupData.group,
