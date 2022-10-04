@@ -16,6 +16,16 @@ import GroupDetailNavigator, {
 } from '../navigators/GroupDetailNavigator';
 
 // ************************************************
+//
+// EXPLORE SCREENS
+//
+// ************************************************
+
+import ExploreGroupsBySport, {
+  screenOptions as ExploreGroupsBySportOptions,
+} from '../screens/explore/ExploreGroupsBySport';
+
+// ************************************************
 // SETTINGS CREENS
 // ************************************************
 
@@ -314,6 +324,11 @@ export default function MainNavigator(props) {
         name='GroupDetailScreen'
         component={GroupDetailNavigator}
         options={GroupDetailNavigatorOptions}
+      />
+      <Stack.Screen
+        name='ExploreGroupsBySport'
+        component={ExploreGroupsBySport}
+        options={ExploreGroupsBySportOptions}
       />
     </Stack.Navigator>
   );

@@ -1,7 +1,7 @@
 /** @format */
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 
 // STORE & ACTIONS
@@ -20,9 +20,20 @@ import GroupEventsScreen, {
   screenOptions as GroupEventsScreenOptions,
 } from '../screens/groups/GroupEventsScreen';
 
+import GroupTestScreen, {
+  screenOptions as GroupTestScreenOptions,
+} from '../screens/groups/GroupTestScreen';
+import { Text, View } from 'react-native';
+import ButtonFilled from '../components/Buttons/Filled/ButtonFilled';
+import SubtitleOne from '../components/type/SubtitleOne';
+import HeadlineFive from '../components/type/HeadlineFive';
+
 const Tabs = createMaterialTopTabNavigator();
 
 export default function GroupDetailNavigator(props) {
+  // myData
+  const me = useSelector(state => state.me.myData);
+
   // we capture the current groupId from the navigation prop
   const groupId = props.route.params.id;
 
@@ -36,23 +47,94 @@ export default function GroupDetailNavigator(props) {
     }
   }, [groupId]);
 
+  const groupMembers = useSelector(state => state.group.groupDetail.members);
+
+  // We need to know if the visitor is a member of the group
+  const isItMyGroup = groupMembers.find(member => member._id === me._id)
+    ? true
+    : false;
+
+  const currentGroup = useSelector(state => state.group.groupDetail);
+
+  // TRUE or FALSE for visilibity means, TRUE everyone can see the group info, details, events, members, etc.
+  // FALSE means only members of that group will be able to see, join or create events.
+  const groupVisibility = currentGroup.preferences.group.visibility.visibility;
+
+  // Groups can be MIXED, MALE or FEMALE sex based. If MIXED both males and females will be able to join
+  // the others options means only people from one sex will be able to opt for an invitation or join
+  const groupDiversity = currentGroup.preferences.group.membership.diversity;
+
+  const currentVisitorGender = me.characteristics.gender;
+
+  // registration policiy can be TRUE or FALSE
+  // meaning TRUE that all new members must request an invitation to join
+  // if FALSE, all new members can freely join the group if the Join Policy is TRUE
+  const groupRegistrationPolicy =
+    currentGroup.preferences.group.membership.noRegistration;
+
+  // there are two options: false and true
+  // TRUE means the admins allow people to freely join the group, no invitation required
+  // everyone starts as noobs.
+  const groupJoinPolicy = currentGroup.preferences.group.membership.freeToJoin;
+
+  // simple operator to see if I can register thanks to my current Gender
+  // if groupDiversity is Mixed, we just give TRUE by default. But if false, we check the group
+  // matches with the current sex of the visitor
+  const canIRegister =
+    groupDiversity === 'mixed'
+      ? true
+      : currentVisitorGender === groupDiversity
+      ? true
+      : false;
+
+  // if the current visitor is NOT a member of this group we simply
+  // check if the group visibility is FALSE, because if it false, we cannot
+  // show any screen to that non-member
+  if (isItMyGroup === false && groupVisibility === true) {
+    return (
+      <View style={{ padding: 16 }}>
+        <HeadlineFive style={{ textAlign: 'center' }}>
+          Este grupo sólo es visible a miembros registrados.
+        </HeadlineFive>
+        {
+          // now we check if this visitor can request a registration by first checking
+          // this group accepts registrations, if so, then can this user opt for registration
+          // matching the group gender policy?
+          // registration policy a false means the
+          groupRegistrationPolicy === false && canIRegister === true ? (
+            <ButtonFilled>Request join</ButtonFilled>
+          ) : // Does the group accept free join or is based on invitation requests?
+          canIRegister === true && groupJoinPolicy === true ? (
+            <ButtonFilled>Join group</ButtonFilled>
+          ) : null
+        }
+      </View>
+    );
+  }
+
   return (
     <Tabs.Navigator>
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name='Info'
         component={GroupInfoScreen}
         options={GroupInfoScreenOptions}
-      />
+      /> */}
+      {/* {currentGroup.preferences} */}
       <Tabs.Screen
         name='Events'
         component={GroupEventsScreen}
         options={GroupEventsScreenOptions}
       />
       <Tabs.Screen
+        name='Test'
+        component={GroupTestScreen}
+        options={GroupTestScreenOptions}
+      />
+      {/* <Tabs.Screen
         name='Members'
         component={GroupMembersScreen}
         options={GroupMembersScreenOptions}
-      />
+      /> */}
     </Tabs.Navigator>
   );
 }

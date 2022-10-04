@@ -17,7 +17,7 @@ import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
 import { fetchVisibleSports } from '../../store/actions/explore';
 import { EVENTS } from '../../data/dummy-data-events';
 
-export default function ExploreScreen() {
+export default function ExploreScreen(props) {
   const dispatch = useDispatch();
 
   const myEvents = EVENTS;
@@ -93,6 +93,7 @@ export default function ExploreScreen() {
               ? t('explore:countGroups_one', { count: sport.groups })
               : t('explore:countGroups_other', { count: sport.groups })
           }
+          onPress={() => props.navigation.navigate('ExploreGroupsBySport')}
         />
       ))}
     </ScrollView>
