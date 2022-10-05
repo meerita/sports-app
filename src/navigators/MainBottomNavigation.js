@@ -91,7 +91,7 @@ export default function MainBottomNavigation(props) {
             return (
               <IconButton
                 source={require('../assets/images/icons/group_add.png')}
-                onPress={() => props.navigation.navigate('SettingsScreen')}
+                onPress={() => props.navigation.navigate('SelectSportScreen')}
                 style={{
                   marginRight: 16,
                   tintColor: darkMode

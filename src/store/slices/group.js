@@ -6,6 +6,13 @@ export const groupSlice = createSlice({
   name: 'group',
   initialState: {
     groupDetail: null,
+    createNewGroup: {
+      sportId: '',
+      title: '',
+      description: '',
+      country: 'es',
+      city: 'Sant Adrià del Besòs',
+    },
   },
   reducers: {
     fetchGroup(state, action) {

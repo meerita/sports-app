@@ -1,11 +1,16 @@
 /** @format */
 
-import { t } from '../services/i18n';
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Platform } from 'react-native';
+import { t } from '../services/i18n';
 import { useSelector } from 'react-redux';
+import React from 'react';
 
+// NAVIGATORS
 import MainBottomNavigation from './MainBottomNavigation';
+
+// CONSTANTS
+import Colors from '../constants/Colors';
 
 // ************************************************
 // SCREENS
@@ -127,9 +132,21 @@ import PreferencesThemeScreen, {
   screenOptions as PreferencesThemeScreenOption,
 } from '../screens/settings/preferences/PreferencesThemeScreen';
 
-// CONSTANTS
-import Colors from '../constants/Colors';
-import { Platform } from 'react-native';
+// ************************************************
+// ADD GROUP SCREENS
+// ************************************************
+
+import SelectSportScreen, {
+  screenOptions as SelectSportScreenOptions,
+} from '../screens/groups/addGroup/SelectSportScreen';
+
+import CreateGroupResume, {
+  screenOptions as CreateGroupResumeOptions,
+} from '../screens/groups/addGroup/CreateGroupResume';
+
+import AddGroupInfo, {
+  screenOptions as AddGroupInfoOptions,
+} from '../screens/groups/addGroup/AddGroupInfo';
 
 export default function MainNavigator(props) {
   // darkMode
@@ -329,6 +346,21 @@ export default function MainNavigator(props) {
         name='ExploreGroupsBySport'
         component={ExploreGroupsBySport}
         options={ExploreGroupsBySportOptions}
+      />
+      <Stack.Screen
+        name='SelectSportScreen'
+        component={SelectSportScreen}
+        options={SelectSportScreenOptions}
+      />
+      <Stack.Screen
+        name='AddGroupInfo'
+        component={AddGroupInfo}
+        options={AddGroupInfoOptions}
+      />
+      <Stack.Screen
+        name='CreateGroupResume'
+        component={CreateGroupResume}
+        options={CreateGroupResumeOptions}
       />
     </Stack.Navigator>
   );
