@@ -19,23 +19,19 @@ import Caption from '../../components/type/Caption';
 import { useEffect } from 'react';
 
 import { fetchCurrentGroup } from '../../store/actions/group';
+import { fetchMyUser } from '../../store/actions/me';
 
 export default function MyGroupsScreen(props) {
   const me = useSelector(state => state.me.myData);
   const myGroups = useSelector(state => state.me.myGroups);
   const isAuth = useSelector(state => state.auth);
   const firstGroup = myGroups[0]._id;
-  console.log(firstGroup);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrentGroup(firstGroup));
-  }, [dispatch]);
-
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
-  };
+  }, []);
 
   return (
     <ScrollView
@@ -81,45 +77,6 @@ export default function MyGroupsScreen(props) {
           </View>
         </Card>
       ))}
-      <Card
-        key={'623b75447e4216025e721121'}
-        onPress={() =>
-          props.navigation.navigate('GroupDetailScreen', {
-            title: 'San Antonio Spurs',
-            id: '6235c2d5b14e2c9b6906f5d8',
-          })
-        }
-        style={{ marginBottom: 16 }}
-      >
-        <View
-          style={{
-            width: '100%',
-            height: Dimensions.get('window').width / 2,
-          }}
-        >
-          <Image
-            source={{
-              uri: 'https://images.unsplash.com/photo-1605021132832-3d59e5ce90f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-            }}
-            style={{
-              width: '100%',
-              height: '100%',
-              borderTopLeftRadius: 4,
-              borderTopRightRadius: 4,
-            }}
-          />
-        </View>
-        <View style={{ paddingHorizontal: 8, paddingVertical: 8 }}>
-          <SubtitleOne>San Antonio Spurs</SubtitleOne>
-          <Caption>
-            {me > 1
-              ? t('groups:manyMembers_other', { count: 4 })
-              : t('groups:manyMembers_one', {
-                  count: 4,
-                })}
-          </Caption>
-        </View>
-      </Card>
     </ScrollView>
   );
 }

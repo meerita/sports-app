@@ -16,8 +16,6 @@ export default function GroupEventsScreen(props) {
   // events in the grouo
   const events = useSelector(state => state.group.groupDetail.events);
 
-  console.log(events);
-
   if (events.length < 1) {
     return (
       <View>

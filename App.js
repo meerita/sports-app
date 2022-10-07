@@ -50,7 +50,9 @@ export default function App() {
 
   if (!fontsLoaded) {
     return <LoadingScreen />;
-  } else {
+  }
+
+  if (isI18nInitialized) {
     return (
       <Provider store={store}>
         <ToastProvider

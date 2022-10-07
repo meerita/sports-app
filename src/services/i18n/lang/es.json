@@ -70,6 +70,10 @@
     "sendAnother": "Enviar otra",
     "general": "Generales",
     "infoUpdated": "Hemos actualizado tu información",
+    "selected": "Seleccionado",
+    "sport": "Deporte",
+    "name": "Nombre",
+    "localization": "Localización",
     "weight": {
       "weight": "Peso",
       "kg": "{{weight}}Kg",
@@ -128,6 +132,22 @@
     "bicyclesDesc": "Groups for traiditional bicycle fans"
   },
   "groups": {
+    "create": {
+      "selectAnSport": "Deporte de tu grupo",
+      "selectAnSportDesc": "Primero elige la actividad deportiva principal de tu nuevo grupo. Todos los eventos se configurarán para el deporte que elijas.",
+      "groupInfo": "Información del grupo",
+      "groupInfoDesc": "Puedes cambiar el nombre y la descripción cuando quieras desde los ajustes del grupo.",
+      "form": {
+        "title": {
+          "name": "Nombre del grupo",
+          "placeholder": "¿Cómo se llamará tu grupo?"
+        },
+        "nextStep": "Siguiente paso",
+        "resume": "Tu nuevo grupo",
+        "resumeDesc": "Esta es toda la información del grupo que deseas crear. Podrás modificar toda esta información luego, en los Ajustes del Grupo. Recuerda que tú serás el primer miembro y el administrador del nuevo grupo.",
+        "createNewGroup": "Crear tu nuevo grupo"
+      }
+    },
     "example": "Example",
     "options": "Opciones del grupo",
     "joinGroup": "Ingresa a {{group}}",
@@ -173,33 +193,6 @@
   },
   "settings": {
     "settings": "Ajustes",
-    "admin": {
-      "adminPanel": "Panel de administradores",
-      "adminPanelDesc": "Sólo los putos amos vemos esto",
-      "users": {
-        "users": "Usuarios",
-        "usersCaption": "{{count}} usuarios"
-      },
-      "sports": {
-        "sports": "Deportes",
-        "sportsCaption": "{{count}} deportes",
-        "sportsGroups": "{{count}} grupos",
-        "noSports": "No encontramos deportes. Quizás debas agregar uno!",
-        "editSport": "Editar deporte",
-        "createSport": {
-          "createSport": "Crear un deporte",
-          "name": "Nombre",
-          "noSpaces": "Sin espacios",
-          "moreThanMin": "Más que el mínimo",
-          "iconUrl": "URL del icono",
-          "participants": "Participantes",
-          "min": "Mínimo",
-          "max": "Máximo",
-          "visible": "Visible",
-          "popular": "Popular"
-        }
-      }
-    },
     "account": {
       "account": "Tu cuenta",
       "accountDesc": "Administra tu email, password…",
@@ -374,7 +367,7 @@
     "soccer": "Fútbol",
     "cars": "Automobilismo",
     "tennis": "Tenis",
-    "eScooters": "Patinetes eléctricos",
+    "eScooter": "Patinetes eléctricos",
     "hiking": "Senderismo",
     "gymnastics": "Gimnasia",
     "euc": "Monociclos",
