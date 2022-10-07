@@ -93,7 +93,12 @@ export default function ExploreScreen(props) {
               ? t('explore:countGroups_one', { count: sport.groups })
               : t('explore:countGroups_other', { count: sport.groups })
           }
-          onPress={() => props.navigation.navigate('ExploreGroupsBySport')}
+          onPress={() =>
+            props.navigation.navigate('ExploreGroupsBySport', {
+              sportId: sport._id,
+              title: sport.title,
+            })
+          }
         />
       ))}
     </ScrollView>

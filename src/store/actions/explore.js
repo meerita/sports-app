@@ -45,13 +45,14 @@ export const fetchVisibleSports = () => {
 // ********************************************************
 
 export const fetchGroupsBySport = sportId => {
+  console.log(sportId);
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user
     // ********************************************************
     const fetchGroups = async () => {
       // we call the API
-      const response = await fetch(`${API_URL}/v1/groups`);
+      const response = await fetch(`${API_URL}/v1/sports/${sportId}/groups`);
       // we check if there's an error
       if (!response.ok) {
         throw new Error('could not fetch any data');

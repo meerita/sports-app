@@ -10,6 +10,9 @@ import Caption from '../../components/type/Caption';
 import { t } from '../../services/i18n';
 
 export default function ExploreGroupsBySport(props) {
+  // the sportId needed to request the groups
+  const sportId = props.route.params.sportId;
+
   const groupsBySport = useSelector(state => state.explore.groupsBySport);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -17,12 +20,12 @@ export default function ExploreGroupsBySport(props) {
   useEffect(() => {
     try {
       setLoading(true);
-      dispatch(fetchGroupsBySport());
+      dispatch(fetchGroupsBySport(sportId));
       setLoading(false);
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, sportId]);
 
   if (loading) {
     return (
@@ -82,6 +85,6 @@ export default function ExploreGroupsBySport(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Sport Name',
+    headerTitle: t(`sports:${navData.route.params.title}`),
   };
 };
