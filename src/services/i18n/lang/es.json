@@ -61,6 +61,7 @@
     "groups": "Grupos",
     "share": "Compartir",
     "explore": "Explorar",
+    "update": "Actualizar",
     "record": "Grabar",
     "activity": "Actividad",
     "me": "Yo",
@@ -157,12 +158,54 @@
     "petitions_one": "{{count}} petición",
     "petitions_other": "{{count}} peticiones",
     "settings": {
-      "events": "Eventos",
-      "eventsDesc": "Controla la creación de eventos",
-      "information": "Información",
-      "informationDesc": "Cambia descripción, nombre, etc.",
+      "events": {
+        "events": "Eventos",
+        "eventsDesc": "Controla la creación de eventos",
+        "creation": "Creación de eventos",
+        "creationDesc": "Aquí puedes definir quienes pueden crear eventos en tu grupo. Por defecto cualquier miembro (novatos y miembros) puede crear eventos.",
+        "explanation": "Aquí podrás configurar las opciones de creación de eventos en tu grupo. Estas opciones se aplican en la pantalla de creación de eventos, y puedes sobreescribirlas si lo necesitas.",
+        "types": {
+          "any-member": "Cualquier miembro",
+          "only-admins": "Sólo administradores",
+          "only-members": "Sólo miembros",
+          "only-my-group": "Sólo mi grupo",
+          "anyone": "Cualquiera",
+          "any-skill": "Cualquier habilidad",
+          "auto-replacements": {
+            "title": "Reemplazos automáticos",
+            "description": "El primero de la lista participa automáticamente"
+          },
+          "allow-replacements": {
+            "title": "Reemplazos Seleccionables",
+            "description": "El creador del evento debe seleccionar el reemplazante"
+          },
+          "no-replacements": {
+            "title": "Sin reemplazos",
+            "description": "No se permiten reemplazos por defecto"
+          }
+        },
+        "participation": "Participación",
+        "visibility": "Visibilidad de los eventos",
+        "skill": "Nivel de habilidad",
+        "meetingPoint": "Punto de encuentro",
+        "replacements": "Reemplazos",
+        "replacementsDesc": "Cuando una evento cubre todos los participantes, otros miembros pueden anotarse como \"reemplazos\" para participar cuando otro participante abandona el evento.",
+        "typeOfEvent": "Tipo de evento"
+      },
+      "information": {
+        "information": "Información",
+        "informationDesc": "Cambia descripción, nombre, etc.",
+        "groupData": "Datos del grupo",
+        "groupDataDesc": "Título, descripción",
+        "localization": "Localización del grupo",
+        "localizationDesc": "Indica el país, provincia y ciudad",
+        "image": "Imagen del grupo",
+        "imageDesc": "Cambia la imagen de tu grupo"
+      },
       "members": "Miembros",
       "membersDesc": "Agregar, quitar miembros del grupo",
+      "membership": "Membrecía",
+      "membershipDesc": "Ajustes de membrecía del grupo",
       "privacy": {
         "privacy": "Privacidad",
         "privacyDesc": "Ajustes de privacidad del grupo",
@@ -182,7 +225,7 @@
         "visibilityDesc": "Por defecto este grupo puede ser encontrado en la sección de Explorar, resultados de búsqueda y perfiles de usuario"
       },
       "gender": {
-        "mixed": "Mixtos",
+        "mixed": "Mixto",
         "male": "Sólo hombres",
         "female": "Sólo mujeres"
       }
@@ -383,5 +426,28 @@
     "trekking": "Trekking",
     "inlineSkate": "Patinaje en línea",
     "volley": "Vóleibol"
+  },
+  "skills": {
+    "groupDesc": "Cuando se creen nuevos eventos, se auto-preseleccionará la opción que elijas aquí.",
+    "novice": {
+      "title": "Novato",
+      "description": "Iniciado en el deporte, aprendiendo"
+    },
+    "advanced-beginner": {
+      "title": "Principiante avanzado",
+      "description": "Dominio básico del deporte"
+    },
+    "competent": {
+      "title": "Competente",
+      "description": "Dominio avanzado del deporte"
+    },
+    "proficient": {
+      "title": "Proficiente",
+      "description": "Nivel avanzado de competición"
+    },
+    "expert": {
+      "title": "Experto",
+      "description": "Nivel profesional de la disciplina"
+    }
   }
 }

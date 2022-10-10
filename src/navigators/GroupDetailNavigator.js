@@ -27,6 +27,8 @@ import { Text, View } from 'react-native';
 import ButtonFilled from '../components/Buttons/Filled/ButtonFilled';
 import SubtitleOne from '../components/type/SubtitleOne';
 import HeadlineFive from '../components/type/HeadlineFive';
+import IconButton from '../components/IconButton/IconButton';
+import Colors from '../constants/Colors';
 
 const Tabs = createMaterialTopTabNavigator();
 
@@ -112,19 +114,44 @@ export default function GroupDetailNavigator(props) {
     );
   }
 
+  if (isItMyGroup) {
+    return (
+      <Tabs.Navigator>
+        <Tabs.Screen
+          name='Events'
+          component={GroupEventsScreen}
+          options={GroupEventsScreenOptions}
+        />
+        <Tabs.Screen
+          name='Members'
+          component={GroupMembersScreen}
+          options={GroupMembersScreenOptions}
+        />
+        <Tabs.Screen
+          name='Info'
+          component={GroupInfoScreen}
+          options={GroupInfoScreenOptions}
+        />
+      </Tabs.Navigator>
+    );
+  }
+
   return (
     <Tabs.Navigator>
-      {/* <Tabs.Screen
+      <Tabs.Screen
         name='Info'
         component={GroupInfoScreen}
         options={GroupInfoScreenOptions}
-      /> */}
-      {/* {currentGroup.preferences} */}
-      <Tabs.Screen
-        name='Events'
-        component={GroupEventsScreen}
-        options={GroupEventsScreenOptions}
       />
+      {currentGroup.preferences.events.visibility !== 'only-my-group' ? (
+        false
+      ) : (
+        <Tabs.Screen
+          name='Events'
+          component={GroupEventsScreen}
+          options={GroupEventsScreenOptions}
+        />
+      )}
       <Tabs.Screen
         name='Test'
         component={GroupTestScreen}
@@ -145,5 +172,13 @@ export const screenOptions = navData => {
   return {
     headerTitle: title,
     headerShadowVisible: false,
+    headerRight: color => {
+      return (
+        <IconButton
+          source={require('../assets/images/icons/settings.png')}
+          onPress={() => navData.navigation.navigate('GroupSettingsScreen')}
+        />
+      );
+    },
   };
 };

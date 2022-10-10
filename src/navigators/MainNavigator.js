@@ -148,6 +148,54 @@ import AddGroupInfo, {
   screenOptions as AddGroupInfoOptions,
 } from '../screens/groups/addGroup/AddGroupInfo';
 
+// ************************************************
+// ADD GROUP SCREENS
+// ************************************************
+
+import GroupSettingsScreen, {
+  screenOptions as GroupSettingsScreenOptions,
+} from '../screens/groups/settings/GroupSettingsScreen';
+
+import GroupSettingsPrivacyScreen, {
+  screenOptions as GroupSettingsPrivacyScreenOptions,
+} from '../screens/groups/settings/GroupSettingsPrivacyScreen';
+
+import GroupSettingsEventsScreen, {
+  screenOptions as GroupSettingsEventsScreenOptions,
+} from '../screens/groups/settings/GroupSettingsEventsScreen';
+
+import GroupSettingsMembershipScreen, {
+  screenOptions as GroupSettingsMembershipScreenOptions,
+} from '../screens/groups/settings/GroupSettingsMembershipScreen';
+
+import GroupSettingsInformationScreen, {
+  screenOptions as GroupSettingsInformationScreenOptions,
+} from '../screens/groups/settings/GroupSettingsInformationScreen';
+
+import GroupSettingsInformationFormScreen, {
+  screenOptions as GroupSettingsInformationFormScreenOptions,
+} from '../screens/groups/settings/GroupSettingsInformationFormScreen/GroupSettingsInformationFormScreen';
+
+import EventOptionsCreationSelectorScreen, {
+  screenOptions as EventOptionsCreationSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsCreationSelectorScreen';
+
+import EventOptionsParticipationSelectorScreen, {
+  screenOptions as EventOptionsParticipationSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsParticipationSelectorScreen';
+
+import EventOptionsVisibilitySelectorScreen, {
+  screenOptions as EventOptionsVisibilitySelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsVisibilitySelectorScreen';
+
+import EventOptionsReplacementsSelectorScreen, {
+  screenOptions as EventOptionsReplacementsSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsReplacementsSelectorScreen';
+
+import EventOptionsSkillsSelectorScreen, {
+  screenOptions as EventOptionsSkillsSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsSkillsSelectorScreen';
+
 export default function MainNavigator(props) {
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -361,6 +409,61 @@ export default function MainNavigator(props) {
         name='CreateGroupResume'
         component={CreateGroupResume}
         options={CreateGroupResumeOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsScreen'
+        component={GroupSettingsScreen}
+        options={GroupSettingsScreenOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsPrivacyScreen'
+        component={GroupSettingsPrivacyScreen}
+        options={GroupSettingsPrivacyScreenOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsEventsScreen'
+        component={GroupSettingsEventsScreen}
+        options={GroupSettingsEventsScreenOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsMembershipScreen'
+        component={GroupSettingsMembershipScreen}
+        options={GroupSettingsMembershipScreenOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsInformationScreen'
+        component={GroupSettingsInformationScreen}
+        options={GroupSettingsInformationScreenOptions}
+      />
+      <Stack.Screen
+        name='GroupSettingsInformationFormScreen'
+        component={GroupSettingsInformationFormScreen}
+        options={GroupSettingsInformationFormScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsCreationSelectorScreen'
+        component={EventOptionsCreationSelectorScreen}
+        options={EventOptionsCreationSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsParticipationSelectorScreen'
+        component={EventOptionsParticipationSelectorScreen}
+        options={EventOptionsParticipationSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsVisibilitySelectorScreen'
+        component={EventOptionsVisibilitySelectorScreen}
+        options={EventOptionsVisibilitySelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsReplacementsSelectorScreen'
+        component={EventOptionsReplacementsSelectorScreen}
+        options={EventOptionsReplacementsSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsSkillsSelectorScreen'
+        component={EventOptionsSkillsSelectorScreen}
+        options={EventOptionsSkillsSelectorScreenOptions}
       />
     </Stack.Navigator>
   );

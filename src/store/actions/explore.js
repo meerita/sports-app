@@ -45,7 +45,6 @@ export const fetchVisibleSports = () => {
 // ********************************************************
 
 export const fetchGroupsBySport = sportId => {
-  console.log(sportId);
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user

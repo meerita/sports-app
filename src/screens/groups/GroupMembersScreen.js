@@ -8,6 +8,7 @@ import { t } from '../../services/i18n';
 // CONSTANTS
 import SubHeader from '../../components/SubHeader/SubHeader';
 import TwoLineWithAvatar from '../../components/Lists/TwoLines/TwoLineWithAvatar';
+import BodyTwo from '../../components/type/BodyTwo';
 
 export default function GroupMembersScreen(props) {
   // darkMode
@@ -52,20 +53,26 @@ export default function GroupMembersScreen(props) {
         />
       ))}
       <SubHeader title='n00bs' />
-      {group.noobs.map(user => (
-        <TwoLineWithAvatar
-          key={user._id}
-          title={user.username}
-          subtitle={user.tag}
-          avatar={{ uri: user.avatar }}
-          onPress={() =>
-            props.navigation.navigate('UserDetailScreen', {
-              userId: user._id,
-              username: user.username,
-            })
-          }
-        />
-      ))}
+      {group.noobs.length < 1 ? (
+        <BodyTwo style={{ paddingHorizontal: 16 }}>
+          No hay noobs, son todos basados en este grupo.
+        </BodyTwo>
+      ) : (
+        group.noobs.map(user => (
+          <TwoLineWithAvatar
+            key={user._id}
+            title={user.username}
+            subtitle={user.tag}
+            avatar={{ uri: user.avatar }}
+            onPress={() =>
+              props.navigation.navigate('UserDetailScreen', {
+                userId: user._id,
+                username: user.username,
+              })
+            }
+          />
+        ))
+      )}
     </View>
   );
 }
