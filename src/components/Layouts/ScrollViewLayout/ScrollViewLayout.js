@@ -1,10 +1,11 @@
 /** @format */
 
-import { ScrollView } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
 import React from 'react';
 import Styles from '../../../constants/Styles';
 import Colors from '../../../constants/Colors';
 import { useSelector } from 'react-redux';
+import { StatusBar } from 'expo-status-bar';
 
 export default function ScrollViewLayout(props) {
   // darkMode
@@ -13,14 +14,21 @@ export default function ScrollViewLayout(props) {
   return (
     <ScrollView
       style={{
-        ...props.style,
         ...Styles.body,
-        paddingTop: 16,
         backgroundColor: darkMode
           ? Colors.dark.background
           : Colors.light.background,
+        ...props.style,
       }}
     >
+      <StatusBar
+        style={darkMode ? 'light' : 'dark'}
+        backgroundColor={
+          Platform.OS === 'android' && darkMode
+            ? Colors.dark.background
+            : Colors.light.background
+        }
+      />
       {props.children}
     </ScrollView>
   );

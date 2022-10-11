@@ -16,6 +16,7 @@ import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
 // STORE & ACTIONS
 import { fetchVisibleSports } from '../../store/actions/explore';
 import { EVENTS } from '../../data/dummy-data-events';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function ExploreScreen(props) {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function ExploreScreen(props) {
   }
 
   return (
-    <ScrollView>
+    <ScrollViewLayout>
       <SubHeader title='Latest events' />
       <ScrollView
         horizontal={true}
@@ -101,6 +102,6 @@ export default function ExploreScreen(props) {
           }
         />
       ))}
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }

@@ -52,11 +52,7 @@ export default function EventOptionsSkillsSelectorScreen(props) {
   ];
 
   return (
-    <ScrollViewLayout
-      style={{
-        backgroundColor: Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('skills:groupDesc')}
       </BodyTwo>

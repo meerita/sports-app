@@ -9,6 +9,7 @@ import { t } from '../../services/i18n';
 import SubHeader from '../../components/SubHeader/SubHeader';
 import TwoLineWithAvatar from '../../components/Lists/TwoLines/TwoLineWithAvatar';
 import BodyTwo from '../../components/type/BodyTwo';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function GroupMembersScreen(props) {
   // darkMode
@@ -21,7 +22,7 @@ export default function GroupMembersScreen(props) {
     group.members.length + group.admins.length + group.noobs.length;
 
   return (
-    <View>
+    <ScrollViewLayout>
       <SubHeader title='Admins' />
       {group.admins.map(user => (
         <TwoLineWithAvatar
@@ -73,7 +74,7 @@ export default function GroupMembersScreen(props) {
           />
         ))
       )}
-    </View>
+    </ScrollViewLayout>
   );
 }
 

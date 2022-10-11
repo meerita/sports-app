@@ -15,7 +15,7 @@ export default function Card(props) {
   }
 
   // darkMode ?
-  const darkMode = false;
+  const darkMode = useSelector(state => state.theme.darkMode);
 
   return (
     <View

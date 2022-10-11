@@ -7,6 +7,7 @@ import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function EventOptionsVisibilitySelectorScreen(props) {
   // groupDetails
@@ -32,13 +33,7 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
   ];
 
   return (
-    <View
-      style={{
-        paddingVertical: 16,
-        backgroundColor: Colors.light.surface,
-        flex: 1,
-      }}
-    >
+    <ScrollViewLayout>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
@@ -51,7 +46,7 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </View>
+    </ScrollViewLayout>
   );
 }
 

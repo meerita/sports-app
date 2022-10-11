@@ -29,12 +29,16 @@ import SubtitleOne from '../components/type/SubtitleOne';
 import HeadlineFive from '../components/type/HeadlineFive';
 import IconButton from '../components/IconButton/IconButton';
 import Colors from '../constants/Colors';
+import ScrollViewLayout from '../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 const Tabs = createMaterialTopTabNavigator();
 
 export default function GroupDetailNavigator(props) {
   // myData
   const me = useSelector(state => state.me.myData);
+
+  // darkMode
+  const darkMode = useSelector(state => state.theme.darkMode);
 
   // we capture the current groupId from the navigation prop
   const groupId = props.route.params.id;
@@ -94,7 +98,7 @@ export default function GroupDetailNavigator(props) {
   // show any screen to that non-member
   if (isItMyGroup === false && groupVisibility === true) {
     return (
-      <View style={{ padding: 16 }}>
+      <ScrollViewLayout style={{ padding: 16 }}>
         <HeadlineFive style={{ textAlign: 'center' }}>
           Este grupo sólo es visible a miembros registrados.
         </HeadlineFive>
@@ -110,13 +114,29 @@ export default function GroupDetailNavigator(props) {
             <ButtonFilled>Join group</ButtonFilled>
           ) : null
         }
-      </View>
+      </ScrollViewLayout>
     );
   }
 
+  const tabOptions = {
+    tabBarIndicatorStyle: {
+      backgroundColor: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    tabBarActiveTintColor: darkMode
+      ? Colors.dark.primary
+      : Colors.light.primary,
+    tabBarInactiveTintColor: darkMode
+      ? Colors.dark.OnSurfaceUnfocused
+      : Colors.light.OnSurfaceUnfocused,
+    tabBarHideOnKeyboard: true,
+    tabBarStyle: {
+      backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
+    },
+  };
+
   if (isItMyGroup) {
     return (
-      <Tabs.Navigator>
+      <Tabs.Navigator screenOptions={tabOptions}>
         <Tabs.Screen
           name='Events'
           component={GroupEventsScreen}
@@ -137,7 +157,7 @@ export default function GroupDetailNavigator(props) {
   }
 
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator screenOptions={tabOptions}>
       <Tabs.Screen
         name='Info'
         component={GroupInfoScreen}

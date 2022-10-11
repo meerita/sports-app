@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import BodyTwo from '../../../../components/type/BodyTwo';
 import TwoLineWithRadio from '../../../../components/Lists/TwoLines/TwoLineWithRadio';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function EventOptionsReplacementsSelectorScreen(props) {
   // groupDetails
@@ -47,13 +48,7 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
   ];
 
   return (
-    <View
-      style={{
-        paddingVertical: 16,
-        backgroundColor: Colors.light.surface,
-        flex: 1,
-      }}
-    >
+    <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('groups:settings.events.replacementsDesc')}
       </BodyTwo>
@@ -69,7 +64,7 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </View>
+    </ScrollViewLayout>
   );
 }
 

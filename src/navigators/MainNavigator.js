@@ -3,8 +3,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Platform } from 'react-native';
 import { t } from '../services/i18n';
-import { useSelector } from 'react-redux';
-import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 
 // NAVIGATORS
 import MainBottomNavigation from './MainBottomNavigation';
@@ -195,8 +195,21 @@ import EventOptionsReplacementsSelectorScreen, {
 import EventOptionsSkillsSelectorScreen, {
   screenOptions as EventOptionsSkillsSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsSkillsSelectorScreen';
+import { themeActions } from '../store/slices/theme';
 
 export default function MainNavigator(props) {
+  const me = useSelector(state => state.me.myData);
+
+  const myDarkMode = useSelector(
+    state => state.me.myData.settings.preferences.theme
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(themeActions.changeTheme({ darkMode: myDarkMode }));
+  }, [myDarkMode]);
+
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
 

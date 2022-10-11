@@ -1,13 +1,39 @@
 /** @format */
 
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { t } from '../../services/i18n';
+
+import { changeMyDarkMode } from '../../store/actions/theme';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import BodyOne from '../../components/type/BodyOne';
 
 export default function MeEventsScreen() {
+  const darkMode = useSelector(state => state.theme.darkMode);
+
+  const dispatch = useDispatch();
+
+  const changeThemeHandler = () => {
+    dispatch(changeMyDarkMode(!darkMode));
+  };
+
   return (
-    <View>
-      <Text>My Events</Text>
-    </View>
+    <ScrollViewLayout>
+      <BodyOne style={{ paddingBottom: 16 }}>
+        Current theme: {!darkMode ? 'light theme' : 'dark theme'}
+      </BodyOne>
+      <Button
+        onPress={() => changeThemeHandler()}
+        title={darkMode ? 'change to light theme' : 'change to dark theme'}
+      />
+    </ScrollViewLayout>
   );
 }
+
+// NAVIGATION OPTIONS
+export const screenOptions = navData => {
+  return {
+    headerTitle: t('groups:create.form.resume'),
+  };
+};

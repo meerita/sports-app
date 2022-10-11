@@ -37,7 +37,7 @@ export default function CreateGroupResume(props) {
   const onSubmit = async () => {
     try {
       setLoading(true);
-      await dispatch(createANewGroup());
+      dispatch(createANewGroup());
     } catch (err) {
       toast.show(err.message);
       setLoading(false);

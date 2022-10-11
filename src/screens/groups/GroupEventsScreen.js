@@ -7,6 +7,7 @@ import { t } from '../../services/i18n';
 
 // components
 import SubtitleOne from '../../components/type/SubtitleOne';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function GroupEventsScreen(props) {
   // darkMode
@@ -18,16 +19,16 @@ export default function GroupEventsScreen(props) {
 
   if (events.length < 1) {
     return (
-      <View>
+      <ScrollViewLayout>
         <SubtitleOne>This groups hasn't any event yet</SubtitleOne>
-      </View>
+      </ScrollViewLayout>
     );
   }
 
   return (
-    <View>
+    <ScrollViewLayout>
       <Text>GroupEventsScreen</Text>
-    </View>
+    </ScrollViewLayout>
   );
 }
 

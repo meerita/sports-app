@@ -149,6 +149,10 @@
         "createNewGroup": "Crear tu nuevo grupo"
       }
     },
+    "members": {
+      "manyMembers_one": "{{count}} miembro",
+      "manyMembers_other": "{{count}} miembros"
+    },
     "example": "Example",
     "options": "Opciones del grupo",
     "joinGroup": "Ingresa a {{group}}",

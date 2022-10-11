@@ -17,7 +17,9 @@ import Card from '../../components/Card/';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import Caption from '../../components/type/Caption';
 import { useEffect } from 'react';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
+// STORE
 import { fetchCurrentGroup } from '../../store/actions/group';
 import { fetchMyUser } from '../../store/actions/me';
 
@@ -34,7 +36,7 @@ export default function MyGroupsScreen(props) {
   }, []);
 
   return (
-    <ScrollView
+    <ScrollViewLayout
       style={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 16 }}
     >
       {myGroups.map(group => (
@@ -69,14 +71,16 @@ export default function MyGroupsScreen(props) {
             <SubtitleOne>{group.title}</SubtitleOne>
             <Caption>
               {group.members.length > 1
-                ? t('groups:manyMembers_other', { count: group.members.length })
-                : t('groups:manyMembers_one', {
+                ? t('groups:members.manyMembers_other', {
+                    count: group.members.length,
+                  })
+                : t('groups:members.manyMembers_one', {
                     count: group.members.length,
                   })}
             </Caption>
           </View>
         </Card>
       ))}
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }

@@ -10,6 +10,7 @@ import moment from 'moment';
 import BodyOne from '../../components/type/BodyOne';
 import SingleLineWithCaption from '../../components/Lists/OneLine/SingleLineWithCaption';
 import Spacer from '../../components/Spacer/Spacer';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function MeScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -21,7 +22,7 @@ export default function MeScreen(props) {
   const characteristics = useSelector(state => state.me.myData.characteristics);
 
   return (
-    <ScrollView>
+    <ScrollViewLayout style={{ paddingTop: 0 }}>
       <View style={{ width: '100%', height: Dimensions.get('window').width }}>
         <Image
           source={{ uri: me.avatar }}
@@ -116,6 +117,6 @@ export default function MeScreen(props) {
       />
       {me.isAdmin && <SingleLineWithCaption title='Admin' caption='Yes' />}
       <Spacer height='16' />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }

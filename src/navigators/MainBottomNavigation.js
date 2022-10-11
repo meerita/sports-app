@@ -44,11 +44,18 @@ export default function MainBottomNavigation(props) {
       ? Colors.dark.primary
       : Colors.light.primary,
     tabBarInactiveTintColor: darkMode
-      ? Colors.dark.OnSurfacedisabled
-      : Colors.light.OnSurfacedisabled,
+      ? Colors.dark.OnSurfaceDisabled
+      : Colors.light.OnSurfaceDisabled,
     tabBarHideOnKeyboard: true,
     headerStyle: {
       backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
+      shadowColor: darkMode ? Colors.dark.black : Colors.light.black,
+      shadowOffset: {
+        height: Platform.OS === 'ios' ? 3 : 0,
+        width: 0,
+      },
+      shadowOpacity: 0.1,
+      elevation: 20,
     },
     headerTitleStyle: {
       fontFamily: 'Barlow-Medium',
@@ -60,12 +67,17 @@ export default function MainBottomNavigation(props) {
     },
     tabBarStyle: {
       backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      borderTopWidth: 0,
-      shadowOpacity: 0.05,
+      borderTopWidth: 1,
+      shadowOpacity: Platform.OS === 'ios' ? 0.2 : 1,
+      borderTopColor: darkMode
+        ? Colors.dark.onSurfaceShadow
+        : Colors.dark.onSurfaceShadow,
+      elevation: 20,
+      height: Platform.OS === 'ios' ? 90 : 60,
     },
     tabBarLabelStyle: {
       paddingTop: 0,
-      paddingBottom: 4,
+      paddingBottom: 8,
     },
   };
 

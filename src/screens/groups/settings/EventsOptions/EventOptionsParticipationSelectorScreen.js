@@ -7,6 +7,7 @@ import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function EventOptionsParticipationSelectorScreen(props) {
   // groupDetails
@@ -46,13 +47,7 @@ export default function EventOptionsParticipationSelectorScreen(props) {
   ];
 
   return (
-    <View
-      style={{
-        paddingVertical: 16,
-        backgroundColor: Colors.light.surface,
-        flex: 1,
-      }}
-    >
+    <ScrollViewLayout>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
@@ -65,7 +60,7 @@ export default function EventOptionsParticipationSelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </View>
+    </ScrollViewLayout>
   );
 }
 

@@ -18,6 +18,7 @@ import MainBottomNavigation from './MainBottomNavigation';
 // STORE
 import { fetchGlobalVariables } from '../store/actions/general';
 import { fetchMyUser } from '../store/actions/me';
+import { changeMyDarkMode } from '../store/actions/theme';
 
 export default function AppNavigator() {
   const [initializing, setInitializing] = useState(true);
@@ -30,16 +31,16 @@ export default function AppNavigator() {
 
   const userId = '62385d8caee17d13a1762b39';
 
-  const me = useSelector(state => state.me.userData);
+  const me = useSelector(state => state.me.myData);
 
   useEffect(() => {
     dispatch(fetchMyUser(userId));
-  }, [me]);
+  }, [dispatch]);
 
   // we will ask for globalvariables in this point
   useEffect(() => {
     dispatch(fetchGlobalVariables());
-  }, []);
+  }, [dispatch]);
 
   if (maintenance) {
     return <MaintenanceScreen />;

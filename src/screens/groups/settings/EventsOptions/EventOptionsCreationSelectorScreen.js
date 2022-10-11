@@ -8,6 +8,7 @@ import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLine
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import BodyTwo from '../../../../components/type/BodyTwo';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function EventOptionsCreationSelectorScreen(props) {
   // groupDetails
@@ -41,13 +42,7 @@ export default function EventOptionsCreationSelectorScreen(props) {
   ];
 
   return (
-    <View
-      style={{
-        paddingVertical: 16,
-        backgroundColor: Colors.light.surface,
-        flex: 1,
-      }}
-    >
+    <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('groups:settings.events.creationDesc')}
       </BodyTwo>
@@ -63,7 +58,7 @@ export default function EventOptionsCreationSelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </View>
+    </ScrollViewLayout>
   );
 }
 

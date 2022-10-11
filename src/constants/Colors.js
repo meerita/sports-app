@@ -20,6 +20,8 @@ export default {
     OnPrimaryVariantDisabled: '#ccc',
     OnErrorActive: '#282828',
     black: '#000',
+    shadow: '#202535',
+    onSurfaceShadow: '#1B202E',
   },
   light: {
     primary: '#484848',
@@ -40,6 +42,8 @@ export default {
     OnSurfaceDisabled: '#989898',
     error: '#ff0000',
     OnErrorActive: '#fff',
+    shadow: '#f1f1f1',
+    onSurfaceShadow: '#f1f1f1',
   },
   secondary: '#282828',
   secondaryVariant: '#171717',
