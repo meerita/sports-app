@@ -15,6 +15,9 @@ import BodyTwo from '../../../components/type/BodyTwo';
 import Styles from '../../../constants/Styles';
 import Colors from '../../../constants/Colors';
 
+// STORE
+import { changeMyDarkMode } from '../../../store/actions/theme';
+
 export default function PreferencesThemeScreen(props) {
   // we get our auth data
   const preferences = useSelector(
@@ -64,7 +67,7 @@ export default function PreferencesThemeScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(themeActions.changeTheme(option.value)),
+          dispatch(changeMyDarkMode(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

@@ -71,7 +71,7 @@ export default function MainBottomNavigation(props) {
       shadowOpacity: Platform.OS === 'ios' ? 0.2 : 1,
       borderTopColor: darkMode
         ? Colors.dark.onSurfaceShadow
-        : Colors.dark.onSurfaceShadow,
+        : Colors.light.onSurfaceShadow,
       elevation: 20,
       height: Platform.OS === 'ios' ? 90 : 60,
     },
