@@ -48,8 +48,6 @@ export default function GroupSettingsMembershipScreen(props) {
       ? 1
       : 2;
 
-  console.log(membership);
-
   return (
     <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>

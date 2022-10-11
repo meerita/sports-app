@@ -15,6 +15,12 @@ export const meSlice = createSlice({
     addMyUser(state, action) {
       state.myData = action.payload.user;
     },
+    changeMyWeight(state, action) {
+      state.myData.characteristics.weight = action.payload.weight;
+    },
+    changeMyHeight(state, action) {
+      state.myData.characteristics.height = action.payload.height;
+    },
   },
 });
 

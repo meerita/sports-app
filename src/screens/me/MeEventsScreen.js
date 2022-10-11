@@ -6,22 +6,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
 
 import { changeMyDarkMode } from '../../store/actions/theme';
+import { meActions } from '../../store/slices/me';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyOne from '../../components/type/BodyOne';
 
 export default function MeEventsScreen() {
+  const me = useSelector(state => state.me.myData);
+
+  const characteristics = me.characteristics;
+
   const darkMode = useSelector(state => state.theme.darkMode);
 
   const dispatch = useDispatch();
 
   const changeThemeHandler = () => {
-    dispatch(changeMyDarkMode(!darkMode));
+    dispatch(meActions.changeMyWeight({ weight: 6 }));
+    console.log(me);
   };
 
   return (
     <ScrollViewLayout>
       <BodyOne style={{ paddingBottom: 16 }}>
-        Current theme: {!darkMode ? 'light theme' : 'dark theme'}
+        characteristics: {characteristics.weight}
       </BodyOne>
       <Button
         onPress={() => changeThemeHandler()}

@@ -61,8 +61,8 @@ export const createUser = userId => {
     try {
       // we will
       const userData = await createUser();
-      dispatch();
-      dispatch();
+      // dispatch();
+      // dispatch();
     } catch (error) {
       console.log(error);
     }

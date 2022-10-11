@@ -17,7 +17,6 @@ export default function GroupSettingsPrivacyScreen(props) {
   const groupPrivacy = privacy.visibility.private;
   const groupVisibility = privacy.visibility.visibility;
 
-  console.log(privacy);
   return (
     <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>

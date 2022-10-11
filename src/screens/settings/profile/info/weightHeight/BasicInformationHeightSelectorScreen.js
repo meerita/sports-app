@@ -17,6 +17,9 @@ import Colors from '../../../../../constants/Colors';
 import BodyTwo from '../../../../../components/type/BodyTwo';
 import SingleLineWithRadio from '../../../../../components/Lists/OneLine/SingleLineWithRadio';
 
+// STORE
+import { changeMyHeight } from '../../../../../store/actions/me';
+
 export default function BasicInformationHeightSelectorScreen(props) {
   // myData
   const me = useSelector(state => state.me.myData);
@@ -78,9 +81,7 @@ export default function BasicInformationHeightSelectorScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeHeight(auth.userId, auth.token, option.value)
-          ),
+          dispatch(changeMyHeight(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

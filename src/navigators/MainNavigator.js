@@ -199,10 +199,14 @@ import { themeActions } from '../store/slices/theme';
 
 export default function MainNavigator(props) {
   const me = useSelector(state => state.me.myData);
-
   const myDarkMode = useSelector(
     state => state.me.myData.settings.preferences.theme
   );
+
+  // console.log('=================================');
+  // console.log(me);
+  // console.log('=================================');
+  // console.log('=================================');
 
   const dispatch = useDispatch();
 

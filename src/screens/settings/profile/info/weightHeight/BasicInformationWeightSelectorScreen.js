@@ -14,6 +14,9 @@ import Colors from '../../../../../constants/Colors';
 
 // COMPONENTS
 import SingleLineWithRadio from '../../../../../components/Lists/OneLine/SingleLineWithRadio';
+import { changeMyWeight } from '../../../../../store/actions/me';
+
+// STORE
 
 export default function BasicInformationWeightSelectorScreen(props) {
   // My data
@@ -44,12 +47,12 @@ export default function BasicInformationWeightSelectorScreen(props) {
   // what radiobutton is checked first
   const [selected, setSelected] = useState(currentWeight);
 
-  const weightRange = [...Array(121).keys()].slice(50, 120); // estaba a 0, tengo que hacer pruebas TODO
+  const weightRange = [...Array(121).keys()].slice(0, 120); // estaba a 0, tengo que hacer pruebas TODO
 
   // options for the radio buttons
   const OPTIONS = weightRange.map(index => ({
     label:
-      preferences.weights === 'lol'
+      preferences.weights === 'imperial'
         ? t('common:weight.lb', {
             weight: convert(index).from('kg').to('lb').toFixed(0),
           })
@@ -72,9 +75,7 @@ export default function BasicInformationWeightSelectorScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeight(auth.userId, auth.token, option.value)
-          ),
+          dispatch(changeMyWeight(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

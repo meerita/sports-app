@@ -14,8 +14,6 @@ export default function GroupSettingsEventsScreen(props) {
     state => state.group.groupDetail.preferences.events
   );
 
-  console.log(eventPreferences);
-
   return (
     <ScrollViewLayout>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
