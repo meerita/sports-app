@@ -129,3 +129,137 @@ export const changeMyHeight = height => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the DIMENSIONS on the USER PREFERENCES
+// ********************************************************
+
+export const changeDimensions = dimension => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the HEIGHT of the USER
+    // ********************************************************
+    const changeDimension = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/preferences/dimensions`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            dimensions: dimension,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const dimensionsUserData = await changeDimension();
+      dispatch(
+        meActions.changeMyDimensionsPreferences({ dimensions: dimension })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the WEIGHTS on the USER PREFERENCES
+// ********************************************************
+
+export const changeWeights = weight => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the HEIGHT of the USER
+    // ********************************************************
+    const changeWeight = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/preferences/weight`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            weights: weight,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const weightsUserData = await changeWeight();
+      dispatch(meActions.changeMyWeightsPreferences({ weights: weight }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the SEX of the USER
+// ********************************************************
+
+export const changeMySex = gender => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the VISIBILITY of the USER
+    // ********************************************************
+    const changeSex = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/users/${userId}/gender`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          gender: gender,
+        }),
+      });
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const genderUserData = await changeSex();
+      dispatch(meActions.changeMySexPreferences({ gender: gender }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

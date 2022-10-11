@@ -1,6 +1,6 @@
 /** @format */
 
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { t } from '../../../../../services/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from 'react-native-toast-notifications';
@@ -15,6 +15,7 @@ import Colors from '../../../../../constants/Colors';
 // COMPONENTS
 import SingleLineWithRadio from '../../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { changeMyWeight } from '../../../../../store/actions/me';
+import ScrollViewLayout from '../../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 // STORE
 
@@ -61,15 +62,9 @@ export default function BasicInformationWeightSelectorScreen(props) {
   }));
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-        ...Styles.formPadded,
-      }}
-    >
-      <BodyTwo style={{ paddingHorizontal: 10, paddingBottom: 16 }}>
-        {t('common:weight.weightInfo')}
+    <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>
+        {t('common:weight.weightInfo')}aaaa
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
@@ -81,7 +76,7 @@ export default function BasicInformationWeightSelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

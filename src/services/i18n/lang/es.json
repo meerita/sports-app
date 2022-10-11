@@ -340,8 +340,14 @@
     "preferences": {
       "preferences": "Preferencias",
       "preferencesDesc": "Unidades, idioma, etc.",
-      "unitSystem": "Pesaje",
-      "metricSystem": "Dimensiones",
+      "weights": {
+        "title": "Pesajes",
+        "description": "Nuestra app convertirá todas las unidades de pesaje al sistema de unidades que prefieras."
+      },
+      "dimensions": {
+        "title": "Dimensiones",
+        "description": "Nuestra app convertirá y mostrará todas las unidades de alturas y distancias en el sistema de unidades que elijas."
+      },
       "language": "Idiomas",
       "theme": "Tema",
       "themDesc": "Por defecto nuestra app viene con el Modo Claro activado, pero puedes usar nuestro increíble Modo Oscur",

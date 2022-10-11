@@ -19,6 +19,7 @@ import SingleLineWithRadio from '../../../../../components/Lists/OneLine/SingleL
 
 // STORE
 import { changeMyHeight } from '../../../../../store/actions/me';
+import ScrollViewLayout from '../../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function BasicInformationHeightSelectorScreen(props) {
   // myData
@@ -67,16 +68,8 @@ export default function BasicInformationHeightSelectorScreen(props) {
     .reverse();
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-        ...Styles.formPadded,
-      }}
-    >
-      <BodyTwo style={{ paddingHorizontal: 10, paddingBottom: 16 }}>
-        {t('common:weight.weightInfo')}
-      </BodyTwo>
+    <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>{t('common:weight.weightInfo')}</BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
@@ -87,7 +80,7 @@ export default function BasicInformationHeightSelectorScreen(props) {
           props.navigation.goBack()
         )}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

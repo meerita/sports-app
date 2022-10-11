@@ -21,6 +21,15 @@ export const meSlice = createSlice({
     changeMyHeight(state, action) {
       state.myData.characteristics.height = action.payload.height;
     },
+    changeMyWeightsPreferences(state, action) {
+      state.myData.settings.preferences.weights = action.payload.weights;
+    },
+    changeMyDimensionsPreferences(state, action) {
+      state.myData.settings.preferences.dimensions = action.payload.dimensions;
+    },
+    changeMySexPreferences(state, action) {
+      state.myData.characteristics.gender = action.payload.gender;
+    },
   },
 });
 

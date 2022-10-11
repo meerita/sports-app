@@ -10,19 +10,20 @@ import React, { useState } from 'react';
 // COMPONENTS
 import SingleLineWithRadio from '../../../components/Lists/OneLine/SingleLineWithRadio';
 import BodyTwo from '../../../components/type/BodyTwo';
+import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 // CONSTANTS
 import Styles from '../../../constants/Styles';
 import Colors from '../../../constants/Colors';
+
+// STORE
+import { changeWeights } from '../../../store/actions/me';
 
 export default function PreferencesWeightScreen(props) {
   // we get our auth data
   const preferences = useSelector(
     state => state.me.myData.settings.preferences
   );
-
-  // darkMode
-  const darkMode = useSelector(state => state.theme.darkMode);
 
   const currentSystem = preferences.weights;
 
@@ -54,36 +55,28 @@ export default function PreferencesWeightScreen(props) {
   ];
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout>
       <BodyTwo style={{ padding: 16 }}>
-        Our app will convert and show all measurements units to your favorite
-        dimension unit.
+        {t('settings:preferences.weights.description')}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(changeWeights(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
         )}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: t('settings:preferences.unitSystem'),
+    headerTitle: t('settings:preferences.weights.title'),
     presentation: 'modal',
   };
 };

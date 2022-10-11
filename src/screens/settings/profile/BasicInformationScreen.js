@@ -9,6 +9,7 @@ import { ScrollView } from 'react-native';
 // CONSTANTS
 import Colors from '../../../constants/Colors';
 import Styles from '../../../constants/Styles';
+import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function BasicInformationScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -17,12 +18,7 @@ export default function BasicInformationScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout style={{ paddingTop: 16 }}>
       <TwoLineWithIcon
         icon={
           me === null
@@ -85,7 +81,7 @@ export default function BasicInformationScreen(props) {
           props.navigation.navigate('BasicInformationWeightHeightScreen');
         }}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

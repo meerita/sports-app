@@ -9,6 +9,7 @@ import convert from 'convert-units';
 // COMPONENTS
 import BodyTwo from '../../../../components/type/BodyTwo';
 import SingleLineWithIcon from '../../../../components/Lists/OneLine/SingleLineWithIcon';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 // CONSTANTS
 import Styles from '../../../../constants/Styles';
@@ -23,25 +24,16 @@ export default function BasicInformationWeightHeightScreen(props) {
     state => state.me.myData.settings.preferences
   );
 
-  // darkMode
-  const darkMode = useSelector(state => state.theme.darkMode);
-
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-        ...Styles.formPadded,
-      }}
-    >
-      <BodyTwo style={{ paddingHorizontal: 10, paddingBottom: 16 }}>
+    <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>
         {t('settings:profile.basicInformation.weightHeightInfo')}
       </BodyTwo>
       <SingleLineWithIcon
         icon={require('../../../../assets/images/icons/weight.png')}
         title={t('common:weight.weight')}
         caption={
-          preferences.weight === 'imperial'
+          preferences.weights === 'imperial'
             ? t('common:weight.lb', {
                 weight: convert(me.characteristics.weight)
                   .from('kg')
@@ -60,7 +52,7 @@ export default function BasicInformationWeightHeightScreen(props) {
         icon={require('../../../../assets/images/icons/straighten.png')}
         title={t('common:height.height')}
         caption={
-          preferences.height === 'imperial'
+          preferences.dimensions === 'imperial'
             ? t('common:height.ft-us', {
                 ft: convert(me.characteristics.height)
                   .from('cm')
@@ -83,7 +75,7 @@ export default function BasicInformationWeightHeightScreen(props) {
           props.navigation.navigate('BasicInformationHeightSelectorScreen')
         }
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

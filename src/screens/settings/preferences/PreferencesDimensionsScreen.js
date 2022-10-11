@@ -14,6 +14,11 @@ import BodyTwo from '../../../components/type/BodyTwo';
 // CONSTANTS
 import Styles from '../../../constants/Styles';
 import Colors from '../../../constants/Colors';
+import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import { changeDimensions } from '../../../store/actions/me';
+
+// STORE
+// import {} from
 
 export default function PreferencesDimensionsScreen(props) {
   // we get our auth data
@@ -53,29 +58,21 @@ export default function PreferencesDimensionsScreen(props) {
   ];
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout>
       <BodyTwo style={{ padding: 16 }}>
-        Our app will convert and show all measurements units to your favorite
-        dimension unit.
+        {t('settings:preferences.dimensions.description')}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeDimensions(auth.userId, auth.token, option.value)
-          ),
+          dispatch(changeDimensions(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
         )}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 
@@ -83,7 +80,7 @@ export default function PreferencesDimensionsScreen(props) {
 
 export const screenOptions = navData => {
   return {
-    headerTitle: t('settings:preferences.metricSystem'),
+    headerTitle: t('settings:preferences.dimensions.title'),
     presentation: 'modal',
   };
 };

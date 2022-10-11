@@ -10,17 +10,18 @@ import { useForm, Controller } from 'react-hook-form';
 // COMPONENTS
 import BodyTwo from '../../../../components/type/BodyTwo';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
+import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 // CONSTANTS
 import Styles from '../../../../constants/Styles';
 import Colors from '../../../../constants/Colors';
 
+// STORE
+import { changeMySex } from '../../../../store/actions/me';
+
 export default function BasicInformationGenderScreen(props) {
   // My Data
   const me = useSelector(state => state.me.myData);
-
-  // darkMode
-  const darkMode = useSelector(state => state.theme.darkMode);
 
   // we will find out which gender this user has and set it as initial state
   const currentGender =
@@ -62,29 +63,21 @@ export default function BasicInformationGenderScreen(props) {
   ];
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-        ...Styles.formPadded,
-      }}
-    >
-      <BodyTwo style={{ paddingHorizontal: 10, paddingBottom: 16 }}>
+    <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>
         {t('settings:profile.basicInformation.genderInfo')}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeGender(auth.userId, auth.token, option.value)
-          ),
+          dispatch(changeMySex(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
         )}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 
