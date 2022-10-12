@@ -6,20 +6,34 @@ import { t } from '../../../../services/i18n';
 import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BodyTwo from '../../../../components/type/BodyTwo';
 import TwoLineWithRadio from '../../../../components/Lists/TwoLines/TwoLineWithRadio';
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
+// STORE
+import { updateMyGroupReplacementsPreferences } from '../../../../store/actions/group';
+import { useToast } from 'react-native-toast-notifications';
+
 export default function EventOptionsReplacementsSelectorScreen(props) {
   // groupDetails
-  const eventPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events
+  const replacementsPreferences = useSelector(
+    state => state.group.groupDetail.preferences.events.replacements
   );
+
+  console.log(replacementsPreferences);
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // what radiobutton is checked first
   const [selected, setSelected] = useState(
-    eventPreferences.visbility === 'only-my-group' ? 1 : 0
+    replacementsPreferences === 'no-replacements'
+      ? 0
+      : replacementsPreferences === 'allow-replacements'
+      ? 1
+      : 2
   );
 
   // The current options for creating the radio button options
@@ -48,7 +62,7 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
   ];
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('groups:settings.events.replacementsDesc')}
       </BodyTwo>
@@ -56,9 +70,7 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(updateMyGroupReplacementsPreferences(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

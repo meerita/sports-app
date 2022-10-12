@@ -27,6 +27,10 @@ export const groupSlice = createSlice({
       state.createNewGroup.title = action.payload.title;
       state.createNewGroup.description = action.payload.description;
     },
+    updateReplacements(state, action) {
+      state.groupDetail.preferences.events.replacements =
+        action.payload.replacements;
+    },
   },
 });
 

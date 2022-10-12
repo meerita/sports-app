@@ -27,7 +27,7 @@ export default function GroupSettingsScreen(props) {
     : false;
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       {amIAnAdmin ? (
         <>
           <TwoLineWithIcon

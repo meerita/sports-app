@@ -76,7 +76,7 @@ export default function GroupSettingsEventsScreen(props) {
         icon={require('../../../assets/images/icons/replace.png')}
         title={t('groups:settings.events.replacements')}
         caption={t(
-          `groups:settings.events.types.${eventPreferences.replacements}`
+          `groups:settings.events.types.${eventPreferences.replacements}.title`
         )}
         onPress={() =>
           props.navigation.navigate('EventOptionsReplacementsSelectorScreen')

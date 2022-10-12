@@ -127,3 +127,56 @@ export const createANewGroup = () => {
     }
   };
 };
+
+// ********************************************************
+// Function to create a group
+// ********************************************************
+
+export const updateMyGroupReplacementsPreferences = replacements => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const replacementsOption = replacements;
+
+    // ********************************************************
+    // Function to create teh group with the API
+    // ********************************************************
+    const updateReplacements = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/events/replacements`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            replacements: replacementsOption,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const replacementsData = await updateReplacements();
+
+      dispatch(
+        groupActions.updateReplacements({
+          replacements: replacementsData.replacements,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
