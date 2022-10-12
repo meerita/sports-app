@@ -192,6 +192,7 @@
         },
         "participation": "Participación",
         "visibility": "Visibilidad de los eventos",
+        "visibilityDesc": "Cuando un visitante que no es miembros visita tu grupo podría ver los eventos creados por tu grupo o no.",
         "skill": "Nivel de habilidad",
         "meetingPoint": "Punto de encuentro",
         "replacements": "Reemplazos",

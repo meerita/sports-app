@@ -1,23 +1,32 @@
 /** @format */
-
-import { View, Text } from 'react-native';
 import React from 'react';
 import { t } from '../../../../services/i18n';
-import Colors from '../../../../constants/Colors';
-import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useToast } from 'react-native-toast-notifications';
+
+// CONSTANTS
+import Colors from '../../../../constants/Colors';
+
+// COMPONENTS
+import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import BodyTwo from '../../../../components/type/BodyTwo';
+import { updateEventVisibility } from '../../../../store/actions/group';
 
 export default function EventOptionsVisibilitySelectorScreen(props) {
   // groupDetails
-  const eventPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events
+  const eventVisibility = useSelector(
+    state => state.group.groupDetail.preferences.events.visibility
   );
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // what radiobutton is checked first
   const [selected, setSelected] = useState(
-    eventPreferences.visbility === 'only-my-group' ? 1 : 0
+    eventVisibility === 'only-my-group' ? 0 : 1
   );
 
   // The current options for creating the radio button options
@@ -34,13 +43,14 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
 
   return (
     <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>
+        {t('groups:settings.events.visibilityDesc')}
+      </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(updateEventVisibility(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

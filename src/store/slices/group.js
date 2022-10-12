@@ -34,6 +34,10 @@ export const groupSlice = createSlice({
     updateSkill(state, action) {
       state.groupDetail.preferences.events.skill = action.payload.skill;
     },
+    updateVisibility(state, action) {
+      state.groupDetail.preferences.events.visibility =
+        action.payload.visibility;
+    },
   },
 });
 

@@ -182,7 +182,7 @@ export const updateMyGroupReplacementsPreferences = replacements => {
 };
 
 // ********************************************************
-// Function to change the REPLACEMENTS OPTOINS of a group
+// Function to change the REQUIRED SKILL OPTOINS of a group
 // ********************************************************
 
 export const updateEventRequiredSkill = skill => {
@@ -226,6 +226,59 @@ export const updateEventRequiredSkill = skill => {
       dispatch(
         groupActions.updateSkill({
           skill: skillData.skill,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the REQUIRED SKILL OPTOINS of a group
+// ********************************************************
+
+export const updateEventVisibility = visibility => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const visibilityToReplace = visibility;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updatevisibility = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/events/visibility`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            visibility: visibilityToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const visibilityData = await updatevisibility();
+
+      dispatch(
+        groupActions.updateVisibility({
+          visibility: visibilityData.visibility,
         })
       );
     } catch (error) {
