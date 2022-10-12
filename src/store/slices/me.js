@@ -30,6 +30,9 @@ export const meSlice = createSlice({
     changeMySexPreferences(state, action) {
       state.myData.characteristics.gender = action.payload.gender;
     },
+    changeMyUsername(state, action) {
+      state.myData.username = action.payload.username;
+    },
   },
 });
 

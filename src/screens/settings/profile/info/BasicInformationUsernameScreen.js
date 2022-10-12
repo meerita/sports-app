@@ -15,6 +15,7 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 // CONSTANTS
 import Styles from '../../../../constants/Styles';
 import Colors from '../../../../constants/Colors';
+import { changeMyUsername } from '../../../../store/actions/me';
 
 export default function BasicInformationUsernameScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -45,9 +46,7 @@ export default function BasicInformationUsernameScreen(props) {
     setLoading(true);
     setNewError(null);
     try {
-      await dispatch(
-        meActions.changeUsername(auth.userId, auth.token, data.username)
-      );
+      await dispatch(changeMyUsername(data.username));
     } catch (err) {
       toast.show(err.message, { type: 'danger', duration: 4000 });
       setLoading(false);

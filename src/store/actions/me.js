@@ -263,3 +263,48 @@ export const changeMySex = gender => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the USERNAME of the USER
+// ********************************************************
+
+export const changeMyUsername = username => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the USERNAME of the USER
+    // ********************************************************
+    const changeUsername = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/profile/username`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const usernameData = await changeUsername();
+      dispatch(meActions.changeMyUsername({ username: username }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
