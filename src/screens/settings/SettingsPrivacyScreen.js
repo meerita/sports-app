@@ -31,6 +31,9 @@ import {
 
 export default function SettingsPrivacyScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
+
+  const isSubscriber = useSelector(state => state.me.myData.isSubscriber);
+
   const cookies = useSelector(
     state => state.me.myData.settings.privacy.cookies
   );
@@ -148,6 +151,10 @@ export default function SettingsPrivacyScreen(props) {
     }
   };
 
+  const toogleProNavigation = () => {
+    props.navigation.navigate('SettingsSubscriptionScreen');
+  };
+
   return (
     <ScrollViewLayout>
       <SubHeader title={t('settings:privacy.proOptions.proOptions')} />
@@ -160,7 +167,7 @@ export default function SettingsPrivacyScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={invisibility}
-          onChange={toogleInvisibility}
+          onChange={isSubscriber ? toogleInvisibility : toogleProNavigation}
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
@@ -172,7 +179,7 @@ export default function SettingsPrivacyScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={hideActivity}
-          onChange={toogleHideActivity}
+          onChange={isSubscriber ? toogleHideActivity : toogleProNavigation}
         />
       </TwoLineItemWithSwitch>
       <SubHeader title={t('settings:privacy.generalOptions.general')} />

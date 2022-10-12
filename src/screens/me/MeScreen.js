@@ -131,7 +131,7 @@ export default function MeScreen(props) {
       <SingleLineWithCaption
         title={t('profile:subscriber.type')}
         caption={
-          me.isSuscriber
+          me.isSubscriber
             ? t('profile:subscriber.pro')
             : t('profile:subscriber.standard')
         }
