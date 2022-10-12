@@ -30,7 +30,13 @@ export default function MeScreen(props) {
         />
       </View>
       <BodyOne style={{ padding: 16 }}>{me.description}</BodyOne>
-      <SingleLineWithCaption title='Nombre de usuario' caption={me.username} />
+      <SingleLineWithCaption
+        title='Nombre de usuario'
+        caption={me.username}
+        onPress={() =>
+          props.navigation.navigate('BasicInformationUsernameScreen')
+        }
+      />
       <SingleLineWithCaption
         title='Usuario número'
         caption={'#' + me.userNumber}

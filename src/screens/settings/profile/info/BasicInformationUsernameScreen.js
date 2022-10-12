@@ -15,6 +15,8 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 // CONSTANTS
 import Styles from '../../../../constants/Styles';
 import Colors from '../../../../constants/Colors';
+
+// STORE
 import { changeMyUsername } from '../../../../store/actions/me';
 
 export default function BasicInformationUsernameScreen(props) {

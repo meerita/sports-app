@@ -16,6 +16,9 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 import Styles from '../../../../constants/Styles';
 import Colors from '../../../../constants/Colors';
 
+// STORE
+import { changeMyDescription } from '../../../../store/actions/me';
+
 export default function BasicInformationDescriptionScreen(props) {
   const me = useSelector(state => state.me.myData);
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -51,9 +54,7 @@ export default function BasicInformationDescriptionScreen(props) {
     setNewError(null);
 
     try {
-      await dispatch(
-        meActions.updateDescription(auth.userId, auth.token, data.description)
-      );
+      await dispatch(changeMyDescription(data.description));
     } catch (err) {
       toast.show(err.message, { type: 'danger', duration: 4000 });
       setLoading(false);

@@ -33,6 +33,9 @@ export const meSlice = createSlice({
     changeMyUsername(state, action) {
       state.myData.username = action.payload.username;
     },
+    changeMyDescription(state, action) {
+      state.myData.description = action.payload.description;
+    },
   },
 });
 
