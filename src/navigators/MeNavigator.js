@@ -47,11 +47,11 @@ export default function MeNavigator(props) {
   );
 }
 
-// NAVIGATION OPTIONS
-export const screenOptions = navData => {
-  return {
-    headerTitle: 'Login',
-    // headerBackTitle: null,
-    presentation: Platform.OS === 'android' ? 'card' : 'modal',
-  };
-};
+// // NAVIGATION OPTIONS
+// export const screenOptions = navData => {
+//   return {
+//     headerTitle: 'Login',
+//     // headerBackTitle: null,
+//     presentation: Platform.OS === 'android' ? 'card' : 'modal',
+//   };
+// };

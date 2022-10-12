@@ -36,6 +36,32 @@ export const meSlice = createSlice({
     changeMyDescription(state, action) {
       state.myData.description = action.payload.description;
     },
+    changeMyTag(state, action) {
+      state.myData.tag = action.payload.tag;
+    },
+    allowAnalytics(state, action) {
+      state.myData.settings.privacy.cookies.analytics =
+        action.payload.analytics;
+    },
+    allowMarketing(state, action) {
+      state.myData.settings.privacy.cookies.marketing =
+        action.payload.marketing;
+    },
+    hideMyGroups(state, action) {
+      state.myData.settings.privacy.general.hideMyGroups =
+        action.payload.hideMyGroups;
+    },
+    hiddenInSearch(state, action) {
+      state.myData.settings.privacy.general.hiddenInSearch =
+        action.payload.hiddenInSearch;
+    },
+    hideActivity(state, action) {
+      state.myData.settings.privacy.pro.hideActivity =
+        action.payload.hideActivity;
+    },
+    invisibility(state, action) {
+      state.myData.settings.privacy.pro.invisible = action.payload.invisible;
+    },
   },
 });
 

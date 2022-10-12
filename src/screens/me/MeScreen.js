@@ -31,16 +31,18 @@ export default function MeScreen(props) {
       </View>
       <BodyOne style={{ padding: 16 }}>{me.description}</BodyOne>
       <SingleLineWithCaption
-        title='Nombre de usuario'
+        title={t('settings:profile.basicInformation.userName')}
         caption={me.username}
         onPress={() =>
           props.navigation.navigate('BasicInformationUsernameScreen')
         }
       />
       <SingleLineWithCaption
-        title='Usuario número'
-        caption={'#' + me.userNumber}
+        title={t('settings:profile.basicInformation.tag')}
+        caption={me.tag}
+        onPress={() => props.navigation.navigate('BasicInformationTagScreen')}
       />
+
       <SingleLineWithCaption
         title={t('settings:profile.basicInformation.localization')}
         caption={t('settings:profile.basicInformation.countryProvince', {
@@ -105,23 +107,41 @@ export default function MeScreen(props) {
         title={t('settings:profile.basicInformation.visibility.visibility')}
         caption={t(
           `settings:profile.basicInformation.visibility.${
-            me.settings.privacy.pro.invisible === false ? 'true' : 'false'
+            me.settings.privacy.pro.invisible ? 'true' : 'false'
           }`
         )}
+        onPress={() => props.navigation.navigate('SettingsPrivacyScreen')}
       />
       <SingleLineWithCaption
-        title='Miembro desde'
+        title={t('profile:memberSince')}
         caption={moment(me.createdAt).startOf('day').fromNow()}
       />
       <SingleLineWithCaption
-        title='Verificado'
-        caption={me.verified ? 'Verified' : 'Unverified'}
+        title={t('profile:memberNumber')}
+        caption={'#' + me.userNumber}
       />
       <SingleLineWithCaption
-        title='Suscriptor'
-        caption={me.isSuscriber ? 'Yes' : 'No'}
+        title={t('profile:verified.verified')}
+        caption={
+          me.verified
+            ? t('profile:verified.verified')
+            : t('profile:verified.unverified')
+        }
       />
-      {me.isAdmin && <SingleLineWithCaption title='Admin' caption='Yes' />}
+      <SingleLineWithCaption
+        title={t('profile:subscriber.type')}
+        caption={
+          me.isSuscriber
+            ? t('profile:subscriber.pro')
+            : t('profile:subscriber.standard')
+        }
+      />
+      {me.isAdmin && (
+        <SingleLineWithCaption
+          title={t('common:admin')}
+          caption={t('common:yes')}
+        />
+      )}
       <Spacer height='16' />
     </ScrollViewLayout>
   );

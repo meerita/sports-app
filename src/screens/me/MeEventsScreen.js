@@ -9,25 +9,29 @@ import { changeMyDarkMode } from '../../store/actions/theme';
 import { meActions } from '../../store/slices/me';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyOne from '../../components/type/BodyOne';
+import { allowAnalyticsCookies } from '../../store/actions/me';
 
 export default function MeEventsScreen() {
   const me = useSelector(state => state.me.myData);
 
   const characteristics = me.characteristics;
 
+  const cookies = me.settings.privacy.cookies;
+
   const darkMode = useSelector(state => state.theme.darkMode);
 
   const dispatch = useDispatch();
 
   const changeThemeHandler = () => {
-    dispatch(meActions.changeMyWeight({ weight: 6 }));
-    console.log(me);
+    // dispatch(meActions.allowAnalytics({ analytics: true }));
+
+    console.log(cookies);
   };
 
   return (
     <ScrollViewLayout>
       <BodyOne style={{ paddingBottom: 16 }}>
-        characteristics: {characteristics.weight}
+        analytics: {cookies.analytics ? 'true' : 'false'}
       </BodyOne>
       <Button
         onPress={() => changeThemeHandler()}

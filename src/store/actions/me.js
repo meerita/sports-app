@@ -353,3 +353,318 @@ export const changeMyDescription = description => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the DESCRIPTION of the USER
+// ********************************************************
+export const changeMyTag = tag => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the DESCRIPTION of the USER
+    // ********************************************************
+    const changeTag = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/users/${userId}/tag`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tag: tag,
+        }),
+      });
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const userTagData = await changeTag();
+      dispatch(
+        meActions.changeMyTag({
+          tag: userTagData.tag,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the ANALYTICS of the USER
+// ********************************************************
+export const allowAnalyticsCookies = analytics => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the ANALYTICS COOKIES of the USER
+    // ********************************************************
+    const changeAnalyticsCookies = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/cookies/analytics`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            analytics: analytics,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const analyticsCookiesData = await changeAnalyticsCookies();
+      dispatch(
+        meActions.allowAnalytics({ analytics: analyticsCookiesData.analytics })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the ANALYTICS of the USER
+// ********************************************************
+export const allowMarketingCookies = marketing => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Call to change the MARKETING COOKIES of the USER
+    // ********************************************************
+    const changeMarketingCookies = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/cookies/marketing`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            marketing: marketing,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const marketingCookiesData = await changeMarketingCookies();
+      dispatch(
+        meActions.allowMarketing({ marketing: marketingCookiesData.marketing })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to HIDE the USERS' GROUPS from his profile
+// ********************************************************
+export const hideUserGroups = hideStatus => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide user groups function
+    // ********************************************************
+    const hideGroups = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/privacy/general/groups`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            hideMyGroups: hideStatus,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const hideMyGroupsData = await hideGroups();
+      dispatch(
+        meActions.hideMyGroups({ hideMyGroups: hideMyGroupsData.hideMyGroups })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to HIDE the USER FROM SEARCHS
+// ********************************************************
+export const hideMeFromSearchResults = hideStatus => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide from search function
+    // ********************************************************
+    const hideSearchResults = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/privacy/general/search`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            hiddenInSearch: hideStatus,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const hiddenInSearchData = await hideSearchResults();
+      dispatch(
+        meActions.hiddenInSearch({
+          hiddenInSearch: hiddenInSearchData.hiddenInSearch,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to MAKE USER INVISIBLE
+// ********************************************************
+export const makeMeInvisible = invisible => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const makeInvisible = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/privacy/pro/invisibility`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            invisible: invisible,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const invisibleData = await makeInvisible();
+      dispatch(
+        meActions.invisibility({
+          invisible: invisibleData.invisible,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to MAKE USER INVISIBLE
+// ********************************************************
+export const hideUserActivity = hideStatus => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const hideActivity = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/privacy/pro/activity`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            hideActivity: hideStatus,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const hideActivityData = await hideActivity();
+      dispatch(
+        meActions.hideActivity({
+          hideActivity: hideActivityData.hideActivity,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

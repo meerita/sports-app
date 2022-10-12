@@ -15,6 +15,7 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 // CONSTANTS
 import Styles from '../../../../constants/Styles';
 import Colors from '../../../../constants/Colors';
+import { changeMyTag } from '../../../../store/actions/me';
 
 export default function BasicInformationTagScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -53,7 +54,7 @@ export default function BasicInformationTagScreen(props) {
     setNewError(null);
 
     try {
-      await dispatch(meActions.updateTag(auth.userId, auth.token, data.tag));
+      await dispatch(changeMyTag(data.tag));
     } catch (err) {
       toast.show(err.message, { type: 'danger', duration: 4000 });
       setLoading(false);

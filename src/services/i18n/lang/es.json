@@ -53,6 +53,8 @@
     "version": "© Minide {{year}}. Versión {{version}}"
   },
   "common": {
+    "yes": "Sí",
+    "no": "No",
     "close": "Cerrar",
     "back": "Volver",
     "accept": "Aceptar",
@@ -280,8 +282,8 @@
         "countryProvince": "{{province}}, {{country}}",
         "visibility": {
           "visibility": "Visibilidad",
-          "true": "Visible",
-          "false": "Invisible"
+          "true": "Invisible",
+          "false": "Visible"
         },
         "weightHeight": "Altura y peso",
         "weightHeightDesc": "Describe tu peso actual y la altura",
@@ -324,7 +326,7 @@
         "hideSearch": "Ocultar en búsquedas",
         "hideSearchDesc": "Tu perfil no saldrá en resultados de búsqueda",
         "groupless": "Grupos ocultos",
-        "grouplessDesc": "Los usuarios no podrán ver en qué grupo participas"
+        "grouplessDesc": "Los usuarios no podrán ver en qué grupos participas"
       },
       "cookies": {
         "cookies": "Cookies",
@@ -403,12 +405,22 @@
     "invisible": "La información de {{user}} está oculta",
     "info": "Información",
     "tag": "Etiqueta",
-    "memberSince": "Miembro desde…",
+    "userNumber": "Número de usuario",
     "memberOf": "Miembro de…",
     "memberNumber": "Miembro número…",
     "location": "Localización",
     "membersNumber": "{{count}} miembros",
-    "mainSetup": "Equipo principal"
+    "mainSetup": "Equipo principal",
+    "verified": {
+      "verified": "Verificado",
+      "unverified": "Sin verificar"
+    },
+    "subscriber": {
+      "type": "Tipo de cuenta",
+      "pro": "PRO",
+      "standard": "Estándar"
+    },
+    "admin": "Administrador"
   },
   "explore": {
     "popularSports": "Deportes populares",

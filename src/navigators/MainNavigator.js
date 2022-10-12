@@ -65,6 +65,14 @@ import SettingsFeedbackScreen, {
 } from '../screens/settings/SettingsFeedbackScreen';
 
 // ************************************************
+// SETTINGS SCREENS / PRIVACY COOKIE
+// ************************************************
+
+import BasicCoockiesInfoScreen, {
+  screenOptions as BasicCoockiesInfoScreenOption,
+} from '../screens/settings/privacy/basicCookies/BasicCookiesInfoScreen';
+
+// ************************************************
 // SETTINGS SCREENS / ACCOUNT
 // ************************************************
 
@@ -481,6 +489,11 @@ export default function MainNavigator(props) {
         name='EventOptionsSkillsSelectorScreen'
         component={EventOptionsSkillsSelectorScreen}
         options={EventOptionsSkillsSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='BasicCoockiesInfoScreen'
+        component={BasicCoockiesInfoScreen}
+        options={BasicCoockiesInfoScreenOption}
       />
     </Stack.Navigator>
   );
