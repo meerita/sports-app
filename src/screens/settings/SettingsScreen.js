@@ -14,6 +14,7 @@ import Styles from '../../constants/Styles';
 
 // STORE
 import { authActions } from '../../store/slices/auth';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function SettingsScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -26,12 +27,7 @@ export default function SettingsScreen(props) {
   };
 
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <TwoLineWithIcon
         icon={require('../../assets/images/icons/manage_accounts.png')}
         title={t('settings:account.account')}
@@ -102,7 +98,7 @@ export default function SettingsScreen(props) {
         subtitle={t('settings:logoutDesc')}
         onPress={() => logoutHandler()}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 
