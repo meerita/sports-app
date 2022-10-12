@@ -15,7 +15,7 @@ export default function GroupSettingsEventsScreen(props) {
   );
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('groups:settings.events.explanation')}
       </BodyTwo>
@@ -59,7 +59,7 @@ export default function GroupSettingsEventsScreen(props) {
       <SingleLineWithIcon
         icon={require('../../../assets/images/icons/skill.png')}
         title={t('groups:settings.events.skill')}
-        caption={t(`groups:settings.events.types.${eventPreferences.skill}`)}
+        caption={t(`skills:${eventPreferences.skill}.title`)}
         onPress={() =>
           props.navigation.navigate('EventOptionsSkillsSelectorScreen')
         }

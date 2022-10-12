@@ -6,20 +6,36 @@ import { t } from '../../../../services/i18n';
 import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TwoLineWithRadio from '../../../../components/Lists/TwoLines/TwoLineWithRadio';
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyTwo from '../../../../components/type/BodyTwo';
+import { useToast } from 'react-native-toast-notifications';
+import { updateEventRequiredSkill } from '../../../../store/actions/group';
 
 export default function EventOptionsSkillsSelectorScreen(props) {
   // groupDetails
-  const eventPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events
+  const eventSkillPreferences = useSelector(
+    state => state.group.groupDetail.preferences.events.skill
   );
+
+  console.log(eventSkillPreferences);
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // what radiobutton is checked first
   const [selected, setSelected] = useState(
-    eventPreferences.visbility === 'only-my-group' ? 1 : 0
+    eventSkillPreferences === 'novice'
+      ? 0
+      : eventSkillPreferences === 'advanced-beginner'
+      ? 1
+      : eventSkillPreferences === 'competent'
+      ? 2
+      : eventSkillPreferences === 'proficient'
+      ? 3
+      : 4
   );
 
   // The current options for creating the radio button options
@@ -52,7 +68,7 @@ export default function EventOptionsSkillsSelectorScreen(props) {
   ];
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('skills:groupDesc')}
       </BodyTwo>
@@ -60,9 +76,7 @@ export default function EventOptionsSkillsSelectorScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(updateEventRequiredSkill(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

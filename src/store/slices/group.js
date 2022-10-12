@@ -31,6 +31,9 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.events.replacements =
         action.payload.replacements;
     },
+    updateSkill(state, action) {
+      state.groupDetail.preferences.events.skill = action.payload.skill;
+    },
   },
 });
 
