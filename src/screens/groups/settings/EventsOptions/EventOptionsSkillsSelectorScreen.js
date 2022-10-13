@@ -90,5 +90,6 @@ export default function EventOptionsSkillsSelectorScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.skill'),
+    presentation: 'modal',
   };
 };

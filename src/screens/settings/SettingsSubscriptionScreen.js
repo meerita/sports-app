@@ -13,11 +13,12 @@ import Colors from '../../constants/Colors';
 import HeadlineFour from '../../components/type/HeadlineFour';
 import SingleLineWithIcon from '../../components/Lists/OneLine/SingleLineWithIcon';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function SettingsSubscriptionScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
   return (
-    <ScrollView
+    <ScrollViewLayout
       style={{
         ...Styles.body,
         backgroundColor: darkMode ? Colors.dark.primary : Colors.light.primary,
@@ -66,6 +67,15 @@ export default function SettingsSubscriptionScreen(props) {
       >
         {t('settings:subscription.startTrial')}
       </ButtonFilled>
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
+
+// NAVIGATION OPTIONS
+export const screenOptions = navData => {
+  return {
+    headerTitle: t('settings:subscription'),
+    headerBackTitle: t('common:back'),
+    presentation: 'modal',
+  };
+};

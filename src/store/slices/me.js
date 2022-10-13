@@ -62,6 +62,35 @@ export const meSlice = createSlice({
     invisibility(state, action) {
       state.myData.settings.privacy.pro.invisible = action.payload.invisible;
     },
+    // NOTIFICATONS GROUP
+    notificationsNewEvents(state, action) {
+      state.myData.settings.notifications.groups.newEvents =
+        action.payload.newEvents;
+    },
+    notificationsGotAnInvite(state, action) {
+      state.myData.settings.notifications.groups.gotAnInvite =
+        action.payload.gotAnInvite;
+    },
+    notificationsNewMember(state, action) {
+      state.myData.settings.notifications.groups.newMember =
+        action.payload.newMember;
+    },
+    notificationsNewRecordAchieved(state, action) {
+      state.myData.settings.notifications.groups.newRecordAchieved =
+        action.payload.newRecordAchieved;
+    },
+    notificationsPetitionToJoin(state, action) {
+      state.myData.settings.notifications.groups.petitionToJoin =
+        action.payload.petitionToJoin;
+    },
+    notificationsPublicAnnounces(state, action) {
+      state.myData.settings.notifications.general.publicAnnounces =
+        action.payload.publicAnnounces;
+    },
+    notificationsAppUpdates(state, action) {
+      state.myData.settings.notifications.general.appUpdates =
+        action.payload.appUpdates;
+    },
   },
 });
 

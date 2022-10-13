@@ -84,5 +84,6 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.replacements'),
+    presentation: 'modal',
   };
 };

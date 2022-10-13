@@ -668,3 +668,325 @@ export const hideUserActivity = hideStatus => {
     }
   };
 };
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF NEW EVENTS
+// ********************************************************
+export const notificationsNewEvents = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/groups/newevents`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            newEvents: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsNewEvents({
+          newEvents: notificationData.newEvents,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF NEW EVENTS
+// ********************************************************
+export const notificationsGotAnInvite = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/groups/invites`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            gotAnInvite: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsGotAnInvite({
+          gotAnInvite: notificationData.gotAnInvite,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF NEW MEMBER JOINED
+// ********************************************************
+export const notificationsNewMember = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/groups/newmember`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            newMember: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsNewMember({
+          newMember: notificationData.newMember,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF PETITIONS
+// ********************************************************
+export const notificationsPetitionToJoin = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/groups/petitiontojoin`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            petitionToJoin: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsPetitionToJoin({
+          petitionToJoin: notificationData.petitionToJoin,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF NEW RECORD
+// ********************************************************
+export const notificationsNewRecordAchieved = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/groups/newrecord`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            newRecordAchieved: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsNewRecordAchieved({
+          newRecordAchieved: notificationData.newRecordAchieved,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF PUBLIC ANNOUNCES
+// ********************************************************
+export const notificationsPublicAnnounces = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/general/publicannounces`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            publicAnnounces: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsPublicAnnounces({
+          publicAnnounces: notificationData.publicAnnounces,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to NOTIFICATONS ON/OFF PUBLIC ANNOUNCES
+// ********************************************************
+export const notificationsAppUpdates = notification => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Hide function
+    // ********************************************************
+    const switchNotification = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/users/${userId}/settings/notifications/general/appupdates`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            appUpdates: notification,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    try {
+      const notificationData = await switchNotification();
+      dispatch(
+        meActions.notificationsAppUpdates({
+          appUpdates: notificationData.appUpdates,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

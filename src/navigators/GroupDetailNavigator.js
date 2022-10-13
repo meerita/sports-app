@@ -192,6 +192,7 @@ export const screenOptions = navData => {
   return {
     headerTitle: title,
     headerShadowVisible: false,
+    headerBackTitle: null,
     headerRight: color => {
       return (
         <IconButton

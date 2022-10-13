@@ -152,5 +152,6 @@ export default function GroupSettingsMembershipScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.membership'),
+    presentation: 'modal',
   };
 };

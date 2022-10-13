@@ -79,7 +79,7 @@ export default StyleSheet.create({
   listSingleCointainer: {
     minHeight: 48,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    // paddingVertical: 12,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -137,6 +137,9 @@ export default StyleSheet.create({
   },
   listSwitchView: {
     flexGrow: 0,
+    // borderWidth: 1,
+    // borderColor: '#ff0000',
+    // alignContent: 'flex-end',
   },
   listActionView: {
     flexGrow: 0,

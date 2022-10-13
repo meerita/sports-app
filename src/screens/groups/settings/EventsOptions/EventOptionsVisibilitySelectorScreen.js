@@ -64,5 +64,6 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.visibility'),
+    presentation: 'modal',
   };
 };

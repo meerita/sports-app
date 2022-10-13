@@ -15,6 +15,7 @@ import {
   updateGroupVisibilityVisibility,
 } from '../../../store/actions/group';
 import { useState } from 'react';
+import SwitchControl from '../../../components/SwitchControl/SwitchControl';
 
 export default function GroupSettingsPrivacyScreen(props) {
   const privacy = useSelector(
@@ -57,22 +58,13 @@ export default function GroupSettingsPrivacyScreen(props) {
         title={t('groups:settings.privacy.private')}
         subtitle={t('groups:settings.privacy.privateDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
-          value={privateGroup}
-          onChange={tooglePrivateGroup}
-        />
+        <SwitchControl value={privateGroup} onChange={tooglePrivateGroup} />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
         title={t('groups:settings.privacy.visibility')}
         subtitle={t('groups:settings.privacy.visibilityDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={groupVisibility}
           onChange={toogleInvisibleGroup}
         />
@@ -85,5 +77,6 @@ export default function GroupSettingsPrivacyScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.privacy.privacy'),
+    presentation: 'modal',
   };
 };

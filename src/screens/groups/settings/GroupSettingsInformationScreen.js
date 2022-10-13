@@ -41,5 +41,6 @@ export default function GroupSettingsInformationScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.information.information'),
+    presentation: 'modal',
   };
 };

@@ -90,5 +90,6 @@ export default function GroupSettingsEventsScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.events'),
+    presentation: 'modal',
   };
 };

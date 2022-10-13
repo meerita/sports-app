@@ -76,5 +76,6 @@ export default function EventOptionsParticipationSelectorScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.participation'),
+    presentation: 'modal',
   };
 };

@@ -70,5 +70,6 @@ export default function EventOptionsCreationSelectorScreen(props) {
 export const screenOptions = navData => {
   return {
     headerTitle: t('groups:settings.events.creation'),
+    presentation: 'modal',
   };
 };

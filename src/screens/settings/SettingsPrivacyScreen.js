@@ -1,14 +1,13 @@
 /** @format */
 
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { t } from '../../services/i18n';
-import { ScrollView, Switch, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import React from 'react';
+import React, { useState } from 'react';
+import { useToast } from 'react-native-toast-notifications';
 
 // CONSTANTS
 import Styles from '../../constants/Styles';
-import Colors from '../../constants/Colors';
 
 // COMPONENTS
 import SubHeader from '../../components/SubHeader/SubHeader';
@@ -17,9 +16,9 @@ import TwoLineItemWithIconAction from '../../components/Lists/TwoLines/TwoLineIt
 import Spacer from '../../components/Spacer/Spacer';
 import BodyTwo from '../../components/type/BodyTwo';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
-import { useToast } from 'react-native-toast-notifications';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import SwitchControl from '../../components/SwitchControl/SwitchControl';
+
+// STORE
 import {
   allowAnalyticsCookies,
   allowMarketingCookies,
@@ -30,8 +29,7 @@ import {
 } from '../../store/actions/me';
 
 export default function SettingsPrivacyScreen(props) {
-  const darkMode = useSelector(state => state.theme.darkMode);
-
+  // We must find if the current user is a PRO member
   const isSubscriber = useSelector(state => state.me.myData.isSubscriber);
 
   const cookies = useSelector(
@@ -162,10 +160,7 @@ export default function SettingsPrivacyScreen(props) {
         title={t('settings:privacy.proOptions.invisible')}
         subtitle={t('settings:privacy.proOptions.invisibleDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={invisibility}
           onChange={isSubscriber ? toogleInvisibility : toogleProNavigation}
         />
@@ -174,10 +169,7 @@ export default function SettingsPrivacyScreen(props) {
         title={t('settings:privacy.proOptions.hideActivity')}
         subtitle={t('settings:privacy.proOptions.hideActivityDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={hideActivity}
           onChange={isSubscriber ? toogleHideActivity : toogleProNavigation}
         />
@@ -187,10 +179,7 @@ export default function SettingsPrivacyScreen(props) {
         title={t('settings:privacy.generalOptions.hideSearch')}
         subtitle={t('settings:privacy.generalOptions.hideSearchDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={hideMyselfFromSearch}
           onChange={toogleHideSearchs}
         />
@@ -199,13 +188,7 @@ export default function SettingsPrivacyScreen(props) {
         title={t('settings:privacy.generalOptions.groupless')}
         subtitle={t('settings:privacy.generalOptions.grouplessDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
-          value={hideMyGroups}
-          onChange={toogleHideMyGroups}
-        />
+        <SwitchControl value={hideMyGroups} onChange={toogleHideMyGroups} />
       </TwoLineItemWithSwitch>
       <SubHeader title={t('settings:privacy.cookies.cookies')} />
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
@@ -222,10 +205,7 @@ export default function SettingsPrivacyScreen(props) {
         subtitle={t('settings:privacy.cookies.analyticsCookiesDesc')}
         onPress={() => toogleAnalyticsCookies()}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={analyticsCookies}
           onChange={toogleAnalyticsCookies}
         />
@@ -235,10 +215,7 @@ export default function SettingsPrivacyScreen(props) {
         subtitle={t('settings:privacy.cookies.marketingCookiesDesc')}
         onPress={() => toogleMarketingCookies()}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
+        <SwitchControl
           value={marketingCookies}
           onChange={toogleMarketingCookies}
         />
