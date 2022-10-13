@@ -86,6 +86,6 @@ export default function GroupSettingsScreen(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Group Settings',
+    headerTitle: t('groups:groupSettings'),
   };
 };

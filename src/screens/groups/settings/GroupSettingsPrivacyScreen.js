@@ -6,20 +6,51 @@ import { t } from '../../../services/i18n';
 import SubHeader from '../../../components/SubHeader/SubHeader';
 import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyTwo from '../../../components/type/BodyTwo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TwoLineItemWithSwitch from '../../../components/Lists/TwoLines/TwoLineItemWithSwitch';
 import Styles from '../../../constants/Styles';
+import { useToast } from 'react-native-toast-notifications';
+import {
+  updateGroupVisibilityPrivate,
+  updateGroupVisibilityVisibility,
+} from '../../../store/actions/group';
+import { useState } from 'react';
 
 export default function GroupSettingsPrivacyScreen(props) {
   const privacy = useSelector(
-    state => state.group.groupDetail.preferences.group
+    state => state.group.groupDetail.preferences.group.visibility
   );
-  const groupPrivacy = privacy.visibility.private;
-  const groupVisibility = privacy.visibility.visibility;
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
+
+  const [privateGroup, setPrivateGroup] = useState(privacy.private);
+  const [groupVisibility, setGroupVisibility] = useState(privacy.visibility);
+
+  const tooglePrivateGroup = () => {
+    if (privateGroup === false) {
+      setPrivateGroup(true);
+      dispatch(updateGroupVisibilityPrivate(true));
+    } else {
+      setPrivateGroup(false);
+      dispatch(updateGroupVisibilityPrivate(false));
+    }
+  };
+
+  const toogleInvisibleGroup = () => {
+    if (groupVisibility === false) {
+      setGroupVisibility(true);
+      dispatch(updateGroupVisibilityVisibility(true));
+    } else {
+      setGroupVisibility(false);
+      dispatch(updateGroupVisibilityVisibility(false));
+    }
+  };
 
   return (
     <ScrollViewLayout>
-      <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
+      <BodyTwo style={{ padding: 16 }}>
         Aquí puedes controlar todos los ajustes de privacidad del grupo.
       </BodyTwo>
       <TwoLineItemWithSwitch
@@ -30,10 +61,8 @@ export default function GroupSettingsPrivacyScreen(props) {
           thumbColor={props.thumbColor}
           trackColor={props.trackColor}
           style={Styles.switchControl}
-          value={groupPrivacy}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // onValueChange={toogleVisibility}
+          value={privateGroup}
+          onChange={tooglePrivateGroup}
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
@@ -45,9 +74,7 @@ export default function GroupSettingsPrivacyScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={groupVisibility}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // onValueChange={toogleVisibility}
+          onChange={toogleInvisibleGroup}
         />
       </TwoLineItemWithSwitch>
     </ScrollViewLayout>

@@ -600,3 +600,107 @@ export const updateMembershipMembersOnly = membersOnly => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the GROUP PRIVATE ONLY
+// ********************************************************
+
+export const updateGroupVisibilityPrivate = privateGroup => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const privateGroupToReplace = privateGroup;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updatePrivateGroup = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/visibility/private`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            private: privateGroupToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const privateGroupData = await updatePrivateGroup();
+      dispatch(
+        groupActions.updatePrivateGroup({
+          private: privateGroupData.private,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the GROUP PRIVATE ONLY
+// ********************************************************
+
+export const updateGroupVisibilityVisibility = groupVisibility => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const visibilityGroupToReplace = groupVisibility;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateGroupVisibility = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/visibility/visibility`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            visibility: visibilityGroupToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const visibilityGroupData = await updateGroupVisibility();
+      dispatch(
+        groupActions.updateGroupVisibility({
+          visibility: visibilityGroupData.visibility,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

@@ -156,7 +156,6 @@
       "manyMembers_other": "{{count}} miembros"
     },
     "example": "Example",
-    "options": "Opciones del grupo",
     "joinGroup": "Ingresa a {{group}}",
     "groupSettings": "Ajustes del grupo",
     "pendingInvitations": "Invitaciones",

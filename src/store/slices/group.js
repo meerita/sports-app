@@ -61,6 +61,14 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.group.membership.membersOnly =
         action.payload.membersOnly;
     },
+    updateVisibilityPrivate(state, action) {
+      state.groupDetail.preferences.group.visibility.private =
+        action.payload.private;
+    },
+    updateGroupVisibility(state, action) {
+      state.groupDetail.preferences.group.visibility.visibility =
+        action.payload.visibility;
+    },
   },
 });
 
