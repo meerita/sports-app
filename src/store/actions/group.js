@@ -339,3 +339,56 @@ export const updateEventParticipation = participation => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the CREATION OF EVENTS OF THE GROUP
+// ********************************************************
+
+export const updateEventCreation = creation => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const creationToReplace = creation;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateCreation = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/events/creation`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            creation: creationToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const creationData = await updateCreation();
+
+      dispatch(
+        groupActions.updateCreation({
+          creation: creationData.creation,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

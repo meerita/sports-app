@@ -42,6 +42,9 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.events.participation =
         action.payload.participation;
     },
+    updateCreation(state, action) {
+      state.groupDetail.preferences.events.creation = action.payload.creation;
+    },
   },
 });
 

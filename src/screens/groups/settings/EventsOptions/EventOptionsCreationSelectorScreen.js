@@ -6,21 +6,27 @@ import { t } from '../../../../services/i18n';
 import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BodyTwo from '../../../../components/type/BodyTwo';
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import { useToast } from 'react-native-toast-notifications';
+import { updateEventCreation } from '../../../../store/actions/group';
 
 export default function EventOptionsCreationSelectorScreen(props) {
   // groupDetails
-  const eventPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events
+  const creationPreferences = useSelector(
+    state => state.group.groupDetail.preferences.events.creation
   );
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // what radiobutton is checked first
   const [selected, setSelected] = useState(
-    eventPreferences.creation === 'any-member'
+    creationPreferences === 'any-member'
       ? 0
-      : eventPreferences.creation === 'only-members'
+      : creationPreferences === 'only-members'
       ? 1
       : 2
   );
@@ -43,16 +49,14 @@ export default function EventOptionsCreationSelectorScreen(props) {
 
   return (
     <ScrollViewLayout>
-      <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
+      <BodyTwo style={{ padding: 16 }}>
         {t('groups:settings.events.creationDesc')}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(updateEventCreation(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
