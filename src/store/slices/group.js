@@ -45,6 +45,22 @@ export const groupSlice = createSlice({
     updateCreation(state, action) {
       state.groupDetail.preferences.events.creation = action.payload.creation;
     },
+    updateDiversity(state, action) {
+      state.groupDetail.preferences.group.membership.diversity =
+        action.payload.diversity;
+    },
+    updateRegistration(state, action) {
+      state.groupDetail.preferences.group.membership.noRegistration =
+        action.payload.noRegistration;
+    },
+    updateFreeToJoin(state, action) {
+      state.groupDetail.preferences.group.membership.freeToJoin =
+        action.payload.freeToJoin;
+    },
+    updateMembersOnly(state, action) {
+      state.groupDetail.preferences.group.membership.membersOnly =
+        action.payload.membersOnly;
+    },
   },
 });
 

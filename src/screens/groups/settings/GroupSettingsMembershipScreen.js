@@ -1,26 +1,33 @@
 /** @format */
 
 import { View, Text, Switch } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { t } from '../../../services/i18n';
 import SubHeader from '../../../components/SubHeader/SubHeader';
 import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyTwo from '../../../components/type/BodyTwo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TwoLineItemWithSwitch from '../../../components/Lists/TwoLines/TwoLineItemWithSwitch';
 import Styles from '../../../constants/Styles';
 import SingleLineWithRadio from '../../../components/Lists/OneLine/SingleLineWithRadio';
 
-import { useState } from 'react';
-import Toast from 'react-native-toast-notifications';
+import { useToast } from 'react-native-toast-notifications';
+import {
+  updateGroupDiversity,
+  updateMembershipFreeToJoin,
+  updateMembershipMembersOnly,
+  updateMembershipNoRegistration,
+} from '../../../store/actions/group';
+import { groupActions } from '../../../store/slices/group';
 
 export default function GroupSettingsMembershipScreen(props) {
   const membership = useSelector(
     state => state.group.groupDetail.preferences.group.membership
   );
-  const noRegistration = membership.noRegistration;
-  const freeToJoin = membership.freeToJoin;
-  const membersOnly = membership.membersOnly;
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   const OPTIONS = [
     {
@@ -48,11 +55,45 @@ export default function GroupSettingsMembershipScreen(props) {
       ? 1
       : 2;
 
+  const [noRegistration, setNoRegistration] = useState(
+    membership.noRegistration
+  );
+
+  const [freeToJoin, setFreeToJoin] = useState(membership.freeToJoin);
+  const [membersOnly, setMembersOnly] = useState(membership.membersOnly);
+
+  const toogleNoRegistration = () => {
+    if (noRegistration === false) {
+      setNoRegistration(true);
+      dispatch(updateMembershipNoRegistration(true));
+    } else {
+      setNoRegistration(false);
+      dispatch(updateMembershipNoRegistration(false));
+    }
+  };
+
+  const toogleFreeToJoin = () => {
+    if (noRegistration === false) {
+      setFreeToJoin(true);
+      dispatch(updateMembershipFreeToJoin(true));
+    } else {
+      setFreeToJoin(false);
+      dispatch(updateMembershipFreeToJoin(false));
+    }
+  };
+
+  const toogleMembersOnly = () => {
+    if (noRegistration === false) {
+      setMembersOnly(true);
+      dispatch(updateMembershipMembersOnly(true));
+    } else {
+      setMembersOnly(false);
+      dispatch(updateMembershipMembersOnly(false));
+    }
+  };
+
   return (
-    <ScrollViewLayout>
-      <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
-        Aquí puedes controlar todos los ajustes de membrecía del grupo.
-      </BodyTwo>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <TwoLineItemWithSwitch
         title={t('groups:settings.privacy.noRegister')}
         subtitle={t('groups:settings.privacy.noRegisterDesc')}
@@ -62,9 +103,7 @@ export default function GroupSettingsMembershipScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={noRegistration}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // onValueChange={toogleVisibility}
+          onChange={toogleNoRegistration}
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
@@ -76,9 +115,7 @@ export default function GroupSettingsMembershipScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={freeToJoin}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // onValueChange={toogleVisibility}
+          onChange={toogleFreeToJoin}
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
@@ -90,9 +127,7 @@ export default function GroupSettingsMembershipScreen(props) {
           trackColor={props.trackColor}
           style={Styles.switchControl}
           value={membersOnly}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // onValueChange={toogleVisibility}
+          onChange={toogleMembersOnly}
         />
       </TwoLineItemWithSwitch>
       <SubHeader title='Sexo de los miembros' />
@@ -103,11 +138,9 @@ export default function GroupSettingsMembershipScreen(props) {
         options={OPTIONS}
         selected={currentGender}
         onChangeSelect={(option, index) => (
-          // dispatch(
-          //   meActions.changeGender(auth.userId, auth.token, option.value)
-          // ),
+          dispatch(updateGroupDiversity(option.value)),
           setSelected(index),
-          Toast.show(t('common:infoUpdated')),
+          toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
         )}
       />

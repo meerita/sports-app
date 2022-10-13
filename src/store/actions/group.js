@@ -392,3 +392,211 @@ export const updateEventCreation = creation => {
     }
   };
 };
+
+// ********************************************************
+// Function to change the DIVERSITY OF THE GROUP
+// ********************************************************
+
+export const updateGroupDiversity = diversity => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const diversityToReplace = diversity;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateDiversity = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/diversity`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            diversity: diversityToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const diversityData = await updateDiversity();
+      dispatch(
+        groupActions.updateDiversity({
+          diversity: diversityData.diversity,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the NO REGISTRATION SETTINGS OF THE GROUP
+// ********************************************************
+
+export const updateMembershipNoRegistration = noRegistration => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const noRegistrationToReplace = noRegistration;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateNoRegistration = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/noRegistration`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            noRegistration: noRegistrationToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const noRegistrationData = await updateNoRegistration();
+      dispatch(
+        groupActions.updateRegistration({
+          noRegistration: noRegistrationData.noRegistration,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the FREE TO JOIN OF THE GROUP
+// ********************************************************
+
+export const updateMembershipFreeToJoin = freeToJoin => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const freeToJoinToReplace = freeToJoin;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateFreeToJoin = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/freetojoin`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            freeToJoin: freeToJoinToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const freeToJoinData = await updateFreeToJoin();
+      dispatch(
+        groupActions.updateFreeToJoin({
+          freeToJoin: freeToJoinData.freeToJoin,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to change the MEMBERS ONLY
+// ********************************************************
+
+export const updateMembershipMembersOnly = membersOnly => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const membersOnlyToReplace = membersOnly;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateMembersOnly = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/membersonly`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            membersOnly: membersOnlyToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const membersOnlyData = await updateMembersOnly();
+      dispatch(
+        groupActions.updateMembersOnly({
+          membersOnly: membersOnlyData.membersOnly,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
