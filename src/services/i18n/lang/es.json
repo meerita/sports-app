@@ -191,8 +191,9 @@
           }
         },
         "participation": "Participación",
+        "participationDesc": "Aquí puedes elegir quiénes pueden participar por defecto en los eventos que se creen en tu grupo.",
         "visibility": "Visibilidad de los eventos",
-        "visibilityDesc": "Cuando un visitante que no es miembros visita tu grupo podría ver los eventos creados por tu grupo o no.",
+        "visibilityDesc": "Elije si quieres que un visitante que no es miembro de tu grupo pueda ver los eventos que se crean en tu grupo.",
         "skill": "Nivel de habilidad",
         "meetingPoint": "Punto de encuentro",
         "replacements": "Reemplazos",

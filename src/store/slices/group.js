@@ -38,6 +38,10 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.events.visibility =
         action.payload.visibility;
     },
+    updateParticipation(state, action) {
+      state.groupDetail.preferences.events.participation =
+        action.payload.participation;
+    },
   },
 });
 

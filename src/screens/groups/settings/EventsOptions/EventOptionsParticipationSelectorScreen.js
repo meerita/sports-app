@@ -6,22 +6,29 @@ import { t } from '../../../../services/i18n';
 import Colors from '../../../../constants/Colors';
 import SingleLineWithRadio from '../../../../components/Lists/OneLine/SingleLineWithRadio';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import { useToast } from 'react-native-toast-notifications';
+import BodyTwo from '../../../../components/type/BodyTwo';
+import { updateEventParticipation } from '../../../../store/actions/group';
 
 export default function EventOptionsParticipationSelectorScreen(props) {
   // groupDetails
-  const eventPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events
+  const participationPreferences = useSelector(
+    state => state.group.groupDetail.preferences.events.participation
   );
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // what radiobutton is checked first
   const [selected, setSelected] = useState(
-    eventPreferences.participation === 'any-member'
+    participationPreferences === 'any-member'
       ? 0
-      : eventPreferences.participation === 'only-members'
+      : participationPreferences === 'only-members'
       ? 1
-      : eventPreferences.participation === 'only-admins'
+      : participationPreferences === 'only-admins'
       ? 2
       : 3
   );
@@ -48,13 +55,14 @@ export default function EventOptionsParticipationSelectorScreen(props) {
 
   return (
     <ScrollViewLayout>
+      <BodyTwo style={{ padding: 16 }}>
+        {t('groups:settings.events.participationDesc')}
+      </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(
-            meActions.changeWeightSystem(auth.userId, auth.token, option.value)
-          ),
+          dispatch(updateEventParticipation(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
