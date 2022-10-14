@@ -155,6 +155,7 @@
       "manyMembers_one": "{{count}} miembro",
       "manyMembers_other": "{{count}} miembros"
     },
+    "founded": "Fundación",
     "example": "Example",
     "joinGroup": "Ingresa a {{group}}",
     "groupSettings": "Ajustes del grupo",

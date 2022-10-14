@@ -1,24 +1,25 @@
 /** @format */
 
-import { View, Text, Switch } from 'react-native';
-import React, { useState } from 'react';
 import { t } from '../../../services/i18n';
-import SubHeader from '../../../components/SubHeader/SubHeader';
-import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
-import BodyTwo from '../../../components/type/BodyTwo';
 import { useDispatch, useSelector } from 'react-redux';
-import TwoLineItemWithSwitch from '../../../components/Lists/TwoLines/TwoLineItemWithSwitch';
-import Styles from '../../../constants/Styles';
-import SingleLineWithRadio from '../../../components/Lists/OneLine/SingleLineWithRadio';
-
 import { useToast } from 'react-native-toast-notifications';
+import React, { useState } from 'react';
+
+// COMPONENTS
+import BodyTwo from '../../../components/type/BodyTwo';
+import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import SingleLineWithRadio from '../../../components/Lists/OneLine/SingleLineWithRadio';
+import SubHeader from '../../../components/SubHeader/SubHeader';
+import SwitchControl from '../../../components/SwitchControl/SwitchControl';
+import TwoLineItemWithSwitch from '../../../components/Lists/TwoLines/TwoLineItemWithSwitch';
+
+// STORE
 import {
   updateGroupDiversity,
   updateMembershipFreeToJoin,
   updateMembershipMembersOnly,
   updateMembershipNoRegistration,
 } from '../../../store/actions/group';
-import { groupActions } from '../../../store/slices/group';
 
 export default function GroupSettingsMembershipScreen(props) {
   const membership = useSelector(
@@ -98,37 +99,19 @@ export default function GroupSettingsMembershipScreen(props) {
         title={t('groups:settings.privacy.noRegister')}
         subtitle={t('groups:settings.privacy.noRegisterDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
-          value={noRegistration}
-          onChange={toogleNoRegistration}
-        />
+        <SwitchControl value={noRegistration} onChange={toogleNoRegistration} />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
         title={t('groups:settings.privacy.freeJoin')}
         subtitle={t('groups:settings.privacy.freeJoinDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
-          value={freeToJoin}
-          onChange={toogleFreeToJoin}
-        />
+        <SwitchControl value={freeToJoin} onChange={toogleFreeToJoin} />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
         title={t('groups:settings.privacy.membersOnly')}
         subtitle={t('groups:settings.privacy.membersOnlyDesc')}
       >
-        <Switch
-          thumbColor={props.thumbColor}
-          trackColor={props.trackColor}
-          style={Styles.switchControl}
-          value={membersOnly}
-          onChange={toogleMembersOnly}
-        />
+        <SwitchControl value={membersOnly} onChange={toogleMembersOnly} />
       </TwoLineItemWithSwitch>
       <SubHeader title='Sexo de los miembros' />
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>

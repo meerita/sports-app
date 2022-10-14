@@ -10,6 +10,7 @@ import Colors from '../../constants/Colors';
 import BodyOne from '../../components/type/BodyOne';
 import SubHeader from '../../components/SubHeader/SubHeader';
 import SingleLineWithCaption from '../../components/Lists/OneLine/SingleLineWithCaption';
+import moment from 'moment';
 
 export default function GroupInfoScreen(props) {
   // darkMode
@@ -18,8 +19,7 @@ export default function GroupInfoScreen(props) {
   const group = useSelector(state => state.group.groupDetail);
 
   // how many members this community has?
-  const memberCount =
-    group.members.length + group.admins.length + group.noobs.length;
+  const memberCount = group.members.length + group.noobs.length;
 
   return (
     <ScrollView
@@ -41,33 +41,30 @@ export default function GroupInfoScreen(props) {
         <BodyOne style={{ padding: 16 }}>{group.description}</BodyOne>
       )}
       <SubHeader title='Info' />
-      <SingleLineWithCaption title='Location' caption={`Barcelona, España`} />
       <SingleLineWithCaption
-        title='Miembros'
-        caption={
-          memberCount > 1
-            ? t('groups:manyMembers_other', { count: memberCount })
-            : t('groups:manyMembers_one', {
-                count: memberCount,
-              })
-        }
+        title={t('common:localization')}
+        caption={`Barcelona, España`}
       />
       <SingleLineWithCaption
-        title='Group Policy'
+        title={t('groups:founded')}
+        caption={moment(group.createdAt).startOf('day').fromNow()}
+      />
+      <SingleLineWithCaption
+        title={t('groups:settings.privacy.membership')}
         caption={
           group.preferences.group.membership.noRegistration
-            ? 'Registration needed'
-            : 'No registration'
+            ? t('groups:settings.privacy.freeJoin')
+            : t('groups:settings.privacy.noRegister')
         }
       />
       <SingleLineWithCaption
-        title='Diversity'
+        title={t('groups:settings.privacy.diversity')}
         caption={
           group.preferences.group.membership.diversity === 'male'
-            ? 'Sólo hombres'
+            ? t('groups:settings.gender.male')
             : group.preferences.group.membership.diversity === 'female'
-            ? 'Sólo mujeres'
-            : 'Hombres y mujeres'
+            ? t('groups:settings.gender.female')
+            : t('groups:settings.gender.mixed')
         }
       />
     </ScrollView>
