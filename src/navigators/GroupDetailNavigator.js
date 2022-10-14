@@ -50,10 +50,12 @@ export default function GroupDetailNavigator(props) {
       dispatch(fetchCurrentGroup(groupId));
     } catch (error) {
       console.log(error);
+      props.navigation.popToTop();
     }
   }, [groupId]);
 
   const groupMembers = useSelector(state => state.group.groupDetail.members);
+  // const groupMembers = ['623b5d3d7e4216025e7210fd'];
 
   // We need to know if the visitor is a member of the group
   const isItMyGroup = groupMembers.find(member => member._id === me._id)
@@ -163,25 +165,20 @@ export default function GroupDetailNavigator(props) {
         component={GroupInfoScreen}
         options={GroupInfoScreenOptions}
       />
-      {currentGroup.preferences.events.visibility !== 'only-my-group' ? (
-        false
-      ) : (
-        <Tabs.Screen
-          name='Events'
-          component={GroupEventsScreen}
-          options={GroupEventsScreenOptions}
-        />
+      {!currentGroup.preferences.group.visibility.private && (
+        <>
+          <Tabs.Screen
+            name='Events'
+            component={GroupEventsScreen}
+            options={GroupEventsScreenOptions}
+          />
+          <Tabs.Screen
+            name='Members'
+            component={GroupMembersScreen}
+            options={GroupMembersScreenOptions}
+          />
+        </>
       )}
-      <Tabs.Screen
-        name='Test'
-        component={GroupTestScreen}
-        options={GroupTestScreenOptions}
-      />
-      {/* <Tabs.Screen
-        name='Members'
-        component={GroupMembersScreen}
-        options={GroupMembersScreenOptions}
-      /> */}
     </Tabs.Navigator>
   );
 }

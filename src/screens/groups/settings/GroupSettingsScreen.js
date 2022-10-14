@@ -2,7 +2,7 @@
 
 import { View, Text } from 'react-native';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../../../services/i18n';
 
 // COMPONENTS
@@ -10,21 +10,102 @@ import SingleLineWithCaption from '../../../components/Lists/OneLine/SingleLineW
 import SingleLineWithIcon from '../../../components/Lists/OneLine/SingleLineWithIcon';
 import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import TwoLineWithIcon from '../../../components/Lists/TwoLines/TwoLineWithIcon';
+import SubtitleOne from '../../../components/type/SubtitleOne';
+
+// STORE
+import { makeAPetitionToJoin } from '../../../store/actions/group';
+import { useToast } from 'react-native-toast-notifications';
 
 export default function GroupSettingsScreen(props) {
   // myData
   const me = useSelector(state => state.me.myData);
+
+  const toast = useToast();
+
+  const dispatch = useDispatch();
 
   // Constant to get all the details of the current group
   const currentGroup = useSelector(state => state.group.groupDetail);
 
   // the List of the admins of this group
   const groupAdmins = currentGroup.admins;
+  // the list of members
+  const groupMembers = currentGroup.members;
+
+  // the invitation list of users
+  const invitationList = currentGroup.invitations;
+
+  // we need to know if this group allows registration
+  const noRegistration =
+    currentGroup.preferences.group.membership.noRegistration;
 
   // We need to know if the visitor is a member of the group
   const amIAnAdmin = groupAdmins.find(member => member._id === me._id)
     ? true
     : false;
+
+  // We need to know if the visitor is a member of the group
+  const isItMyGroup = groupMembers.find(member => member._id === me._id)
+    ? true
+    : false;
+
+  const alreadyPetitionedAccess = invitationList.find(
+    member => member._id === me._id
+  )
+    ? true
+    : false;
+
+  const sendPetitionToJoin = () => {
+    try {
+      dispatch(makeAPetitionToJoin(currentGroup._id));
+      // console.log(currentGroup._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!isItMyGroup && noRegistration) {
+    return (
+      <ScrollViewLayout style={{ padding: 16 }}>
+        <SubtitleOne>{t('groups:settings.privacy.noRegisterDesc')}</SubtitleOne>
+      </ScrollViewLayout>
+    );
+  }
+
+  if (!isItMyGroup) {
+    return (
+      <>
+        {currentGroup.preferences.group.membership.freeToJoin ? (
+          <ScrollViewLayout style={{ paddingVertical: 16 }}>
+            <TwoLineWithIcon
+              icon={require('../../../assets/images/icons/login.png')}
+              title={t('groups:joinGroup', { group: currentGroup.title })}
+              subtitle={t('groups:joinGroupDesc')}
+              onPress={() => {
+                props.navigation.navigate('GroupSettingsInformationScreen');
+              }}
+            />
+          </ScrollViewLayout>
+        ) : alreadyPetitionedAccess === false ? (
+          <ScrollViewLayout style={{ paddingVertical: 16 }}>
+            <TwoLineWithIcon
+              icon={require('../../../assets/images/icons/suspense.png')}
+              title={t('groups:petitionToJoin')}
+              subtitle={t('groups:petitionToJoinDesc')}
+              onPress={() => sendPetitionToJoin()}
+            />
+          </ScrollViewLayout>
+        ) : (
+          <ScrollViewLayout style={{ padding: 16 }}>
+            <SubtitleOne>
+              You already have made a petition to enter this group. Just wait
+              the admins approve your registration.
+            </SubtitleOne>
+          </ScrollViewLayout>
+        )}
+      </>
+    );
+  }
 
   return (
     <ScrollViewLayout style={{ paddingVertical: 16 }}>

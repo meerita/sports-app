@@ -27,12 +27,14 @@ export default function MyGroupsScreen(props) {
   const me = useSelector(state => state.me.myData);
   const myGroups = useSelector(state => state.me.myGroups);
   const isAuth = useSelector(state => state.auth);
-  const firstGroup = myGroups[0]._id;
+  const firstGroup = myGroups.length > 0 ? myGroups[0]._id : false;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCurrentGroup(firstGroup));
+    if (firstGroup) {
+      dispatch(fetchCurrentGroup(firstGroup));
+    }
   }, []);
 
   return (

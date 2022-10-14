@@ -30,7 +30,9 @@ export default function AppNavigator() {
   const maintenance = useSelector(state => state.general.maintenance);
 
   // const userId = '62385d8caee17d13a1762b39';
-  const userId = '6238a480170aff10d16ccd86';
+  const userId = '623b5d3d7e4216025e7210fd';
+  // const userId = '631a1d63644135c5f00dca63';
+  // const userId = '6238a480170aff10d16ccd86';
 
   const me = useSelector(state => state.me.myData);
 

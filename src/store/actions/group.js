@@ -29,6 +29,7 @@ export const fetchCurrentGroup = id => {
     try {
       // we will
       const groupData = await fetchGroup();
+      console.log(groupData);
       await dispatch(
         groupActions.fetchGroup({
           group: groupData.group,
@@ -699,6 +700,51 @@ export const updateGroupVisibilityVisibility = groupVisibility => {
           visibility: visibilityGroupData.visibility,
         })
       );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to MAKE A PETITION TO JOIN A GROUP
+// ********************************************************
+
+export const makeAPetitionToJoin = groupId => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Function to fetch the group in user
+    // ********************************************************
+    const makePetition = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/join/petition`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const petitionData = await makePetition();
+      dispatch(fetchCurrentGroup(groupId));
     } catch (error) {
       console.log(error);
     }

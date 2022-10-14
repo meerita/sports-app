@@ -19,8 +19,6 @@ export default function EventOptionsSkillsSelectorScreen(props) {
     state => state.group.groupDetail.preferences.events.skill
   );
 
-  console.log(eventSkillPreferences);
-
   const toast = useToast();
 
   const dispatch = useDispatch();

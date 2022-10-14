@@ -74,7 +74,7 @@ export default function GroupSettingsMembershipScreen(props) {
   };
 
   const toogleFreeToJoin = () => {
-    if (noRegistration === false) {
+    if (freeToJoin === false) {
       setFreeToJoin(true);
       dispatch(updateMembershipFreeToJoin(true));
     } else {
@@ -84,7 +84,7 @@ export default function GroupSettingsMembershipScreen(props) {
   };
 
   const toogleMembersOnly = () => {
-    if (noRegistration === false) {
+    if (membersOnly === false) {
       setMembersOnly(true);
       dispatch(updateMembershipMembersOnly(true));
     } else {
