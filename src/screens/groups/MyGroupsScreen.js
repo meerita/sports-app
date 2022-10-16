@@ -22,6 +22,7 @@ import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollVi
 // STORE
 import { fetchCurrentGroup } from '../../store/actions/group';
 import { fetchMyUser } from '../../store/actions/me';
+import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 
 export default function MyGroupsScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -36,6 +37,17 @@ export default function MyGroupsScreen(props) {
       dispatch(fetchCurrentGroup(firstGroup));
     }
   }, []);
+
+  console.log(myGroups);
+
+  if (myGroups.length === 0) {
+    return (
+      <View>
+        <Text>No hay grupos</Text>
+        <ButtonFilled>Crea un grupo</ButtonFilled>
+      </View>
+    );
+  }
 
   return (
     <ScrollViewLayout

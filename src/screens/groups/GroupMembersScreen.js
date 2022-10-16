@@ -59,16 +59,16 @@ export default function GroupMembersScreen(props) {
           No hay noobs, son todos basados en este grupo.
         </BodyTwo>
       ) : (
-        group.noobs.map(user => (
+        group.noobs.map(noob => (
           <TwoLineWithAvatar
-            key={user._id}
-            title={user.username}
-            subtitle={user.tag}
-            avatar={{ uri: user.avatar }}
+            key={noob._id}
+            title={noob.username}
+            subtitle={noob.tag}
+            avatar={{ uri: noob.avatar }}
             onPress={() =>
               props.navigation.navigate('UserDetailScreen', {
-                userId: user._id,
-                username: user.username,
+                userId: noob._id,
+                username: noob.username,
               })
             }
           />

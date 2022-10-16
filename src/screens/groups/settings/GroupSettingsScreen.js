@@ -13,7 +13,10 @@ import TwoLineWithIcon from '../../../components/Lists/TwoLines/TwoLineWithIcon'
 import SubtitleOne from '../../../components/type/SubtitleOne';
 
 // STORE
-import { makeAPetitionToJoin } from '../../../store/actions/group';
+import {
+  makeAPetitionToJoin,
+  registerMeAsANoob,
+} from '../../../store/actions/group';
 import { useToast } from 'react-native-toast-notifications';
 
 export default function GroupSettingsScreen(props) {
@@ -31,6 +34,7 @@ export default function GroupSettingsScreen(props) {
   const groupAdmins = currentGroup.admins;
   // the list of members
   const groupMembers = currentGroup.members;
+  const groupNoobs = currentGroup.noobs;
 
   // the invitation list of users
   const invitationList = currentGroup.invitations;
@@ -46,6 +50,8 @@ export default function GroupSettingsScreen(props) {
 
   // We need to know if the visitor is a member of the group
   const isItMyGroup = groupMembers.find(member => member._id === me._id)
+    ? true
+    : groupNoobs.find(member => member._id === me._id)
     ? true
     : false;
 
@@ -64,6 +70,24 @@ export default function GroupSettingsScreen(props) {
     }
   };
 
+  const registerThisUserAsANoob = () => {
+    try {
+      dispatch(registerMeAsANoob(currentGroup._id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const amIbanned = currentGroup.banned.includes(me._id);
+
+  if (amIbanned) {
+    return (
+      <View>
+        <Text>Estás banneado de este grupo</Text>
+      </View>
+    );
+  }
+
   if (!isItMyGroup && noRegistration) {
     return (
       <ScrollViewLayout style={{ padding: 16 }}>
@@ -81,9 +105,7 @@ export default function GroupSettingsScreen(props) {
               icon={require('../../../assets/images/icons/login.png')}
               title={t('groups:joinGroup', { group: currentGroup.title })}
               subtitle={t('groups:joinGroupDesc')}
-              onPress={() => {
-                props.navigation.navigate('GroupSettingsInformationScreen');
-              }}
+              onPress={() => registerThisUserAsANoob()}
             />
           </ScrollViewLayout>
         ) : alreadyPetitionedAccess === false ? (

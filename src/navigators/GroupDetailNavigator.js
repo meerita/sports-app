@@ -3,6 +3,8 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import { t } from '../services/i18n';
 
 // STORE & ACTIONS
 import { fetchCurrentGroup } from '../store/actions/group';
@@ -23,7 +25,7 @@ import GroupEventsScreen, {
 import GroupTestScreen, {
   screenOptions as GroupTestScreenOptions,
 } from '../screens/groups/GroupTestScreen';
-import { Text, View } from 'react-native';
+
 import ButtonFilled from '../components/Buttons/Filled/ButtonFilled';
 import SubtitleOne from '../components/type/SubtitleOne';
 import HeadlineFive from '../components/type/HeadlineFive';
@@ -55,10 +57,12 @@ export default function GroupDetailNavigator(props) {
   }, [groupId]);
 
   const groupMembers = useSelector(state => state.group.groupDetail.members);
-  // const groupMembers = ['623b5d3d7e4216025e7210fd'];
+  const groupNoobs = useSelector(state => state.group.groupDetail.noobs);
 
   // We need to know if the visitor is a member of the group
   const isItMyGroup = groupMembers.find(member => member._id === me._id)
+    ? true
+    : groupNoobs.find(member => member._id === me._id)
     ? true
     : false;
 
@@ -94,6 +98,16 @@ export default function GroupDetailNavigator(props) {
       : currentVisitorGender === groupDiversity
       ? true
       : false;
+
+  const amIbanned = currentGroup.banned.includes(me._id);
+
+  if (amIbanned) {
+    return (
+      <View>
+        <Text>Estás banneado de este grupo</Text>
+      </View>
+    );
+  }
 
   // if the current visitor is NOT a member of this group we simply
   // check if the group visibility is FALSE, because if it false, we cannot
@@ -140,17 +154,17 @@ export default function GroupDetailNavigator(props) {
     return (
       <Tabs.Navigator screenOptions={tabOptions}>
         <Tabs.Screen
-          name='Events'
+          name={t('groups:settings.events.events')}
           component={GroupEventsScreen}
           options={GroupEventsScreenOptions}
         />
         <Tabs.Screen
-          name='Members'
+          name={t('groups:settings.members')}
           component={GroupMembersScreen}
           options={GroupMembersScreenOptions}
         />
         <Tabs.Screen
-          name='Info'
+          name={t('groups:settings.information.information')}
           component={GroupInfoScreen}
           options={GroupInfoScreenOptions}
         />
@@ -161,19 +175,20 @@ export default function GroupDetailNavigator(props) {
   return (
     <Tabs.Navigator screenOptions={tabOptions}>
       <Tabs.Screen
-        name='Info'
+        name={t('groups:settings.information.information')}
         component={GroupInfoScreen}
         options={GroupInfoScreenOptions}
       />
+
       {!currentGroup.preferences.group.visibility.private && (
         <>
           <Tabs.Screen
-            name='Events'
+            name={t('groups:settings.events.events')}
             component={GroupEventsScreen}
             options={GroupEventsScreenOptions}
           />
           <Tabs.Screen
-            name='Members'
+            name={t('groups:settings.members')}
             component={GroupMembersScreen}
             options={GroupMembersScreenOptions}
           />
