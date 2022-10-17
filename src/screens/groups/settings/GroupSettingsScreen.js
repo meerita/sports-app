@@ -146,7 +146,7 @@ export default function GroupSettingsScreen(props) {
             title={t('groups:settings.members')}
             subtitle={t('groups:settings.membersDesc')}
             onPress={() => {
-              props.navigation.navigate('SettingsProfileScreen');
+              props.navigation.navigate('GroupMemberShipScreen');
             }}
           />
           <TwoLineWithIcon

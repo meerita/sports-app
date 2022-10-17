@@ -18,6 +18,7 @@ import LoadingScreen from './src/screens/LoadingScreen';
 // SERVICES
 import i18n from './src/services/i18n';
 import { useState } from 'react';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 export default function App() {
   // loading fonts
@@ -59,9 +60,11 @@ export default function App() {
           textStyle={{ fontFamily: 'Barlow-SemiBold', fontSize: 16 }}
           offsetBottom={20}
         >
-          <NavigationContainer>
-            <AppNavigator />
-          </NavigationContainer>
+          <ActionSheetProvider>
+            <NavigationContainer>
+              <AppNavigator />
+            </NavigationContainer>
+          </ActionSheetProvider>
         </ToastProvider>
       </Provider>
     );

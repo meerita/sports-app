@@ -27,7 +27,11 @@ const TwoLineWithAvatar = props => {
     ListItem = TouchableNativeFeedback;
   }
   return (
-    <ListItem onPress={props.onPress}>
+    <ListItem
+      onPress={props.onPress}
+      onLongPress={props.onLongPress}
+      delayLongPress={1000}
+    >
       <View style={styles.container}>
         <View style={styles.avatarContainer}>
           <Image style={styles.avatar} source={props.avatar} />

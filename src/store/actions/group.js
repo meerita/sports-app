@@ -1,5 +1,6 @@
 /** @format */
 import { groupActions } from '../slices/group';
+import { fetchMyUser } from '../actions/me';
 
 const API_URL = 'http://192.168.1.48:8000';
 
@@ -789,6 +790,341 @@ export const registerMeAsANoob = groupId => {
       // we will
       const petitionData = await makePetition();
       dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to demote an admin to member
+// ********************************************************
+
+export const demoteAdminToMember = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/admin/demote`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+            adminId: adminId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not demote admin');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to demote a member to noob
+// ********************************************************
+
+export const demoteMemberToNoob = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/member/demote`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+            adminId: adminId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not demote admin');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to promote a noob to member
+// ********************************************************
+
+export const promoteNoobToMember = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/member/accept`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not demote admin');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to promote a member to member
+// ********************************************************
+
+export const promoteMemberToAdmin = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/admin/accept`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not demote admin');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to promote a noob to member
+// ********************************************************
+
+export const kickUserFromGroup = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/member/kick`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+            adminId: adminId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not kick the user');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to promote a noob to member
+// ********************************************************
+
+export const unbanUserFromGroup = data => {
+  const userId = data.userId;
+  const groupId = data.groupId;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/member/unban`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId,
+            adminId: adminId,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not kick the user');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchCurrentGroup(groupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
+// Function to promote a noob to member
+// ********************************************************
+
+export const leaveThisGroup = groupId => {
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/groups/${groupId}/leave`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+        }),
+      });
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not kick the user');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(fetchMyUser(userId));
     } catch (error) {
       console.log(error);
     }

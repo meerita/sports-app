@@ -9,6 +9,7 @@ import generalReducer from './slices/general';
 import groupReducer from './slices/group';
 import meReducer from './slices/me';
 import themeReducer from './slices/theme';
+import userReducer from './slices/user';
 
 export default configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
     general: generalReducer,
     explore: exploreReducer,
     group: groupReducer,
+    user: userReducer,
   },
 });

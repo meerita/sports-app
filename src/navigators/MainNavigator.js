@@ -20,6 +20,18 @@ import GroupDetailNavigator, {
   screenOptions as GroupDetailNavigatorOptions,
 } from '../navigators/GroupDetailNavigator';
 
+import MembershipNavigator, {
+  screenOptions as MembershipNavigatorOptions,
+} from './MembershipNavigator';
+
+// ************************************************
+// USERDETAIL
+// ************************************************
+
+import UserDetailScreen, {
+  screenOptions as UserDetailScreenOptions,
+} from '../navigators/UserDetailNavigator';
+
 // ************************************************
 //
 // EXPLORE SCREENS
@@ -268,6 +280,16 @@ export default function MainNavigator(props) {
         name='BottomNavigation'
         component={MainBottomNavigation}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='GroupMemberShipScreen'
+        component={MembershipNavigator}
+        options={MembershipNavigatorOptions}
+      />
+      <Stack.Screen
+        name='UserDetailScreen'
+        component={UserDetailScreen}
+        options={UserDetailScreenOptions}
       />
       <Stack.Screen
         name='SettingsAccountScreen'

@@ -38,7 +38,11 @@ export default function MyGroupsScreen(props) {
     }
   }, []);
 
-  console.log(myGroups);
+  // useEffect(() => {
+  //   if (myGroups) {
+  //     dispatch(fetchMyUser(me._id));
+  //   }
+  // }, [myGroups]);
 
   if (myGroups.length === 0) {
     return (
