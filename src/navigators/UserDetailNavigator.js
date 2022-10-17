@@ -19,14 +19,20 @@ export default function UserDetailNavigator(props) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserProfile(userId));
-    console.log(userId, userProfile);
-  }, []);
-
   const userProfile = useSelector(state => state.user.userProfileData);
 
-  console.log(userProfile);
+  useEffect(() => {
+    console.log('dispatching');
+    dispatch(fetchUserProfile(userId));
+  }, [userId]);
+
+  if (!userProfile) {
+    return (
+      <View>
+        <Text>Loading…</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollViewLayout style={{ paddingTop: 0 }}>
