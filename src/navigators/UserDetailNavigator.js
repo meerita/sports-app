@@ -1,35 +1,74 @@
 /** @format */
 
-import { View, Text, Image, Dimensions } from 'react-native';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserProfile } from '../store/actions/user';
-import ScrollViewLayout from '../components/Layouts/ScrollViewLayout/ScrollViewLayout';
-import BodyOne from '../components/type/BodyOne';
-import SingleLineWithCaption from '../components/Lists/OneLine/SingleLineWithCaption';
 import { t } from '../services/i18n';
-import Spacer from '../components/Spacer/Spacer';
+import { useDispatch, useSelector } from 'react-redux';
+import { View, Text, Image, Dimensions, ScrollView } from 'react-native';
 import convert from 'convert-units';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+
+// STORE
+import { fetchUserProfile } from '../store/actions/user';
+
+// COMPONENTS
+import BodyOne from '../components/type/BodyOne';
+import Caption from '../components/type/Caption';
+import Card from '../components/Card';
+import ScrollViewLayout from '../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import SingleLineWithCaption from '../components/Lists/OneLine/SingleLineWithCaption';
+import Spacer from '../components/Spacer/Spacer';
 import SubHeader from '../components/SubHeader/SubHeader';
+import SubtitleOne from '../components/type/SubtitleOne';
 
 export default function UserDetailNavigator(props) {
-  // current UserId visited
+  // DATA & PROPS
+  const me = useSelector(state => state.me.myData);
   const userId = props.route.params.userId;
 
+  // UTILS
   const dispatch = useDispatch();
 
-  const userProfile = useSelector(state => state.user.userProfileData);
+  // STATES
+  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
-    console.log('dispatching');
-    dispatch(fetchUserProfile(userId));
+    try {
+      setIsLoading(true);
+      dispatch(fetchUserProfile(userId));
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   }, [userId]);
 
-  if (!userProfile) {
+  // POST FETCHING
+  const userProfile = useSelector(state => state.user.userProfileData);
+
+  // IF SOMETHING IS WRONG…
+  if (isLoading || !userProfile) {
     return (
       <View>
         <Text>Loading…</Text>
+      </View>
+    );
+  }
+
+  // Am I visiting my own profile?
+  const myOwnProfile = me._id === userId;
+
+  // is user invisible?
+  const userInvisible = userProfile.settings.privacy.pro.invisible;
+
+  // wants to show his groups?
+  const hideMyGroups = userProfile.settings.privacy.general.hideMyGroups;
+
+  // If the user has INVISIBLE activated and is not visiting his own
+  // profile we must hide all the information
+
+  if (userInvisible && !myOwnProfile) {
+    return (
+      <View>
+        <Text>Este usuario ha decidido poner en invisible su perfil</Text>
       </View>
     );
   }
@@ -128,11 +167,71 @@ export default function UserDetailNavigator(props) {
           props.navigation.navigate('BasicInformationHeightSelectorScreen')
         }
       />
+      {myOwnProfile || (!myOwnProfile && !hideMyGroups) ? (
+        <>
+          <SubHeader
+            title={t('profile:memberOf')}
+            style={{ paddingBottom: 16 }}
+          />
+          <ScrollView
+            horizontal={true}
+            style={{ paddingLeft: 12, paddingRight: 16 }}
+          >
+            {userProfile.groups.map(group => (
+              <View
+                style={{
+                  marginRight: 4,
+                  marginLeft: 4,
+                }}
+              >
+                <Card
+                  key={group._id}
+                  style={{
+                    marginBottom: 16,
+                    width: 298,
+                  }}
+                  onPress={() =>
+                    props.navigation.navigate('GroupDetailScreen', {
+                      title: group.title,
+                      id: group._id,
+                    })
+                  }
+                >
+                  <View
+                    style={{
+                      width: '100%',
+                      height: Dimensions.get('window').width / 2,
+                    }}
+                  >
+                    <Image
+                      source={{ uri: group.image }}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderTopLeftRadius: 4,
+                        borderTopRightRadius: 4,
+                      }}
+                    />
+                  </View>
+                  <View style={{ paddingVertical: 8, paddingHorizontal: 8 }}>
+                    <SubtitleOne>{group.title}</SubtitleOne>
+                    <Caption>
+                      {group.members.length > 1
+                        ? t('groups:members.manyMembers_other', {
+                            count: group.members.length,
+                          })
+                        : t('groups:members.manyMembers_one', {
+                            count: group.members.length,
+                          })}
+                    </Caption>
+                  </View>
+                </Card>
+              </View>
+            ))}
+          </ScrollView>
+        </>
+      ) : null}
 
-      <SubHeader title={t('profile:memberOf')} />
-      {userProfile.groups.map(group => (
-        <Text>{group.title}</Text>
-      ))}
       {/* 
       <SingleLineWithCaption
         title={t('settings:profile.basicInformation.visibility.visibility')}
