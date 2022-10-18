@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 
 // CONSTANTS
-import Colors from '../../../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
 // TYPE
-import SubtitleOne from '../../../type/SubtitleOne';
-import BodyTwo from '../../../type/BodyTwo';
+import SubtitleOne from '../../type/SubtitleOne';
+import BodyTwo from '../../type/BodyTwo';
 
 const TwoLineItemLongerText = props => {
   // we define a variable to use TouchableOpacity or NaviteWithFeedback

@@ -188,7 +188,7 @@ export default StyleSheet.create({
     lineHeight: 20,
   },
   overLine: {
-    fontFamily: 'Barlow-SemiBold',
+    fontFamily: 'Barlow-Medium',
     fontSize: 14,
     letterSpacing: 0.5,
     textTransform: 'uppercase',

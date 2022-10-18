@@ -18,6 +18,7 @@ import Colors from '../../../constants/Colors';
 import Styles from '../../../constants/Styles';
 
 import { groupActions } from '../../../store/slices/group';
+import { useEffect } from 'react';
 
 export default function AddGroupInfo(props) {
   // darkMode
@@ -47,6 +48,11 @@ export default function AddGroupInfo(props) {
     getValues,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    setValue('title', createGroupInfo.title);
+    setValue('description', createGroupInfo.description);
+  }, []);
 
   const onSubmit = data => {
     dispatch(

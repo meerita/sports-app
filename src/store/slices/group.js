@@ -6,6 +6,7 @@ export const groupSlice = createSlice({
   name: 'group',
   initialState: {
     groupDetail: null,
+    groupEvents: [],
     createNewGroup: {
       sportId: '',
       sportName: '',
@@ -16,6 +17,9 @@ export const groupSlice = createSlice({
     },
   },
   reducers: {
+    addGroupEvents(state, action) {
+      state.groupEvents = action.payload.events;
+    },
     fetchGroup(state, action) {
       state.groupDetail = action.payload.group;
     },

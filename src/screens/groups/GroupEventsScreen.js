@@ -8,26 +8,71 @@ import { t } from '../../services/i18n';
 // components
 import SubtitleOne from '../../components/type/SubtitleOne';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
+import SubHeader from '../../components/SubHeader/SubHeader';
+
+// STORE
+import { getGroupEvents } from '../../store/actions/group';
 
 export default function GroupEventsScreen(props) {
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
   // currentGroup
   const group = useSelector(state => state.group.groupDetail);
-  // events in the grouo
-  const events = useSelector(state => state.group.groupDetail.events);
 
-  if (events.length < 1) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getGroupEvents(group._id));
+  }, [group]);
+
+  // events in the group
+  const groupEvents = useSelector(state => state.group.groupEvents);
+
+  const newEvents = groupEvents.filter(group => group.open);
+
+  const pastEvents = groupEvents.filter(group => !group.open);
+
+  if (groupEvents.length < 1) {
     return (
       <ScrollViewLayout>
-        <SubtitleOne>This groups hasn't any event yet</SubtitleOne>
+        <SubtitleOne>This group has no events</SubtitleOne>
       </ScrollViewLayout>
     );
   }
 
   return (
     <ScrollViewLayout>
-      <Text>GroupEventsScreen</Text>
+      <SubHeader title='Nuevos eventos' />
+      {newEvents.map(event => (
+        <TwoLineWithIcon
+          icon={{ uri: event.sport.iconUrl }}
+          key={event._id}
+          title={event.title}
+          subtitle={event.sport.title}
+          onPress={() =>
+            props.navigation.navigate('EventDetailScreen', {
+              title: event.title,
+              _id: event._id,
+            })
+          }
+        />
+      ))}
+      <SubHeader title='Eventos pasados' />
+      {pastEvents.map(event => (
+        <TwoLineWithIcon
+          icon={{ uri: event.sport.iconUrl }}
+          key={event._id}
+          title={event.title}
+          subtitle={event.sport.title}
+          onPress={() =>
+            props.navigation.navigate('EventDetailScreen', {
+              title: event.title,
+              _id: event._id,
+            })
+          }
+        />
+      ))}
     </ScrollViewLayout>
   );
 }
@@ -35,6 +80,6 @@ export default function GroupEventsScreen(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Events',
+    headerTitle: t('common:events'),
   };
 };

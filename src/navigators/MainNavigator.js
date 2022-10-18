@@ -215,24 +215,26 @@ import EventOptionsReplacementsSelectorScreen, {
 import EventOptionsSkillsSelectorScreen, {
   screenOptions as EventOptionsSkillsSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsSkillsSelectorScreen';
+
+import EventDetailScreen, {
+  screenOptions as EventDetailScreenOptions,
+} from '../screens/events/EventDetailScreen';
+
+// STORE
 import { themeActions } from '../store/slices/theme';
 
 export default function MainNavigator(props) {
   const me = useSelector(state => state.me.myData);
-  const myDarkMode = useSelector(
-    state => state.me.myData.settings.preferences.theme
-  );
-
-  // console.log('=================================');
-  // console.log(me);
-  // console.log('=================================');
-  // console.log('=================================');
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(themeActions.changeTheme({ darkMode: myDarkMode }));
   }, [myDarkMode]);
+
+  const myDarkMode = useSelector(
+    state => state.me.myData.settings.preferences.theme
+  );
 
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -290,6 +292,11 @@ export default function MainNavigator(props) {
         name='UserDetailScreen'
         component={UserDetailScreen}
         options={UserDetailScreenOptions}
+      />
+      <Stack.Screen
+        name='EventDetailScreen'
+        component={EventDetailScreen}
+        options={EventDetailScreenOptions}
       />
       <Stack.Screen
         name='SettingsAccountScreen'

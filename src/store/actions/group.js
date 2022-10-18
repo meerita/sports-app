@@ -1130,3 +1130,36 @@ export const leaveThisGroup = groupId => {
     }
   };
 };
+
+// ********************************************************
+// Function to retrieve group events
+// ********************************************************
+
+export const getGroupEvents = groupId => {
+  return async (dispatch, getState) => {
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/groups/${groupId}/events`);
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not kick the user');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const events = await apiCall();
+      await dispatch(groupActions.addGroupEvents({ events: events }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

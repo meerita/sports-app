@@ -46,7 +46,7 @@ export default function CreateGroupResume(props) {
   };
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingTop: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
         {t('groups:create.form.resumeDesc')}
       </BodyTwo>

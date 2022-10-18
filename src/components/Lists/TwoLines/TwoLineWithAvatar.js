@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   avatarContainer: {
     width: 40,
     height: 40,
-    marginRight: 32,
+    marginRight: 16,
     flexGrow: 0,
     borderRadius: 512,
     overflow: 'hidden',

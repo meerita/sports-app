@@ -43,7 +43,7 @@ export default function SelectSportScreen(props) {
   };
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingTop: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
         {t('groups:create.selectAnSportDesc')}
       </BodyTwo>
