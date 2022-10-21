@@ -32,4 +32,5 @@ export const namespaces = [
   'errors',
   'loaders',
   'skills',
+  'typesOfActivity',
 ];

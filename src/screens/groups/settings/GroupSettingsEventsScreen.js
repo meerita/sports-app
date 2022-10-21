@@ -10,6 +10,9 @@ import { useSelector } from 'react-redux';
 
 export default function GroupSettingsEventsScreen(props) {
   // groupDetails
+  const currentSport = useSelector(state => state.group.groupDetail.sport);
+
+  // groupDetails
   const eventPreferences = useSelector(
     state => state.group.groupDetail.preferences.events
   );
@@ -77,11 +80,15 @@ export default function GroupSettingsEventsScreen(props) {
       />
       <SingleLineWithIcon
         // poner siempre el icono del deporte oficial del grupo
-        icon={require('../../../assets/images/icons/soccer.png')}
+        icon={{
+          uri: `${currentSport.iconUrl}`,
+        }}
         title={t('groups:settings.events.typeOfEvent')}
-        caption='3v3'
+        caption={t(
+          `typesOfActivity:${currentSport.title}.${eventPreferences.activity}.label`
+        )}
         onPress={() =>
-          props.navigation.navigate('GroupEventsTypeSettingsScreen')
+          props.navigation.navigate('EventOptionsTypeOfActivitySelectorScreen')
         }
       />
       <SingleLineWithIcon

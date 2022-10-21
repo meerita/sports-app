@@ -1163,3 +1163,45 @@ export const getGroupEvents = groupId => {
     }
   };
 };
+
+export const changeGroupTypeOfActivity = data => {
+  const { groupId, activity } = data;
+  return async (dispatch, getState) => {
+    const userId = getState().me.myData._id;
+    // ********************************************************
+    // Function to call the API
+    // ********************************************************
+    const apiCall = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/events/activity`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            activity: activity,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('Could not kick the user');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await apiCall();
+      await dispatch(groupActions.updateEventActivity({ activity: activity }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

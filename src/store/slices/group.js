@@ -77,6 +77,9 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.group.membership.diversity =
         action.payload.gender;
     },
+    updateEventActivity(state, action) {
+      state.groupDetail.preferences.events.activity = action.payload.activity;
+    },
   },
 });
 

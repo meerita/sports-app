@@ -181,3 +181,99 @@ export const changeEventGenderRequirement = data => {
     }
   };
 };
+
+export const changeEventParticipation = data => {
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    const { eventId, groupId, allowedParticipants } = data;
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/participation/change`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            adminId: adminId,
+            groupId: groupId,
+            allowedParticipants: allowedParticipants,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const updatedEventData = await changeEventData();
+      dispatch(
+        eventActions.changeParticipation({
+          allowedParticipants: updatedEventData.allowedParticipants,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const changeEventActivity = data => {
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    const { eventId, groupId, activity } = data;
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/activity/change`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            adminId: adminId,
+            groupId: groupId,
+            activity: activity,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const updatedEventData = await changeEventData();
+      dispatch(
+        eventActions.changeActivity({
+          activity: updatedEventData.activity,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

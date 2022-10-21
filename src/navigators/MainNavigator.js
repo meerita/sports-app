@@ -196,6 +196,10 @@ import GroupSettingsInformationFormScreen, {
   screenOptions as GroupSettingsInformationFormScreenOptions,
 } from '../screens/groups/settings/GroupSettingsInformationFormScreen/GroupSettingsInformationFormScreen';
 
+import EventOptionsTypeOfActivitySelectorScreen, {
+  screenOptions as EventOptionsTypeOfActivitySelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsTypeOfActivitySelectorScreen';
+
 import EventOptionsCreationSelectorScreen, {
   screenOptions as EventOptionsCreationSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsCreationSelectorScreen';
@@ -321,6 +325,11 @@ export default function MainNavigator(props) {
         name='SettingsPrivacyScreen'
         component={SettingsPrivacyScreen}
         options={SettingsPrivacyScreenOption}
+      />
+      <Stack.Screen
+        name='EventOptionsTypeOfActivitySelectorScreen'
+        component={EventOptionsTypeOfActivitySelectorScreen}
+        options={EventOptionsTypeOfActivitySelectorScreenOptions}
       />
       <Stack.Screen
         name='SettingsSubscriptionScreen'

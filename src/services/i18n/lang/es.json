@@ -467,6 +467,90 @@
     "inlineSkate": "Patinaje en línea",
     "volley": "Vóleibol"
   },
+  "typesOfActivity": {
+    "soccer": {
+      "type_one": {
+        "label": "5 contra 5",
+        "description": "Campo pequeños, puede ser en interior o exterior",
+        "max": 10
+      },
+      "type_two": {
+        "label": "7 contra 7",
+        "description": "Campos medianos, puede ser sintéticos o césped",
+        "max": 14
+      },
+      "type_three": {
+        "label": "11 contra 11",
+        "description": "Campos de césped, con medidas profesionales",
+        "max": 22
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 10
+      }
+    },
+    "cars": "Automobilismo",
+    "tennis": "Tenis",
+    "eScooter": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Todoterreno montañoso",
+        "description": "Grandes pendientes, barro, caminos de grava",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 10
+      }
+    },
+    "hiking": "Senderismo",
+    "gymnastics": "Gimnasia",
+    "euc": "Monociclos",
+    "fitness": "Fitness",
+    "eBikes": "Bicicletas eléctricas",
+    "basketball": {
+      "type_one": {
+        "label": "2 contra 2",
+        "description": "Medio campo, en interior o exteriores",
+        "max": 4
+      },
+      "type_two": {
+        "label": "3 contra 3",
+        "description": "Medio campo, en interior o exteriores",
+        "max": 6
+      },
+      "type_three": {
+        "label": "5 contra 5",
+        "description": "Campo entero, medidas oficiales",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 10
+      }
+    },
+    "mountain": "Montañismo",
+    "padel": "Pádel",
+    "martialArts": "Artes marciales",
+    "kiteSurf": "Kitesurf",
+    "bikes": "Motocicletas",
+    "bicycle": "Ciclismo",
+    "trekking": "Trekking",
+    "inlineSkate": "Patinaje en línea",
+    "volley": "Vóleibol"
+  },
   "skills": {
     "groupDesc": "Cuando se creen nuevos eventos, se auto-preseleccionará la opción que elijas aquí.",
     "novice": {

@@ -208,11 +208,6 @@ export default function EventDetailScreen(props) {
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/visibility_on.png')}
           title={t('settings:profile.basicInformation.visibility.visibility')}
-          // caption={t(
-          //   `settings:profile.basicInformation.visibility.${
-          //     !eventDetail.visible ? 'true' : 'false'
-          //   }`
-          // )}
           caption={
             eventDetail.visibility
               ? t('groups:settings.events.types.anyone')
@@ -227,6 +222,23 @@ export default function EventDetailScreen(props) {
           }
         />
         <Line />
+        <SingleLineWithIcon
+          icon={require('../../assets/images/icons/Admin.png')}
+          title={'Participation…'}
+          caption={t(
+            `groups:settings.events.types.${eventDetail.allowedParticipants}`
+          )}
+          onPress={() =>
+            props.navigation.navigate(
+              'EventOptionsParticipationSelectorScreen',
+              {
+                editEvent: true,
+                eventId: eventDetail._id,
+                groupId: eventDetail.group,
+              }
+            )
+          }
+        />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/people.png')}
           title='Max participants'
@@ -248,7 +260,19 @@ export default function EventDetailScreen(props) {
         <SingleLineWithIcon
           icon={{ uri: eventDetail.sport.iconUrl }}
           title={'Tipo de evento'}
-          caption={'Offroad'}
+          caption={t(
+            `typesOfActivity:${eventDetail.sport.title}.${eventDetail.activity}.label`
+          )}
+          onPress={() =>
+            props.navigation.navigate(
+              'EventOptionsTypeOfActivitySelectorScreen',
+              {
+                editEvent: true,
+                eventId: eventDetail._id,
+                groupId: eventDetail.group,
+              }
+            )
+          }
         />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/skill.png')}

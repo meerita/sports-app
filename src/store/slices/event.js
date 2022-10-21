@@ -20,6 +20,13 @@ export const eventSlice = createSlice({
     changeGender(state, action) {
       state.eventDetail.allowedGender = action.payload.gender;
     },
+    changeParticipation(state, action) {
+      state.eventDetail.allowedParticipants =
+        action.payload.allowedParticipants;
+    },
+    changeActivity(state, action) {
+      state.eventDetail.activity = action.payload.activity;
+    },
   },
 });
 
