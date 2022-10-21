@@ -64,7 +64,7 @@ export default function GroupInfoScreen(props) {
             ? t('groups:settings.gender.male')
             : group.preferences.group.membership.diversity === 'female'
             ? t('groups:settings.gender.female')
-            : t('groups:settings.gender.mixed')
+            : t('groups:settings.gender.other')
         }
       />
     </ScrollView>

@@ -40,8 +40,8 @@ export default function GroupSettingsMembershipScreen(props) {
       value: 'female',
     },
     {
-      label: t('groups:settings.gender.mixed'),
-      value: 'mixed',
+      label: t('groups:settings.gender.other'),
+      value: 'other',
     },
   ];
 

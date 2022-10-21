@@ -46,11 +46,11 @@ const TwoLineWithRadio = ({ options = [], onChangeSelect, selected }) => {
                   color:
                     selected === index
                       ? darkMode
-                        ? Colors.dark.OnBackgroundUnfocused
-                        : Colors.light.OnBackgroundUnfocused
+                        ? Colors.dark.OnSurfaceUnfocused
+                        : Colors.light.OnSurfaceUnfocused
                       : !darkMode
-                      ? Colors.light.OnSurfaceDisabled
-                      : Colors.dark.OnSurfaceUnfocused,
+                      ? Colors.light.OnBackgroundUnfocused
+                      : Colors.dark.OnBackgroundUnfocused,
                 }}
               >
                 {option.description}

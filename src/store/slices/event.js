@@ -11,6 +11,15 @@ export const eventSlice = createSlice({
     addEventDetail(state, action) {
       state.eventDetail = action.payload.event;
     },
+    changeVisibility(state, action) {
+      state.eventDetail.visibility = action.payload.visibility;
+    },
+    changeSkill(state, action) {
+      state.eventDetail.skill = action.payload.skill;
+    },
+    changeGender(state, action) {
+      state.eventDetail.allowedGender = action.payload.gender;
+    },
   },
 });
 

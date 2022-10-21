@@ -73,6 +73,10 @@ export const groupSlice = createSlice({
       state.groupDetail.preferences.group.visibility.visibility =
         action.payload.visibility;
     },
+    updateGroupGender(state, action) {
+      state.groupDetail.preferences.group.membership.diversity =
+        action.payload.gender;
+    },
   },
 });
 

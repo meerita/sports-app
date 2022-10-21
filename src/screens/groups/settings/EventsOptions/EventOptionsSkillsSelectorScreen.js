@@ -12,12 +12,21 @@ import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/Sc
 import BodyTwo from '../../../../components/type/BodyTwo';
 import { useToast } from 'react-native-toast-notifications';
 import { updateEventRequiredSkill } from '../../../../store/actions/group';
+import {
+  changeEventGenderRequirement,
+  changeEventSkillRequirement,
+} from '../../../../store/actions/event';
 
 export default function EventOptionsSkillsSelectorScreen(props) {
-  // groupDetails
-  const eventSkillPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events.skill
-  );
+  const eventOnEdition = props.route.params
+    ? props.route.params.editEvent
+    : false;
+  const eventId = props.route.params ? props.route.params.eventId : false;
+  const groupId = props.route.params ? props.route.params.groupId : false;
+
+  const eventSkillPreferences = eventOnEdition
+    ? useSelector(state => state.event.eventDetail.skill)
+    : useSelector(state => state.group.groupDetail.preferences.events.skill);
 
   const toast = useToast();
 
@@ -68,13 +77,23 @@ export default function EventOptionsSkillsSelectorScreen(props) {
   return (
     <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
-        {t('skills:groupDesc')}
+        {eventOnEdition
+          ? 'You are about to change the minimum skill required to participate in this event.'
+          : t('skills:groupDesc')}
       </BodyTwo>
       <TwoLineWithRadio
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(updateEventRequiredSkill(option.value)),
+          dispatch(
+            eventOnEdition
+              ? changeEventSkillRequirement({
+                  eventId: eventId,
+                  groupId: groupId,
+                  skill: option.value,
+                })
+              : updateEventRequiredSkill(option.value)
+          ),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()
@@ -86,8 +105,14 @@ export default function EventOptionsSkillsSelectorScreen(props) {
 
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
+  const editingEvent = navData.route.params
+    ? navData.route.params.editEvent
+    : false;
+
   return {
-    headerTitle: t('groups:settings.events.skill'),
+    headerTitle: editingEvent
+      ? 'Habilidad mínima requerida'
+      : t('groups:settings.events.skill'),
     presentation: 'modal',
   };
 };

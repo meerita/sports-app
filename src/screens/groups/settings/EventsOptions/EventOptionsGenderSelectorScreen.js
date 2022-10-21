@@ -14,10 +14,16 @@ import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/Sc
 import BodyTwo from '../../../../components/type/BodyTwo';
 
 // STORE
-import { updateEventVisibility } from '../../../../store/actions/group';
-import { changeCustomEventVisibility } from '../../../../store/actions/event';
+import {
+  updateEventVisibility,
+  updateMyGroupDiversity,
+} from '../../../../store/actions/group';
+import {
+  changeCustomEventVisibility,
+  changeEventGenderRequirement,
+} from '../../../../store/actions/event';
 
-export default function EventOptionsVisibilitySelectorScreen(props) {
+export default function EventOptionsGenderSelectorScreen(props) {
   // we use this to use different texts and dispatch functions depending
   // if we are editing one event or the group settings events
   const eventOnEdition = props.route.params
@@ -27,28 +33,44 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
   const groupId = props.route.params ? props.route.params.groupId : false;
 
   // event visibility settings or group event visibility settings
-  const eventVisibility = eventOnEdition
-    ? useSelector(state => state.event.eventDetail.visibility)
+  const genderSelector = eventOnEdition
+    ? useSelector(state => state.event.eventDetail.allowedGender)
     : useSelector(
-        state => state.group.groupDetail.preferences.events.visibility
+        state => state.group.groupDetail.preferences.group.membership.diversity
       );
 
+  // we will find out which gender this user has and set it as initial state
+  const currentGender =
+    genderSelector === 'male' ? 0 : genderSelector === 'female' ? 1 : 2;
+
+  // we initialize Toasts
   const toast = useToast();
 
+  // loading state
+  const [loading, setLoading] = useState(false);
+
+  // we manage the errors
+  const [newError, setNewError] = useState();
+
+  // we setup the use of dispatch
   const dispatch = useDispatch();
 
   // what radiobutton is checked first
-  const [selected, setSelected] = useState(!eventVisibility ? 0 : 1);
+  const [selected, setSelected] = useState(currentGender);
 
-  // The current options for creating the radio button options
+  // options for the radio buttons
   const OPTIONS = [
     {
-      label: t('groups:settings.events.types.only-my-group'),
-      value: false,
+      label: t('settings:profile.basicInformation.male'),
+      value: 'male',
     },
     {
-      label: t('groups:settings.events.types.anyone'),
-      value: true,
+      label: t('settings:profile.basicInformation.female'),
+      value: 'female',
+    },
+    {
+      label: t('settings:profile.basicInformation.other'),
+      value: 'other',
     },
   ];
 
@@ -56,8 +78,8 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
     <ScrollViewLayout>
       <BodyTwo style={{ padding: 16 }}>
         {eventOnEdition
-          ? "If you want to make public this event so other players join your activity, you can do it here. You can change the visibility settings of this event without affecting your group's settings."
-          : t('groups:settings.events.visibilityDesc')}
+          ? 'May require only males, only females or it can be mixed. This will affect which people will be able to participate.'
+          : t('settings:profile.basicInformation.genderInfo')}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
@@ -65,11 +87,12 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
         onChangeSelect={(option, index) => (
           dispatch(
             eventOnEdition
-              ? changeCustomEventVisibility({
+              ? changeEventGenderRequirement({
                   eventId: eventId,
                   groupId: groupId,
+                  gender: option.value,
                 })
-              : updateEventVisibility(option.value)
+              : updateMyGroupDiversity(option.value)
           ),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
@@ -87,8 +110,8 @@ export const screenOptions = navData => {
     : false;
   return {
     headerTitle: editingEvent
-      ? 'Event visibility'
-      : t('groups:settings.events.visibility'),
+      ? 'Required gender'
+      : t('settings:profile.basicInformation.gender'),
     presentation: 'modal',
   };
 };

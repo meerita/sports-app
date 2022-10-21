@@ -398,7 +398,7 @@ export const updateEventCreation = creation => {
 // Function to change the DIVERSITY OF THE GROUP
 // ********************************************************
 
-export const updateGroupDiversity = diversity => {
+export const updateMyGroupDiversity = diversity => {
   return async (dispatch, getState) => {
     // the current user creating this group
     const groupId = getState().group.groupDetail._id;

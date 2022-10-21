@@ -13,6 +13,8 @@ import SubHeader from '../../components/SubHeader/SubHeader';
 
 // STORE
 import { getGroupEvents } from '../../store/actions/group';
+import EventListItem from '../../components/Lists/EventListItem/EventListItem';
+import moment from 'moment';
 
 export default function GroupEventsScreen(props) {
   // darkMode
@@ -44,35 +46,40 @@ export default function GroupEventsScreen(props) {
   return (
     <ScrollViewLayout>
       <SubHeader title='Nuevos eventos' />
-      {newEvents.map(event => (
-        <TwoLineWithIcon
-          icon={{ uri: event.sport.iconUrl }}
-          key={event._id}
-          title={event.title}
-          subtitle={event.sport.title}
-          onPress={() =>
-            props.navigation.navigate('EventDetailScreen', {
-              title: event.title,
-              _id: event._id,
-            })
-          }
-        />
-      ))}
+      {newEvents
+        .map(event => (
+          <EventListItem
+            key={event._id}
+            title={event.title}
+            subtitle={'Cuando: ' + moment(event.when).calendar()}
+            icon={{ uri: event.sport.iconUrl }}
+            onPress={() =>
+              props.navigation.navigate('EventDetailScreen', {
+                title: event.title,
+                _id: event._id,
+              })
+            }
+            style={{ marginHorizontal: 16 }}
+          />
+        ))
+        .reverse()}
       <SubHeader title='Eventos pasados' />
-      {pastEvents.map(event => (
-        <TwoLineWithIcon
-          icon={{ uri: event.sport.iconUrl }}
-          key={event._id}
-          title={event.title}
-          subtitle={event.sport.title}
-          onPress={() =>
-            props.navigation.navigate('EventDetailScreen', {
-              title: event.title,
-              _id: event._id,
-            })
-          }
-        />
-      ))}
+      {pastEvents
+        .map(event => (
+          <TwoLineWithIcon
+            icon={{ uri: event.sport.iconUrl }}
+            key={event._id}
+            title={event.title}
+            subtitle={moment(event.when).calendar()}
+            onPress={() =>
+              props.navigation.navigate('EventDetailScreen', {
+                title: event.title,
+                _id: event._id,
+              })
+            }
+          />
+        ))
+        .reverse()}
     </ScrollViewLayout>
   );
 }

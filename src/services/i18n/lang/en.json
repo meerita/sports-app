@@ -162,7 +162,7 @@
         "visibilityDesc": "Por defecto este grupo puede ser encontrado en la sección de Explorar, resultados de búsqueda y perfiles de usuario"
       },
       "gender": {
-        "mixed": "Mixtos",
+        "other": "Mixtos",
         "male": "Sólo hombres",
         "female": "Sólo mujeres"
       }

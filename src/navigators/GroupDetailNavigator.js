@@ -72,7 +72,7 @@ export default function GroupDetailNavigator(props) {
   // FALSE means only members of that group will be able to see, join or create events.
   const groupVisibility = currentGroup.preferences.group.visibility.visibility;
 
-  // Groups can be MIXED, MALE or FEMALE sex based. If MIXED both males and females will be able to join
+  // Groups can be OTHER, MALE or FEMALE sex based. If OTHER both males and females will be able to join
   // the others options means only people from one sex will be able to opt for an invitation or join
   const groupDiversity = currentGroup.preferences.group.membership.diversity;
 
@@ -90,10 +90,10 @@ export default function GroupDetailNavigator(props) {
   const groupJoinPolicy = currentGroup.preferences.group.membership.freeToJoin;
 
   // simple operator to see if I can register thanks to my current Gender
-  // if groupDiversity is Mixed, we just give TRUE by default. But if false, we check the group
+  // if groupDiversity is Other, we just give TRUE by default. But if false, we check the group
   // matches with the current sex of the visitor
   const canIRegister =
-    groupDiversity === 'mixed'
+    groupDiversity === 'other'
       ? true
       : currentVisitorGender === groupDiversity
       ? true
@@ -207,10 +207,17 @@ export const screenOptions = navData => {
     headerBackTitle: null,
     headerRight: color => {
       return (
-        <IconButton
-          source={require('../assets/images/icons/settings.png')}
-          onPress={() => navData.navigation.navigate('GroupSettingsScreen')}
-        />
+        <>
+          <IconButton
+            source={require('../assets/images/icons/settings.png')}
+            onPress={() => navData.navigation.navigate('GroupSettingsScreen')}
+            style={{ marginRight: 8 }}
+          />
+          <IconButton
+            source={require('../assets/images/icons/more.png')}
+            onPress={() => navData.navigation.navigate('GroupSettingsScreen')}
+          />
+        </>
       );
     },
   };

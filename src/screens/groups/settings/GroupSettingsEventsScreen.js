@@ -14,6 +14,10 @@ export default function GroupSettingsEventsScreen(props) {
     state => state.group.groupDetail.preferences.events
   );
 
+  const otherPreferences = useSelector(
+    state => state.group.groupDetail.preferences
+  );
+
   return (
     <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16, paddingBottom: 16 }}>
@@ -38,10 +42,34 @@ export default function GroupSettingsEventsScreen(props) {
         }
       />
       <SingleLineWithIcon
+        icon={
+          otherPreferences.group.membership.diversity === 'other'
+            ? require('../../../assets/images/icons/question_mark.png')
+            : otherPreferences.group.membership.diversity === 'male'
+            ? require('../../../assets/images/icons/male.png')
+            : require('../../../assets/images/icons/female.png')
+        }
+        title={'Diversidad'}
+        caption={t(
+          `groups:settings.gender.${
+            otherPreferences.group.membership.diversity === 'other'
+              ? 'other'
+              : otherPreferences.group.membership.diversity === 'male'
+              ? 'male'
+              : 'female'
+          }`
+        )}
+        onPress={() =>
+          props.navigation.navigate('EventOptionsGenderSelectorScreen')
+        }
+      />
+      <SingleLineWithIcon
         icon={require('../../../assets/images/icons/visibility_on.png')}
         title={t('groups:settings.events.visibility')}
         caption={t(
-          `groups:settings.events.types.${eventPreferences.visibility}`
+          `groups:settings.events.types.${
+            eventPreferences.visibility ? 'anyone' : 'only-my-group'
+          }`
         )}
         onPress={() =>
           props.navigation.navigate('EventOptionsVisibilitySelectorScreen')

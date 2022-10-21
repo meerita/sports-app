@@ -200,6 +200,10 @@ import EventOptionsCreationSelectorScreen, {
   screenOptions as EventOptionsCreationSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsCreationSelectorScreen';
 
+import EventOptionsGenderSelectorScreen, {
+  screenOptions as EventOptionsGenderSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsGenderSelectorScreen';
+
 import EventOptionsParticipationSelectorScreen, {
   screenOptions as EventOptionsParticipationSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsParticipationSelectorScreen';
@@ -224,17 +228,17 @@ import EventDetailScreen, {
 import { themeActions } from '../store/slices/theme';
 
 export default function MainNavigator(props) {
-  const me = useSelector(state => state.me.myData);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(themeActions.changeTheme({ darkMode: myDarkMode }));
-  }, [myDarkMode]);
+  const me = useSelector(state => state.me.myData);
 
   const myDarkMode = useSelector(
     state => state.me.myData.settings.preferences.theme
   );
+
+  useEffect(() => {
+    dispatch(themeActions.changeTheme({ darkMode: myDarkMode }));
+  }, [myDarkMode]);
 
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -518,6 +522,11 @@ export default function MainNavigator(props) {
         name='EventOptionsSkillsSelectorScreen'
         component={EventOptionsSkillsSelectorScreen}
         options={EventOptionsSkillsSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsGenderSelectorScreen'
+        component={EventOptionsGenderSelectorScreen}
+        options={EventOptionsGenderSelectorScreenOptions}
       />
       <Stack.Screen
         name='BasicCoockiesInfoScreen'

@@ -30,7 +30,6 @@ export default function AppNavigator() {
 
   const userId = '62385d8caee17d13a1762b39'; // Minide
   // const userId = '6238a480170aff10d16ccd86'; // timcuqui
-  // const userId = '6349eee515508cea7cc6df3e'; // poronga
   // const userId = '6349eee515508cea7cc6df3e'; // roger
   // const userId = '6238a608170aff10d16ccd89'; // viso
   // const userId = '623b5d3d7e4216025e7210fd'; // ruven

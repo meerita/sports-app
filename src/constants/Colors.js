@@ -7,7 +7,7 @@ export default {
     background: '#1A1E2C', // #181818
     OnBackgroundActive: '#f8f8f1',
     OnBackgroundUnfocused: '#A5ABD0',
-    OnBackgroundDisabled: '#666D98',
+    OnBackgroundDisabled: '#363A49',
     OnSurfaceActive: '#f8f8f1',
     OnSurfaceUnfocused: '#A5ABD0',
     OnSurfaceDisabled: '#666D98',
@@ -42,7 +42,7 @@ export default {
     OnSurfaceDisabled: '#989898',
     error: '#ff0000',
     OnErrorActive: '#fff',
-    shadow: '#eee',
+    shadow: '#000',
     onSurfaceShadow: '#eee',
     black: '#000',
   },
