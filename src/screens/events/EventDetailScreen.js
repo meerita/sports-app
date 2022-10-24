@@ -279,7 +279,7 @@ export default function EventDetailScreen(props) {
         />
         <Line />
         <SingleLineWithIcon
-          icon={require('../../assets/images/icons/Admin.png')}
+          icon={require('../../assets/images/icons/manage_accounts.png')}
           title={'Participation…'}
           caption={t(
             `groups:settings.events.types.${eventDetail.allowedParticipants}`
@@ -297,14 +297,14 @@ export default function EventDetailScreen(props) {
         />
         <Line />
         <SingleLineWithIcon
-          icon={require('../../assets/images/icons/people.png')}
+          icon={require('../../assets/images/icons/group.png')}
           title='Max participants'
           caption={eventDetail.maxParticipants}
           onPress={() => props.navigation.navigate('MaxPlayersScreen')}
         />
         <Line />
         <SingleLineWithIcon
-          icon={require('../../assets/images/icons/meeting_place.png')}
+          icon={require('../../assets/images/icons/person_pin_circle.png')}
           title={'Punto de encuentro'}
           caption={'Carrer Muntaner 16'}
         />
@@ -333,7 +333,7 @@ export default function EventDetailScreen(props) {
           }
         />
         <SingleLineWithIcon
-          icon={require('../../assets/images/icons/skill.png')}
+          icon={require('../../assets/images/icons/verified.png')}
           title={'Dificultad'}
           caption={t(`skills:${eventDetail.skill}.title`)}
           onPress={() =>
@@ -371,13 +371,13 @@ export default function EventDetailScreen(props) {
           }
         />
         <SingleLineWithIcon
-          icon={require('../../assets/images/icons/Duration.png')}
+          icon={require('../../assets/images/icons/timer.png')}
           title={'Duración'}
           caption={'2hs'}
         />
         {eventDetail.costPerParticipant ? (
           <SingleLineWithIcon
-            icon={require('../../assets/images/icons/money.png')}
+            icon={require('../../assets/images/icons/payments.png')}
             title={'Coste por persona'}
             caption={eventDetail.costPerParticipant + '€'}
           />

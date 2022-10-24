@@ -11,25 +11,21 @@ import Colors from '../../constants/Colors';
 
 //COMPONENTS
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function SettingsProfileScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
   const me = useSelector(state => state.me.myData);
   return (
-    <ScrollView
-      style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
-      }}
-    >
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <TwoLineWithIcon
         icon={
           me === null
-            ? require('../../assets/images/icons/el.png')
+            ? require('../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'male'
-            ? require('../../assets/images/icons/el.png')
+            ? require('../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'female'
-            ? require('../../assets/images/icons/ella.png')
+            ? require('../../assets/images/icons/face_female.png')
             : require('../../assets/images/icons/question_mark.png')
         }
         title={t('settings:profile.basicInformation.basicInformation')}
@@ -39,7 +35,7 @@ export default function SettingsProfileScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../assets/images/icons/switch_account.png')}
+        icon={require('../../assets/images/icons/switch_accounts.png')}
         title={t('settings:profileManager.profileManager')}
         subtitle={t('settings:profileManager.profileManagerDesc')}
         onPress={() => {
@@ -54,7 +50,7 @@ export default function SettingsProfileScreen(props) {
           props.navigation.navigate('MyGroupsScreen');
         }}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

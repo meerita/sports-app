@@ -158,7 +158,7 @@ export default function GroupSettingsScreen(props) {
             }}
           />
           <TwoLineWithIcon
-            icon={require('../../../assets/images/icons/events.png')}
+            icon={require('../../../assets/images/icons/calendar_month.png')}
             title={t('groups:settings.events.events')}
             subtitle={t('groups:settings.events.eventsDesc')}
             onPress={() => {

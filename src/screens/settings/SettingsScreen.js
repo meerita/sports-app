@@ -39,11 +39,11 @@ export default function SettingsScreen(props) {
       <TwoLineWithIcon
         icon={
           me === null
-            ? require('../../assets/images/icons/el.png')
+            ? require('../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'male'
-            ? require('../../assets/images/icons/el.png')
+            ? require('../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'female'
-            ? require('../../assets/images/icons/ella.png')
+            ? require('../../assets/images/icons/face_female.png')
             : require('../../assets/images/icons/question_mark.png')
         }
         title={t('settings:profile.profile')}
@@ -53,7 +53,7 @@ export default function SettingsScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../assets/images/icons/preferences.png')}
+        icon={require('../../assets/images/icons/tune.png')}
         title={t('settings:preferences.preferences')}
         subtitle={t('settings:preferences.preferencesDesc')}
         onPress={() => {
@@ -77,7 +77,7 @@ export default function SettingsScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../assets/images/icons/Notifications.png')}
+        icon={require('../../assets/images/icons/edit_notifications.png')}
         title={t('settings:notifications.notifications')}
         subtitle={t('settings:notifications.notificationsDesc')}
         onPress={() => {

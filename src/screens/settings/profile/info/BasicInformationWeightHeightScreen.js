@@ -30,7 +30,7 @@ export default function BasicInformationWeightHeightScreen(props) {
         {t('settings:profile.basicInformation.weightHeightInfo')}
       </BodyTwo>
       <SingleLineWithIcon
-        icon={require('../../../../assets/images/icons/weight.png')}
+        icon={require('../../../../assets/images/icons/scale.png')}
         title={t('common:weight.weight')}
         caption={
           preferences.weights === 'imperial'

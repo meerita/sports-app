@@ -11,15 +11,15 @@ import Colors from '../../constants/Colors';
 
 //COMPONENTS
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function SettingsAccountScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
 
   return (
-    <ScrollView
+    <ScrollViewLayout
       style={{
-        ...Styles.body,
-        backgroundColor: darkMode ? Colors.dark.surface : Colors.light.surface,
+        paddingVertical: 16,
       }}
     >
       <TwoLineWithIcon
@@ -39,7 +39,7 @@ export default function SettingsAccountScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../assets/images/icons/email.png')}
+        icon={require('../../assets/images/icons/mail.png')}
         title={t('settings:email')}
         subtitle={t('settings:emailDesc')}
         onPress={() => {
@@ -54,7 +54,7 @@ export default function SettingsAccountScreen(props) {
           props.navigation.navigate('DeleteAccountScreen');
         }}
       />
-    </ScrollView>
+    </ScrollViewLayout>
   );
 }
 

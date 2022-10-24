@@ -27,7 +27,7 @@ export default function GroupSettingsEventsScreen(props) {
         {t('groups:settings.events.explanation')}
       </BodyTwo>
       <SingleLineWithIcon
-        icon={require('../../../assets/images/icons/events.png')}
+        icon={require('../../../assets/images/icons/calendar_month.png')}
         title={t('groups:settings.events.creation')}
         caption={t(`groups:settings.events.types.${eventPreferences.creation}`)}
         onPress={() =>
@@ -92,7 +92,7 @@ export default function GroupSettingsEventsScreen(props) {
         }
       />
       <SingleLineWithIcon
-        icon={require('../../../assets/images/icons/skill.png')}
+        icon={require('../../../assets/images/icons/verified.png')}
         title={t('groups:settings.events.skill')}
         caption={t(`skills:${eventPreferences.skill}.title`)}
         onPress={() =>
@@ -100,7 +100,7 @@ export default function GroupSettingsEventsScreen(props) {
         }
       />
       {/* <SingleLineWithIcon
-        icon={require('../../../assets/images/icons/meeting_place.png')}
+        icon={require('../../../assets/images/icons/person_pin_circle.png')}
         title={t('groups:settings.events.meetingPoint')}
         caption='Icaria 22, Barcelona'
         onPress={() =>

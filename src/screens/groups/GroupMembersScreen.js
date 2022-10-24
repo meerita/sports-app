@@ -257,7 +257,7 @@ export default function GroupMembersScreen(props) {
         ]
       : [
           <Image
-            source={require('../../assets/images/icons/admin_panel.png')}
+            source={require('../../assets/images/icons/supervisor_account.png')}
             style={{
               tintColor: darkMode
                 ? Colors.dark.OnSurfaceUnfocused

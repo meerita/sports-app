@@ -59,20 +59,35 @@ export default function EventOptionsGenderSelectorScreen(props) {
   const [selected, setSelected] = useState(currentGender);
 
   // options for the radio buttons
-  const OPTIONS = [
-    {
-      label: t('settings:profile.basicInformation.male'),
-      value: 'male',
-    },
-    {
-      label: t('settings:profile.basicInformation.female'),
-      value: 'female',
-    },
-    {
-      label: t('settings:profile.basicInformation.other'),
-      value: 'other',
-    },
-  ];
+  const OPTIONS = eventOnEdition
+    ? [
+        {
+          label: t('groups:settings.gender.male'),
+          value: 'male',
+        },
+        {
+          label: t('groups:settings.gender.female'),
+          value: 'female',
+        },
+        {
+          label: t('groups:settings.gender.other'),
+          value: 'other',
+        },
+      ]
+    : [
+        {
+          label: t('settings:profile.basicInformation.male'),
+          value: 'male',
+        },
+        {
+          label: t('settings:profile.basicInformation.female'),
+          value: 'female',
+        },
+        {
+          label: t('settings:profile.basicInformation.other'),
+          value: 'other',
+        },
+      ];
 
   return (
     <ScrollViewLayout>

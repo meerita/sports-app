@@ -1,6 +1,6 @@
 /** @format */
 
-import { ScrollView } from 'react-native';
+import { DrawerLayoutAndroid, ScrollView } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
@@ -37,7 +37,7 @@ export default function SettingsPreferencesScreen(props) {
         onPress={() => props.navigation.navigate('PreferencesDimensionsScreen')}
       />
       <SingleLineWithIcon
-        icon={require('../../assets/images/icons/weight.png')}
+        icon={require('../../assets/images/icons/scale.png')}
         title={t('settings:preferences.unitSystem')}
         caption={
           preferences.weights === 'imperial'
@@ -52,13 +52,17 @@ export default function SettingsPreferencesScreen(props) {
         caption='Español'
       />
       <SingleLineWithIcon
-        icon={require('../../assets/images/icons/dark_mode.png')}
-        title={t('settings:preferences.theme')}
+        icon={
+          darkMode
+            ? require('../../assets/images/icons/dark_mode.png')
+            : require('../../assets/images/icons/light_mode.png')
+        }
         caption={
           darkMode
             ? t('settings:preferences.themeDark')
             : t('settings:preferences.themeLight')
         }
+        title={t('settings:preferences.theme')}
         onPress={() => props.navigation.navigate('PreferencesThemeScreen')}
       />
     </ScrollView>

@@ -141,7 +141,7 @@ export default function MainBottomNavigation(props) {
           tabBarLabel: t('activity'),
           tabBarIcon: ({ color }) => (
             <Image
-              source={require('../assets/images/icons/Notifications.png')}
+              source={require('../assets/images/icons/notifications_active.png')}
               style={{ tintColor: color }}
             />
           ),
@@ -161,12 +161,12 @@ export default function MainBottomNavigation(props) {
               />
             ) : me.characteristics.gender === 'male' ? (
               <Image
-                source={require('../assets/images/icons/el.png')}
+                source={require('../assets/images/icons/face_male.png')}
                 style={{ tintColor: color }}
               />
             ) : me.characteristics.gender === 'female' ? (
               <Image
-                source={require('../assets/images/icons/ella.png')}
+                source={require('../assets/images/icons/face_female.png')}
                 style={{ tintColor: color }}
               />
             ) : (

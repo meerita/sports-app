@@ -40,7 +40,7 @@ export default function SettingsSubscriptionScreen(props) {
         title={t('settings:subscription.proBadge')}
       />
       <SingleLineWithIcon
-        icon={require('../../assets/images/icons/Admin.png')}
+        icon={require('../../assets/images/icons/supervisor_account.png')}
         title={t('settings:subscription.multiple')}
       />
       <SingleLineWithIcon
@@ -56,7 +56,7 @@ export default function SettingsSubscriptionScreen(props) {
         title={t('settings:subscription.discounts')}
       />
       <SingleLineWithIcon
-        icon={require('../../assets/images/icons/skill.png')}
+        icon={require('../../assets/images/icons/verified.png')}
         title={t('settings:subscription.prize')}
       />
       <ButtonFilled

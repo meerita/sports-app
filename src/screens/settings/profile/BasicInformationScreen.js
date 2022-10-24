@@ -22,11 +22,11 @@ export default function BasicInformationScreen(props) {
       <TwoLineWithIcon
         icon={
           me === null
-            ? require('../../../assets/images/icons/el.png')
+            ? require('../../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'male'
-            ? require('../../../assets/images/icons/el.png')
+            ? require('../../../assets/images/icons/face_male.png')
             : me.characteristics.gender === 'female'
-            ? require('../../../assets/images/icons/ella.png')
+            ? require('../../../assets/images/icons/face_female.png')
             : require('../../../assets/images/icons/question_mark.png')
         }
         title={t('settings:profile.basicInformation.userName')}
@@ -44,7 +44,7 @@ export default function BasicInformationScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../../assets/images/icons/profile.png')}
+        icon={require('../../../assets/images/icons/subject.png')}
         title={t('settings:profile.basicInformation.description')}
         subtitle={t('settings:profile.basicInformation.descriptionDesc')}
         onPress={() => {
@@ -52,7 +52,7 @@ export default function BasicInformationScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../../assets/images/icons/meeting_place.png')}
+        icon={require('../../../assets/images/icons/person_pin_circle.png')}
         title='Localización'
         subtitle='Cambia la localización de tu cuenta'
         onPress={() => {
@@ -74,7 +74,7 @@ export default function BasicInformationScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../../assets/images/icons/weight.png')}
+        icon={require('../../../assets/images/icons/scale.png')}
         title={t('settings:profile.basicInformation.weightHeight')}
         subtitle={t('settings:profile.basicInformation.weightHeightDesc')}
         onPress={() => {

@@ -8,7 +8,7 @@ import TwoLineWithIcon from '../../../components/Lists/TwoLines/TwoLineWithIcon'
 
 export default function GroupSettingsInformationScreen(props) {
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <TwoLineWithIcon
         icon={require('../../../assets/images/icons/info.png')}
         title={t('groups:settings.information.groupData')}
@@ -26,7 +26,7 @@ export default function GroupSettingsInformationScreen(props) {
         }}
       />
       <TwoLineWithIcon
-        icon={require('../../../assets/images/icons/photo.png')}
+        icon={require('../../../assets/images/icons/add_a_photo.png')}
         title={t('groups:settings.information.image')}
         subtitle={t('groups:settings.information.imageDesc')}
         onPress={() => {
