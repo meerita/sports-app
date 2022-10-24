@@ -27,6 +27,12 @@ export const eventSlice = createSlice({
     changeActivity(state, action) {
       state.eventDetail.activity = action.payload.activity;
     },
+    changeMaxParticipants(state, action) {
+      state.eventDetail.maxParticipants = action.payload.maxParticipants;
+    },
+    changeEventOpeness(state, action) {
+      state.eventDetail.open = action.payload.open;
+    },
   },
 });
 

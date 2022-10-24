@@ -3,7 +3,7 @@
 import { View, Text, Image, Dimensions, Linking } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEventDetail } from '../../store/actions/event';
+import { closeEvent, fetchEventDetail } from '../../store/actions/event';
 
 // COMPONENTS
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
@@ -33,6 +33,7 @@ export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
   const eventId = props.route.params._id;
   const me = useSelector(state => state.me.myData);
+  const groupDetail = useSelector(state => state.group.groupDetail);
 
   const dispatch = useDispatch();
 
@@ -54,11 +55,91 @@ export default function EventDetailScreen(props) {
     );
   }
 
-  const amIinThisGroup = me.groups.find(
+  // we purge the organizer
+  const participants = eventDetail.participants.filter(
+    participant => participant._id != eventDetail.organizer._id
+  );
+
+  const amIParticipanting = eventDetail.participants.find(
+    participant => participant._id === me._id
+  );
+
+  // these will be the core actions of the main button, depending the user
+  // who views the detail and the type of user.
+  const coreActions = {
+    close: {
+      text: 'Close event',
+      icon: require('../../assets/images/icons/close.png'),
+      name: 'bt_close',
+      position: 1,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    share: {
+      text: 'Join event',
+      icon: require('../../assets/images/icons/share.png'),
+      name: 'bt_share',
+      position: 2,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    join: {
+      text: 'Join event',
+      icon: require('../../assets/images/icons/suspense.png'),
+      name: 'bt_join',
+      position: 2,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    open: {
+      text: 'Open event',
+      icon: require('../../assets/images/icons/restart.png'),
+      name: 'bt_close',
+      position: 1,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    leave: {
+      text: 'Leave the event',
+      icon: require('../../assets/images/icons/event_out.png'),
+      name: 'bt_leave',
+      position: 4,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    edit: {
+      text: 'Edit event',
+      icon: require('../../assets/images/icons/event_edit.png'),
+      name: 'bt_edit',
+      position: 3,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    guest: {
+      text: 'Sign me as guest',
+      icon: require('../../assets/images/icons/rsvp.png'),
+      name: 'bt_petition',
+      position: 1,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+  };
+
+  // We must know how to trigger everything on this event, depending
+  // of the event policy, the people, etc.
+
+  // If the event is older than today, it can be closed
+  const canBeClosed = new Date(eventDetail.when) > new Date();
+  console.log('Can be closed? ' + canBeClosed);
+
+  // see if I am admin of the group
+  const amIAdminOfThisGroup = groupDetail.admins.find(
+    admin => admin._id === me._id
+  );
+
+  const amIMemberOfThisGroup = me.groups.find(
     myGroup => myGroup._id === eventDetail.group
   );
 
-  if (!amIinThisGroup && !eventDetail.visible) {
+  const amIanAdminOrOrganizer =
+    me._id === eventDetail.organizer._id || amIAdminOfThisGroup;
+
+  // if the user is not member of the group and the status of the eventdetail
+  // is invisible
+  if (!amIMemberOfThisGroup && !eventDetail.visible) {
     return (
       <View>
         <Text>Este evento es visible sólo para miembros del grupo</Text>
@@ -66,53 +147,28 @@ export default function EventDetailScreen(props) {
     );
   }
 
-  // we purge the organizer
-  const participants = eventDetail.participants.filter(
-    participant => participant._id != eventDetail.organizer._id
-  );
+  let actions = [];
 
-  const actions = [
-    {
-      text: 'Close event',
-      icon: require('../../assets/images/icons/close.png'),
-      name: 'bt_close',
-      position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
-    },
-    {
-      text: 'Sign me as guest',
-      icon: require('../../assets/images/icons/rsvp.png'),
-      name: 'bt_petition',
-      position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
-    },
-    {
-      text: 'Join event',
-      icon: require('../../assets/images/icons/suspense.png'),
-      name: 'bt_videocam',
-      position: 2,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
-    },
-    {
-      text: 'Edit event',
-      icon: require('../../assets/images/icons/event_edit.png'),
-      name: 'bt_language',
-      position: 3,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
-    },
-    {
-      text: 'Leave the event',
-      icon: require('../../assets/images/icons/event_out.png'),
-      name: 'bt_out',
-      position: 4,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
-    },
-  ];
+  const newActions = [];
+
+  const testcases = amIAdminOfThisGroup
+    ? eventDetail.open
+      ? amIParticipanting
+        ? canBeClosed
+          ? 'Soy admin del grupo, y soy participante: cerrar'
+          : 'Soy admin del grupo, y soy participante: cerrar, editar, salir del evento'
+        : 'soy admin, pero no estoy en la lista de participantes: cerrar , editar, unirme al evento'
+      : 'Soy admin, puedo reabrir el evento'
+    : 'no, i am not admin';
+
+  console.log(testcases);
 
   const eventFloatingButtonActions = name => {
     switch (name) {
-      case 'bt_videocam':
-        alert('videocam pressed');
+      case 'bt_close':
+        dispatch(
+          closeEvent({ eventId: eventDetail._id, groupId: eventDetail.group })
+        );
         break;
       case 'bt_lol':
         alert('btlol pressed');
@@ -239,10 +295,12 @@ export default function EventDetailScreen(props) {
             )
           }
         />
+        <Line />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/people.png')}
           title='Max participants'
           caption={eventDetail.maxParticipants}
+          onPress={() => props.navigation.navigate('MaxPlayersScreen')}
         />
         <Line />
         <SingleLineWithIcon
@@ -423,9 +481,9 @@ export default function EventDetailScreen(props) {
         </BodyTwo>
         <Spacer height={64} />
       </ScrollViewLayout>
-      {eventDetail.open && (
+      {eventDetail.open || amIanAdminOrOrganizer || amIAdminOfThisGroup ? (
         <FloatingAction
-          actions={actions}
+          actions={newActions}
           onPressItem={name => eventFloatingButtonActions(name)}
           color={darkMode ? Colors.dark.primary : Colors.light.primary}
           iconWidth={24}
@@ -438,6 +496,8 @@ export default function EventDetailScreen(props) {
           floatingIcon={require('../../assets/images/icons/event.png')}
           actionsPaddingTopBottom={0}
         />
+      ) : (
+        false
       )}
     </>
   );

@@ -208,6 +208,10 @@ import EventOptionsGenderSelectorScreen, {
   screenOptions as EventOptionsGenderSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsGenderSelectorScreen';
 
+import MaxPlayersScreen, {
+  screenOptions as MaxPlayersScreenOptions,
+} from '../screens/events/addEvent/MaxPlayersScreen';
+
 import EventOptionsParticipationSelectorScreen, {
   screenOptions as EventOptionsParticipationSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsParticipationSelectorScreen';
@@ -310,6 +314,11 @@ export default function MainNavigator(props) {
         name='SettingsAccountScreen'
         component={SettingsAccountScreen}
         options={SettingsAccountScreenOption}
+      />
+      <Stack.Screen
+        name='MaxPlayersScreen'
+        component={MaxPlayersScreen}
+        options={MaxPlayersScreenOptions}
       />
       <Stack.Screen
         name='SettingsProfileScreen'

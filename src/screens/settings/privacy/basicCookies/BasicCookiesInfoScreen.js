@@ -1,7 +1,8 @@
 /** @format */
 
-import { View, Text } from 'react-native';
 import React from 'react';
+
+// COMPONENTS
 import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyTwo from '../../../../components/type/BodyTwo';
 import SubHeader from '../../../../components/SubHeader/SubHeader';
