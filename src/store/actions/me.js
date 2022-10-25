@@ -9,6 +9,7 @@ const API_URL = 'http://192.168.1.48:8000';
 // ********************************************************
 
 export const fetchMyUser = userId => {
+  console.log(userId);
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user

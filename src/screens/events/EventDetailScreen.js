@@ -1,6 +1,6 @@
 /** @format */
 
-import { View, Text, Image, Dimensions, Linking } from 'react-native';
+import { View, Text, Image, Dimensions, Linking, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeEvent, fetchEventDetail } from '../../store/actions/event';
@@ -28,6 +28,7 @@ import Participant from '../../components/Lists/Participant/Participant';
 import Spacer from '../../components/Spacer/Spacer';
 import { FloatingAction } from 'react-native-floating-action';
 import user from '../../store/slices/user';
+import { fetchCurrentGroup } from '../../store/actions/group';
 
 export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -47,7 +48,7 @@ export default function EventDetailScreen(props) {
 
   const eventDetail = useSelector(state => state.event.eventDetail);
 
-  if (isLoading || !eventDetail) {
+  if (isLoading || !eventDetail || !groupDetail) {
     return (
       <View>
         <Text>Cargando evento</Text>
@@ -60,9 +61,16 @@ export default function EventDetailScreen(props) {
     participant => participant._id != eventDetail.organizer._id
   );
 
+  // my id is participating in the event?
   const amIParticipanting = eventDetail.participants.find(
     participant => participant._id === me._id
   );
+
+  const amIInvitedToEvent = eventDetail.invitations.find(
+    participant => participant._id === me._id
+  );
+
+  console.log(amIInvitedToEvent);
 
   // these will be the core actions of the main button, depending the user
   // who views the detail and the type of user.
@@ -75,8 +83,11 @@ export default function EventDetailScreen(props) {
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
     share: {
-      text: 'Join event',
-      icon: require('../../assets/images/icons/share.png'),
+      text: 'Share event',
+      icon:
+        Platform.OS === 'android'
+          ? require('../../assets/images/icons/share.png')
+          : require('../../assets/images/icons/ios_share.png'),
       name: 'bt_share',
       position: 2,
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
@@ -102,6 +113,13 @@ export default function EventDetailScreen(props) {
       position: 4,
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
+    leaveGuest: {
+      text: 'Leave as guest',
+      icon: require('../../assets/images/icons/event_out.png'),
+      name: 'bt_leave_guest',
+      position: 4,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
     edit: {
       text: 'Edit event',
       icon: require('../../assets/images/icons/event_edit.png'),
@@ -123,23 +141,44 @@ export default function EventDetailScreen(props) {
 
   // If the event is older than today, it can be closed
   const canBeClosed = new Date(eventDetail.when) > new Date();
-  console.log('Can be closed? ' + canBeClosed);
+  console.log(canBeClosed ? 'CANNOT BE CLOSED' : 'CAN BE CLOSED');
 
   // see if I am admin of the group
   const amIAdminOfThisGroup = groupDetail.admins.find(
     admin => admin._id === me._id
   );
+  console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
 
-  const amIMemberOfThisGroup = me.groups.find(
-    myGroup => myGroup._id === eventDetail.group
+  // am I a member of the group who organizes the event?
+  const amIMemberOfThisGroup = groupDetail.members.find(
+    member => member._id === me._id
+  );
+  console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
+
+  // am I a member of the group who organizes the event?
+  const amINoobOfThisGroup = groupDetail.noobs.find(
+    noob => noob._id === me._id
   );
 
-  const amIanAdminOrOrganizer =
-    me._id === eventDetail.organizer._id || amIAdminOfThisGroup;
+  console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
+
+  // Am I the organizer of the event
+  const amITheOrganizer = me._id === eventDetail.organizer._id;
+  console.log(amITheOrganizer ? 'I AM ORGANIZER' : 'I AM NOT ORGANIZER');
+
+  // what is the event participation policy?
+  const eventParticipationPolicy = eventDetail.allowedParticipants;
+  console.log('EVENT POLICY: ' + eventParticipationPolicy);
+
+  // Am I one of both?
+  const amIanAdminOrOrganizer = amITheOrganizer || amIAdminOfThisGroup;
+
+  // I belong to this group?
+  const iBelongToThisGroup = amINoobOfThisGroup || amIMemberOfThisGroup;
 
   // if the user is not member of the group and the status of the eventdetail
   // is invisible
-  if (!amIMemberOfThisGroup && !eventDetail.visible) {
+  if (!iBelongToThisGroup && !eventDetail.visibility) {
     return (
       <View>
         <Text>Este evento es visible sólo para miembros del grupo</Text>
@@ -149,19 +188,69 @@ export default function EventDetailScreen(props) {
 
   let actions = [];
 
-  const newActions = [];
-
-  const testcases = amIAdminOfThisGroup
+  const myActions = amIanAdminOrOrganizer
     ? eventDetail.open
       ? amIParticipanting
-        ? canBeClosed
-          ? 'Soy admin del grupo, y soy participante: cerrar'
-          : 'Soy admin del grupo, y soy participante: cerrar, editar, salir del evento'
-        : 'soy admin, pero no estoy en la lista de participantes: cerrar , editar, unirme al evento'
-      : 'Soy admin, puedo reabrir el evento'
-    : 'no, i am not admin';
+        ? (actions = actions.concat(
+            coreActions.leave,
+            coreActions.edit,
+            coreActions.close,
+            coreActions.share
+          )) // 'Soy el puto amo y ya estoy participando'
+        : (actions = actions.concat(
+            coreActions.join,
+            coreActions.edit,
+            coreActions.close,
+            coreActions.share
+          )) //'soy el puto amo y no estoy participando, puedo registrarme'
+      : (actions = actions.concat(coreActions.open, coreActions.share)) //'soy el puto amog y el evento está cerrado'
+    : iBelongToThisGroup
+    ? amIMemberOfThisGroup
+      ? eventParticipationPolicy != 'only-admins'
+        ? eventDetail.open
+          ? amIParticipanting
+            ? (actions = actions.concat(coreActions.leave, coreActions.share)) // 'soy miembro, y ya estoy participando'
+            : (actions = actions.concat(coreActions.join, coreActions.share)) //'Soy miembro, no estoy participando y puedo registrarme'
+          : (actions = actions.concat(coreActions.share)) // 'soy miembro no puedo registrarme porque el evento está cerrado'
+        : eventDetail.allowInvitations
+        ? eventDetail.open
+          ? amIInvitedToEvent || amIParticipanting
+            ? (actions = actions.concat(
+                coreActions.leaveGuest,
+                coreActions.share
+              )) // 'Soy miembro y ya estoy invitado'
+            : (actions = actions.concat(coreActions.guest, coreActions.share)) //'soy miembro y puedo registrame como invitado porque el evento está abierto y sólo para admins'
+          : (actions = actions.concat(coreActions.share)) // 'soy miembro y como invitado podría registrarme pero el evento está cerrado'
+        : (actions = actions.concat(coreActions.share)) //'soy miembro pero no puedo registrarme como nada porque está cerrado el evento'
+      : eventParticipationPolicy === 'any-member' ||
+        eventParticipationPolicy === 'anyone'
+      ? eventDetail.open
+        ? amIParticipanting
+          ? (actions = actions.concat(coreActions.leave, coreActions.share))
+          : (actions = actions.concat(coreActions.join, coreActions.share))
+        : (actions = actions.concat(coreActions.share))
+      : eventDetail.allowInvitations
+      ? eventDetail.open
+        ? amIInvitedToEvent || amIParticipanting
+          ? (actions = actions.concat(coreActions.leave, coreActions.share)) // 'Soy noob, podría registrarme como invitado pero ya estoy en la lista de invitados o miembros'
+          : (actions = actions.concat(coreActions.guest, coreActions.share)) //
+        : (actions = actions.concat(coreActions.share))
+      : (actions = actions.concat(coreActions.share)) // 'soy noob y no puedo registrarme para nada'
+    : eventParticipationPolicy === 'anyone'
+    ? eventDetail.open
+      ? amIParticipanting
+        ? (actions = actions.concat(coreActions.leave, coreActions.share))
+        : (actions = actions.concat(coreActions.join, coreActions.share))
+      : (actions = actions.concat(coreActions.share))
+    : eventDetail.allowInvitations
+    ? eventDetail.open
+      ? amIInvitedToEvent || amIParticipanting
+        ? (actions = actions.concat(coreActions.leave, coreActions.share))
+        : (actions = actions.concat(coreActions.guest, coreActions.share)) // could register as a guest because i am not member or anythnig
+      : (actions = actions.concat(coreActions.share)) // could not register as a guest because event is closed
+    : (actions = actions.concat(coreActions.share)); // can't register not even as guest
 
-  console.log(testcases);
+  console.log(myActions);
 
   const eventFloatingButtonActions = name => {
     switch (name) {
@@ -284,6 +373,24 @@ export default function EventDetailScreen(props) {
           caption={t(
             `groups:settings.events.types.${eventDetail.allowedParticipants}`
           )}
+          onPress={() =>
+            props.navigation.navigate(
+              'EventOptionsParticipationSelectorScreen',
+              {
+                editEvent: true,
+                eventId: eventDetail._id,
+                groupId: eventDetail.group,
+              }
+            )
+          }
+        />
+        <Line />
+        <SingleLineWithIcon
+          icon={require('../../assets/images/icons/manage_accounts.png')}
+          title={'Invitados?'}
+          caption={
+            eventDetail.allowInvitations ? 'se permiten invitados' : 'no'
+          }
           onPress={() =>
             props.navigation.navigate(
               'EventOptionsParticipationSelectorScreen',
@@ -481,24 +588,18 @@ export default function EventDetailScreen(props) {
         </BodyTwo>
         <Spacer height={64} />
       </ScrollViewLayout>
-      {eventDetail.open || amIanAdminOrOrganizer || amIAdminOfThisGroup ? (
-        <FloatingAction
-          actions={newActions}
-          onPressItem={name => eventFloatingButtonActions(name)}
-          color={darkMode ? Colors.dark.primary : Colors.light.primary}
-          iconWidth={24}
-          iconHeight={24}
-          iconColor={
-            darkMode
-              ? Colors.dark.OnPrimaryActive
-              : Colors.light.OnPrimaryActive
-          }
-          floatingIcon={require('../../assets/images/icons/event.png')}
-          actionsPaddingTopBottom={0}
-        />
-      ) : (
-        false
-      )}
+      <FloatingAction
+        actions={myActions}
+        onPressItem={name => eventFloatingButtonActions(name)}
+        color={darkMode ? Colors.dark.primary : Colors.light.primary}
+        iconWidth={24}
+        iconHeight={24}
+        iconColor={
+          darkMode ? Colors.dark.OnPrimaryActive : Colors.light.OnPrimaryActive
+        }
+        floatingIcon={require('../../assets/images/icons/event.png')}
+        actionsPaddingTopBottom={0}
+      />
     </>
   );
 }
