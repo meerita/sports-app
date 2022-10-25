@@ -76,14 +76,14 @@ export default function EventDetailScreen(props) {
   // who views the detail and the type of user.
   const coreActions = {
     close: {
-      text: 'Close event',
+      text: 'Close',
       icon: require('../../assets/images/icons/close.png'),
       name: 'bt_close',
       position: 1,
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
     share: {
-      text: 'Share event',
+      text: 'Share',
       icon:
         Platform.OS === 'android'
           ? require('../../assets/images/icons/share.png')
@@ -93,14 +93,14 @@ export default function EventDetailScreen(props) {
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
     join: {
-      text: 'Join event',
+      text: 'Participate',
       icon: require('../../assets/images/icons/suspense.png'),
       name: 'bt_join',
       position: 2,
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
     open: {
-      text: 'Open event',
+      text: 'Re-open',
       icon: require('../../assets/images/icons/restart.png'),
       name: 'bt_close',
       position: 1,
@@ -121,7 +121,7 @@ export default function EventDetailScreen(props) {
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
     edit: {
-      text: 'Edit event',
+      text: 'Edit',
       icon: require('../../assets/images/icons/event_edit.png'),
       name: 'bt_edit',
       position: 3,
@@ -131,6 +131,13 @@ export default function EventDetailScreen(props) {
       text: 'Sign me as guest',
       icon: require('../../assets/images/icons/rsvp.png'),
       name: 'bt_petition',
+      position: 1,
+      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+    },
+    delete: {
+      text: 'Delete',
+      icon: require('../../assets/images/icons/delete.png'),
+      name: 'bt_delete',
       position: 1,
       color: darkMode ? Colors.dark.primary : Colors.light.primary,
     },
@@ -195,15 +202,21 @@ export default function EventDetailScreen(props) {
             coreActions.leave,
             coreActions.edit,
             coreActions.close,
+            coreActions.delete,
             coreActions.share
           )) // 'Soy el puto amo y ya estoy participando'
         : (actions = actions.concat(
             coreActions.join,
             coreActions.edit,
             coreActions.close,
+            coreActions.delete,
             coreActions.share
           )) //'soy el puto amo y no estoy participando, puedo registrarme'
-      : (actions = actions.concat(coreActions.open, coreActions.share)) //'soy el puto amog y el evento está cerrado'
+      : (actions = actions.concat(
+          coreActions.open,
+          coreActions.delete,
+          coreActions.share
+        )) //'soy el puto amog y el evento está cerrado'
     : iBelongToThisGroup
     ? amIMemberOfThisGroup
       ? eventParticipationPolicy != 'only-admins'
@@ -349,65 +362,80 @@ export default function EventDetailScreen(props) {
           vamos por la montaña hasta Tiana, bajamos por ahí y llegamos a
           Badalona.
         </BodyOne>
-        <Line />
-        <SingleLineWithIcon
-          icon={require('../../assets/images/icons/visibility_on.png')}
-          title={t('settings:profile.basicInformation.visibility.visibility')}
-          caption={
-            eventDetail.visibility
-              ? t('groups:settings.events.types.anyone')
-              : t('groups:settings.events.types.only-my-group')
-          }
-          onPress={() =>
-            props.navigation.navigate('EventOptionsVisibilitySelectorScreen', {
-              editEvent: true,
-              eventId: eventDetail._id,
-              groupId: eventDetail.group,
-            })
-          }
-        />
-        <Line />
-        <SingleLineWithIcon
-          icon={require('../../assets/images/icons/manage_accounts.png')}
-          title={'Participation…'}
-          caption={t(
-            `groups:settings.events.types.${eventDetail.allowedParticipants}`
-          )}
-          onPress={() =>
-            props.navigation.navigate(
-              'EventOptionsParticipationSelectorScreen',
-              {
-                editEvent: true,
-                eventId: eventDetail._id,
-                groupId: eventDetail.group,
+
+        {amIanAdminOrOrganizer ? (
+          <>
+            <Line />
+            <SingleLineWithIcon
+              icon={require('../../assets/images/icons/visibility_on.png')}
+              title={t(
+                'settings:profile.basicInformation.visibility.visibility'
+              )}
+              caption={
+                eventDetail.visibility
+                  ? t('groups:settings.events.types.anyone')
+                  : t('groups:settings.events.types.only-my-group')
               }
-            )
-          }
-        />
-        <Line />
-        <SingleLineWithIcon
-          icon={require('../../assets/images/icons/manage_accounts.png')}
-          title={'Invitados?'}
-          caption={
-            eventDetail.allowInvitations ? 'se permiten invitados' : 'no'
-          }
-          onPress={() =>
-            props.navigation.navigate(
-              'EventOptionsParticipationSelectorScreen',
-              {
-                editEvent: true,
-                eventId: eventDetail._id,
-                groupId: eventDetail.group,
+              onPress={() =>
+                props.navigation.navigate(
+                  'EventOptionsVisibilitySelectorScreen',
+                  {
+                    editEvent: true,
+                    eventId: eventDetail._id,
+                    groupId: eventDetail.group,
+                  }
+                )
               }
-            )
-          }
-        />
+            />
+            <Line />
+            <SingleLineWithIcon
+              icon={require('../../assets/images/icons/manage_accounts.png')}
+              title={'Participation…'}
+              caption={t(
+                `groups:settings.events.types.${eventDetail.allowedParticipants}`
+              )}
+              onPress={() =>
+                props.navigation.navigate(
+                  'EventOptionsParticipationSelectorScreen',
+                  {
+                    editEvent: true,
+                    eventId: eventDetail._id,
+                    groupId: eventDetail.group,
+                  }
+                )
+              }
+            />
+            <Line />
+            <SingleLineWithIcon
+              icon={require('../../assets/images/icons/manage_accounts.png')}
+              title={'Invitados?'}
+              caption={
+                eventDetail.allowInvitations ? 'se permiten invitados' : 'no'
+              }
+              onPress={() =>
+                props.navigation.navigate(
+                  'EventOptionsParticipationSelectorScreen',
+                  {
+                    editEvent: true,
+                    eventId: eventDetail._id,
+                    groupId: eventDetail.group,
+                  }
+                )
+              }
+            />
+          </>
+        ) : (
+          false
+        )}
         <Line />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/group.png')}
           title='Max participants'
           caption={eventDetail.maxParticipants}
-          onPress={() => props.navigation.navigate('MaxPlayersScreen')}
+          onPress={() =>
+            amIanAdminOrOrganizer &&
+            props.navigation.navigate('MaxPlayersScreen')
+          }
         />
         <Line />
         <SingleLineWithIcon
@@ -429,6 +457,7 @@ export default function EventDetailScreen(props) {
             `typesOfActivity:${eventDetail.sport.title}.${eventDetail.activity}.label`
           )}
           onPress={() =>
+            amIanAdminOrOrganizer &&
             props.navigation.navigate(
               'EventOptionsTypeOfActivitySelectorScreen',
               {
@@ -444,6 +473,7 @@ export default function EventDetailScreen(props) {
           title={'Dificultad'}
           caption={t(`skills:${eventDetail.skill}.title`)}
           onPress={() =>
+            amIanAdminOrOrganizer &&
             props.navigation.navigate('EventOptionsSkillsSelectorScreen', {
               editEvent: true,
               eventId: eventDetail._id,
@@ -451,32 +481,56 @@ export default function EventDetailScreen(props) {
             })
           }
         />
-        <SingleLineWithIcon
-          icon={
-            eventDetail.allowedGender === 'other'
-              ? require('../../assets/images/icons/question_mark.png')
-              : eventDetail.allowedGender === 'male'
-              ? require('../../assets/images/icons/male.png')
-              : require('../../assets/images/icons/female.png')
-          }
-          title={'Evento para…'}
-          caption={t(
-            `groups:settings.gender.${
+        {amIanAdminOrOrganizer ? (
+          <SingleLineWithIcon
+            icon={
               eventDetail.allowedGender === 'other'
-                ? 'other'
+                ? require('../../assets/images/icons/question_mark.png')
                 : eventDetail.allowedGender === 'male'
-                ? 'male'
-                : 'female'
-            }`
-          )}
-          onPress={() =>
-            props.navigation.navigate('EventOptionsGenderSelectorScreen', {
-              editEvent: true,
-              eventId: eventDetail._id,
-              groupId: eventDetail.group,
-            })
-          }
-        />
+                ? require('../../assets/images/icons/male.png')
+                : require('../../assets/images/icons/female.png')
+            }
+            title={'Evento para…'}
+            caption={t(
+              `groups:settings.gender.${
+                eventDetail.allowedGender === 'other'
+                  ? 'other'
+                  : eventDetail.allowedGender === 'male'
+                  ? 'male'
+                  : 'female'
+              }`
+            )}
+            onPress={() =>
+              props.navigation.navigate('EventOptionsGenderSelectorScreen', {
+                editEvent: true,
+                eventId: eventDetail._id,
+                groupId: eventDetail.group,
+              })
+            }
+          />
+        ) : eventDetail.allowedGender != 'other' ? (
+          <SingleLineWithIcon
+            icon={
+              eventDetail.allowedGender === 'other'
+                ? require('../../assets/images/icons/question_mark.png')
+                : eventDetail.allowedGender === 'male'
+                ? require('../../assets/images/icons/male.png')
+                : require('../../assets/images/icons/female.png')
+            }
+            title={'Evento para…'}
+            caption={t(
+              `groups:settings.gender.${
+                eventDetail.allowedGender === 'other'
+                  ? 'other'
+                  : eventDetail.allowedGender === 'male'
+                  ? 'male'
+                  : 'female'
+              }`
+            )}
+          />
+        ) : (
+          false
+        )}
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/timer.png')}
           title={'Duración'}
