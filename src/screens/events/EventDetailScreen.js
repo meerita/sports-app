@@ -1,9 +1,23 @@
 /** @format */
 
-import { View, Text, Image, Dimensions, Linking, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  Linking,
+  Platform,
+  Alert,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeEvent, fetchEventDetail } from '../../store/actions/event';
+import {
+  closeEvent,
+  fetchEventDetail,
+  joinMeThisEventAsParticipant,
+  joinThisEventAsParticipant,
+  leaveMeThisEventAsParticipant,
+} from '../../store/actions/event';
 
 // COMPONENTS
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
@@ -29,6 +43,7 @@ import Spacer from '../../components/Spacer/Spacer';
 import { FloatingAction } from 'react-native-floating-action';
 import user from '../../store/slices/user';
 import { fetchCurrentGroup } from '../../store/actions/group';
+import SuperHeader from '../../components/Headers/SuperHeader/SuperHeader';
 
 export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -62,25 +77,28 @@ export default function EventDetailScreen(props) {
   );
 
   // my id is participating in the event?
-  const amIParticipanting = eventDetail.participants.find(
-    participant => participant._id === me._id
-  );
+  const amIParticipanting =
+    eventDetail.participants.find(participant => participant._id === me._id) ||
+    eventDetail.replacements.find(participant => participant._id === me._id);
 
   const amIInvitedToEvent = eventDetail.invitations.find(
     participant => participant._id === me._id
   );
 
-  console.log(amIInvitedToEvent);
-
   // these will be the core actions of the main button, depending the user
   // who views the detail and the type of user.
+
+  const darkModeOption = darkMode
+    ? Colors.dark.secondary
+    : Colors.light.secondary;
+
   const coreActions = {
     close: {
       text: 'Close',
       icon: require('../../assets/images/icons/close.png'),
       name: 'bt_close',
       position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     share: {
       text: 'Share',
@@ -90,56 +108,56 @@ export default function EventDetailScreen(props) {
           : require('../../assets/images/icons/ios_share.png'),
       name: 'bt_share',
       position: 2,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     join: {
       text: 'Participate',
       icon: require('../../assets/images/icons/suspense.png'),
       name: 'bt_join',
       position: 2,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     open: {
       text: 'Re-open',
       icon: require('../../assets/images/icons/restart.png'),
-      name: 'bt_close',
+      name: 'bt_open',
       position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     leave: {
       text: 'Leave the event',
       icon: require('../../assets/images/icons/event_out.png'),
       name: 'bt_leave',
       position: 4,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     leaveGuest: {
       text: 'Leave as guest',
       icon: require('../../assets/images/icons/event_out.png'),
       name: 'bt_leave_guest',
       position: 4,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     edit: {
       text: 'Edit',
       icon: require('../../assets/images/icons/event_edit.png'),
       name: 'bt_edit',
       position: 3,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     guest: {
       text: 'Sign me as guest',
       icon: require('../../assets/images/icons/rsvp.png'),
       name: 'bt_petition',
       position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
     delete: {
       text: 'Delete',
       icon: require('../../assets/images/icons/delete.png'),
       name: 'bt_delete',
       position: 1,
-      color: darkMode ? Colors.dark.primary : Colors.light.primary,
+      color: darkModeOption,
     },
   };
 
@@ -148,34 +166,34 @@ export default function EventDetailScreen(props) {
 
   // If the event is older than today, it can be closed
   const canBeClosed = new Date(eventDetail.when) > new Date();
-  console.log(canBeClosed ? 'CANNOT BE CLOSED' : 'CAN BE CLOSED');
+  // console.log(canBeClosed ? 'CANNOT BE CLOSED' : 'CAN BE CLOSED');
 
   // see if I am admin of the group
   const amIAdminOfThisGroup = groupDetail.admins.find(
     admin => admin._id === me._id
   );
-  console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
+  // console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
 
   // am I a member of the group who organizes the event?
   const amIMemberOfThisGroup = groupDetail.members.find(
     member => member._id === me._id
   );
-  console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
+  // console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
 
   // am I a member of the group who organizes the event?
   const amINoobOfThisGroup = groupDetail.noobs.find(
     noob => noob._id === me._id
   );
 
-  console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
+  // console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
 
   // Am I the organizer of the event
   const amITheOrganizer = me._id === eventDetail.organizer._id;
-  console.log(amITheOrganizer ? 'I AM ORGANIZER' : 'I AM NOT ORGANIZER');
+  // console.log(amITheOrganizer ? 'I AM ORGANIZER' : 'I AM NOT ORGANIZER');
 
   // what is the event participation policy?
   const eventParticipationPolicy = eventDetail.allowedParticipants;
-  console.log('EVENT POLICY: ' + eventParticipationPolicy);
+  // console.log('EVENT POLICY: ' + eventParticipationPolicy);
 
   // Am I one of both?
   const amIanAdminOrOrganizer = amITheOrganizer || amIAdminOfThisGroup;
@@ -263,19 +281,82 @@ export default function EventDetailScreen(props) {
       : (actions = actions.concat(coreActions.share)) // could not register as a guest because event is closed
     : (actions = actions.concat(coreActions.share)); // can't register not even as guest
 
-  console.log(myActions);
+  // console.log(myActions);
 
   const eventFloatingButtonActions = name => {
     switch (name) {
       case 'bt_close':
-        dispatch(
-          closeEvent({ eventId: eventDetail._id, groupId: eventDetail.group })
-        );
+        askMeBeforeExcecute({
+          message: 'Are you sure you want to close this event?',
+          action: () =>
+            dispatch(
+              closeEvent({
+                eventId: eventId,
+                groupId: eventDetail.group,
+              })
+            ),
+        });
         break;
-      case 'bt_lol':
-        alert('btlol pressed');
+      case 'bt_open':
+        askMeBeforeExcecute({
+          message: 'Are you sure you want to re-open this event?',
+          action: () =>
+            dispatch(
+              closeEvent({
+                eventId: eventId,
+                groupId: eventDetail.group,
+              })
+            ),
+        });
+        break;
+      case 'bt_join':
+        try {
+          dispatch(
+            joinMeThisEventAsParticipant({
+              proposerId: me._id,
+              groupId: eventDetail.group,
+              gender: me.characteristics.gender,
+              participantId: me._id,
+              eventId: eventDetail._id,
+            })
+          );
+        } catch (error) {
+          console.log(error);
+        }
+        break;
+      case 'bt_leave':
+        try {
+          dispatch(
+            leaveMeThisEventAsParticipant({
+              proposerId: me._id,
+              groupId: eventDetail.group,
+              participantId: me._id,
+              eventId: eventDetail._id,
+            })
+          );
+        } catch (error) {
+          console.log(error);
+        }
         break;
     }
+  };
+
+  const askMeBeforeExcecute = alert => {
+    Alert.alert(
+      '',
+      alert.message,
+      [
+        {
+          text: t('common:cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('common:accept'),
+          onPress: alert.action,
+        },
+      ],
+      { cancelable: true, userInterfaceStyle: darkMode ? 'dark' : 'light' }
+    );
   };
 
   const goToExternalLink = url => {
@@ -284,26 +365,7 @@ export default function EventDetailScreen(props) {
 
   return (
     <>
-      <View
-        style={{
-          shadowColor: darkMode ? Colors.dark.shadow : Colors.light.shadow,
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 1.41,
-          elevation: 2,
-          backgroundColor: darkMode
-            ? Colors.dark.surface
-            : Colors.light.surface,
-          paddingLeft: 16,
-          paddingRight: 16,
-          paddingBottom: 24,
-          zIndex: 24,
-          borderRadius: 0,
-        }}
-      >
+      <SuperHeader>
         <HeadlineFive
           style={{
             color: darkMode
@@ -313,7 +375,7 @@ export default function EventDetailScreen(props) {
         >
           {eventDetail.title}
         </HeadlineFive>
-      </View>
+      </SuperHeader>
       <ScrollViewLayout>
         {!eventDetail.open && (
           <View

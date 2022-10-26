@@ -33,7 +33,7 @@ export default function GroupEventsScreen(props) {
 
   const newEvents = groupEvents.filter(group => group.open);
 
-  const pastEvents = groupEvents.filter(group => !group.open);
+  const pastEvents = groupEvents.filter(group => group.open === false);
 
   if (groupEvents.length < 1) {
     return (

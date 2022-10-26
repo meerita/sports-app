@@ -371,3 +371,91 @@ export const closeEvent = data => {
     }
   };
 };
+
+export const joinMeThisEventAsParticipant = data => {
+  const { participantId, proposerId, groupId, gender, eventId } = data;
+  return async dispatch => {
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/participants/add`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            proposerId: proposerId,
+            participantId: participantId,
+            groupId: groupId,
+            gender: gender,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const changedEvent = await changeEventData();
+      console.log(changedEvent);
+      await dispatch(fetchEventDetail(eventId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const leaveMeThisEventAsParticipant = data => {
+  const { participantId, proposerId, groupId, gender, eventId } = data;
+  console.log(data);
+  return async dispatch => {
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/participants/remove`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            proposerId: proposerId,
+            participantId: participantId,
+            groupId: groupId,
+            gender: gender,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await changeEventData();
+      await dispatch(fetchEventDetail(eventId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
