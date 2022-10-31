@@ -12,11 +12,11 @@ import SingleLineWithIcon from '../../components/Lists/OneLine/SingleLineWithIco
 import SubHeader from '../../components/SubHeader/SubHeader';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 // STORE & ACTIONS
 import { fetchVisibleSports } from '../../store/actions/explore';
 import { EVENTS } from '../../data/dummy-data-events';
-import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 
 export default function ExploreScreen(props) {
   const dispatch = useDispatch();

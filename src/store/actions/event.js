@@ -2,7 +2,7 @@
 
 import event, { eventActions } from '../slices/event';
 
-const API_URL = 'http://192.168.1.48:8000';
+const API_URL = 'http://192.168.1.42:9000';
 
 // ********************************************************
 // Function to fetch an user
