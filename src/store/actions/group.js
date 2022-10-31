@@ -116,13 +116,12 @@ export const createANewGroup = () => {
       // we will
       const newGroupData = await createGroup();
       await subscribeUserToNewGroup(newGroupData.group._id);
-      // await subscribeUserToNewGroup(newGroupData.)
 
-      // await dispatch(
-      //   groupActions.fetchGroup({
-      //     group: groupData.group,
-      //   })
-      // );
+      await dispatch(
+        groupActions.fetchGroup({
+          group: newGroupData.group._id,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
