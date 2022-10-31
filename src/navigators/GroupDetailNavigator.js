@@ -32,6 +32,7 @@ import HeadlineFive from '../components/type/HeadlineFive';
 import IconButton from '../components/IconButton/IconButton';
 import Colors from '../constants/Colors';
 import ScrollViewLayout from '../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import { FloatingAction } from 'react-native-floating-action';
 
 const Tabs = createMaterialTopTabNavigator();
 
@@ -173,28 +174,30 @@ export default function GroupDetailNavigator(props) {
   }
 
   return (
-    <Tabs.Navigator screenOptions={tabOptions}>
-      <Tabs.Screen
-        name={t('groups:settings.information.information')}
-        component={GroupInfoScreen}
-        options={GroupInfoScreenOptions}
-      />
+    <>
+      <Tabs.Navigator screenOptions={tabOptions}>
+        <Tabs.Screen
+          name={t('groups:settings.information.information')}
+          component={GroupInfoScreen}
+          options={GroupInfoScreenOptions}
+        />
 
-      {!currentGroup.preferences.group.visibility.private && (
-        <>
-          <Tabs.Screen
-            name={t('groups:settings.events.events')}
-            component={GroupEventsScreen}
-            options={GroupEventsScreenOptions}
-          />
-          <Tabs.Screen
-            name={t('groups:settings.members')}
-            component={GroupMembersScreen}
-            options={GroupMembersScreenOptions}
-          />
-        </>
-      )}
-    </Tabs.Navigator>
+        {!currentGroup.preferences.group.visibility.private && (
+          <>
+            <Tabs.Screen
+              name={t('groups:settings.events.events')}
+              component={GroupEventsScreen}
+              options={GroupEventsScreenOptions}
+            />
+            <Tabs.Screen
+              name={t('groups:settings.members')}
+              component={GroupMembersScreen}
+              options={GroupMembersScreenOptions}
+            />
+          </>
+        )}
+      </Tabs.Navigator>
+    </>
   );
 }
 

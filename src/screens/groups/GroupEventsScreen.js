@@ -1,20 +1,27 @@
 /** @format */
 
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
+import { FloatingAction } from 'react-native-floating-action';
+import moment from 'moment';
 
-// components
+// COMPONENTS
 import SubtitleOne from '../../components/type/SubtitleOne';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
 import SubHeader from '../../components/SubHeader/SubHeader';
+import EventListItem from '../../components/Lists/EventListItem/EventListItem';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
 
 // STORE
 import { getGroupEvents } from '../../store/actions/group';
-import EventListItem from '../../components/Lists/EventListItem/EventListItem';
-import moment from 'moment';
+
+// CONSTANTS
+import Colors from '../../constants/Colors';
+import HeadlineFive from '../../components/type/HeadlineFive';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
 
 export default function GroupEventsScreen(props) {
   // darkMode
@@ -35,11 +42,70 @@ export default function GroupEventsScreen(props) {
 
   const pastEvents = groupEvents.filter(group => group.open === false);
 
+  const darkModeOption = darkMode
+    ? Colors.dark.secondary
+    : Colors.light.secondary;
+
+  const coreActions = {
+    create: {
+      text: 'Create',
+      icon: require('../../assets/images/icons/event.png'),
+      name: 'bt_create',
+      position: 1,
+      color: darkModeOption,
+    },
+  };
+
+  let myActions = [coreActions.create];
+
+  const eventFloatingButtonActions = name => {
+    switch (name) {
+      case 'bt_create':
+        props.navigation.navigate('CreateEventScreen');
+        break;
+    }
+  };
+
   if (groupEvents.length < 1) {
     return (
-      <ScrollViewLayout>
-        <SubtitleOne>This group has no events</SubtitleOne>
-      </ScrollViewLayout>
+      <>
+        <PlaceholderLayout>
+          <Image
+            source={require('../../assets/images/placeholders/event_placeholder.png')}
+            style={{
+              tintColor: darkMode
+                ? Colors.dark.OnBackgroundUnfocused
+                : Colors.light.OnBackgroundUnfocused,
+              marginBottom: 16,
+            }}
+          />
+          <HeadlineFive
+            style={{
+              color: darkMode
+                ? Colors.dark.OnBackgroundUnfocused
+                : Colors.light.OnBackgroundUnfocused,
+            }}
+          >
+            This group has no events
+          </HeadlineFive>
+        </PlaceholderLayout>
+        <FloatingAction
+          actions={myActions}
+          onPressItem={name => eventFloatingButtonActions(name)}
+          color={darkMode ? Colors.dark.primary : Colors.light.primary}
+          overlayColor='rgba(68, 68, 68, 0)'
+          overrideWithAction
+          iconWidth={24}
+          iconHeight={24}
+          iconColor={
+            darkMode
+              ? Colors.dark.OnPrimaryActive
+              : Colors.light.OnPrimaryActive
+          }
+          floatingIcon={require('../../assets/images/icons/event.png')}
+          actionsPaddingTopBottom={0}
+        />
+      </>
     );
   }
 

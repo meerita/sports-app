@@ -43,7 +43,7 @@ import ExploreGroupsBySport, {
 } from '../screens/explore/ExploreGroupsBySport';
 
 // ************************************************
-// SETTINGS CREENS
+// SETTINGS SCREENS
 // ************************************************
 
 import SettingsScreen, {
@@ -196,6 +196,10 @@ import GroupSettingsInformationFormScreen, {
   screenOptions as GroupSettingsInformationFormScreenOptions,
 } from '../screens/groups/settings/GroupSettingsInformationFormScreen/GroupSettingsInformationFormScreen';
 
+// ************************************************
+// EVENTS SCREENS
+// ************************************************
+
 import EventOptionsTypeOfActivitySelectorScreen, {
   screenOptions as EventOptionsTypeOfActivitySelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsTypeOfActivitySelectorScreen';
@@ -231,6 +235,10 @@ import EventOptionsSkillsSelectorScreen, {
 import EventDetailScreen, {
   screenOptions as EventDetailScreenOptions,
 } from '../screens/events/EventDetailScreen';
+
+import CreateEventScreen, {
+  screenOptions as CreateEventScreenOptions,
+} from '../screens/events/addEvent/CreateEventScreen';
 
 // STORE
 import { themeActions } from '../store/slices/theme';
@@ -405,6 +413,11 @@ export default function MainNavigator(props) {
         name='PreferencesThemeScreen'
         component={PreferencesThemeScreen}
         options={PreferencesThemeScreenOption}
+      />
+      <Stack.Screen
+        name='CreateEventScreen'
+        component={CreateEventScreen}
+        options={CreateEventScreenOptions}
       />
       <Stack.Screen
         name='ChangePasswordScreen'
