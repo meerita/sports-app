@@ -17,14 +17,16 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 import {
   updateEventVisibility,
   updateMyGroupDiversity,
+  updateMyGroupInvitations,
 } from '../../../../store/actions/group';
 import {
   changeCustomEventVisibility,
   changeEventGenderRequirement,
+  changeEventInvitations,
 } from '../../../../store/actions/event';
 import { eventActions } from '../../../../store/slices/event';
 
-export default function EventOptionsGenderSelectorScreen(props) {
+export default function EventOptionsInvitationsSelectorScreen(props) {
   // we use this to use different texts and dispatch functions depending
   // if we are editing one event or the group settings events
   const eventOnEdition = props.route.params
@@ -39,17 +41,13 @@ export default function EventOptionsGenderSelectorScreen(props) {
   const groupId = props.route.params ? props.route.params.groupId : false;
 
   // event visibility settings or group event visibility settings
-  const genderSelector = eventOnEdition
-    ? useSelector(state => state.event.eventDetail.allowedGender)
+  const invitationSelector = eventOnEdition
+    ? useSelector(state => state.event.eventDetail.allowInvitations)
     : createEvent
-    ? useSelector(state => state.event.createEvent.allowedGender)
+    ? useSelector(state => state.event.createEvent.allowInvitations)
     : useSelector(
-        state => state.group.groupDetail.preferences.group.membership.diversity
+        state => state.group.groupDetail.preferences.event.invitations
       );
-
-  // we will find out which gender this user has and set it as initial state
-  const currentGender =
-    genderSelector === 'male' ? 0 : genderSelector === 'female' ? 1 : 2;
 
   // we initialize Toasts
   const toast = useToast();
@@ -64,46 +62,26 @@ export default function EventOptionsGenderSelectorScreen(props) {
   const dispatch = useDispatch();
 
   // what radiobutton is checked first
-  const [selected, setSelected] = useState(currentGender);
+  const [selected, setSelected] = useState(!invitationSelector ? 0 : 1);
 
-  // options for the radio buttons
-  const OPTIONS =
-    eventOnEdition || createEvent
-      ? [
-          {
-            label: t('groups:settings.gender.male'),
-            value: 'male',
-          },
-          {
-            label: t('groups:settings.gender.female'),
-            value: 'female',
-          },
-          {
-            label: t('groups:settings.gender.other'),
-            value: 'other',
-          },
-        ]
-      : [
-          {
-            label: t('settings:profile.basicInformation.male'),
-            value: 'male',
-          },
-          {
-            label: t('settings:profile.basicInformation.female'),
-            value: 'female',
-          },
-          {
-            label: t('settings:profile.basicInformation.other'),
-            value: 'other',
-          },
-        ];
+  // The current options for creating the radio button options
+  const OPTIONS = [
+    {
+      label: 'No invitations',
+      value: false,
+    },
+    {
+      label: 'Invitations allowed',
+      value: true,
+    },
+  ];
 
   return (
     <ScrollViewLayout>
       <BodyTwo style={{ padding: 16 }}>
-        {eventOnEdition
-          ? 'May require only males, only females or it can be mixed. This will affect which people will be able to participate.'
-          : t('settings:profile.basicInformation.genderInfo')}
+        {eventOnEdition || createEvent
+          ? 'Allow non-group users to register in your event on the invitatation list. You can add them as participant manually.'
+          : 'When you create an event, you can preset the invitation feature. All non-members can register in your event in the invitation list. You can add them as participant manually.'}
       </BodyTwo>
       <SingleLineWithRadio
         options={OPTIONS}
@@ -111,18 +89,16 @@ export default function EventOptionsGenderSelectorScreen(props) {
         onChangeSelect={(option, index) => (
           dispatch(
             eventOnEdition
-              ? changeEventGenderRequirement({
+              ? changeEventInvitations({
                   eventId: eventId,
                   groupId: groupId,
                   gender: option.value,
                 })
               : createEvent
-              ? dispatch(
-                  eventActions.createEventGender({
-                    allowedGender: option.value,
-                  })
-                )
-              : updateMyGroupDiversity(option.value)
+              ? eventActions.createEventInvitations({
+                  allowInvitations: option.value,
+                })
+              : updateMyGroupInvitations(option.value)
           ),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
@@ -144,8 +120,8 @@ export const screenOptions = navData => {
   return {
     headerTitle:
       editingEvent || createEvent
-        ? 'Required gender'
-        : t('settings:profile.basicInformation.gender'),
+        ? 'Allow invitation list'
+        : 'Invitation list options',
     presentation: 'modal',
   };
 };

@@ -12,6 +12,7 @@ import { useToast } from 'react-native-toast-notifications';
 import BodyTwo from '../../../../components/type/BodyTwo';
 import { updateEventParticipation } from '../../../../store/actions/group';
 import { changeEventParticipation } from '../../../../store/actions/event';
+import { eventActions } from '../../../../store/slices/event';
 
 export default function EventOptionsParticipationSelectorScreen(props) {
   // we use this to use different texts and dispatch functions depending
@@ -19,12 +20,19 @@ export default function EventOptionsParticipationSelectorScreen(props) {
   const eventOnEdition = props.route.params
     ? props.route.params.editEvent
     : false;
+
+  const createEvent = props.route.params
+    ? props.route.params.createEvent
+    : false;
+
   const eventId = props.route.params ? props.route.params.eventId : false;
   const groupId = props.route.params ? props.route.params.groupId : false;
 
   // groupDetails
   const participationPreferences = eventOnEdition
     ? useSelector(state => state.event.eventDetail.allowedParticipants)
+    : createEvent
+    ? useSelector(state => state.event.createEvent.allowedParticipants)
     : useSelector(
         state => state.group.groupDetail.preferences.events.participation
       );
@@ -82,6 +90,12 @@ export default function EventOptionsParticipationSelectorScreen(props) {
                   groupId: groupId,
                   allowedParticipants: option.value,
                 })
+              : createEvent
+              ? dispatch(
+                  eventActions.createEventParticipation({
+                    allowedParticipants: option.value,
+                  })
+                )
               : updateEventParticipation(option.value)
           ),
           setSelected(index),

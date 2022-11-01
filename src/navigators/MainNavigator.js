@@ -240,6 +240,14 @@ import CreateEventScreen, {
   screenOptions as CreateEventScreenOptions,
 } from '../screens/events/addEvent/CreateEventScreen';
 
+import CreateEventOptionsScreen, {
+  screenOptions as CreateEventOptionsScreenOptions,
+} from '../screens/events/addEvent/CreateEventOptionsScreen';
+
+import EventOptionsInvitationsSelectorScreen, {
+  screenOptions as EventOptionsInvitationsSelectorScreenOptions,
+} from '../screens/groups/settings/EventsOptions/EventOptionsInvitationsSelectorScreen';
+
 // STORE
 import { themeActions } from '../store/slices/theme';
 
@@ -347,6 +355,16 @@ export default function MainNavigator(props) {
         name='EventOptionsTypeOfActivitySelectorScreen'
         component={EventOptionsTypeOfActivitySelectorScreen}
         options={EventOptionsTypeOfActivitySelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='EventOptionsInvitationsSelectorScreen'
+        component={EventOptionsInvitationsSelectorScreen}
+        options={EventOptionsInvitationsSelectorScreenOptions}
+      />
+      <Stack.Screen
+        name='CreateEventOptionsScreen'
+        component={CreateEventOptionsScreen}
+        options={CreateEventOptionsScreenOptions}
       />
       <Stack.Screen
         name='SettingsSubscriptionScreen'

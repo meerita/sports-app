@@ -23,8 +23,10 @@ import {
   changeCustomEventVisibility,
   changeEventActivity,
   changeEventGenderRequirement,
+  changeEventMaxParticipants,
 } from '../../../../store/actions/event';
 import TwoLineWithRadio from '../../../../components/Lists/TwoLines/TwoLineWithRadio';
+import { eventActions } from '../../../../store/slices/event';
 
 export default function EventOptionsTypeOfActivitySelectorScreen(props) {
   // we use this to use different texts and dispatch functions depending
@@ -32,6 +34,11 @@ export default function EventOptionsTypeOfActivitySelectorScreen(props) {
   const eventOnEdition = props.route.params
     ? props.route.params.editEvent
     : false;
+  // i am creating a new event
+  const creatingEvent = props.route.params
+    ? props.route.params.createEvent
+    : false;
+
   const eventId = props.route.params ? props.route.params.eventId : false;
   const groupId = props.route.params ? props.route.params.groupId : false;
 
@@ -45,6 +52,8 @@ export default function EventOptionsTypeOfActivitySelectorScreen(props) {
 
   const activityPreferences = eventOnEdition
     ? useSelector(state => state.event.eventDetail.activity)
+    : creatingEvent
+    ? useSelector(state => state.event.createEvent.activity)
     : useSelector(state => state.group.groupDetail.preferences.events.activity);
 
   const currentSportSelector =
@@ -77,21 +86,25 @@ export default function EventOptionsTypeOfActivitySelectorScreen(props) {
       label: t(`typesOfActivity:${currentSport}.type_one.label`),
       description: t(`typesOfActivity:${currentSport}.type_one.description`),
       value: 'type_one',
+      max: t(`typesOfActivity:${currentSport}.type_one.max`),
     },
     {
       label: t(`typesOfActivity:${currentSport}.type_two.label`),
       description: t(`typesOfActivity:${currentSport}.type_two.description`),
       value: 'type_two',
+      max: t(`typesOfActivity:${currentSport}.type_two.max`),
     },
     {
       label: t(`typesOfActivity:${currentSport}.type_three.label`),
       description: t(`typesOfActivity:${currentSport}.type_three.description`),
       value: 'type_three',
+      max: t(`typesOfActivity:${currentSport}.type_three.max`),
     },
     {
       label: t(`typesOfActivity:${currentSport}.type_four.label`),
       description: t(`typesOfActivity:${currentSport}.type_four.description`),
       value: 'type_four',
+      max: t(`typesOfActivity:${currentSport}.type_four.max`),
     },
   ];
 
@@ -108,10 +121,20 @@ export default function EventOptionsTypeOfActivitySelectorScreen(props) {
         onChangeSelect={(option, index) => (
           dispatch(
             eventOnEdition
-              ? changeEventActivity({
+              ? (changeEventActivity({
                   eventId: eventId,
                   groupId: groupId,
                   activity: option.value,
+                }),
+                changeEventMaxParticipants({
+                  eventId: eventId,
+                  groupId: groupId,
+                  maxParticipants: option.max,
+                }))
+              : creatingEvent
+              ? eventActions.createEventActivity({
+                  activity: option.value,
+                  maxParticipants: option.max,
                 })
               : changeGroupTypeOfActivity({
                   groupId: currentGroupId,
@@ -132,9 +155,16 @@ export const screenOptions = navData => {
   const editingEvent = navData.route.params
     ? navData.route.params.editEvent
     : false;
+
+  const creatingEvent = navData.route.params
+    ? navData.route.params.createEvent
+    : false;
+
   return {
     headerTitle: editingEvent
       ? "Event's activity"
+      : creatingEvent
+      ? 'Select an activity'
       : 'Default activity for events',
     presentation: 'modal',
   };

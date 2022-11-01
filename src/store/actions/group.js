@@ -446,6 +446,58 @@ export const updateMyGroupDiversity = diversity => {
 };
 
 // ********************************************************
+// Function to change the INVITATIONS OF THE GROUP
+// ********************************************************
+
+export const updateMyGroupInvitations = invitations => {
+  return async (dispatch, getState) => {
+    // the current user creating this group
+    const groupId = getState().group.groupDetail._id;
+    const invitationsToReplace = invitations;
+
+    // ********************************************************
+    // Function to update the API
+    // ********************************************************
+    const updateDiversity = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/diversity`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            diversity: diversityToReplace,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any group data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const diversityData = await updateDiversity();
+      dispatch(
+        groupActions.updateDiversity({
+          diversity: diversityData.diversity,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// ********************************************************
 // Function to change the NO REGISTRATION SETTINGS OF THE GROUP
 // ********************************************************
 

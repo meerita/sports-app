@@ -14,12 +14,21 @@ import ScrollViewLayout from '../../../../components/Layouts/ScrollViewLayout/Sc
 // STORE
 import { updateMyGroupReplacementsPreferences } from '../../../../store/actions/group';
 import { useToast } from 'react-native-toast-notifications';
+import { eventActions } from '../../../../store/slices/event';
 
 export default function EventOptionsReplacementsSelectorScreen(props) {
+  const creatingEvent = props.route.params
+    ? props.route.params.createEvent
+    : false;
+
   // groupDetails
-  const replacementsPreferences = useSelector(
-    state => state.group.groupDetail.preferences.events.replacements
-  );
+  const replacementsPreferences = creatingEvent
+    ? useSelector(state => state.event.createEvent.allowReplacementsType)
+    : useSelector(
+        state => state.group.groupDetail.preferences.events.replacements
+      );
+
+  console.log(replacementsPreferences);
 
   const toast = useToast();
 
@@ -68,7 +77,13 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
         options={OPTIONS}
         selected={selected}
         onChangeSelect={(option, index) => (
-          dispatch(updateMyGroupReplacementsPreferences(option.value)),
+          creatingEvent
+            ? dispatch(
+                eventActions.createEventReplacements({
+                  allowReplacementsType: option.value,
+                })
+              )
+            : dispatch(updateMyGroupReplacementsPreferences(option.value)),
           setSelected(index),
           toast.show(t('common:infoUpdated')),
           props.navigation.goBack()

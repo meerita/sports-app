@@ -1,6 +1,7 @@
 /** @format */
 
 import event, { eventActions } from '../slices/event';
+import { getGroupEvents } from './group';
 
 const API_URL = 'http://192.168.1.42:9000';
 
@@ -182,6 +183,55 @@ export const changeEventGenderRequirement = data => {
   };
 };
 
+export const changeEventInvitations = data => {
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    const { eventId, groupId, allowInvitations } = data;
+
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/invitations/change`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            adminId: adminId,
+            groupId: groupId,
+            allowInvitations: allowInvitations,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const updatedEventData = await changeEventData();
+      dispatch(
+        eventActions.changeInvitations({
+          allowInvitations: allowInvitations,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const changeEventParticipation = data => {
   return async (dispatch, getState) => {
     const adminId = getState().me.myData._id;
@@ -233,7 +283,7 @@ export const changeEventParticipation = data => {
 export const changeEventActivity = data => {
   return async (dispatch, getState) => {
     const adminId = getState().me.myData._id;
-    const { eventId, groupId, activity } = data;
+    const { eventId, groupId, activity, maxParticipants } = data;
     // ********************************************************
     // Function to fetch the event
     // ********************************************************
@@ -454,6 +504,73 @@ export const leaveMeThisEventAsParticipant = data => {
       // we will
       await changeEventData();
       await dispatch(fetchEventDetail(eventId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createANewEvent = data => {
+  console.log(data);
+  const {
+    activity,
+    allowedGender,
+    allowedParticipants,
+    visibility,
+    allowInvitations,
+    allowReplacementsType,
+    when,
+    description,
+    externalLink,
+    group,
+    skill,
+    maxParticipants,
+    organizer,
+    sport,
+    title,
+  } = data;
+  return async dispatch => {
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const createEventData = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/events/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: title,
+          description: description,
+          sport: sport,
+          group: group,
+          organizer: organizer,
+          maxParticipants: maxParticipants,
+          allowInvitations: allowInvitations,
+          allowReplacementsType: allowReplacementsType,
+          externalLink: externalLink,
+          when: when,
+          skill: skill,
+          visibility: visibility,
+          allowedGender: allowedGender,
+          allowedParticipants: allowedParticipants,
+        }),
+      });
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      await createEventData();
+      await dispatch(getGroupEvents(group));
     } catch (error) {
       console.log(error);
     }

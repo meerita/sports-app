@@ -16,16 +16,24 @@ import {
   changeEventGenderRequirement,
   changeEventSkillRequirement,
 } from '../../../../store/actions/event';
+import { eventActions } from '../../../../store/slices/event';
 
 export default function EventOptionsSkillsSelectorScreen(props) {
   const eventOnEdition = props.route.params
     ? props.route.params.editEvent
     : false;
+
+  const createEvent = props.route.params
+    ? props.route.params.createEvent
+    : false;
+
   const eventId = props.route.params ? props.route.params.eventId : false;
   const groupId = props.route.params ? props.route.params.groupId : false;
 
   const eventSkillPreferences = eventOnEdition
     ? useSelector(state => state.event.eventDetail.skill)
+    : createEvent
+    ? useSelector(state => state.event.createEvent.skill)
     : useSelector(state => state.group.groupDetail.preferences.events.skill);
 
   const toast = useToast();
@@ -92,6 +100,8 @@ export default function EventOptionsSkillsSelectorScreen(props) {
                   groupId: groupId,
                   skill: option.value,
                 })
+              : createEvent
+              ? eventActions.createEventSkill({ skill: option.value })
               : updateEventRequiredSkill(option.value)
           ),
           setSelected(index),

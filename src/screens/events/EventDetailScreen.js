@@ -419,10 +419,7 @@ export default function EventDetailScreen(props) {
           </View>
         )}
         <BodyOne style={{ padding: 16, paddingBottom: 24 }}>
-          Salida en patinete desde Argentona hasta Barcelona. Vamos en tren
-          hasta Matarò, de ahí subimos a Argentona y entramos en el parque,
-          vamos por la montaña hasta Tiana, bajamos por ahí y llegamos a
-          Badalona.
+          {eventDetail.description}
         </BodyOne>
 
         {amIanAdminOrOrganizer ? (
@@ -476,7 +473,7 @@ export default function EventDetailScreen(props) {
               }
               onPress={() =>
                 props.navigation.navigate(
-                  'EventOptionsParticipationSelectorScreen',
+                  'EventOptionsInvitationsSelectorScreen',
                   {
                     editEvent: true,
                     eventId: eventDetail._id,

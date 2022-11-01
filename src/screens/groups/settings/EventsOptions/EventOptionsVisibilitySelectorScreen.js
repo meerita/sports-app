@@ -16,6 +16,7 @@ import BodyTwo from '../../../../components/type/BodyTwo';
 // STORE
 import { updateEventVisibility } from '../../../../store/actions/group';
 import { changeCustomEventVisibility } from '../../../../store/actions/event';
+import { eventActions } from '../../../../store/slices/event';
 
 export default function EventOptionsVisibilitySelectorScreen(props) {
   // we use this to use different texts and dispatch functions depending
@@ -23,12 +24,21 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
   const eventOnEdition = props.route.params
     ? props.route.params.editEvent
     : false;
+
+  const eventOnCreation = props.route.params
+    ? props.route.params.createEvent
+    : false;
+
   const eventId = props.route.params ? props.route.params.eventId : false;
   const groupId = props.route.params ? props.route.params.groupId : false;
 
   // event visibility settings or group event visibility settings
   const eventVisibility = eventOnEdition
     ? useSelector(state => state.event.eventDetail.visibility)
+    : eventOnCreation
+    ? useSelector(
+        state => state.group.groupDetail.preferences.events.visibility
+      )
     : useSelector(
         state => state.group.groupDetail.preferences.events.visibility
       );
@@ -69,6 +79,8 @@ export default function EventOptionsVisibilitySelectorScreen(props) {
                   eventId: eventId,
                   groupId: groupId,
                 })
+              : eventOnCreation
+              ? eventActions.createEventVisibility({ visibility: option.value })
               : updateEventVisibility(option.value)
           ),
           setSelected(index),
@@ -85,9 +97,16 @@ export const screenOptions = navData => {
   const editingEvent = navData.route.params
     ? navData.route.params.editEvent
     : false;
+
+  const eventOnCreation = navData.route.params
+    ? navData.route.params.createEvent
+    : false;
+
   return {
     headerTitle: editingEvent
       ? 'Event visibility'
+      : eventOnCreation
+      ? 'no'
       : t('groups:settings.events.visibility'),
     presentation: 'modal',
   };
