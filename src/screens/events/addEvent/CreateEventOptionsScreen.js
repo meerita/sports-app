@@ -155,7 +155,7 @@ export default function CreateEventOptionsScreen(props) {
           }
         />
         <SingleLineWithIcon
-          icon={require('../../../assets/images/icons/manage_accounts.png')}
+          icon={require('../../../assets/images/icons/rsvp.png')}
           title={'Invitations'}
           caption={
             createEvent.allowInvitations ? 'Invites allowed' : 'No invitations'

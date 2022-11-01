@@ -458,17 +458,17 @@ export const updateMyGroupInvitations = invitations => {
     // ********************************************************
     // Function to update the API
     // ********************************************************
-    const updateDiversity = async () => {
+    const changeData = async () => {
       // we call the API
       const response = await fetch(
-        `${API_URL}/v1/groups/${groupId}/settings/preferences/group/membership/diversity`,
+        `${API_URL}/v1/groups/${groupId}/settings/preferences/events/invitations`,
         {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            diversity: diversityToReplace,
+            invitations: invitationsToReplace,
           }),
         }
       );
@@ -485,10 +485,10 @@ export const updateMyGroupInvitations = invitations => {
     // Once we have the data, we will dispatch it
     try {
       // we will
-      const diversityData = await updateDiversity();
+      const responseChangedData = await changeData();
       dispatch(
-        groupActions.updateDiversity({
-          diversity: diversityData.diversity,
+        groupActions.updateGroupInvitations({
+          invitations: responseChangedData.invitations,
         })
       );
     } catch (error) {

@@ -46,7 +46,7 @@ export default function EventOptionsInvitationsSelectorScreen(props) {
     : createEvent
     ? useSelector(state => state.event.createEvent.allowInvitations)
     : useSelector(
-        state => state.group.groupDetail.preferences.event.invitations
+        state => state.group.groupDetail.preferences.events.invitations
       );
 
   // we initialize Toasts

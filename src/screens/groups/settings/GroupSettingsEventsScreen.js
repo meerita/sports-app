@@ -45,6 +45,18 @@ export default function GroupSettingsEventsScreen(props) {
         }
       />
       <SingleLineWithIcon
+        icon={require('../../../assets/images/icons/rsvp.png')}
+        title='Allow invitations'
+        caption={
+          eventPreferences.invitations
+            ? 'Invitations allowed'
+            : 'No invitations'
+        }
+        onPress={() =>
+          props.navigation.navigate('EventOptionsInvitationsSelectorScreen')
+        }
+      />
+      <SingleLineWithIcon
         icon={
           otherPreferences.group.membership.diversity === 'other'
             ? require('../../../assets/images/icons/question_mark.png')
