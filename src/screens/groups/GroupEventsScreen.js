@@ -24,6 +24,7 @@ import HeadlineFive from '../../components/type/HeadlineFive';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 
 export default function GroupEventsScreen(props) {
+  const me = useSelector(state => state.me.myData);
   // darkMode
   const darkMode = useSelector(state => state.theme.darkMode);
   // currentGroup
@@ -41,6 +42,40 @@ export default function GroupEventsScreen(props) {
   const newEvents = groupEvents.filter(group => group.open);
 
   const pastEvents = groupEvents.filter(group => group.open === false);
+
+  // see if I am admin of the group
+  const amIAdminOfThisGroup = group.admins.find(admin => admin._id === me._id);
+  // console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
+
+  // am I a member of the group who organizes the event?
+  const amIMemberOfThisGroup = group.members.find(
+    member => member._id === me._id
+  );
+  // console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
+
+  // am I a member of the group who organizes the event?
+  const amINoobOfThisGroup = group.noobs.find(noob => noob._id === me._id);
+  // console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
+
+  // I belong to this group?
+  const iBelongToThisGroup =
+    amIAdminOfThisGroup || amINoobOfThisGroup || amIMemberOfThisGroup;
+
+  const creationPolicy = group.preferences.events.creation;
+
+  console.log(creationPolicy);
+
+  const canCreate = amIAdminOfThisGroup
+    ? true
+    : creationPolicy === 'only-members' && amIMemberOfThisGroup
+    ? true
+    : creationPolicy === 'any-member' && iBelongToThisGroup
+    ? true
+    : creationPolicy === 'anyone'
+    ? true
+    : false;
+
+  console.log(canCreate);
 
   const darkModeOption = darkMode
     ? Colors.dark.secondary
@@ -89,22 +124,24 @@ export default function GroupEventsScreen(props) {
             This group has no events
           </HeadlineFive>
         </PlaceholderLayout>
-        <FloatingAction
-          actions={myActions}
-          onPressItem={name => eventFloatingButtonActions(name)}
-          color={darkMode ? Colors.dark.primary : Colors.light.primary}
-          overlayColor='rgba(68, 68, 68, 0)'
-          overrideWithAction
-          iconWidth={24}
-          iconHeight={24}
-          iconColor={
-            darkMode
-              ? Colors.dark.OnPrimaryActive
-              : Colors.light.OnPrimaryActive
-          }
-          floatingIcon={require('../../assets/images/icons/event.png')}
-          actionsPaddingTopBottom={0}
-        />
+        {canCreate && (
+          <FloatingAction
+            actions={myActions}
+            onPressItem={name => eventFloatingButtonActions(name)}
+            color={darkMode ? Colors.dark.primary : Colors.light.primary}
+            overlayColor='rgba(68, 68, 68, 0)'
+            overrideWithAction
+            iconWidth={24}
+            iconHeight={24}
+            iconColor={
+              darkMode
+                ? Colors.dark.OnPrimaryActive
+                : Colors.light.OnPrimaryActive
+            }
+            floatingIcon={require('../../assets/images/icons/event.png')}
+            actionsPaddingTopBottom={0}
+          />
+        )}
       </>
     );
   }
@@ -148,20 +185,24 @@ export default function GroupEventsScreen(props) {
           ))
           .reverse()}
       </ScrollViewLayout>
-      <FloatingAction
-        actions={myActions}
-        onPressItem={name => eventFloatingButtonActions(name)}
-        color={darkMode ? Colors.dark.primary : Colors.light.primary}
-        overlayColor='rgba(68, 68, 68, 0)'
-        overrideWithAction
-        iconWidth={24}
-        iconHeight={24}
-        iconColor={
-          darkMode ? Colors.dark.OnPrimaryActive : Colors.light.OnPrimaryActive
-        }
-        floatingIcon={require('../../assets/images/icons/event.png')}
-        actionsPaddingTopBottom={0}
-      />
+      {canCreate && (
+        <FloatingAction
+          actions={myActions}
+          onPressItem={name => eventFloatingButtonActions(name)}
+          color={darkMode ? Colors.dark.primary : Colors.light.primary}
+          overlayColor='rgba(68, 68, 68, 0)'
+          overrideWithAction
+          iconWidth={24}
+          iconHeight={24}
+          iconColor={
+            darkMode
+              ? Colors.dark.OnPrimaryActive
+              : Colors.light.OnPrimaryActive
+          }
+          floatingIcon={require('../../assets/images/icons/event.png')}
+          actionsPaddingTopBottom={0}
+        />
+      )}
     </>
   );
 }

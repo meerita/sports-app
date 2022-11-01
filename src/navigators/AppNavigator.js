@@ -29,11 +29,14 @@ export default function AppNavigator() {
   const maintenance = useSelector(state => state.general.maintenance);
 
   const userId = '635fbaa6bfc5f267ebcb17d4'; // Minide
-  // const userId = '6238a480170aff10d16ccd86'; // timcuqui
-  // const userId = '6349eee515508cea7cc6df3e'; // roger
-  // const userId = '6238a608170aff10d16ccd89'; // viso
+  // const userId = '6361544ceb317d919b580e1c'; // timcuqui
+  // const userId = '6361557ceb317d919b580e69'; // roger
+  // const userId = '63615337eb317d919b580e01'; // viso
   // const userId = '623b5d3d7e4216025e7210fd'; // ruven
-  // const userId = '631a1d63644135c5f00dca63'; // patitas
+  // const userId = '63615511eb317d919b580e51'; // patitas
+  // const userId = '63615555eb317d919b580e5d'; // Lupión
+  // const userId = '6361553eeb317d919b580e57'; // M4DP3Y
+  // const userId = '6361556deb317d919b580e63'; // MyClaus
 
   const me = useSelector(state => state.me.myData);
 

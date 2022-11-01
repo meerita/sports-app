@@ -22,6 +22,7 @@ import {
   promoteMemberToAdmin,
   promoteNoobToMember,
 } from '../../store/actions/group';
+import Spacer from '../../components/Spacer/Spacer';
 
 export default function GroupMembersScreen(props) {
   // me
@@ -477,6 +478,7 @@ export default function GroupMembersScreen(props) {
           />
         ))
       )}
+      <Spacer height='64' />
     </ScrollViewLayout>
   );
 }
