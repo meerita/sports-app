@@ -102,8 +102,14 @@ export const eventSlice = createSlice({
     createEventGender(state, action) {
       state.createEvent.allowedGender = action.payload.allowedGender;
     },
-    resetState(state, action) {
+    resetState(state) {
       state.createEvent = initialState.createEvent;
+    },
+    updateDateTime(state, action) {
+      state.eventDetail.when = action.payload.when;
+    },
+    setDateTimeEventCreation(state, action) {
+      state.createEvent.when = action.payload.when;
     },
   },
 });

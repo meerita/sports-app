@@ -8,17 +8,23 @@ import DateTimePicker, {
 } from '@react-native-community/datetimepicker';
 import { Button } from 'react-native-paper';
 import ButtonFilled from '../../../components/Buttons/Filled/ButtonFilled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Colors from '../../../constants/Colors';
 import BodyTwo from '../../../components/type/BodyTwo';
 import ScrollViewLayout from '../../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import SingleLineWithIcon from '../../../components/Lists/OneLine/SingleLineWithIcon';
 import moment from 'moment';
+import {
+  changeEventInvitations,
+  updateEventTimeDate,
+} from '../../../store/actions/event';
 
 export default function CreateEventWhenScreen(props) {
   const eventDetail = useSelector(state => state.event.eventDetail);
   const darkMode = useSelector(state => state.theme.darkMode);
   const editEvent = props.route.params.editEvent;
+
+  const dispatch = useDispatch();
 
   // const eventSelectedDate = editEvent
   //   ? useSelector(state => state.event.eventDetail.when)
@@ -34,6 +40,13 @@ export default function CreateEventWhenScreen(props) {
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
+    dispatch(
+      updateEventTimeDate({
+        eventId: eventDetail._id,
+        groupId: eventDetail.group,
+        when: currentDate,
+      })
+    );
   };
 
   const showMode = currentMode => {
@@ -56,42 +69,46 @@ export default function CreateEventWhenScreen(props) {
     showMode('time');
   };
 
-  const teta = new Date();
-
   return (
     <ScrollViewLayout>
       <BodyTwo style={{ padding: 16 }}>
-        Current selected date: {date.toLocaleString('es-ES')}
+        Every time you change the date and time, all participants, replacements
+        and guests will be notified.
       </BodyTwo>
-      <SingleLineWithIcon
-        icon={require('../../../assets/images/icons/event.png')}
-        onPress={showDatepicker}
-        title='Date'
-        caption={moment(date).startOf('day').fromNow()}
-      />
-      <SingleLineWithIcon
-        icon={require('../../../assets/images/icons/time.png')}
-        onPress={showTimepicker}
-        title='Time of the event'
-        caption={date.getHours() + ':' + date.getMinutes()}
-      />
+      {Platform.OS === 'android' && (
+        <>
+          <SingleLineWithIcon
+            icon={require('../../../assets/images/icons/event.png')}
+            onPress={showDatepicker}
+            title='Date'
+            caption={moment(date).format('LL')}
+          />
+          <SingleLineWithIcon
+            icon={require('../../../assets/images/icons/time.png')}
+            onPress={showTimepicker}
+            title='Time of the event'
+            caption={moment(date).format('LT')}
+          />
+        </>
+      )}
       {Platform.OS === 'ios' && (
-        <DateTimePicker
-          testID='dateTimePicker'
-          value={date}
-          mode={Platform.OS === 'ios' ? 'datetime' : mode}
-          is24Hour={true}
-          themeVariant={darkMode ? 'dark' : 'light'}
-          accentColor={
-            darkMode ? Colors.dark.primaryVariant : Colors.light.primaryVariant
-          }
-          style={{
-            borderWidth: 1,
-            borderColor: Colors.dark.primaryVariant,
-            fontSize: 24,
-          }}
-          onChange={onChange}
-        />
+        <View style={{ alignContent: 'center' }}>
+          <DateTimePicker
+            testID='dateTimePicker'
+            value={date}
+            mode={Platform.OS === 'ios' ? 'datetime' : mode}
+            display={'spinner'}
+            is24Hour={true}
+            themeVariant={darkMode ? 'dark' : 'light'}
+            accentColor={
+              darkMode
+                ? Colors.dark.primaryVariant
+                : Colors.light.primaryVariant
+            }
+            style={{}}
+            onChange={onChange}
+          />
+        </View>
       )}
     </ScrollViewLayout>
   );

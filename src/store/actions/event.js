@@ -574,3 +574,49 @@ export const createANewEvent = data => {
     }
   };
 };
+
+export const updateEventTimeDate = data => {
+  const { groupId, eventId, when } = data;
+
+  return async (dispatch, getState) => {
+    const adminId = getState().me.myData._id;
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const changeEventData = async () => {
+      // we call the API
+      const response = await fetch(
+        `${API_URL}/v1/events/${eventId}/when/change`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            adminId: adminId,
+            groupId: groupId,
+            when: when,
+          }),
+        }
+      );
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const newDateResponse = await changeEventData();
+      await dispatch(
+        eventActions.updateDateTime({ when: newDateResponse.when })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

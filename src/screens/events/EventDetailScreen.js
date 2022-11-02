@@ -71,6 +71,8 @@ export default function EventDetailScreen(props) {
     );
   }
 
+  const eventDate = new Date(eventDetail.when);
+
   // we purge the organizer
   const participants = eventDetail.participants.filter(
     participant => participant._id != eventDetail.organizer._id
@@ -497,12 +499,22 @@ export default function EventDetailScreen(props) {
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/event.png')}
           title={'Cuándo'}
-          caption={moment(eventDetail.when).calendar()}
+          caption={moment(eventDate).format('LL')}
           onPress={() =>
             props.navigation.navigate('CreateEventWhenScreen', {
               editEvent: true,
             })
           }
+        />
+        <SingleLineWithIcon
+          icon={require('../../assets/images/icons/time.png')}
+          onPress={() =>
+            props.navigation.navigate('CreateEventWhenScreen', {
+              editEvent: true,
+            })
+          }
+          title='Time of the event'
+          caption={moment(eventDate).format('LT')}
         />
         <Line />
         <SingleLineWithIcon
