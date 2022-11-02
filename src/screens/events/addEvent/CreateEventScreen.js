@@ -41,6 +41,8 @@ export default function CreateEventScreen(props) {
     formState: { errors },
   } = useForm();
 
+  const newDate = new Date();
+
   useEffect(() => {
     setValue('title', createEvent.title);
     setValue('description', createEvent.description);
@@ -53,6 +55,7 @@ export default function CreateEventScreen(props) {
         allowedParticipants: groupDetail.preferences.events.participation,
         allowedGender: groupDetail.preferences.group.membership.diversity,
         skill: groupDetail.preferences.events.skill,
+        when: newDate.toDateString(),
         maxParticipants: t(
           `typesOfActivity:${groupDetail.sport.title}.type_one.max`
         ),

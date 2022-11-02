@@ -85,8 +85,15 @@ export default function CreateEventOptionsScreen(props) {
         <Line />
         <SingleLineWithIcon
           icon={require('../../../assets/images/icons/event.png')}
-          title={'When'}
-          caption={moment(new Date()).calendar()}
+          title={'Cuándo'}
+          caption={moment(createEvent.when).format('LL')}
+          onPress={() => props.navigation.navigate('CreateEventWhenScreen')}
+        />
+        <SingleLineWithIcon
+          icon={require('../../../assets/images/icons/time.png')}
+          onPress={() => props.navigation.navigate('CreateEventWhenScreen')}
+          title='Time of the event'
+          caption={moment(createEvent.when).format('LT')}
         />
         <SingleLineWithIcon
           icon={{ uri: groupDetail.sport.iconUrl }}

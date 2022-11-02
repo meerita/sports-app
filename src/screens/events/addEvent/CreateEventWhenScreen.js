@@ -18,19 +18,19 @@ import {
   changeEventInvitations,
   updateEventTimeDate,
 } from '../../../store/actions/event';
+import { eventActions } from '../../../store/slices/event';
 
 export default function CreateEventWhenScreen(props) {
   const eventDetail = useSelector(state => state.event.eventDetail);
+  const eventCreate = useSelector(state => state.event.createEvent);
   const darkMode = useSelector(state => state.theme.darkMode);
-  const editEvent = props.route.params.editEvent;
+  const editEvent = props.route.params && props.route.params.editEvent;
 
   const dispatch = useDispatch();
 
-  // const eventSelectedDate = editEvent
-  //   ? useSelector(state => state.event.eventDetail.when)
-  //   : useSelector(state => state.event.createEvent.when);
+  console.log(eventCreate);
 
-  const eventSelectedDate = useSelector(state => state.event.eventDetail.when);
+  const eventSelectedDate = editEvent ? eventDetail.when : eventCreate.when;
 
   const [date, setDate] = useState(new Date(eventSelectedDate));
   const [mode, setMode] = useState('date');
@@ -40,13 +40,22 @@ export default function CreateEventWhenScreen(props) {
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
-    dispatch(
-      updateEventTimeDate({
-        eventId: eventDetail._id,
-        groupId: eventDetail.group,
-        when: currentDate,
-      })
-    );
+
+    if (editEvent) {
+      dispatch(
+        updateEventTimeDate({
+          eventId: eventDetail._id,
+          groupId: eventDetail.group,
+          when: currentDate,
+        })
+      );
+    } else {
+      dispatch(
+        eventActions.setDateTimeEventCreation({
+          when: currentDate.toISOString(),
+        })
+      );
+    }
   };
 
   const showMode = currentMode => {
@@ -105,7 +114,6 @@ export default function CreateEventWhenScreen(props) {
                 ? Colors.dark.primaryVariant
                 : Colors.light.primaryVariant
             }
-            style={{}}
             onChange={onChange}
           />
         </View>

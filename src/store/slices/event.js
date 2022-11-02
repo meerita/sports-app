@@ -2,6 +2,8 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+const date = new Date().toISOString();
+
 const initialState = {
   eventDetail: null,
   createEvent: {
@@ -13,7 +15,7 @@ const initialState = {
     allowInvitations: null,
     allowReplacementsType: null,
     externalLink: null,
-    when: null,
+    when: date,
     costPerParticipant: null,
     visibility: null,
     distance: null,
