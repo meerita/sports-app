@@ -2,7 +2,7 @@
 
 import { generalActions } from '../slices/general';
 
-const API_URL = 'http://192.168.1.42:9000';
+const API_URL = 'http://192.168.1.73:9000';
 
 export const fetchGlobalVariables = () => {
   return async dispatch => {

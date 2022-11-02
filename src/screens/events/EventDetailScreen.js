@@ -166,34 +166,27 @@ export default function EventDetailScreen(props) {
 
   // If the event is older than today, it can be closed
   const canBeClosed = new Date(eventDetail.when) > new Date();
-  // console.log(canBeClosed ? 'CANNOT BE CLOSED' : 'CAN BE CLOSED');
 
   // see if I am admin of the group
   const amIAdminOfThisGroup = groupDetail.admins.find(
     admin => admin._id === me._id
   );
-  // console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
 
   // am I a member of the group who organizes the event?
   const amIMemberOfThisGroup = groupDetail.members.find(
     member => member._id === me._id
   );
-  // console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
 
   // am I a member of the group who organizes the event?
   const amINoobOfThisGroup = groupDetail.noobs.find(
     noob => noob._id === me._id
   );
 
-  // console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
-
   // Am I the organizer of the event
   const amITheOrganizer = me._id === eventDetail.organizer._id;
-  // console.log(amITheOrganizer ? 'I AM ORGANIZER' : 'I AM NOT ORGANIZER');
 
   // what is the event participation policy?
   const eventParticipationPolicy = eventDetail.allowedParticipants;
-  // console.log('EVENT POLICY: ' + eventParticipationPolicy);
 
   // Am I one of both?
   const amIanAdminOrOrganizer = amITheOrganizer || amIAdminOfThisGroup;
@@ -280,8 +273,6 @@ export default function EventDetailScreen(props) {
         : (actions = actions.concat(coreActions.guest, coreActions.share)) // could register as a guest because i am not member or anythnig
       : (actions = actions.concat(coreActions.share)) // could not register as a guest because event is closed
     : (actions = actions.concat(coreActions.share)); // can't register not even as guest
-
-  // console.log(myActions);
 
   const eventFloatingButtonActions = name => {
     switch (name) {
@@ -507,6 +498,11 @@ export default function EventDetailScreen(props) {
           icon={require('../../assets/images/icons/event.png')}
           title={'Cuándo'}
           caption={moment(eventDetail.when).calendar()}
+          onPress={() =>
+            props.navigation.navigate('CreateEventWhenScreen', {
+              editEvent: true,
+            })
+          }
         />
         <Line />
         <SingleLineWithIcon

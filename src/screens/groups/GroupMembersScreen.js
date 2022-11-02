@@ -83,10 +83,6 @@ export default function GroupMembersScreen(props) {
     const iAmANormalAdminOnSuperAdmin =
       me._id != superAdminId && me._id != data.userId;
 
-    console.log('iAmASuperAdminOnMe: ' + iAmASuperAdminOnMe);
-    console.log('iAmASuperAdminOnOthers: ' + iAmASuperAdminOnOthers);
-    console.log('iAmANormalAdminOnOthers: ' + iAmANormalAdminOnSuperAdmin);
-
     const options =
       iAmASuperAdminOnMe || iAmANormalAdminOnMe
         ? [t('groups:demoteMeAsAMember'), t('groups:leave'), t('common:close')]

@@ -64,7 +64,6 @@ export default function GroupSettingsScreen(props) {
   const sendPetitionToJoin = () => {
     try {
       dispatch(makeAPetitionToJoin(currentGroup._id));
-      // console.log(currentGroup._id);
     } catch (error) {
       console.log(error);
     }

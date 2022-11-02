@@ -45,7 +45,6 @@ export default function GroupEventsScreen(props) {
 
   // see if I am admin of the group
   const amIAdminOfThisGroup = group.admins.find(admin => admin._id === me._id);
-  // console.log(amIAdminOfThisGroup ? 'I AM ADMIN' : 'I AM NOT ADMIN');
 
   // am I a member of the group who organizes the event?
   const amIMemberOfThisGroup = group.members.find(
@@ -63,8 +62,6 @@ export default function GroupEventsScreen(props) {
 
   const creationPolicy = group.preferences.events.creation;
 
-  console.log(creationPolicy);
-
   const canCreate = amIAdminOfThisGroup
     ? true
     : creationPolicy === 'only-members' && amIMemberOfThisGroup
@@ -74,8 +71,6 @@ export default function GroupEventsScreen(props) {
     : creationPolicy === 'anyone'
     ? true
     : false;
-
-  console.log(canCreate);
 
   const darkModeOption = darkMode
     ? Colors.dark.secondary

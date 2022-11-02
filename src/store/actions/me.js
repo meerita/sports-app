@@ -2,7 +2,7 @@
 import { meActions } from '../slices/me';
 import { themeActions } from '../slices/theme';
 
-const API_URL = 'http://192.168.1.42:9000';
+const API_URL = 'http://192.168.1.73:9000';
 
 // ********************************************************
 // Function to fetch the any logged user
@@ -52,7 +52,6 @@ export const changeMyWeight = weight => {
   const userWeight = weight;
   return async (dispatch, getState) => {
     const userId = getState().me.myData._id;
-    console.log('userID del peso que quiero cambiar: ' + userId);
     // ********************************************************
     // Function to PATCH the WEIGHT of the USER
     // ********************************************************

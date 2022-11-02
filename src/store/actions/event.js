@@ -3,7 +3,7 @@
 import event, { eventActions } from '../slices/event';
 import { getGroupEvents } from './group';
 
-const API_URL = 'http://192.168.1.42:9000';
+const API_URL = 'http://192.168.1.73:9000';
 
 // ********************************************************
 // Function to fetch an user
@@ -458,7 +458,6 @@ export const joinMeThisEventAsParticipant = data => {
     try {
       // we will
       const changedEvent = await changeEventData();
-      console.log(changedEvent);
       await dispatch(fetchEventDetail(eventId));
     } catch (error) {
       console.log(error);
@@ -511,7 +510,6 @@ export const leaveMeThisEventAsParticipant = data => {
 };
 
 export const createANewEvent = data => {
-  console.log(data);
   const {
     activity,
     allowedGender,

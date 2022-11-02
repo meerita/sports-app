@@ -1,7 +1,7 @@
 /** @format */
 import { authActions } from '../slices/auth';
 
-const API_URL = 'http://192.168.1.42:9000';
+const API_URL = 'http://192.168.1.73:9000';
 
 // ********************************************************
 // Function to register an user on the platform

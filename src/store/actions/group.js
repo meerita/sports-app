@@ -2,7 +2,7 @@
 import { groupActions } from '../slices/group';
 import { fetchMyUser } from '../actions/me';
 
-const API_URL = 'http://192.168.1.42:9000';
+const API_URL = 'http://192.168.1.73:9000';
 
 // ********************************************************
 // Function to fetch a group detail

@@ -24,8 +24,6 @@ export default function MeEventsScreen() {
 
   const changeThemeHandler = () => {
     // dispatch(meActions.allowAnalytics({ analytics: true }));
-
-    console.log(cookies);
   };
 
   return (

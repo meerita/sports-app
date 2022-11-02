@@ -248,6 +248,10 @@ import EventOptionsInvitationsSelectorScreen, {
   screenOptions as EventOptionsInvitationsSelectorScreenOptions,
 } from '../screens/groups/settings/EventsOptions/EventOptionsInvitationsSelectorScreen';
 
+import CreateEventWhenScreen, {
+  screenOptions as CreateEventWhenScreenOptions,
+} from '../screens/events/addEvent/CreateEventWhenScreen';
+
 // STORE
 import { themeActions } from '../store/slices/theme';
 
@@ -365,6 +369,11 @@ export default function MainNavigator(props) {
         name='CreateEventOptionsScreen'
         component={CreateEventOptionsScreen}
         options={CreateEventOptionsScreenOptions}
+      />
+      <Stack.Screen
+        name='CreateEventWhenScreen'
+        component={CreateEventWhenScreen}
+        options={CreateEventWhenScreenOptions}
       />
       <Stack.Screen
         name='SettingsSubscriptionScreen'
