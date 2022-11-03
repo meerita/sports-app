@@ -252,6 +252,14 @@ import CreateEventWhenScreen, {
   screenOptions as CreateEventWhenScreenOptions,
 } from '../screens/events/addEvent/CreateEventWhenScreen';
 
+import UserList, {
+  screenOptions as UserListOptions,
+} from '../screens/user/UserList';
+
+import NewUserDetailScreen, {
+  screenOptions as NewUserDetailScreenOptions,
+} from '../screens/user/NewUserDetailScreen';
+
 // STORE
 import { themeActions } from '../store/slices/theme';
 
@@ -319,6 +327,16 @@ export default function MainNavigator(props) {
         name='GroupMemberShipScreen'
         component={MembershipNavigator}
         options={MembershipNavigatorOptions}
+      />
+      <Stack.Screen
+        name='UserList'
+        component={UserList}
+        options={UserListOptions}
+      />
+      <Stack.Screen
+        name='NewUserDetailScreen'
+        component={NewUserDetailScreen}
+        options={NewUserDetailScreenOptions}
       />
       <Stack.Screen
         name='UserDetailScreen'

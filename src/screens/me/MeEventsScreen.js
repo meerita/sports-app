@@ -11,7 +11,7 @@ import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollVi
 import BodyOne from '../../components/type/BodyOne';
 import { allowAnalyticsCookies } from '../../store/actions/me';
 
-export default function MeEventsScreen() {
+export default function MeEventsScreen(props) {
   const me = useSelector(state => state.me.myData);
 
   const characteristics = me.characteristics;
@@ -32,7 +32,7 @@ export default function MeEventsScreen() {
         analytics: {cookies.analytics ? 'true' : 'false'}
       </BodyOne>
       <Button
-        onPress={() => changeThemeHandler()}
+        onPress={() => props.navigation.navigate('UserList')}
         title={darkMode ? 'change to light theme' : 'change to dark theme'}
       />
     </ScrollViewLayout>

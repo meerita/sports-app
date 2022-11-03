@@ -415,7 +415,7 @@ export default function GroupMembersScreen(props) {
               : null
           }
           onPress={() =>
-            props.navigation.navigate('UserDetailScreen', {
+            props.navigation.push('NewUserDetailScreen', {
               userId: user._id,
               username: user.username,
             })
