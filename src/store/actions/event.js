@@ -1,7 +1,8 @@
 /** @format */
 
-import event, { eventActions } from '../slices/event';
+import { eventActions } from '../slices/event';
 import { getGroupEvents } from './group';
+import { fetchMyEvents } from './me';
 
 const API_URL = 'http://192.168.1.73:9000';
 
@@ -424,7 +425,9 @@ export const closeEvent = data => {
 
 export const joinMeThisEventAsParticipant = data => {
   const { participantId, proposerId, groupId, gender, eventId } = data;
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const me = getState().me.myData;
+
     // ********************************************************
     // Function to fetch the event
     // ********************************************************
@@ -459,6 +462,7 @@ export const joinMeThisEventAsParticipant = data => {
       // we will
       const changedEvent = await changeEventData();
       await dispatch(fetchEventDetail(eventId));
+      await dispatch(fetchMyEvents(me._id));
     } catch (error) {
       console.log(error);
     }
@@ -467,8 +471,8 @@ export const joinMeThisEventAsParticipant = data => {
 
 export const leaveMeThisEventAsParticipant = data => {
   const { participantId, proposerId, groupId, gender, eventId } = data;
-  console.log(data);
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const me = getState().me.myData;
     // ********************************************************
     // Function to fetch the event
     // ********************************************************
@@ -503,6 +507,7 @@ export const leaveMeThisEventAsParticipant = data => {
       // we will
       await changeEventData();
       await dispatch(fetchEventDetail(eventId));
+      await dispatch(fetchMyEvents(me._id));
     } catch (error) {
       console.log(error);
     }
@@ -527,7 +532,7 @@ export const createANewEvent = data => {
     sport,
     title,
   } = data;
-  return async dispatch => {
+  return async (dispatch, getState) => {
     // ********************************************************
     // Function to fetch the event
     // ********************************************************
@@ -569,6 +574,7 @@ export const createANewEvent = data => {
       // we will
       await createEventData();
       await dispatch(getGroupEvents(group));
+      await dispatch(fetchMyEvents(organizer));
     } catch (error) {
       console.log(error);
     }

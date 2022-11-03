@@ -7,10 +7,14 @@ export const meSlice = createSlice({
   initialState: {
     myData: null,
     myGroups: [],
+    myEvents: [],
   },
   reducers: {
     addMyGroups(state, action) {
       state.myGroups = action.payload.groups;
+    },
+    addMyEvents(state, action) {
+      state.myEvents = action.payload.events;
     },
     addMyUser(state, action) {
       state.myData = action.payload.user;

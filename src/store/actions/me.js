@@ -9,7 +9,6 @@ const API_URL = 'http://192.168.1.73:9000';
 // ********************************************************
 
 export const fetchMyUser = userId => {
-  console.log(userId);
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user
@@ -38,6 +37,36 @@ export const fetchMyUser = userId => {
           darkMode: userData.user.settings.preferences.theme,
         })
       );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fetchMyEvents = userId => {
+  return async dispatch => {
+    // ********************************************************
+    // Function to fetch the loged in user
+    // ********************************************************
+    const fetchData = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/users/${userId}/events`);
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const responseData = await fetchData();
+      console.log(responseData);
+      dispatch(meActions.addMyEvents({ events: responseData }));
     } catch (error) {
       console.log(error);
     }

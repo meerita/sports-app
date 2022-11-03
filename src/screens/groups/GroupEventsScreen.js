@@ -111,6 +111,7 @@ export default function GroupEventsScreen(props) {
           />
           <HeadlineFive
             style={{
+              textAlign: 'center',
               color: darkMode
                 ? Colors.dark.OnBackgroundUnfocused
                 : Colors.light.OnBackgroundUnfocused,
