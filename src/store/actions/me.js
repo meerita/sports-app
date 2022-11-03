@@ -65,7 +65,6 @@ export const fetchMyEvents = userId => {
     try {
       // we will
       const responseData = await fetchData();
-      console.log(responseData);
       dispatch(meActions.addMyEvents({ events: responseData }));
     } catch (error) {
       console.log(error);

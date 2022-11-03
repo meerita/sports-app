@@ -475,18 +475,18 @@
   "typesOfActivity": {
     "soccer": {
       "type_one": {
-        "label": "5 contra 5",
-        "description": "Campo pequeños, puede ser en interior o exterior",
+        "label": "Fútbol 5",
+        "description": "Campo pequeños, 5 jugadores por equipo",
         "max": 10
       },
       "type_two": {
-        "label": "7 contra 7",
-        "description": "Campos medianos, puede ser sintéticos o césped",
+        "label": "Fútbol 7",
+        "description": "Campos medianos, 7 jugadores por equipo",
         "max": 14
       },
       "type_three": {
-        "label": "11 contra 11",
-        "description": "Campos de césped, con medidas profesionales",
+        "label": "Fútbol profesional",
+        "description": "Campos de césped, 11 jugadores por equipo",
         "max": 22
       },
       "type_four": {
@@ -495,7 +495,28 @@
         "max": 10
       }
     },
-    "cars": "Automobilismo",
+    "cars": {
+      "type_one": {
+        "label": "City",
+        "description": "Sólo una vuelta con los chicos",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Todoterreno",
+        "description": "Barro, gravilla, caminos complicados…",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Rally",
+        "description": "Largas distancias, varios días…",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
     "tennis": "Tenis",
     "eScooter": {
       "type_one": {
@@ -516,14 +537,119 @@
       "type_four": {
         "label": "Otras actividades",
         "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "hiking": {
+      "type_one": {
+        "label": "Senderismo casual",
+        "description": "Senderismo por parques nacionales",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Senderismo por montaña",
+        "description": "Grandes pendientes, altitud, diferentes tipos de pistas…",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Senderismo en hielo",
+        "description": "Hielo, barro, senderos nevados…",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "gymnastics": {
+      "type_one": {
+        "label": "Danza",
+        "description": "Sólo una vuelta con los chicos",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Zen",
+        "description": "Pilates, Yoga, bodybalance…",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Alta intensidad",
+        "description": "Bodycombat, GRIT series…",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Bodypump, Core, GAP…",
+        "max": 100
+      }
+    },
+    "euc": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Todoterreno montañoso",
+        "description": "Grandes pendientes, barro, caminos de grava",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "fitness": {
+      "type_one": {
+        "label": "Estándar",
+        "description": "Diferentes actividades",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Crossfit",
+        "description": "Entreno de alta intensidad",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Powerlifting",
+        "description": "Levantar mucho peso con técnica",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Calistenia",
+        "description": "Pulls, pushups, usa tu cuerpo…",
         "max": 10
       }
     },
-    "hiking": "Senderismo",
-    "gymnastics": "Gimnasia",
-    "euc": "Monociclos",
-    "fitness": "Fitness",
-    "eBikes": "Bicicletas eléctricas",
+    "eBikes": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Todoterreno montañoso",
+        "description": "Grandes pendientes, barro, caminos de grava",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
     "basketball": {
       "type_one": {
         "label": "2 contra 2",
@@ -546,15 +672,162 @@
         "max": 10
       }
     },
-    "mountain": "Montañismo",
-    "padel": "Pádel",
+    "mountain": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Rally",
+        "description": "Largas distancias, varios días",
+        "max": 50
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "padel": {
+      "type_one": {
+        "label": "Casual",
+        "description": "Sólo jugamos con los chicos",
+        "max": 4
+      },
+      "type_two": {
+        "label": "Cancha de cristal",
+        "description": "For playing with a different speeds",
+        "max": 4
+      },
+      "type_three": {
+        "label": "Entreno",
+        "description": "Sesión de entreno con un instructor",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 10
+      }
+    },
     "martialArts": "Artes marciales",
     "kiteSurf": "Kitesurf",
-    "bikes": "Motocicletas",
-    "bicycle": "Ciclismo",
-    "trekking": "Trekking",
-    "inlineSkate": "Patinaje en línea",
-    "volley": "Vóleibol"
+    "bikes": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Rally",
+        "description": "Largas distancias, varios días",
+        "max": 50
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "bicycle": {
+      "type_one": {
+        "label": "Ruta de ciudad",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Ruta todoterreno",
+        "description": "Barro, grava, pendientes moderadas",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Todoterreno montañoso",
+        "description": "Grandes pendientes, barro, caminos de grava",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "trekking": {
+      "type_one": {
+        "label": "Trekking casual",
+        "description": "Se hace por placer y diversión",
+        "max": 10
+      },
+      "type_two": {
+        "label": "Cross-country",
+        "description": "Senderismo a campo traviesa",
+        "max": 10
+      },
+      "type_three": {
+        "label": "Trekking montañoso",
+        "description": "Senderos de montaña o zonas sin caminos",
+        "max": 10
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "inlineSkate": {
+      "type_one": {
+        "label": "Patinaje recreacional",
+        "description": "Por ciudad, pavimentada, carriles bici",
+        "max": 100
+      },
+      "type_two": {
+        "label": "Patinaje Freestyle",
+        "description": "Trucos, obstáculos, saltos",
+        "max": 100
+      },
+      "type_three": {
+        "label": "Patinaje agresivo",
+        "description": "Saltos, grinding, velocidad",
+        "max": 50
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    },
+    "volley": {
+      "type_one": {
+        "label": "2 vs 2",
+        "description": "Partidas de Beach Volley",
+        "max": 4
+      },
+      "type_two": {
+        "label": "3 vs 3",
+        "description": "Vóleibol de playa o estándar",
+        "max": 6
+      },
+      "type_three": {
+        "label": "6 vs 6",
+        "description": "Partida estándar de Vóleibol",
+        "max": 12
+      },
+      "type_four": {
+        "label": "Otras actividades",
+        "description": "Quedadas, entrenos, etc.",
+        "max": 100
+      }
+    }
   },
   "skills": {
     "groupDesc": "Cuando se creen nuevos eventos, se auto-preseleccionará la opción que elijas aquí.",

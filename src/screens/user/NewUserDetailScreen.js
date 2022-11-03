@@ -32,7 +32,6 @@ export default function NewUserDetailScreen(props) {
   const me = useSelector(state => state.me.myData);
   const userId = props.route.params.userId;
   const users = useSelector(state => state.group.groupDetail);
-  console.log(userId);
 
   const [{ loading, user, error }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -61,7 +60,6 @@ export default function NewUserDetailScreen(props) {
     try {
       // we will
       const userData = await fetchData();
-      console.log(userData);
       dispatch({ type: 'FETCH_SUCCESS', payload: userData.user });
     } catch (error) {
       console.log(error);

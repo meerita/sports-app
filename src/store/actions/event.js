@@ -7,8 +7,39 @@ import { fetchMyEvents } from './me';
 const API_URL = 'http://192.168.1.73:9000';
 
 // ********************************************************
-// Function to fetch an user
+// Function to fetch an event
 // ********************************************************
+
+export const fetchLatestEvents = () => {
+  return async dispatch => {
+    // ********************************************************
+    // Function to fetch the event
+    // ********************************************************
+    const fetchData = async () => {
+      // we call the API
+      const response = await fetch(`${API_URL}/v1/events/latest`);
+      // we check if there's an error
+      if (!response.ok) {
+        throw new Error('could not fetch any data');
+      }
+      // if OK then we get the response
+      const data = await response.json();
+      // we return data
+      return data;
+    };
+
+    // Once we have the data, we will dispatch it
+    try {
+      // we will
+      const fetchDataResponse = await fetchData();
+      dispatch(
+        eventActions.addLatestEvents({ latestEvents: fetchDataResponse })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const fetchEventDetail = eventId => {
   return async dispatch => {

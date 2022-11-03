@@ -28,8 +28,6 @@ export default function EventOptionsReplacementsSelectorScreen(props) {
         state => state.group.groupDetail.preferences.events.replacements
       );
 
-  console.log(replacementsPreferences);
-
   const toast = useToast();
 
   const dispatch = useDispatch();

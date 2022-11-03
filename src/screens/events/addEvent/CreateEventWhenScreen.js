@@ -28,8 +28,6 @@ export default function CreateEventWhenScreen(props) {
 
   const dispatch = useDispatch();
 
-  console.log(eventCreate);
-
   const eventSelectedDate = editEvent ? eventDetail.when : eventCreate.when;
 
   const [date, setDate] = useState(new Date(eventSelectedDate));

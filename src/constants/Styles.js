@@ -7,7 +7,8 @@ export default StyleSheet.create({
   // buttons
   button: {
     borderRadius: 3,
-    padding: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 16,
     minHeight: 44,
     alignItems: 'center',
     justifyContent: 'center',

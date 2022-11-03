@@ -6,6 +6,7 @@ const date = new Date().toISOString();
 
 const initialState = {
   eventDetail: null,
+  latestEvents: [],
   createEvent: {
     title: '',
     description: '',
@@ -32,6 +33,9 @@ export const eventSlice = createSlice({
   reducers: {
     addEventDetail(state, action) {
       state.eventDetail = action.payload.event;
+    },
+    addLatestEvents(state, action) {
+      state.latestEvents = action.payload.latestEvents;
     },
     changeVisibility(state, action) {
       state.eventDetail.visibility = action.payload.visibility;

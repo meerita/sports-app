@@ -29,8 +29,6 @@ export default function CreateEventOptionsScreen(props) {
   const groupDetail = useSelector(state => state.group.groupDetail);
   const darkMode = useSelector(state => state.theme.darkMode);
 
-  console.log(createEvent);
-
   // we setup the use of dispatch
   const dispatch = useDispatch();
 

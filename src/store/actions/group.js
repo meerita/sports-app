@@ -49,7 +49,6 @@ export const createANewGroup = () => {
   return async (dispatch, getState) => {
     // the current user creating this group
     const adminId = getState().me.myData._id;
-
     // We will get the current state for newGroup
     const newGroup = getState().group.createNewGroup;
 
@@ -76,52 +75,19 @@ export const createANewGroup = () => {
       });
       // we check if there's an error
       if (!response.ok) {
-        throw new Error('could not fetch any group data');
+        throw new Error('could not create any group');
       }
       // if OK then we get the response
       const data = await response.json();
       // we return data
       return data;
     };
-
-    // Function to subscribe this user to the group
-    const subscribeUserToNewGroup = async groupId => {
-      const response = await fetch(
-        `${API_URL}/v1/users/${adminId}/groups/subscribe`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            groupId: groupId,
-          }),
-        }
-      );
-      // we check if there's an error
-      if (!response.ok) {
-        throw new Error('could not fetch any group data');
-      }
-      // if OK then we get the response
-      const data = await response.json();
-      // we return data
-      return data;
-    };
-
-    // Function to add this group to the sport counter
-    const addGroupToSport = async sportId => {};
 
     // Once we have the data, we will dispatch it
     try {
       // we will
       const newGroupData = await createGroup();
-      await subscribeUserToNewGroup(newGroupData.group._id);
-
-      await dispatch(
-        groupActions.fetchGroup({
-          group: newGroupData.group._id,
-        })
-      );
+      await dispatch(fetchMyUser(adminId));
     } catch (error) {
       console.log(error);
     }

@@ -8,8 +8,15 @@ import Card from '../../components/Card';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import Caption from '../../components/type/Caption';
 import { t } from '../../services/i18n';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
+import HeadlineFive from '../../components/type/HeadlineFive';
+import Colors from '../../constants/Colors';
+import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 
 export default function ExploreGroupsBySport(props) {
+  // darkMode
+  const darkMode = useSelector(state => state.theme.darkMode);
+
   // the sportId needed to request the groups
   const sportId = props.route.params.sportId;
 
@@ -32,6 +39,40 @@ export default function ExploreGroupsBySport(props) {
       <View>
         <Text>Loading groups…</Text>
       </View>
+    );
+  }
+
+  if (groupsBySport >= 0) {
+    return (
+      <PlaceholderLayout>
+        <Image
+          source={require('../../assets/images/placeholders/important.png')}
+          style={{
+            tintColor: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
+        <HeadlineFive
+          style={{
+            textAlign: 'center',
+            color: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+          }}
+        >
+          There aren't groups here yet
+        </HeadlineFive>
+        <View style={{ paddingVertical: 32 }}>
+          <ButtonFilled
+            style={{ flexGrow: 0 }}
+            onPress={() => props.navigation.navigate('SelectSportScreen')}
+          >
+            Create a new group
+          </ButtonFilled>
+        </View>
+      </PlaceholderLayout>
     );
   }
 

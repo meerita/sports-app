@@ -50,11 +50,9 @@ export default function GroupEventsScreen(props) {
   const amIMemberOfThisGroup = group.members.find(
     member => member._id === me._id
   );
-  // console.log(amIMemberOfThisGroup ? 'I AM MEMBER' : 'I AM NOT MEMBER');
 
   // am I a member of the group who organizes the event?
   const amINoobOfThisGroup = group.noobs.find(noob => noob._id === me._id);
-  // console.log(amINoobOfThisGroup ? 'I AM NOOB' : 'I AM NOT NOOB');
 
   // I belong to this group?
   const iBelongToThisGroup =

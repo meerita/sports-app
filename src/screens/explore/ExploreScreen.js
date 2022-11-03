@@ -17,16 +17,21 @@ import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollVi
 // STORE & ACTIONS
 import { fetchVisibleSports } from '../../store/actions/explore';
 import { EVENTS } from '../../data/dummy-data-events';
+import { fetchLatestEvents } from '../../store/actions/event';
+import Colors from '../../constants/Colors';
+import BodyTwo from '../../components/type/BodyTwo';
 
 export default function ExploreScreen(props) {
   const dispatch = useDispatch();
-
-  const myEvents = EVENTS;
+  const darkMode = useSelector(state => state.theme.darkMode);
 
   // fetch all sports
   useEffect(() => {
+    dispatch(fetchLatestEvents());
     dispatch(fetchVisibleSports());
-  }, [allSports]);
+  }, [allSports, latestEvents]);
+
+  const latestEvents = useSelector(state => state.event.latestEvents);
 
   const allSports = useSelector(state => state.explore.sports);
 
@@ -45,7 +50,7 @@ export default function ExploreScreen(props) {
         horizontal={true}
         style={{ paddingLeft: 8, paddingRight: 16 }}
       >
-        {myEvents.map(event => (
+        {latestEvents.map(event => (
           <Card
             key={event._id}
             style={{
@@ -62,7 +67,7 @@ export default function ExploreScreen(props) {
               }}
             >
               <Image
-                source={{ uri: event.image }}
+                source={{ uri: event.group.image }}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -71,12 +76,32 @@ export default function ExploreScreen(props) {
                 }}
               />
             </View>
-            <View style={{}}>
-              <TwoLineWithIcon
-                title={event.title}
-                icon={event.sport.iconUrl}
-                subtitle={`Participantes: ${event.players}/${event.maxPlayers}`}
+            <View
+              style={{
+                minHeight: 56,
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}
+            >
+              <Image
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 32,
+                  flexGrow: 0,
+                  tintColor: darkMode
+                    ? Colors.dark.OnSurfaceUnfocused
+                    : Colors.light.OnSurfaceUnfocused,
+                }}
+                source={{ uri: event.sport.iconUrl }}
               />
+              <View style={{ flexShrink: 5, flexGrow: 5, marginRight: 16 }}>
+                <SubtitleOne>{event.title.slice(0, 24) + '…'}</SubtitleOne>
+                <BodyTwo>{event.group.title}</BodyTwo>
+              </View>
             </View>
           </Card>
         ))}
