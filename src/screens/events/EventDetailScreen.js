@@ -44,6 +44,7 @@ import { FloatingAction } from 'react-native-floating-action';
 import user from '../../store/slices/user';
 import { fetchCurrentGroup } from '../../store/actions/group';
 import SuperHeader from '../../components/Headers/SuperHeader/SuperHeader';
+import Loading from '../../components/Loading/Loading';
 
 export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -64,11 +65,7 @@ export default function EventDetailScreen(props) {
   const eventDetail = useSelector(state => state.event.eventDetail);
 
   if (isLoading || !eventDetail || !groupDetail) {
-    return (
-      <View>
-        <Text>Cargando evento</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   const eventDate = new Date(eventDetail.when);

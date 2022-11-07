@@ -20,20 +20,29 @@ import { EVENTS } from '../../data/dummy-data-events';
 import { fetchLatestEvents } from '../../store/actions/event';
 import Colors from '../../constants/Colors';
 import BodyTwo from '../../components/type/BodyTwo';
+import Loading from '../../components/Loading/Loading';
+import { useState } from 'react';
 
 export default function ExploreScreen(props) {
   const dispatch = useDispatch();
   const darkMode = useSelector(state => state.theme.darkMode);
 
+  const [loading, setLoading] = useState(true);
+
   // fetch all sports
   useEffect(() => {
     dispatch(fetchLatestEvents());
     dispatch(fetchVisibleSports());
+    setLoading(false);
   }, [allSports, latestEvents]);
 
   const latestEvents = useSelector(state => state.event.latestEvents);
 
   const allSports = useSelector(state => state.explore.sports);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (allSports.length === 0) {
     return (

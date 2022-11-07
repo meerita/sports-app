@@ -1,6 +1,6 @@
 /** @format */
 
-import { View, Text, Button, Image } from 'react-native';
+import { View, Text, Button, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
@@ -20,6 +20,7 @@ import SubHeader from '../../components/SubHeader/SubHeader';
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
 import moment from 'moment';
 import ThreeLinesWithIcon from '../../components/Lists/ThreeLines/ThreeLinesWithIcon';
+import Loading from '../../components/Loading/Loading';
 
 export default function MeEventsScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -55,9 +56,7 @@ export default function MeEventsScreen(props) {
   };
 
   if (loading) {
-    <View>
-      <Text>Loading…</Text>
-    </View>;
+    <Loading />;
   }
 
   if (myEvents >= 0) {
@@ -92,15 +91,13 @@ export default function MeEventsScreen(props) {
     <ScrollViewLayout>
       <SubHeader title='Nuevos eventos' />
       {openEvents.map(event => (
-        <>
-          <ThreeLinesWithIcon
-            key={event._id}
-            icon={{ uri: event.sport.iconUrl }}
-            title={event.title}
-            subtitle={event.group.title}
-            caption={moment(event.when).calendar()}
-          />
-        </>
+        <ThreeLinesWithIcon
+          key={event._id}
+          icon={{ uri: event.sport.iconUrl }}
+          title={event.title}
+          subtitle={event.group.title}
+          caption={moment(event.when).calendar()}
+        />
       ))}
       <SubHeader title='Eventos pasados' />
       {closedEvents.map(event => (
