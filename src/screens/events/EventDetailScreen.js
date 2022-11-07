@@ -1,50 +1,38 @@
 /** @format */
 
-import {
-  View,
-  Text,
-  Image,
-  Dimensions,
-  Linking,
-  Platform,
-  Alert,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { FloatingAction } from 'react-native-floating-action';
+import { t } from '../../services/i18n';
 import { useDispatch, useSelector } from 'react-redux';
+import { View, Text, Image, Linking, Platform, Alert } from 'react-native';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+
+// STORE ACTIONS
 import {
   closeEvent,
   fetchEventDetail,
   joinMeThisEventAsParticipant,
-  joinThisEventAsParticipant,
   leaveMeThisEventAsParticipant,
 } from '../../store/actions/event';
 
-// COMPONENTS
-import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
-import Styles from '../../constants/Styles';
+// CONSTANTS
 import Colors from '../../constants/Colors';
-import HeadlineFive from '../../components/type/HeadlineFive';
-import SingleLineWithIcon from '../../components/Lists/OneLine/SingleLineWithIcon';
-import { t } from '../../services/i18n';
-import Line from '../../components/Line/Line';
-import TwoLineWithAvatar from '../../components/Lists/TwoLines/TwoLineWithAvatar';
-import TwoLineItemLongerText from '../../components/Lists/TwoLines/TwoLineItemLongerText';
-import SubHeader from '../../components/SubHeader/SubHeader';
+
+// COMPONENTS
 import BodyOne from '../../components/type/BodyOne';
 import BodyTwo from '../../components/type/BodyTwo';
-import SubtitleOne from '../../components/type/SubtitleOne';
-import Caption from '../../components/type/Caption';
-
-import moment from 'moment';
-import Card from '../../components/Card/';
-import ParticipantContainer from '../../components/Layouts/ParticipantContainer/ParticipantContainer';
-import Participant from '../../components/Lists/Participant/Participant';
-import Spacer from '../../components/Spacer/Spacer';
-import { FloatingAction } from 'react-native-floating-action';
-import user from '../../store/slices/user';
-import { fetchCurrentGroup } from '../../store/actions/group';
-import SuperHeader from '../../components/Headers/SuperHeader/SuperHeader';
+import HeadlineFive from '../../components/type/HeadlineFive';
+import Line from '../../components/Line/Line';
 import Loading from '../../components/Loading/Loading';
+import Participant from '../../components/Lists/Participant/Participant';
+import ParticipantContainer from '../../components/Layouts/ParticipantContainer/ParticipantContainer';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import SingleLineWithIcon from '../../components/Lists/OneLine/SingleLineWithIcon';
+import Spacer from '../../components/Spacer/Spacer';
+import SubHeader from '../../components/SubHeader/SubHeader';
+import SubtitleOne from '../../components/type/SubtitleOne';
+import SuperHeader from '../../components/Headers/SuperHeader/SuperHeader';
+import TwoLineWithAvatar from '../../components/Lists/TwoLines/TwoLineWithAvatar';
 
 export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
