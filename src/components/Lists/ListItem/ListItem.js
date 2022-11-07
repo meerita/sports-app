@@ -1,11 +1,6 @@
 /** @format */
 
-import {
-  View,
-  Text,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from 'react-native';
+import { TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 export default function ListItem(props) {

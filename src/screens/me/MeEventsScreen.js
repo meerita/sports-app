@@ -19,6 +19,7 @@ import { useState } from 'react';
 import SubHeader from '../../components/SubHeader/SubHeader';
 import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
 import moment from 'moment';
+import ThreeLinesWithIcon from '../../components/Lists/ThreeLines/ThreeLinesWithIcon';
 
 export default function MeEventsScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -91,17 +92,19 @@ export default function MeEventsScreen(props) {
     <ScrollViewLayout>
       <SubHeader title='Nuevos eventos' />
       {openEvents.map(event => (
-        <TwoLineWithIcon
-          key={event._id}
-          icon={{ uri: event.sport.iconUrl }}
-          title={event.title}
-          subtitle={event.group.title}
-          caption={moment(event.when).calendar()}
-        />
+        <>
+          <ThreeLinesWithIcon
+            key={event._id}
+            icon={{ uri: event.sport.iconUrl }}
+            title={event.title}
+            subtitle={event.group.title}
+            caption={moment(event.when).calendar()}
+          />
+        </>
       ))}
       <SubHeader title='Eventos pasados' />
       {closedEvents.map(event => (
-        <TwoLineWithIcon
+        <ThreeLinesWithIcon
           key={event._id}
           icon={{ uri: event.sport.iconUrl }}
           title={event.title}
