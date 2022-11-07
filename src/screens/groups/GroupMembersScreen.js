@@ -23,6 +23,7 @@ import {
   promoteNoobToMember,
 } from '../../store/actions/group';
 import Spacer from '../../components/Spacer/Spacer';
+import TwoLineMemberListItem from '../../components/Lists/TwoLines/TwoLineMemberListItem';
 
 export default function GroupMembersScreen(props) {
   // me
@@ -33,6 +34,8 @@ export default function GroupMembersScreen(props) {
 
   // currentGroup
   const group = useSelector(state => state.group.groupDetail);
+
+  console.log(group);
 
   // am I an admin?
   const groupAdmin = group.admins.find(admin => admin._id === me._id);
@@ -401,11 +404,16 @@ export default function GroupMembersScreen(props) {
     <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <SubHeader title={t('common:admins')} />
       {group.admins.map(user => (
-        <TwoLineWithAvatar
+        <TwoLineMemberListItem
           key={user._id}
           title={user.username}
           subtitle={user.tag}
           avatar={{ uri: user.avatar }}
+          icon={
+            user.isSubscriber
+              ? require('../../assets/images/icons/PRO.png')
+              : false
+          }
           onLongPress={() =>
             groupAdmin
               ? openAdminSheet({
@@ -424,11 +432,16 @@ export default function GroupMembersScreen(props) {
       ))}
       <SubHeader title={t('common:members')} />
       {group.members.map(user => (
-        <TwoLineWithAvatar
+        <TwoLineMemberListItem
           key={user._id}
           title={user.username}
           subtitle={user.tag}
           avatar={{ uri: user.avatar }}
+          icon={
+            user.isSubscriber
+              ? require('../../assets/images/icons/PRO.png')
+              : false
+          }
           onLongPress={() =>
             groupAdmin
               ? openMembersSheet({
@@ -452,11 +465,16 @@ export default function GroupMembersScreen(props) {
         </BodyTwo>
       ) : (
         group.noobs.map(noob => (
-          <TwoLineWithAvatar
+          <TwoLineMemberListItem
             key={noob._id}
             title={noob.username}
             subtitle={noob.tag}
             avatar={{ uri: noob.avatar }}
+            icon={
+              noob.isSubscriber
+                ? require('../../assets/images/icons/PRO.png')
+                : false
+            }
             onLongPress={() =>
               groupAdmin
                 ? openNoobSheet({
