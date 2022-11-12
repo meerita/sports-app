@@ -23,6 +23,10 @@ import AcceptCookiesScreen, {
 } from '../screens/auth/AcceptCookiesScreen';
 import Colors from '../constants/Colors';
 
+import SetupPushNotificationScreen, {
+  screenOptions as SetupPushNotificationScreenOptions,
+} from '../screens/setup/SetupPushNotificationScreen';
+
 export default function AuthNavigator() {
   // Definition of the stack
   const Stack = createNativeStackNavigator();
@@ -70,6 +74,11 @@ export default function AuthNavigator() {
         name='AcceptCookies'
         component={AcceptCookiesScreen}
         options={AcceptCookiesScreenOptions}
+      />
+      <Stack.Screen
+        name='SetupPushNotificationScreen'
+        component={SetupPushNotificationScreen}
+        options={SetupPushNotificationScreenOptions}
       />
     </Stack.Navigator>
   );

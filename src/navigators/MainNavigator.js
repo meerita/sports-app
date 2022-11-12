@@ -260,6 +260,10 @@ import NewUserDetailScreen, {
   screenOptions as NewUserDetailScreenOptions,
 } from '../screens/user/NewUserDetailScreen';
 
+import SetupPushNotificationScreen, {
+  screenOptions as SetupPushNotificationScreenOptions,
+} from '../screens/setup/SetupPushNotificationScreen';
+
 // STORE
 import { themeActions } from '../store/slices/theme';
 
@@ -357,6 +361,11 @@ export default function MainNavigator(props) {
         name='MaxPlayersScreen'
         component={MaxPlayersScreen}
         options={MaxPlayersScreenOptions}
+      />
+      <Stack.Screen
+        name='SetupPushNotificationScreen'
+        component={SetupPushNotificationScreen}
+        options={SetupPushNotificationScreenOptions}
       />
       <Stack.Screen
         name='SettingsProfileScreen'

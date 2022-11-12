@@ -20,6 +20,12 @@ import {
   notificationsPetitionToJoin,
   notificationsPublicAnnounces,
 } from '../../store/actions/me';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
+import SubtitleOne from '../../components/type/SubtitleOne';
+import HeadlineFive from '../../components/type/HeadlineFive';
+import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
+import { Image, View } from 'react-native';
+import Colors from '../../constants/Colors';
 
 export default function SettingsNotificationsScreen(props) {
   // constant for the notification settings of groups
@@ -30,6 +36,8 @@ export default function SettingsNotificationsScreen(props) {
   const general = useSelector(
     state => state.me.myData.settings.notifications.general
   );
+
+  const [notificationPermission, setNotificationPermission] = useState(false);
 
   // constant for dispatch
   const dispatch = useDispatch();
@@ -116,6 +124,33 @@ export default function SettingsNotificationsScreen(props) {
       dispatch(notificationsNewMember(false));
     }
   };
+
+  if (!notificationPermission) {
+    return (
+      <PlaceholderLayout>
+        <Image
+          source={require('../../assets/images/placeholders/notifications_placeholder.png')}
+          width={96}
+          height={96}
+          style={{
+            tintColor: Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
+        <HeadlineFive style={{ textAlign: 'center', paddingHorizontal: 16 }}>
+          Notifications will help you to stay on track of your sports life.
+        </HeadlineFive>
+        <View style={{ paddingVertical: 32 }}>
+          <ButtonFilled
+            style={{ flexGrow: 0 }}
+            onPress={() => setNotificationPermission(true)}
+          >
+            Activate notifications
+          </ButtonFilled>
+        </View>
+      </PlaceholderLayout>
+    );
+  }
 
   return (
     <ScrollViewLayout style={{ paddingVertical: 16 }}>
