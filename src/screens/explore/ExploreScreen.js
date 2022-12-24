@@ -54,7 +54,7 @@ export default function ExploreScreen(props) {
 
   return (
     <ScrollViewLayout>
-      <SubHeader title='Latest events' />
+      <SubHeader title={t('events:incomingEvents')} />
       <ScrollView
         horizontal={true}
         style={{ paddingLeft: 8, paddingRight: 16 }}
@@ -115,7 +115,7 @@ export default function ExploreScreen(props) {
           </Card>
         ))}
       </ScrollView>
-      <SubHeader title='All sports' />
+      <SubHeader title={t('explore:popularSports')} />
       {allSports.map(sport => (
         <SingleLineWithIcon
           key={sport._id}

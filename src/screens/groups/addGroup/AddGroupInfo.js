@@ -65,7 +65,7 @@ export default function AddGroupInfo(props) {
   };
 
   return (
-    <ScrollViewLayout>
+    <ScrollViewLayout style={{ paddingVertical: 16 }}>
       <BodyTwo style={{ paddingHorizontal: 16 }}>
         {t('groups:create.groupInfoDesc')}
       </BodyTwo>

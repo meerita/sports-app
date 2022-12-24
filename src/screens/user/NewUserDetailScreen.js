@@ -1,9 +1,8 @@
 /** @format */
 
-import { View, Text, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Image, Dimensions, ScrollView } from 'react-native';
 import React, { useReducer, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import BodyOne from '../../components/type/BodyOne';
 import SubHeader from '../../components/SubHeader/SubHeader';
@@ -14,6 +13,7 @@ import SingleLineWithCaption from '../../components/Lists/OneLine/SingleLineWith
 import Card from '../../components/Card';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import Caption from '../../components/type/Caption';
+import Loading from '../../components/Loading/Loading';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -73,7 +73,7 @@ export default function NewUserDetailScreen(props) {
   if (loading) {
     return (
       <View>
-        <Text> loading…</Text>
+        <Loading />
       </View>
     );
   }

@@ -1,10 +1,10 @@
 /** @format */
-import { View, Image, Dimensions, ScrollView } from 'react-native';
-import React from 'react';
-import { useSelector } from 'react-redux';
 import { t } from '../../services/i18n';
+import { useSelector } from 'react-redux';
+import { View, Image, Dimensions } from 'react-native';
 import convert from 'convert-units';
 import moment from 'moment';
+import React from 'react';
 
 // COMPONENTS
 import BodyOne from '../../components/type/BodyOne';

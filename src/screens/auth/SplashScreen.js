@@ -55,7 +55,7 @@ export default function SplashScreen(props) {
             }}
             onPress={() => props.navigation.navigate('AcceptTermsScreen')}
           >
-            {t('auth:register')}
+            {t('auth:register.register')}
           </ButtonFilled>
           <ButtonText
             // onPress={() => props.navigation.navigate('Login')}
@@ -64,7 +64,7 @@ export default function SplashScreen(props) {
               width: Dimensions.get('window').width / 2 - 20,
             }}
           >
-            {t('auth:login')}
+            {t('auth:login.login')}
           </ButtonText>
         </View>
         <Caption

@@ -8,9 +8,6 @@ import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 export default function UserList(props) {
   const users = useSelector(state => state.group.groupDetail);
 
-  // console.log(users);
-  // console.log('hola');
-
   if (!users) {
     return (
       <View>

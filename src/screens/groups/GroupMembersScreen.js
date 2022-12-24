@@ -35,8 +35,6 @@ export default function GroupMembersScreen(props) {
   // currentGroup
   const group = useSelector(state => state.group.groupDetail);
 
-  console.log(group);
-
   // am I an admin?
   const groupAdmin = group.admins.find(admin => admin._id === me._id);
 
@@ -400,43 +398,25 @@ export default function GroupMembersScreen(props) {
     );
   };
 
+  const groupMembers = group.members;
+  const groupAdmins = group.admins;
+
+  const combinedMembers = groupMembers.map(member => {
+    if (groupAdmins.some(admin => admin._id === member._id)) {
+      return { ...member, admin: true };
+    }
+    return member;
+  });
+
   return (
     <ScrollViewLayout style={{ paddingVertical: 16 }}>
-      <SubHeader title={t('common:admins')} />
-      {group.admins.map(user => (
+      {combinedMembers.map(user => (
         <TwoLineMemberListItem
           key={user._id}
           title={user.username}
           subtitle={user.tag}
           avatar={{ uri: user.avatar }}
-          icon={
-            user.isSubscriber
-              ? require('../../assets/images/icons/PRO.png')
-              : false
-          }
-          onLongPress={() =>
-            groupAdmin
-              ? openAdminSheet({
-                  userId: user._id,
-                  username: user.username,
-                })
-              : null
-          }
-          onPress={() =>
-            props.navigation.push('NewUserDetailScreen', {
-              userId: user._id,
-              username: user.username,
-            })
-          }
-        />
-      ))}
-      <SubHeader title={t('common:members')} />
-      {group.members.map(user => (
-        <TwoLineMemberListItem
-          key={user._id}
-          title={user.username}
-          subtitle={user.tag}
-          avatar={{ uri: user.avatar }}
+          caption={user.admin && t('common:admin')}
           icon={
             user.isSubscriber
               ? require('../../assets/images/icons/PRO.png')

@@ -3,7 +3,7 @@
 import { FloatingAction } from 'react-native-floating-action';
 import { t } from '../../services/i18n';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, Image, Linking, Platform, Alert } from 'react-native';
+import { View, Image, Linking, Platform, Alert } from 'react-native';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
@@ -33,6 +33,7 @@ import SubHeader from '../../components/SubHeader/SubHeader';
 import SubtitleOne from '../../components/type/SubtitleOne';
 import SuperHeader from '../../components/Headers/SuperHeader/SuperHeader';
 import TwoLineWithAvatar from '../../components/Lists/TwoLines/TwoLineWithAvatar';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
 
 export default function EventDetailScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -81,14 +82,14 @@ export default function EventDetailScreen(props) {
 
   const coreActions = {
     close: {
-      text: 'Close',
+      text: t('common:close'),
       icon: require('../../assets/images/icons/close.png'),
       name: 'bt_close',
       position: 1,
       color: darkModeOption,
     },
     share: {
-      text: 'Share',
+      text: t('common:share'),
       icon:
         Platform.OS === 'android'
           ? require('../../assets/images/icons/share.png')
@@ -98,49 +99,49 @@ export default function EventDetailScreen(props) {
       color: darkModeOption,
     },
     join: {
-      text: 'Participate',
+      text: t('common:participate'),
       icon: require('../../assets/images/icons/suspense.png'),
       name: 'bt_join',
       position: 2,
       color: darkModeOption,
     },
     open: {
-      text: 'Re-open',
+      text: t('common:reOpen'),
       icon: require('../../assets/images/icons/restart.png'),
       name: 'bt_open',
       position: 1,
       color: darkModeOption,
     },
     leave: {
-      text: 'Leave the event',
+      text: t('events:leaveEvent'),
       icon: require('../../assets/images/icons/event_out.png'),
       name: 'bt_leave',
       position: 4,
       color: darkModeOption,
     },
     leaveGuest: {
-      text: 'Leave as guest',
+      text: t('events:leaveAsGuest'),
       icon: require('../../assets/images/icons/event_out.png'),
       name: 'bt_leave_guest',
       position: 4,
       color: darkModeOption,
     },
     edit: {
-      text: 'Edit',
+      text: t('common:edit'),
       icon: require('../../assets/images/icons/event_edit.png'),
       name: 'bt_edit',
       position: 3,
       color: darkModeOption,
     },
     guest: {
-      text: 'Sign me as guest',
+      text: t('events:signAsGuest'),
       icon: require('../../assets/images/icons/rsvp.png'),
       name: 'bt_petition',
       position: 1,
       color: darkModeOption,
     },
     delete: {
-      text: 'Delete',
+      text: t('common:delete'),
       icon: require('../../assets/images/icons/delete.png'),
       name: 'bt_delete',
       position: 1,
@@ -185,9 +186,27 @@ export default function EventDetailScreen(props) {
   // is invisible
   if (!iBelongToThisGroup && !eventDetail.visibility) {
     return (
-      <View>
-        <Text>Este evento es visible sólo para miembros del grupo</Text>
-      </View>
+      <PlaceholderLayout>
+        <Image
+          source={require('../../assets/images/placeholders/visibility_off_placeholder.png')}
+          style={{
+            tintColor: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
+        <HeadlineFive
+          style={{
+            textAlign: 'center',
+            color: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+          }}
+        >
+          {t('events:visibleOnlyMembers')}
+        </HeadlineFive>
+      </PlaceholderLayout>
     );
   }
 
@@ -202,36 +221,36 @@ export default function EventDetailScreen(props) {
             coreActions.close,
             coreActions.delete,
             coreActions.share
-          )) // 'Soy el puto amo y ya estoy participando'
+          )) // I am god and i am participating
         : (actions = actions.concat(
             coreActions.join,
             coreActions.edit,
             coreActions.close,
             coreActions.delete,
             coreActions.share
-          )) //'soy el puto amo y no estoy participando, puedo registrarme'
+          )) // I am god y and I am not participating but I can register to this event
       : (actions = actions.concat(
           coreActions.open,
           coreActions.delete,
           coreActions.share
-        )) //'soy el puto amog y el evento está cerrado'
+        )) // I am god but the event is closed
     : iBelongToThisGroup
     ? amIMemberOfThisGroup
       ? eventParticipationPolicy != 'only-admins'
         ? eventDetail.open
           ? amIParticipanting
-            ? (actions = actions.concat(coreActions.leave, coreActions.share)) // 'soy miembro, y ya estoy participando'
-            : (actions = actions.concat(coreActions.join, coreActions.share)) //'Soy miembro, no estoy participando y puedo registrarme'
-          : (actions = actions.concat(coreActions.share)) // 'soy miembro no puedo registrarme porque el evento está cerrado'
+            ? (actions = actions.concat(coreActions.leave, coreActions.share)) // I am a member, and I am participating
+            : (actions = actions.concat(coreActions.join, coreActions.share)) // I am a member and I am
+          : (actions = actions.concat(coreActions.share)) // I am member and i can't register because the event is closed
         : eventDetail.allowInvitations
         ? eventDetail.open
           ? amIInvitedToEvent || amIParticipanting
             ? (actions = actions.concat(
                 coreActions.leaveGuest,
                 coreActions.share
-              )) // 'Soy miembro y ya estoy invitado'
-            : (actions = actions.concat(coreActions.guest, coreActions.share)) //'soy miembro y puedo registrame como invitado porque el evento está abierto y sólo para admins'
-          : (actions = actions.concat(coreActions.share)) // 'soy miembro y como invitado podría registrarme pero el evento está cerrado'
+              )) // I am a member and I am invited
+            : (actions = actions.concat(coreActions.guest, coreActions.share)) // i am member and I can register as a guest because the event is open and only for admins'
+          : (actions = actions.concat(coreActions.share)) // i am member and as a guest i could be register but the event is closed
         : (actions = actions.concat(coreActions.share)) //'soy miembro pero no puedo registrarme como nada porque está cerrado el evento'
       : eventParticipationPolicy === 'any-member' ||
         eventParticipationPolicy === 'anyone'
@@ -243,10 +262,10 @@ export default function EventDetailScreen(props) {
       : eventDetail.allowInvitations
       ? eventDetail.open
         ? amIInvitedToEvent || amIParticipanting
-          ? (actions = actions.concat(coreActions.leave, coreActions.share)) // 'Soy noob, podría registrarme como invitado pero ya estoy en la lista de invitados o miembros'
+          ? (actions = actions.concat(coreActions.leave, coreActions.share)) // 'I am a noob i could register as a guest but i am already on the guest list or members'
           : (actions = actions.concat(coreActions.guest, coreActions.share)) //
         : (actions = actions.concat(coreActions.share))
-      : (actions = actions.concat(coreActions.share)) // 'soy noob y no puedo registrarme para nada'
+      : (actions = actions.concat(coreActions.share)) // I am a noob and I can't register
     : eventParticipationPolicy === 'anyone'
     ? eventDetail.open
       ? amIParticipanting
@@ -265,7 +284,7 @@ export default function EventDetailScreen(props) {
     switch (name) {
       case 'bt_close':
         askMeBeforeExcecute({
-          message: 'Are you sure you want to close this event?',
+          message: t('events:closeEventWarning'),
           action: () =>
             dispatch(
               closeEvent({
@@ -277,7 +296,7 @@ export default function EventDetailScreen(props) {
         break;
       case 'bt_open':
         askMeBeforeExcecute({
-          message: 'Are you sure you want to re-open this event?',
+          message: t('events:reOpeningWarning'),
           action: () =>
             dispatch(
               closeEvent({
@@ -391,7 +410,7 @@ export default function EventDetailScreen(props) {
                     : Colors.light.OnPrimaryActive,
                 }}
               >
-                Este evento ha finalizado y está cerrado.
+                {t('events:eventIsClosed')}
               </SubtitleOne>
             </View>
           </View>
@@ -427,7 +446,7 @@ export default function EventDetailScreen(props) {
             <Line />
             <SingleLineWithIcon
               icon={require('../../assets/images/icons/manage_accounts.png')}
-              title={'Participation…'}
+              title={t('groups:settings.events.participation')}
               caption={t(
                 `groups:settings.events.types.${eventDetail.allowedParticipants}`
               )}
@@ -445,7 +464,7 @@ export default function EventDetailScreen(props) {
             <Line />
             <SingleLineWithIcon
               icon={require('../../assets/images/icons/manage_accounts.png')}
-              title={'Invitados?'}
+              title={t('common:guests')}
               caption={
                 eventDetail.allowInvitations ? 'se permiten invitados' : 'no'
               }
@@ -467,7 +486,7 @@ export default function EventDetailScreen(props) {
         <Line />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/group.png')}
-          title='Max participants'
+          title={t('events:maxParticipants')}
           caption={eventDetail.maxParticipants}
           onPress={() =>
             amIanAdminOrOrganizer &&
@@ -477,13 +496,13 @@ export default function EventDetailScreen(props) {
         <Line />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/person_pin_circle.png')}
-          title={'Punto de encuentro'}
+          title={t('events:meetingPoint')}
           caption={'Carrer Muntaner 16'}
         />
         <Line />
         <SingleLineWithIcon
           icon={require('../../assets/images/icons/event.png')}
-          title={'Cuándo'}
+          title={t('events:when')}
           caption={moment(eventDate).format('LL')}
           onPress={() =>
             props.navigation.navigate('CreateEventWhenScreen', {
@@ -498,13 +517,13 @@ export default function EventDetailScreen(props) {
               editEvent: true,
             })
           }
-          title='Time of the event'
+          title={t('events:time')}
           caption={moment(eventDate).format('LT')}
         />
         <Line />
         <SingleLineWithIcon
           icon={{ uri: eventDetail.sport.iconUrl }}
-          title={'Tipo de evento'}
+          title={t('groups:settings.events.typeOfEvent')}
           caption={t(
             `typesOfActivity:${eventDetail.sport.title}.${eventDetail.activity}.label`
           )}

@@ -115,7 +115,7 @@ export default function GroupEventsScreen(props) {
                 : Colors.light.OnBackgroundUnfocused,
             }}
           >
-            This group has no events
+            {t('groups:noEvents')}
           </HeadlineFive>
         </PlaceholderLayout>
         {canCreate && (

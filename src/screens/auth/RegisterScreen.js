@@ -155,7 +155,7 @@ export default function RegisterScreen(props) {
         onPress={handleSubmit(onSubmit)}
         style={{ marginHorizontal: 8, marginBottom: 32 }}
       >
-        {loading ? t('loaders:registering') : t('auth:register')}
+        {loading ? t('loaders:registering') : t('auth:register.register')}
       </ButtonFilled>
     </FormLayout>
   );
@@ -164,7 +164,7 @@ export default function RegisterScreen(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Register an account',
+    headerTitle: t('auth:register.register'),
     headerBackTitle: 'Close',
     presentation: Platform.OS === 'android' ? 'card' : 'modal',
   };

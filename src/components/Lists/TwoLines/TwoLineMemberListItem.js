@@ -18,6 +18,7 @@ import Styles from '../../../constants/Styles';
 import SubtitleOne from '../../type/SubtitleOne';
 import BodyTwo from '../../type/BodyTwo';
 import { useSelector } from 'react-redux';
+import Caption from '../../type/Caption';
 
 export default function TwoLineMemberListItem(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -52,15 +53,19 @@ export default function TwoLineMemberListItem(props) {
           <BodyTwo style={Styles.listSubtitle}>{props.subtitle}</BodyTwo>
         </View>
         <View style={Styles.listActionView}>
-          <Image
-            style={{
-              ...Styles.listAction,
-              tintColor: darkMode
-                ? Colors.dark.OnBackgroundActive
-                : Colors.light.OnBackgroundActive,
-            }}
-            source={props.icon}
-          />
+          {props.caption ? (
+            <Caption>{props.caption}</Caption>
+          ) : (
+            <Image
+              style={{
+                ...Styles.listAction,
+                tintColor: darkMode
+                  ? Colors.dark.OnBackgroundActive
+                  : Colors.light.OnBackgroundActive,
+              }}
+              source={props.icon}
+            />
+          )}
         </View>
       </View>
     </ListItem>

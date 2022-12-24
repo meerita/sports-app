@@ -1,22 +1,22 @@
 /** @format */
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { t } from '../services/i18n';
+import { useSelector } from 'react-redux';
 import React from 'react';
 
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// CONSTANTS
+import Colors from '../constants/Colors';
 
-import MeScreen, {
-  screenOptions as MeScreenOptions,
-} from '../screens/me/MeScreen';
+// SCREENS
+import MeScreen from '../screens/me/MeScreen';
 
 import MeEventsScreen, {
   screenOptions as MeEventsScreenOptions,
 } from '../screens/me/MeEventsScreen';
-import Colors from '../constants/Colors';
-import { useSelector } from 'react-redux';
-
-const Tabs = createMaterialTopTabNavigator();
 
 export default function MeNavigator(props) {
+  const Tabs = createMaterialTopTabNavigator();
   const darkMode = useSelector(state => state.theme.darkMode);
 
   const tabOptions = {
@@ -37,21 +37,12 @@ export default function MeNavigator(props) {
 
   return (
     <Tabs.Navigator screenOptions={tabOptions}>
-      <Tabs.Screen name='Me' component={MeScreen} options={MeScreenOptions} />
+      <Tabs.Screen name={t('common:info')} component={MeScreen} />
       <Tabs.Screen
-        name='Events'
+        name={t('common:events')}
         component={MeEventsScreen}
         options={MeEventsScreenOptions}
       />
     </Tabs.Navigator>
   );
 }
-
-// // NAVIGATION OPTIONS
-// export const screenOptions = navData => {
-//   return {
-//     headerTitle: 'Login',
-//     // headerBackTitle: null,
-//     presentation: Platform.OS === 'android' ? 'card' : 'modal',
-//   };
-// };

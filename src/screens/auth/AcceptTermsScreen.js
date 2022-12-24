@@ -12,6 +12,8 @@ import BodyTwo from '../../components/type/BodyTwo';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
+import { t } from '../../services/i18n';
+import Line from '../../components/Line/Line';
 
 export default function AcceptTermsScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -22,9 +24,12 @@ export default function AcceptTermsScreen(props) {
   return (
     <View>
       <BodyTwo style={{ padding: 16 }}>
-        Para poder registrarte y participar de la comunidad debes aceptar todos
-        estos términos y servicios. Este paso es obligatorio.
+        {t('auth:register.acceptTerms.acceptTermsDesc')}
       </BodyTwo>
+      <BodyTwo>Leer Términos y condiciones.</BodyTwo>
+      <BodyTwo>Leer Política de Privacidad.</BodyTwo>
+      <BodyTwo>Leer Términos de suscripción.</BodyTwo>
+      <Line />
       <SingleLineWithSwitch title='Términos y condiciones'>
         <CheckBox
           disabled={true}
@@ -72,7 +77,7 @@ export default function AcceptTermsScreen(props) {
         <ButtonFilled
           onPress={() => props.navigation.navigate('AcceptCookies')}
         >
-          Next
+          {t('common:nextStep')}
         </ButtonFilled>
       </View>
     </View>
@@ -82,7 +87,7 @@ export default function AcceptTermsScreen(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Aceptar términos',
+    headerTitle: t('auth:register.acceptTerms.title'),
     // headerBackTitle: null,
     presentation: Platform.OS === 'android' ? 'card' : 'modal',
   };

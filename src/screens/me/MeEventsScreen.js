@@ -1,26 +1,21 @@
 /** @format */
 
-import { View, Text, Button, Image, Dimensions } from 'react-native';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Image } from 'react-native';
 import { t } from '../../services/i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
-import { changeMyDarkMode } from '../../store/actions/theme';
-import { meActions } from '../../store/slices/me';
-import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
-import BodyOne from '../../components/type/BodyOne';
-import { allowAnalyticsCookies, fetchMyEvents } from '../../store/actions/me';
-import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
-import HeadlineFive from '../../components/type/HeadlineFive';
-import Colors from '../../constants/Colors';
+import { fetchMyEvents } from '../../store/actions/me';
 import { useEffect } from 'react';
-import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import { useState } from 'react';
-import SubHeader from '../../components/SubHeader/SubHeader';
-import TwoLineWithIcon from '../../components/Lists/TwoLines/TwoLineWithIcon';
-import moment from 'moment';
-import ThreeLinesWithIcon from '../../components/Lists/ThreeLines/ThreeLinesWithIcon';
+import Colors from '../../constants/Colors';
+import HeadlineFive from '../../components/type/HeadlineFive';
 import Loading from '../../components/Loading/Loading';
+import moment from 'moment';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
+import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import SubHeader from '../../components/SubHeader/SubHeader';
+import ThreeLinesWithIcon from '../../components/Lists/ThreeLines/ThreeLinesWithIcon';
 
 export default function MeEventsScreen(props) {
   const me = useSelector(state => state.me.myData);
@@ -30,10 +25,6 @@ export default function MeEventsScreen(props) {
   const openEvents = myEvents.filter(event => event.open === true);
 
   const closedEvents = myEvents.filter(event => event.open != true);
-
-  const characteristics = me.characteristics;
-
-  const cookies = me.settings.privacy.cookies;
 
   const darkMode = useSelector(state => state.theme.darkMode);
 
@@ -80,7 +71,7 @@ export default function MeEventsScreen(props) {
                 : Colors.light.OnBackgroundUnfocused,
             }}
           >
-            You didn't join any event yet
+            {t('events:noEvents')}
           </HeadlineFive>
         </PlaceholderLayout>
       </>
@@ -89,7 +80,7 @@ export default function MeEventsScreen(props) {
 
   return (
     <ScrollViewLayout>
-      <SubHeader title='Nuevos eventos' />
+      <SubHeader title={t('events:incomingEvents')} />
       {openEvents.map(event => (
         <ThreeLinesWithIcon
           key={event._id}
@@ -99,7 +90,7 @@ export default function MeEventsScreen(props) {
           caption={moment(event.when).calendar()}
         />
       ))}
-      <SubHeader title='Eventos pasados' />
+      <SubHeader title={t('events:pastEvents')} />
       {closedEvents.map(event => (
         <ThreeLinesWithIcon
           key={event._id}

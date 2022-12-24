@@ -10,6 +10,8 @@ import Caption from '../../components/type/Caption';
 import TwoLineItemWithSwitch from '../../components/Lists/TwoLines/TwoLineItemWithSwitch';
 import BodyTwo from '../../components/type/BodyTwo';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
+import { t } from '../../services/i18n';
+import App from '../../constants/App';
 
 export default function AcceptCookiesScreen(props) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -18,14 +20,11 @@ export default function AcceptCookiesScreen(props) {
   return (
     <View>
       <BodyTwo style={{ padding: 16 }}>
-        MINIDE utiliza cookies para ofrecer una experiencia de uso superior.
-        Además utilizamos estos datos para mejorar la aplicación, ofrecer
-        mejores publicidades y rendimiento. De momento no hemos activado ningún
-        tipo de cookie y puedes revocar estos servicios en todo momento.
+        {t('auth:register.acceptCookies.description', { brand: App.name })}
       </BodyTwo>
       <TwoLineItemWithSwitch
-        title='Básicas'
-        subtitle='Cookies básicas para que funcione la app.'
+        title={t('auth:register.acceptCookies.types.essentials')}
+        subtitle={t('auth:register.acceptCookies.types.essentialsDesc')}
         onPress={() => setToggleCheckBox(!toggleCheckBox)}
       >
         <CheckBox
@@ -35,8 +34,8 @@ export default function AcceptCookiesScreen(props) {
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
-        title='Cookie de Analítica'
-        subtitle='Las cookies que más nos interesan, así podemos aprender de nuestra comunidad y darles la mejor experiencia de uso'
+        title={t('auth:register.acceptCookies.types.analytics')}
+        subtitle={t('auth:register.acceptCookies.types.essentialsDesc')}
         onPress={() => setToggleCheckBox(!toggleCheckBox)}
       >
         <CheckBox
@@ -47,8 +46,8 @@ export default function AcceptCookiesScreen(props) {
       </TwoLineItemWithSwitch>
 
       <TwoLineItemWithSwitch
-        title='Cookies de Marketing'
-        subtitle='Con estas cookies te presentamos anuncios personalizados.'
+        title={t('auth:register.acceptCookies.types.marketing')}
+        subtitle={t('auth:register.acceptCookies.types.marketingDesc')}
         onPress={() => setToggleCheckBox2(!toggleCheckBox2)}
       >
         <CheckBox
@@ -58,8 +57,8 @@ export default function AcceptCookiesScreen(props) {
         />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
-        title='Otras'
-        subtitle='Con estas cookies te presentamos anuncios personalizados.'
+        title={t('auth:register.acceptCookies.types.other')}
+        subtitle={t('auth:register.acceptCookies.types.otherDesc')}
         onPress={() => setToggleCheckBox3(!toggleCheckBox3)}
       >
         <CheckBox
@@ -72,7 +71,7 @@ export default function AcceptCookiesScreen(props) {
         <ButtonFilled
           onPress={() => props.navigation.navigate('RegisterScreen')}
         >
-          Next
+          {t('common:nextStep')}
         </ButtonFilled>
       </View>
     </View>
@@ -82,7 +81,7 @@ export default function AcceptCookiesScreen(props) {
 // NAVIGATION OPTIONS
 export const screenOptions = navData => {
   return {
-    headerTitle: 'Cookies acceptance',
+    headerTitle: t('auth:register.acceptCookies.title'),
     // headerBackTitle: null,
     presentation: Platform.OS === 'android' ? 'card' : 'modal',
   };

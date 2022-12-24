@@ -3,7 +3,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { t } from '../services/i18n';
 
 // STORE & ACTIONS
@@ -33,6 +33,7 @@ import IconButton from '../components/IconButton/IconButton';
 import Colors from '../constants/Colors';
 import ScrollViewLayout from '../components/Layouts/ScrollViewLayout/ScrollViewLayout';
 import { FloatingAction } from 'react-native-floating-action';
+import PlaceholderLayout from '../components/Layouts/PlaceholderLayout/PlaceholderLayout';
 
 const Tabs = createMaterialTopTabNavigator();
 
@@ -104,9 +105,20 @@ export default function GroupDetailNavigator(props) {
 
   if (amIbanned) {
     return (
-      <View>
-        <Text>Estás banneado de este grupo</Text>
-      </View>
+      <PlaceholderLayout style={{ padding: 16 }}>
+        <Image
+          source={require('../assets/images/placeholders/visibility_off_placeholder.png')}
+          style={{
+            tintColor: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
+        <HeadlineFive style={{ textAlign: 'center' }}>
+          {t('groups:banned')}
+        </HeadlineFive>
+      </PlaceholderLayout>
     );
   }
 
@@ -115,23 +127,38 @@ export default function GroupDetailNavigator(props) {
   // show any screen to that non-member
   if (isItMyGroup === false && groupVisibility === true) {
     return (
-      <ScrollViewLayout style={{ padding: 16 }}>
+      <PlaceholderLayout style={{ padding: 16 }}>
+        <Image
+          source={require('../assets/images/placeholders/visibility_off_placeholder.png')}
+          style={{
+            tintColor: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
         <HeadlineFive style={{ textAlign: 'center' }}>
-          Este grupo sólo es visible a miembros registrados.
+          {t('groups:visibleOnlyMembers')}
         </HeadlineFive>
-        {
-          // now we check if this visitor can request a registration by first checking
-          // this group accepts registrations, if so, then can this user opt for registration
-          // matching the group gender policy?
-          // registration policy a false means the
-          groupRegistrationPolicy === false && canIRegister === true ? (
-            <ButtonFilled>Request join</ButtonFilled>
-          ) : // Does the group accept free join or is based on invitation requests?
-          canIRegister === true && groupJoinPolicy === true ? (
-            <ButtonFilled>Join group</ButtonFilled>
-          ) : null
-        }
-      </ScrollViewLayout>
+        <View style={{ paddingVertical: 32 }}>
+          {
+            // now we check if this visitor can request a registration by first checking
+            // this group accepts registrations, if so, then can this user opt for registration
+            // matching the group gender policy?
+            // registration policy a false means the
+            groupRegistrationPolicy === false && canIRegister === true ? (
+              <ButtonFilled style={{ flexGrow: 0 }}>
+                {t('groups:petitionToJoin')}
+              </ButtonFilled>
+            ) : // Does the group accept free join or is based on invitation requests?
+            canIRegister === true && groupJoinPolicy === true ? (
+              <ButtonFilled style={{ flexGrow: 0 }}>
+                {t('groups:joinGroup', { group: groupDetail.title })}
+              </ButtonFilled>
+            ) : null
+          }
+        </View>
+      </PlaceholderLayout>
     );
   }
 

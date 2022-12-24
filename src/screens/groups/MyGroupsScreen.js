@@ -23,8 +23,12 @@ import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollVi
 import { fetchCurrentGroup } from '../../store/actions/group';
 import { fetchMyUser } from '../../store/actions/me';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
+import PlaceholderLayout from '../../components/Layouts/PlaceholderLayout/PlaceholderLayout';
+import HeadlineFive from '../../components/type/HeadlineFive';
+import Colors from '../../constants/Colors';
 
 export default function MyGroupsScreen(props) {
+  const darkMode = useSelector(state => state.theme.darkMode);
   const me = useSelector(state => state.me.myData);
   const myGroups = useSelector(state => state.me.myGroups);
   const isAuth = useSelector(state => state.auth);
@@ -38,18 +42,40 @@ export default function MyGroupsScreen(props) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (myGroups) {
-  //     dispatch(fetchMyUser(me._id));
-  //   }
-  // }, [myGroups]);
+  useEffect(() => {
+    if (!myGroups) {
+      dispatch(fetchMyUser(me._id));
+    }
+  }, [myGroups]);
 
   if (myGroups.length === 0) {
     return (
-      <View>
-        <Text>No hay grupos</Text>
-        <ButtonFilled>Crea un grupo</ButtonFilled>
-      </View>
+      <PlaceholderLayout>
+        <Image
+          source={require('../../assets/images/placeholders/important.png')}
+          style={{
+            tintColor: darkMode
+              ? Colors.dark.OnBackgroundUnfocused
+              : Colors.light.OnBackgroundUnfocused,
+            marginBottom: 16,
+          }}
+        />
+        <HeadlineFive
+          style={{
+            textAlign: 'center',
+            paddingHorizontal: 16,
+            marginBottom: 64,
+          }}
+        >
+          {t('groups:noGroups')}
+        </HeadlineFive>
+        <ButtonFilled
+          style={{ flexGrow: 0 }}
+          onPress={() => props.navigation.navigate('SelectSportScreen')}
+        >
+          {t('groups:create.form.createNewGroup')}
+        </ButtonFilled>
+      </PlaceholderLayout>
     );
   }
 
@@ -85,7 +111,6 @@ export default function MyGroupsScreen(props) {
             />
           </View>
           <View style={{ paddingHorizontal: 8, paddingVertical: 8 }}>
-            <Caption>{group._id}</Caption>
             <SubtitleOne>{group.title}</SubtitleOne>
             <Caption>
               {group.members.length > 1

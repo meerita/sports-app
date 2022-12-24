@@ -364,8 +364,6 @@ export const changeEventMaxParticipants = data => {
   return async (dispatch, getState) => {
     const adminId = getState().me.myData._id;
     const { eventId, groupId, maxParticipants } = data;
-
-    console.log(data);
     // ********************************************************
     // Function to fetch the event
     // ********************************************************
