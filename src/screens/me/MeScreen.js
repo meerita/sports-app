@@ -29,7 +29,9 @@ export default function MeScreen(props) {
           style={{ width: '100%', height: '100%' }}
         />
       </View>
-      <BodyOne style={{ padding: 16 }}>{me.description}</BodyOne>
+      {me.description && (
+        <BodyOne style={{ padding: 16 }}>{me.description}</BodyOne>
+      )}
       <SingleLineWithCaption
         title={t('settings:profile.basicInformation.userName')}
         caption={me.username}

@@ -61,13 +61,14 @@ export default function ButtonFilled(props) {
         backgroundColor: darkMode
           ? Colors.dark.background
           : Colors.light.background,
+        shadowColor: 'transparent',
       }}
     >
       <TextButton
         style={{
           color: darkMode
-            ? Colors.dark.OnBackgroundDisabled
-            : Colors.light.OnBackgroundDisabled,
+            ? Colors.dark.OnSurfaceDisabled
+            : Colors.light.OnSurfaceDisabled,
         }}
       >
         {props.children}

@@ -1,22 +1,38 @@
 /** @format */
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React, { useState } from 'react';
-import Card from '../../components/Card';
 import CheckBox from 'expo-checkbox';
-import SingleLineWithSwitch from '../../components/Lists/OneLine/SingleLineWithSwitch';
-import SingleLineWithRadio from '../../components/Lists/OneLine/SingleLineWithRadio';
-import Caption from '../../components/type/Caption';
 import TwoLineItemWithSwitch from '../../components/Lists/TwoLines/TwoLineItemWithSwitch';
 import BodyTwo from '../../components/type/BodyTwo';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import { t } from '../../services/i18n';
 import App from '../../constants/App';
+import { authActions } from '../../store/slices/auth';
+import { useDispatch } from 'react-redux';
 
 export default function AcceptCookiesScreen(props) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
   const [toggleCheckBox3, setToggleCheckBox3] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const accceptAnalyticsCookies = () => {
+    setToggleCheckBox(!toggleCheckBox);
+    dispatch(authActions.signUpAcceptAnalyticsCookies());
+  };
+
+  const acceptMarketingCookies = () => {
+    setToggleCheckBox2(!toggleCheckBox2);
+    dispatch(authActions.signUpAcceptMarketingCookies());
+  };
+
+  const acceptOtherCookies = () => {
+    setToggleCheckBox3(!toggleCheckBox3);
+    dispatch(authActions.signUpAcceptOtherCookies());
+  };
+
   return (
     <View>
       <BodyTwo style={{ padding: 16 }}>
@@ -25,18 +41,13 @@ export default function AcceptCookiesScreen(props) {
       <TwoLineItemWithSwitch
         title={t('auth:register.acceptCookies.types.essentials')}
         subtitle={t('auth:register.acceptCookies.types.essentialsDesc')}
-        onPress={() => setToggleCheckBox(!toggleCheckBox)}
       >
-        <CheckBox
-          disabled={true}
-          value={true}
-          onValueChange={newValue => setToggleCheckBox(newValue)}
-        />
+        <CheckBox disabled={true} value={true} />
       </TwoLineItemWithSwitch>
       <TwoLineItemWithSwitch
         title={t('auth:register.acceptCookies.types.analytics')}
         subtitle={t('auth:register.acceptCookies.types.essentialsDesc')}
-        onPress={() => setToggleCheckBox(!toggleCheckBox)}
+        onPress={() => accceptAnalyticsCookies()}
       >
         <CheckBox
           disabled={false}
@@ -48,7 +59,7 @@ export default function AcceptCookiesScreen(props) {
       <TwoLineItemWithSwitch
         title={t('auth:register.acceptCookies.types.marketing')}
         subtitle={t('auth:register.acceptCookies.types.marketingDesc')}
-        onPress={() => setToggleCheckBox2(!toggleCheckBox2)}
+        onPress={() => acceptMarketingCookies()}
       >
         <CheckBox
           disabled={false}
@@ -59,7 +70,7 @@ export default function AcceptCookiesScreen(props) {
       <TwoLineItemWithSwitch
         title={t('auth:register.acceptCookies.types.other')}
         subtitle={t('auth:register.acceptCookies.types.otherDesc')}
-        onPress={() => setToggleCheckBox3(!toggleCheckBox3)}
+        onPress={() => acceptOtherCookies()}
       >
         <CheckBox
           disabled={false}

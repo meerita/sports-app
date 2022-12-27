@@ -35,10 +35,19 @@
       "register": "Registrarse",
       "acceptTerms": {
         "title": "Aceptar términos",
-        "acceptTermsDesc": "Para poder registrarte y participar de la comunidad debes leer y aceptar todos estos términos y servicios. Este paso es obligatorio.",
-        "privacyPolicy": "Política de Privacidad",
-        "termsAndConditions": "Términos y condiciones",
-        "subTerms": "Términos de subscripción"
+        "acceptTermsDesc": "Para poder registrarte debes leer todos los términos y condiciones, la política de privacidad y suscripción.",
+        "privacyPolicy": {
+          "title": "Política de privacidad",
+          "description": "Informe sobre los datos que recopilamos y cómo los utilizamos."
+        },
+        "termsAndConditions": {
+          "title": "Términos y condiciones",
+          "description": "Condiciones de uso de la aplicación y sus servicios."
+        },
+        "subTerms": {
+          "title": "Términos de suscripción",
+          "description": "Condiciones que aplican a la suscripción PRO de la aplicación."
+        }
       },
       "acceptCookies": {
         "title": "Aceptar cookies",
@@ -66,7 +75,7 @@
     "recoverPassword": {
       "recover": "Recuperar contraseña",
       "recoverPasswordInfo": "Escribe tu email y te enviaremos instrucciones para restablecer la contraseña.",
-      "emailSentTo": "Te hemos enviado un email con las instrucciones para que recuperes tu contraseña"
+      "emailSentTo": "Te enviaremos un correo a {{mail}} con las instrucciones"
     }
   },
   "welcome": {

@@ -13,7 +13,7 @@ export default function Line(props) {
       {...props}
       height={1}
       style={{
-        ...props.styles,
+        ...props.style,
         backgroundColor: darkMode
           ? Colors.dark.OnBackgroundDisabled
           : Colors.light.OnBackgroundDisabled,

@@ -27,6 +27,26 @@ import SetupPushNotificationScreen, {
   screenOptions as SetupPushNotificationScreenOptions,
 } from '../screens/setup/SetupPushNotificationScreen';
 
+import RecoverPasswordScreen, {
+  screenOptions as RecoverPasswordScreenOptions,
+} from '../screens/auth/RecoverPasswordScreen';
+
+import RecoverPasswordDoneScreen, {
+  screenOptions as RecoverPasswordDoneScreenOptions,
+} from '../screens/auth/RecoverPasswordDoneScreen';
+
+import TermsAndConditionsScreen, {
+  screenOptions as TermsAndConditionsScreenOptions,
+} from '../screens/auth/docs/TermsAndConditionsScreen';
+
+import SubscriptionTerms, {
+  screenOptions as SubscriptionTermsOptions,
+} from '../screens/auth/docs/SubscriptionTermsScreen';
+
+import PrivacyPolicyScreen, {
+  screenOptions as PrivacyPolicyScreenOptions,
+} from '../screens/auth/docs/PrivacyPolicyScreen';
+
 export default function AuthNavigator() {
   // Definition of the stack
   const Stack = createNativeStackNavigator();
@@ -76,9 +96,34 @@ export default function AuthNavigator() {
         options={AcceptCookiesScreenOptions}
       />
       <Stack.Screen
+        name='RecoverPassword'
+        component={RecoverPasswordScreen}
+        options={RecoverPasswordScreenOptions}
+      />
+      <Stack.Screen
+        name='RecoverPasswordDone'
+        component={RecoverPasswordDoneScreen}
+        options={RecoverPasswordDoneScreenOptions}
+      />
+      <Stack.Screen
         name='SetupPushNotificationScreen'
         component={SetupPushNotificationScreen}
         options={SetupPushNotificationScreenOptions}
+      />
+      <Stack.Screen
+        name='TermsAndConditions'
+        component={TermsAndConditionsScreen}
+        options={TermsAndConditionsScreenOptions}
+      />
+      <Stack.Screen
+        name='SubscriptionTerms'
+        component={SubscriptionTerms}
+        options={SubscriptionTermsOptions}
+      />
+      <Stack.Screen
+        name='PrivacyPolicy'
+        component={PrivacyPolicyScreen}
+        options={PrivacyPolicyScreenOptions}
       />
     </Stack.Navigator>
   );
