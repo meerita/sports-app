@@ -82,7 +82,11 @@
     "find": "Encuentra grupos o amigos",
     "organize": "Organiza eventos",
     "measure": "Mide tu rendimiento",
-    "version": "© Minide {{year}}. Versión {{version}}"
+    "version": "© Minide {{year}}. Versión {{version}}",
+    "maintenance": {
+      "title": "Mantenimiento",
+      "description": "La aplicación está en mantenimiento. Esta ventana se refrescará automáticamente en 10 minutos."
+    }
   },
   "common": {
     "accept": "Aceptar",
@@ -124,6 +128,7 @@
     "noob": "Novato",
     "noobs": "Novatos",
     "participate": "Participar",
+    "refresh": "Actualizar",
     "record": "Grabar",
     "reOpen": "Reabrir",
     "report": "Reportar un problema",

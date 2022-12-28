@@ -9,7 +9,6 @@ const API_URL = 'http://192.168.1.73:9000';
 // ********************************************************
 
 export const fetchMyUser = userId => {
-  console.log('el userid que traigo: ' + userId);
   return async dispatch => {
     // ********************************************************
     // Function to fetch the loged in user
@@ -31,8 +30,6 @@ export const fetchMyUser = userId => {
     try {
       // we will
       const userData = await fetchUserData();
-      console.log('el user piedo que traigo: ');
-      console.log(userData);
       await dispatch(meActions.addMyUser({ user: userData.user }));
       await dispatch(meActions.addMyGroups({ groups: userData.user.groups }));
       await dispatch(

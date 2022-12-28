@@ -158,8 +158,6 @@ export const login = loginData => {
       // we excecute the login function
       const userData = await loginUser();
 
-      console.log(userData);
-
       await dispatch(
         authActions.authenticate({
           userId: userData.localId,

@@ -69,12 +69,12 @@ export default function AppNavigator() {
 
   const me = useSelector(state => state.me.myData);
 
-  const maintenance = useSelector(state => state.general.maintenance);
-
   // we will ask for globalvariables in this point
   useEffect(() => {
     dispatch(fetchGlobalVariables());
-  }, [dispatch]);
+  }, [dispatch, maintenance]);
+
+  const maintenance = useSelector(state => state.general.maintenance);
 
   if (maintenance) {
     return <MaintenanceScreen />;
