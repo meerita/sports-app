@@ -24,8 +24,6 @@ export default function AcceptTermsScreen(props) {
   const acceptation = useSelector(state => state.auth.signUp);
   const dispatch = useDispatch();
 
-  console.log(acceptation);
-
   const [toggleCheckBox, setToggleCheckBox] = useState(acceptation.docs.terms);
   const [toggleCheckBox2, setToggleCheckBox2] = useState(
     acceptation.docs.privacy

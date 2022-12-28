@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { t } from '../../services/i18n';
 import { useForm, Controller } from 'react-hook-form';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from 'react-native-toast-notifications';
 
 // CONSTANTS
@@ -14,12 +14,12 @@ import Colors from '../../constants/Colors';
 import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import FormLayout from '../../components/Forms/FormLayout/FormLayout';
 import Input from '../../components/Forms/Input/Input';
-import ButtonText from '../../components/Buttons/ButtonText/ButtonText';
-import BodyTwo from '../../components/type/BodyTwo';
+import { createUser } from '../../store/actions/auth';
 
 export default function RegisterScreen(props) {
   // toast notifications
   const toast = useToast();
+  const cookies = useSelector(state => state.auth.signUp.cookies);
 
   // loading state for the forms
   const [loading, setLoading] = useState(false);
@@ -42,8 +42,12 @@ export default function RegisterScreen(props) {
   const onSubmit = async data => {
     try {
       setLoading(true);
-      // await dispatch(form data);
-      toast.show(data.email, { type: 'danger', duration: 4000 });
+      dispatch(
+        createUser({
+          data,
+          cookies,
+        })
+      );
     } catch (error) {
       console.log(error);
       setLoading(false);

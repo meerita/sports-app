@@ -276,6 +276,8 @@ export default function MainNavigator(props) {
     state => state.me.myData.settings.preferences.theme
   );
 
+  console.log('myDarkMode: ', myDarkMode);
+
   useEffect(() => {
     dispatch(themeActions.changeTheme({ darkMode: myDarkMode }));
   }, [myDarkMode]);

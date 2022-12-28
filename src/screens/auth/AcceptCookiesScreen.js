@@ -9,12 +9,22 @@ import ButtonFilled from '../../components/Buttons/Filled/ButtonFilled';
 import { t } from '../../services/i18n';
 import App from '../../constants/App';
 import { authActions } from '../../store/slices/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function AcceptCookiesScreen(props) {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
-  const [toggleCheckBox3, setToggleCheckBox3] = useState(false);
+  const cookiesAcceptation = useSelector(state => state.auth.signUp.cookies);
+
+  console.log(cookiesAcceptation);
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(
+    cookiesAcceptation.analytics
+  );
+  const [toggleCheckBox2, setToggleCheckBox2] = useState(
+    cookiesAcceptation.marketing
+  );
+  const [toggleCheckBox3, setToggleCheckBox3] = useState(
+    cookiesAcceptation.others
+  );
 
   const dispatch = useDispatch();
 

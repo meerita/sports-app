@@ -1,10 +1,8 @@
 /** @format */
 
-import { View, Text, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // PANTALLAS
 import LoadingScreen from '../screens/LoadingScreen';
@@ -13,37 +11,65 @@ import MaintenanceScreen from '../screens/auth/MaintenanceScreen';
 // NAVIGATORS
 import AuthNavigator from './AuthNavigator';
 import MainNavigator from './MainNavigator';
-import MainBottomNavigation from './MainBottomNavigation';
 
 // STORE
 import { fetchGlobalVariables } from '../store/actions/general';
 import { fetchMyUser } from '../store/actions/me';
+import { authActions } from '../store/slices/auth';
+import { forceTheUserLogout } from '../store/actions/auth';
 
 export default function AppNavigator() {
+  const dispatch = useDispatch();
+
   const [initializing, setInitializing] = useState(true);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const tryLogin = async () => {
+      // we set the initializing to true to trigger the loading screen
+      setInitializing(true);
+      // we get the userData from the storage
+      const userData = await AsyncStorage.getItem('userData');
+      // if we dont have userData we logout
+      if (!userData) {
+        dispatch(forceTheUserLogout());
+        setInitializing(false);
+        return;
+      }
+      // converting userData to JSON
+      const transformedData = JSON.parse(userData);
+
+      // we will extract transformedData
+      const { token, userId, expiresIn } = transformedData;
+
+      // we will convert the expiresIn to a date object for comparison
+      const expirationDate = new Date(expiresIn);
+
+      // if the expirationDate is less than the current date the token is
+      // invalid and we will force a logout. Also if we dont have a token
+      // and we dont have a userId we will force a logout
+      if (expirationDate <= new Date() || !token || !userId) {
+        dispatch(forceTheUserLogout());
+        setInitializing(false);
+        return;
+      }
+      // we will authenticate the user
+      dispatch(
+        authActions.authenticate({
+          userId: userId,
+          token: token,
+        })
+      );
+      // we fetch the user once we logged in
+      dispatch(fetchMyUser(userId));
+    };
+    tryLogin();
+  }, []);
 
   const isAuth = useSelector(state => state.auth);
 
-  const maintenance = useSelector(state => state.general.maintenance);
-
-  const userId = '63a17a5eb63c42b099b5629e'; // Minide
-  // const userId = '6374c70677f45f0c0f10336e'; // Misterio
-  // const userId = '63a7422243fa97c1ebe5111f'; // timcuqui
-  // const userId = '6361557ceb317d919b580e69'; // roger
-  // const userId = '63615337eb317d919b580e01'; // viso
-  // const userId = '623b5d3d7e4216025e7210fd'; // ruven
-  // const userId = '63a4159b0b67ba239d048364'; // patitas
-  // const userId = '63a19d30925d45b9890e9e86'; // Lupión
-  // const userId = '6361553eeb317d919b580e57'; // M4DP3Y
-  // const userId = '6361556deb317d919b580e63'; // MyClaus
-
   const me = useSelector(state => state.me.myData);
 
-  useEffect(() => {
-    dispatch(fetchMyUser(userId));
-  }, [dispatch]);
+  const maintenance = useSelector(state => state.general.maintenance);
 
   // we will ask for globalvariables in this point
   useEffect(() => {
@@ -66,5 +92,7 @@ export default function AppNavigator() {
   }
 
   // the app itself
-  return <MainNavigator />;
+  if (me) {
+    return <MainNavigator />;
+  }
 }

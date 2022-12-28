@@ -5,11 +5,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    token: '',
+    userId: null,
+    token: null,
     isAuthenticated: false,
-    acceptedTerms: 0,
-    acceptedPolicy: 0,
-    acceptedSubcriptionTerms: 0,
     cookies: {
       analytics: false,
       marketing: false,
@@ -29,10 +27,14 @@ export const authSlice = createSlice({
     },
   },
   reducers: {
-    authenticate: state => {
+    authenticate: (state, action) => {
+      state.userId = action.payload.userId;
+      state.token = action.payload.token;
       state.isAuthenticated = true;
     },
     logout: state => {
+      state.userId = null;
+      state.token = null;
       state.isAuthenticated = false;
     },
     updateCookies: (state, action) => {

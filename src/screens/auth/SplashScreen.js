@@ -58,12 +58,7 @@ export default function SplashScreen(props) {
             {t('auth:register.register')}
           </ButtonFilled>
           <ButtonText
-            onPress={() =>
-              props.navigation.navigate('RecoverPassword', {
-                alreadyUser: false,
-              })
-            }
-            // onPress={() => dispatch(authActions.authenticate())}
+            onPress={() => props.navigation.navigate('LoginScreen')}
             style={{
               width: Dimensions.get('window').width / 2 - 20,
             }}

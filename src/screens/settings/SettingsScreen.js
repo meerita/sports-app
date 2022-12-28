@@ -15,6 +15,7 @@ import Styles from '../../constants/Styles';
 // STORE
 import { authActions } from '../../store/slices/auth';
 import ScrollViewLayout from '../../components/Layouts/ScrollViewLayout/ScrollViewLayout';
+import { forceTheUserLogout } from '../../store/actions/auth';
 
 export default function SettingsScreen(props) {
   const darkMode = useSelector(state => state.theme.darkMode);
@@ -23,7 +24,7 @@ export default function SettingsScreen(props) {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(authActions.logout());
+    dispatch(forceTheUserLogout());
   };
 
   return (
